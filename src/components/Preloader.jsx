@@ -2,15 +2,28 @@ import React, { useEffect, useState } from 'react';
 import './Preloader.css';
 import loaderImg from '../assets/loader.png';
 
-const Preloader = ({ isLoading }) => {
+const Preloader = ({ isLoading, onImageLoaded }) => {
     const [show, setShow] = useState(true);
+    const [imageReady, setImageReady] = useState(false);
+
+    useEffect(() => {
+        const img = new Image();
+        img.src = loaderImg;
+
+        const handleLoad = () => {
+            setImageReady(true);
+            if (onImageLoaded) onImageLoaded();
+        };
+
+        img.onload = handleLoad;
+        img.onerror = handleLoad; // Proceed even if image fails
+    }, [onImageLoaded]);
 
     useEffect(() => {
         if (!isLoading) {
-            // Add a small delay to allow the fade-out animation to play
             const timer = setTimeout(() => {
                 setShow(false);
-            }, 500); // Match the transition duration in CSS
+            }, 500);
             return () => clearTimeout(timer);
         }
     }, [isLoading]);
@@ -19,10 +32,12 @@ const Preloader = ({ isLoading }) => {
 
     return (
         <div className={`preloader-container ${!isLoading ? 'fade-out' : ''}`}>
-            <div className="loader-wrapper">
-                <div className="loader-circle"></div>
-                <img src={loaderImg} alt="Loading..." className="loader-image" />
-            </div>
+            {imageReady && (
+                <div className="loader-wrapper">
+                    <div className="loader-circle"></div>
+                    <img src={loaderImg} alt="Loading..." className="loader-image" />
+                </div>
+            )}
         </div>
     );
 };
