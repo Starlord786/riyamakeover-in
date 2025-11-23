@@ -1,0 +1,137 @@
+.footer {
+    background-color: #000;
+    color: #fff;
+    padding: 80px 20px 40px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 60px;
+    /* Lot of gap */
+}
+
+.footer-links {
+    display: flex;
+    gap: 50px;
+    /* Lot of space between links */
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.footer-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -5px;
+    left: 0;
+    background-color: #d4af37;
+    transition: width 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #d4af37;
+}
+
+.footer-link:hover::after {
+    width: 100%;
+}
+
+.login-link {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 25px;
+    border-radius: 30px;
+}
+
+.login-link:hover {
+    border-color: #d4af37;
+    background-color: rgba(212, 175, 55, 0.1);
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.brand-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: #d4af37;
+    position: relative;
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s linear infinite;
+    letter-spacing: 2px;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.brand-description {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+    max-width: 500px;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+.footer-bottom {
+    margin-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 30px;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+    .footer {
+        padding: 60px 20px 30px;
+    }
+
+    .footer-container {
+        gap: 40px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .brand-text {
+        font-size: 2.5rem;
+    }
+
+    .brand-description {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
+}

@@ -143,16 +143,13 @@
     left: -50%;
     width: 200%;
     height: 200%;
-background: conic-gradient(
-  #C5A35C,
-    #345DFF,
-    #7A2BE2,
-    #0CC276,
-    #C5A35C
+    background: conic-gradient(#C5A35C,
+            #345DFF,
+            #7A2BE2,
+            #0CC276,
+            #C5A35C);
 
-);
-
-    animation: rotate-border 7s linear infinite;
+    animation: rotate-border 10s linear infinite;
     z-index: -2;
     opacity: 0;
     transition: opacity 0.5s ease;
