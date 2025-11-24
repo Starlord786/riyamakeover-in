@@ -216,6 +216,14 @@
 
 /* Mobile Responsive */
 @media screen and (max-width: 960px) {
+    .navbar-container {
+        padding: 0 10px 0 5px;
+    }
+
+    .navbar-logo {
+        margin-left: 10px;
+    }
+
     .navbar-search {
         display: none;
     }
