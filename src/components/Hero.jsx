@@ -39,6 +39,11 @@ const heroData = [
 const Hero = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
+    const [touchStart, setTouchStart] = useState(null);
+    const [touchEnd, setTouchEnd] = useState(null);
+
+    // Minimum swipe distance (in px)
+    const minSwipeDistance = 50;
 
     const nextSlide = useCallback(() => {
         if (isAnimating) return;
@@ -61,6 +66,28 @@ const Hero = () => {
         setTimeout(() => setIsAnimating(false), 1000);
     }, [isAnimating, currentSlide]);
 
+    // Swipe Handlers
+    const onTouchStart = (e) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const onTouchMove = (e) => {
+        setTouchEnd(e.targetTouches[0].clientX);
+    };
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+        if (isLeftSwipe) {
+            nextSlide();
+        } else if (isRightSwipe) {
+            prevSlide();
+        }
+    };
+
     // Auto-play logic
     useEffect(() => {
         if (isAnimating) return; // Don't set timer if currently animating
@@ -73,7 +100,13 @@ const Hero = () => {
     }, [currentSlide, isAnimating, nextSlide]);
 
     return (
-        <section className="hero" id="home">
+        <section
+            className="hero"
+            id="home"
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+        >
             {heroData.map((slide, index) => (
                 <div
                     key={slide.id}
@@ -107,16 +140,15 @@ const Hero = () => {
                 </svg>
             </button>
 
+            {/* Pagination Dots */}
             <div className="slider-controls">
-                <div className="dots-container">
-                    {heroData.map((_, index) => (
-                        <span
-                            key={index}
-                            className={`dot ${index === currentSlide ? 'active' : ''}`}
-                            onClick={() => goToSlide(index)}
-                        ></span>
-                    ))}
-                </div>
+                {heroData.map((_, index) => (
+                    <div
+                        key={index}
+                        className={`dot ${index === currentSlide ? 'active' : ''}`}
+                        onClick={() => goToSlide(index)}
+                    ></div>
+                ))}
             </div>
         </section>
     );
