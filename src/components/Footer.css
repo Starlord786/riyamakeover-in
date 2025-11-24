@@ -1,155 +1,205 @@
 /* Color Variables for easy theme changing */
 :root {
-  --dark-background: #0d0c15; /* Very dark/deep background */
-  --text-white: #ffffff; /* Main text color */
-  --text-gold: #c5b358; /* Luxurious, slightly muted gold */
-  --text-light-grey: #a0a0a0; /* Subtle color for links/subtext */
+    --dark-background: #0d0c15;
+    /* Very dark/deep background */
+    --text-white: #ffffff;
+    /* Main text color */
+    --text-gold: #c5b358;
+    /* Luxurious, slightly muted gold */
+    --text-light-grey: #a0a0a0;
+    /* Subtle color for links/subtext */
 }
 
 .premium-footer {
-  background-color: var(--dark-background);
-  color: var(--text-white);
-  padding: 80px 5%; /* Generous padding for a luxury feel */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--dark-background);
+    color: var(--text-white);
+    padding: 80px 5%;
+    /* Generous padding for a luxury feel */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 .footer-content {
-  display: flex;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    /* Left side takes ~37%, Right side takes ~63% */
+    gap: 80px;
+    /* Consistent gap between main sections */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* --- Left Side: Title and CTA --- */
+/* --- Left Side: Logo & Social --- */
 
 .footer-left {
-  flex-basis: 35%; /* Gives more space to the title */
-  padding-right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    /* Ensure it takes full height for margin-top: auto to work */
 }
 
-.footer-title {
-  font-size: 2.2rem;
-  line-height: 1.3;
-  font-weight: 500;
-  margin-bottom: 30px;
-  color: var(--text-white); /* Main title is white for maximum impact */
+.footer-logo-container {
+    margin-bottom: 40px;
+    /* Space before social icons */
+    display: flex;
+    justify-content: flex-start;
 }
 
-.cta-button {
-  background: none;
-  border: 2px solid var(--text-light-grey); /* Subtle white/grey border */
-  color: var(--text-white);
-  padding: 12px 30px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.footer-logo {
+    width: 180px;
+    /* Bigger */
+    height: 180px;
+    border-radius: 50%;
+    /* Round the logo */
+    object-fit: cover;
+    /* Ensure it fills the circle */
+
+    border: 2px solid var(--text-gold);
+    padding: 10px;
+    /* Optional: adds space inside the border */
+    background: rgba(255, 255, 255, 0.05);
+    /* Subtle background */
 }
-
-.cta-button:hover {
-  border-color: var(--text-gold); /* Hover turns the border gold */
-  color: var(--text-gold);
-}
-
-/* --- Right Side: Links --- */
-
-.footer-links-group {
-  flex-basis: 60%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.footer-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.column-heading {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: var(--text-gold); /* Headings are GOLD */
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.footer-link {
-  color: var(--text-light-grey); /* Links are light grey/subtle white */
-  text-decoration: none;
-  margin-bottom: 12px;
-  font-size: 0.95rem;
-  transition: color 0.3s ease;
-}
-
-.footer-link:hover {
-  color: var(--text-white); /* White hover for better contrast */
-}
-
-/* --- Social Section --- */
 
 .footer-social {
-  max-width: 1200px;
-  margin: 50px auto 0;
+    margin-top: auto;
+    /* Pushes it down if there's extra height, or just sits there */
 }
 
-.social-separator {
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Thin, subtle separator line */
-  margin: 0 0 30px 0;
+.footer-social p {
+    font-size: 0.95rem;
+    color: var(--text-light-grey);
+    margin-bottom: 15px;
 }
 
-.social-content {
-  display: flex;
-  align-items: center;
-}
-
-.social-content p {
-  font-size: 0.95rem;
-  color: var(--text-light-grey);
-  margin-right: 30px;
+.social-icons {
+    display: flex;
+    gap: 20px;
 }
 
 .social-icons a {
-  color: var(--text-gold); /* Social icons are GOLD to stand out */
-  font-size: 1.2rem;
-  text-decoration: none;
-  margin-right: 20px;
-  transition: color 0.3s ease;
-  /* (In a real implementation, you'd use icon libraries here) */
+    color: var(--text-gold);
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    /* Centers SVG */
+    align-items: center;
+    justify-content: center;
 }
 
 .social-icons a:hover {
-  color: var(--text-white);
+    color: var(--text-white);
+}
+
+/* --- Right Side: Links & Designer --- */
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer-links-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 Equal columns */
+    gap: 40px;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.column-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: var(--text-gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-link {
+    color: var(--text-light-grey);
+    text-decoration: none;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--text-white);
+}
+
+/* --- Designer Text --- */
+.footer-designer {
+    margin-top: 60px;
+    text-align: right;
+    width: 100%;
+}
+
+.designer-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 5rem;
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    color: rgba(255, 255, 255, 0.25);
+    margin: 0;
+    line-height: 1;
+    white-space: nowrap;
 }
 
 /* --- Media Query for Responsiveness --- */
 
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-  }
+@media (max-width: 900px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        /* Stack vertically */
+        gap: 60px;
+    }
 
-  .footer-left {
-    flex-basis: 100%;
-    padding-right: 0;
-    margin-bottom: 40px;
-  }
+    .footer-left {
+        align-items: center;
+        text-align: center;
+        padding-right: 0;
+        height: auto;
+    }
 
-  .footer-links-group {
-    flex-basis: 100%;
-    flex-wrap: wrap;
-    gap: 30px;
-  }
+    .footer-links-group {
+        grid-template-columns: repeat(3, 1fr);
+        /* Keep 3 columns on tablet if possible */
+    }
 
-  .footer-column {
-    flex-basis: 45%; /* Two columns per row on smaller screens */
-  }
+    .footer-designer {
+        text-align: center;
+        margin-top: 40px;
+    }
 
-  .social-content {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .designer-text {
+        font-size: 2.5rem;
+        /* Smaller on tablet */
+        white-space: normal;
+    }
+}
 
-  .social-content p {
-    margin-bottom: 15px;
-  }
+@media (max-width: 600px) {
+    .footer-links-group {
+        grid-template-columns: 1fr;
+        /* Stack links on mobile */
+        text-align: center;
+        gap: 40px;
+    }
+
+    .footer-left {
+        margin-bottom: 20px;
+    }
+
+    .designer-text {
+        font-size: 1.8rem;
+        /* Smaller on mobile */
+        letter-spacing: 3px;
+    }
 }
