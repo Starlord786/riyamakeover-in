@@ -1,137 +1,155 @@
-.footer {
-    background-color: #000;
-    color: #fff;
-    padding: 80px 20px 40px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
+/* Color Variables for easy theme changing */
+:root {
+  --dark-background: #0d0c15; /* Very dark/deep background */
+  --text-white: #ffffff; /* Main text color */
+  --text-gold: #c5b358; /* Luxurious, slightly muted gold */
+  --text-light-grey: #a0a0a0; /* Subtle color for links/subtext */
 }
 
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 60px;
-    /* Lot of gap */
+.premium-footer {
+  background-color: var(--dark-background);
+  color: var(--text-white);
+  padding: 80px 5%; /* Generous padding for a luxury feel */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-.footer-links {
-    display: flex;
-    gap: 50px;
-    /* Lot of space between links */
-    flex-wrap: wrap;
-    justify-content: center;
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Left Side: Title and CTA --- */
+
+.footer-left {
+  flex-basis: 35%; /* Gives more space to the title */
+  padding-right: 40px;
+}
+
+.footer-title {
+  font-size: 2.2rem;
+  line-height: 1.3;
+  font-weight: 500;
+  margin-bottom: 30px;
+  color: var(--text-white); /* Main title is white for maximum impact */
+}
+
+.cta-button {
+  background: none;
+  border: 2px solid var(--text-light-grey); /* Subtle white/grey border */
+  color: var(--text-white);
+  padding: 12px 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  border-color: var(--text-gold); /* Hover turns the border gold */
+  color: var(--text-gold);
+}
+
+/* --- Right Side: Links --- */
+
+.footer-links-group {
+  flex-basis: 60%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.column-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--text-gold); /* Headings are GOLD */
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .footer-link {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 300;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.footer-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 1px;
-    bottom: -5px;
-    left: 0;
-    background-color: #d4af37;
-    transition: width 0.3s ease;
+  color: var(--text-light-grey); /* Links are light grey/subtle white */
+  text-decoration: none;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
 }
 
 .footer-link:hover {
-    color: #d4af37;
+  color: var(--text-white); /* White hover for better contrast */
 }
 
-.footer-link:hover::after {
-    width: 100%;
+/* --- Social Section --- */
+
+.footer-social {
+  max-width: 1200px;
+  margin: 50px auto 0;
 }
 
-.login-link {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 8px 25px;
-    border-radius: 30px;
+.social-separator {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Thin, subtle separator line */
+  margin: 0 0 30px 0;
 }
 
-.login-link:hover {
-    border-color: #d4af37;
-    background-color: rgba(212, 175, 55, 0.1);
+.social-content {
+  display: flex;
+  align-items: center;
 }
 
-.footer-brand {
-    display: flex;
+.social-content p {
+  font-size: 0.95rem;
+  color: var(--text-light-grey);
+  margin-right: 30px;
+}
+
+.social-icons a {
+  color: var(--text-gold); /* Social icons are GOLD to stand out */
+  font-size: 1.2rem;
+  text-decoration: none;
+  margin-right: 20px;
+  transition: color 0.3s ease;
+  /* (In a real implementation, you'd use icon libraries here) */
+}
+
+.social-icons a:hover {
+  color: var(--text-white);
+}
+
+/* --- Media Query for Responsiveness --- */
+
+@media (max-width: 768px) {
+  .footer-content {
     flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
+  }
 
-.brand-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    font-weight: 700;
-    color: #d4af37;
-    position: relative;
-    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 3s linear infinite;
-    letter-spacing: 2px;
-}
+  .footer-left {
+    flex-basis: 100%;
+    padding-right: 0;
+    margin-bottom: 40px;
+  }
 
-@keyframes shine {
-    to {
-        background-position: 200% center;
-    }
-}
+  .footer-links-group {
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
 
-.brand-description {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 1rem;
-    max-width: 500px;
-    line-height: 1.6;
-    font-weight: 300;
-}
+  .footer-column {
+    flex-basis: 45%; /* Two columns per row on smaller screens */
+  }
 
-.footer-bottom {
-    margin-top: 40px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 30px;
-    width: 100%;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-}
+  .social-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-/* Mobile Responsive */
-@media screen and (max-width: 768px) {
-    .footer {
-        padding: 60px 20px 30px;
-    }
-
-    .footer-container {
-        gap: 40px;
-    }
-
-    .footer-links {
-        flex-direction: column;
-        gap: 25px;
-    }
-
-    .brand-text {
-        font-size: 2.5rem;
-    }
-
-    .brand-description {
-        font-size: 0.9rem;
-        padding: 0 10px;
-    }
+  .social-content p {
+    margin-bottom: 15px;
+  }
 }
