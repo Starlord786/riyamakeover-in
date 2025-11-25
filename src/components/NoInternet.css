@@ -1,0 +1,162 @@
+.no-internet-container {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #030712;
+  
+    color: white;
+    overflow: hidden;
+}
+
+.particles-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background-color: #3b82f6;
+    /* blue-500 */
+    border-radius: 50%;
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+    max-width: 28rem;
+    width: 100%;
+}
+
+.icon-container {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.icon-glow {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(239, 68, 68, 0.2);
+    /* red-500/20 */
+    border-radius: 50%;
+    filter: blur(24px);
+}
+
+.icon-circle {
+    position: relative;
+    background-color: #111827;
+    /* gray-900 */
+    padding: 1.5rem;
+    border-radius: 50%;
+    border: 1px solid #1f2937;
+    /* gray-800 */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.wifi-icon {
+    color: #ef4444;
+    /* red-500 */
+}
+
+.orbit-ring {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 50%;
+}
+
+.orbit-dot {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #ef4444;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.8);
+}
+
+.title {
+    font-size: 1.875rem;
+    /* 3xl */
+    line-height: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(to right, white, #9ca3af);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+@media (min-width: 768px) {
+    .title {
+        font-size: 2.25rem;
+        /* 4xl */
+        line-height: 2.5rem;
+    }
+}
+
+.description {
+    color: #9ca3af;
+    /* gray-400 */
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+    /* lg */
+}
+
+.retry-button {
+    position: relative;
+    padding: 0.75rem 2rem;
+    background-color: white;
+    color: black;
+    font-weight: 600;
+    border-radius: 9999px;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.button-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.button-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #e5e7eb, white);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.retry-button:hover .button-shine {
+    opacity: 1;
+}
+
+.bottom-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, transparent, rgba(239, 68, 68, 0.5), transparent);
+}

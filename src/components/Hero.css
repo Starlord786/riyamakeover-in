@@ -248,23 +248,6 @@
     }
 
     .nav-arrow {
-        width: 40px;
-        height: 40px;
-        opacity: 0.5;
-        /* Always visible but dim on mobile */
-        display: flex;
-        /* Ensure they are displayed on mobile if desired, or keep hidden */
-    }
-
-    .hero:hover .nav-arrow {
-        opacity: 1;
-    }
-
-    .nav-arrow.prev {
-        left: 10px;
-    }
-
-    .nav-arrow.next {
-        right: 10px;
+        display: none;
     }
 }
