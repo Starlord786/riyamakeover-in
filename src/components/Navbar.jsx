@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Navbar.css';
@@ -67,13 +68,13 @@ const Navbar = () => {
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <ToastContainer />
             <div className="navbar-container">
-                <a href="/" className="navbar-logo">
+                <Link to="/" className="navbar-logo">
                     <img src={logo} alt="Riya Makeover" className="logo-img" />
-                </a>
+                </Link>
                 <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
-                    <a href="#home" className="navbar-item" onClick={() => setIsOpen(false)}>Home</a>
-                    <a href="#services" className="navbar-item" onClick={() => setIsOpen(false)}>Services</a>
-                    <a href="#gallery" className="navbar-item" onClick={() => setIsOpen(false)}>Gallery</a>
+                    <Link to="/" className="navbar-item" onClick={() => setIsOpen(false)}>Home</Link>
+                    <Link to="/services" className="navbar-item" onClick={() => setIsOpen(false)}>Services</Link>
+                    <Link to="/gallery" className="navbar-item" onClick={() => setIsOpen(false)}>Gallery</Link>
                     <a href="#contact" className="navbar-item" onClick={() => setIsOpen(false)}>Contact</a>
 
                     <div
