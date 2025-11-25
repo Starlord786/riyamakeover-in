@@ -7,13 +7,11 @@ import { Routes, Route } from 'react-router-dom'
 import Services from './components/Services'
 import Gallery from './components/Gallery'
 import Preloader from './components/Preloader'
-import About from './pages/About'
-import Features from './pages/Features'
-import Pricing from './pages/Pricing'
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isImageLoaded, setIsImageLoaded] = React.useState(false);
+  const { showOfflinePage, showNotification, countdown } = useNetworkStatus();
 
   React.useEffect(() => {
     if (isImageLoaded) {
@@ -25,24 +23,23 @@ function App() {
     }
   }, [isImageLoaded]);
 
+  // If offline page should be shown, render it exclusively (or on top)
+  if (showOfflinePage) {
+    return <NoInternet onRetry={() => window.location.reload()} />;
+  }
+
   return (
     <>
+      <OfflineNotification show={showNotification} countdown={countdown} />
       <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
       <Navbar />
       <Routes>
-        <Route path="/" element={
-          <>
-            <Hero />
-            <Services />
-            <Gallery />
-          </>
-        } />
+        <Route path="/" element={<Hero />} />
         <Route path="/services" element={<Services />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/features" element={<Features />} />
-        <Route path="/pricing" element={<Pricing />} />
       </Routes>
+      <Services />
+      <Gallery />
       <Footer />
     </>
   )
