@@ -7,6 +7,12 @@ import { Routes, Route } from 'react-router-dom'
 import Services from './components/Services'
 import Gallery from './components/Gallery'
 import Preloader from './components/Preloader'
+import NoInternet from './components/NoInternet'
+import OfflineNotification from './components/OfflineNotification'
+import Contact from './components/Contact'
+import Home from './components/Home'
+import { useNetworkStatus } from './hooks/useNetworkStatus'
+
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -34,12 +40,11 @@ function App() {
       <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
       <Navbar />
       <Routes>
-        <Route path="/" element={<Hero />} />
+        <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
-      <Services />
-      <Gallery />
       <Footer />
     </>
   )
