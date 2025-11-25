@@ -3,6 +3,9 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Footer from './components/Footer'
 import './App.css'
+import { Routes, Route } from 'react-router-dom'
+import Services from './components/Services'
+import Gallery from './components/Gallery'
 import Preloader from './components/Preloader'
 import NoInternet from './components/NoInternet'
 import OfflineNotification from './components/OfflineNotification'
@@ -35,7 +38,6 @@ function App() {
       <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
       <Navbar />
       <Hero />
-      <Contact />
       <Footer />
     </>
   )
