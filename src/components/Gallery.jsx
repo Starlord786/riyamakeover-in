@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import './Gallery.css';
 
 const galleryImages = [
@@ -41,6 +42,19 @@ const galleryImages = [
 ];
 
 const Gallery = () => {
+    const scrollContainer = useRef(null);
+
+    const scroll = (direction) => {
+        const container = scrollContainer.current;
+        if (container) {
+            const scrollAmount = 340; // card width + gap roughly
+            container.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    };
+
     return (
         <div className="gallery-container">
             <div className="gallery-header">
@@ -49,10 +63,17 @@ const Gallery = () => {
             </div>
 
             <div className="carousel-wrapper">
-                <div className="carousel-track">
-                    {/* Double the images to create seamless infinite scroll */}
-                    {[...galleryImages, ...galleryImages].map((image, index) => (
-                        <div className="gallery-card" key={`${image.id}-${index}`}>
+                <button
+                    className="nav-btn prev-btn"
+                    onClick={() => scroll('left')}
+                    aria-label="Scroll left"
+                >
+                    <ChevronLeft size={32} />
+                </button>
+
+                <div className="carousel-track" ref={scrollContainer}>
+                    {galleryImages.map((image) => (
+                        <div className="gallery-card" key={image.id}>
                             <div className="card-image-wrapper">
                                 <img src={image.url} alt={image.title} loading="lazy" />
                             </div>
@@ -63,6 +84,14 @@ const Gallery = () => {
                         </div>
                     ))}
                 </div>
+
+                <button
+                    className="nav-btn next-btn"
+                    onClick={() => scroll('right')}
+                    aria-label="Scroll right"
+                >
+                    <ChevronRight size={32} />
+                </button>
             </div>
         </div>
     );
