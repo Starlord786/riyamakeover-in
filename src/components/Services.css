@@ -2,7 +2,7 @@
     padding-top: 80px;
     /* Account for fixed navbar */
     min-height: 100vh;
-    background-color: #0a0a0a;
+    background-color: #000000;
     color: #fff;
     padding-bottom: 4rem;
 }
@@ -10,9 +10,35 @@
 .services-hero {
     text-align: center;
     padding: 4rem 1rem;
-    background: radial-gradient(circle at center, rgba(189, 147, 249, 0.1) 0%, rgba(10, 10, 10, 0) 70%);
-    max-width: 600px;
+    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+    max-width: 800px;
     margin: 0 auto;
+}
+
+.services-hero h1 {
+    font-size: 4.5rem;
+    color: #d4af37;
+    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    letter-spacing: -1px;
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: shine 4s linear infinite;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.services-hero p {
+    color: #a0a0a0;
+    font-size: 1.4rem;
+    max-width: 700px;
+    margin: 0 auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    letter-spacing: 0.5px;
 }
 
 .services-grid {
@@ -26,7 +52,7 @@
 
 .service-card {
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.1);
     border-radius: 16px;
     padding: 2rem;
     transition: all 0.3s ease;
@@ -40,20 +66,21 @@
 .service-card:hover {
     transform: translateY(-5px);
     background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(212, 175, 55, 0.4);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .service-icon {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
-    color: #e0e0e0;
+    color: #d4af37;
 }
 
 .service-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: #fff;
+    font-family: 'Playfair Display', serif;
 }
 
 .service-card p {
@@ -61,36 +88,45 @@
     margin-bottom: 1.5rem;
     line-height: 1.6;
     flex-grow: 1;
+    font-family: 'Outfit', sans-serif;
 }
 
 .service-price {
-    font-size: 1.1rem;
-    color: #fff;
+    font-size: 1.2rem;
+    color: #d4af37;
     margin-bottom: 1.5rem;
     font-weight: 500;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 .service-btn {
     padding: 0.8rem 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-    border-radius: 8px;
+    background: transparent;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 500;
     text-align: center;
     text-decoration: none;
+    font-family: 'Outfit', sans-serif;
 }
 
 .service-btn:hover {
-    background: #fff;
+    background: #d4af37;
     color: #000;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
 }
 
 @media (max-width: 768px) {
     .services-hero h1 {
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .services-grid {

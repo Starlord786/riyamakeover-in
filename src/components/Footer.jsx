@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css'; // Link to the CSS file
 
 import dragonLogo from '../assets/dragon-animated.svg';
@@ -43,9 +44,9 @@ const Footer = () => {
                         {/* Platform Column */}
                         <div className="footer-column">
                             <h3 className="column-heading">Platform</h3>
-                            <a href="/about" className="footer-link">About</a>
-                            <a href="/features" className="footer-link">Features</a>
-                            <a href="/pricing" className="footer-link">Pricing & Plans</a>
+                            <Link to="/about" className="footer-link">About</Link>
+                            <Link to="/features" className="footer-link">Features</Link>
+                            <Link to="/pricing" className="footer-link">Pricing & Plans</Link>
                             <a href="/contact" className="footer-link">Contact</a>
                         </div>
 

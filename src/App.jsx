@@ -7,6 +7,9 @@ import { Routes, Route } from 'react-router-dom'
 import Services from './components/Services'
 import Gallery from './components/Gallery'
 import Preloader from './components/Preloader'
+import About from './pages/About'
+import Features from './pages/Features'
+import Pricing from './pages/Pricing'
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -27,12 +30,19 @@ function App() {
       <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
       <Navbar />
       <Routes>
-        <Route path="/" element={<Hero />} />
+        <Route path="/" element={
+          <>
+            <Hero />
+            <Services />
+            <Gallery />
+          </>
+        } />
         <Route path="/services" element={<Services />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/pricing" element={<Pricing />} />
       </Routes>
-      <Services />
-      <Gallery />
       <Footer />
     </>
   )
