@@ -1,6 +1,6 @@
 /* Color Variables for easy theme changing */
 :root {
-    --dark-background: #0d0c15;
+    --dark-background: black;
     /* Very dark/deep background */
     --text-white: #ffffff;
     /* Main text color */

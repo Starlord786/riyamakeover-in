@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import './Services.css';
 
 const servicesData = [
@@ -50,6 +51,39 @@ const servicesData = [
 const Services = () => {
     return (
         <div className="services-page">
+            {/* Golden Particles Animation */}
+            <div className="particles-container">
+                {[...Array(70)].map((_, i) => (
+                    <motion.div
+                        key={i}
+                        className="particle"
+                        initial={{
+                            opacity: 0,
+                            scale: 0,
+                        }}
+                        animate={{
+                            y: [0, -200], // Move up more
+                            opacity: [0, 0.8, 0], // Fade in then out
+                            scale: [0, Math.random() * 0.5 + 0.8, 0], // Larger scale
+                        }}
+                        transition={{
+                            duration: Math.random() * 7 + 8, // Slower, more majestic
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: Math.random() * 5,
+                        }}
+                        style={{
+                            left: `${Math.random() * 100}vw`,
+                            top: `${Math.random() * 100}vh`,
+                            width: Math.random() * 10 + 5 + 'px', // Much bigger: 5px to 15px
+                            height: Math.random() * 10 + 5 + 'px',
+                            background: `rgba(212, 175, 55, ${Math.random() * 0.3 + 0.2})`, // Slightly more transparent to not block text too much
+                            boxShadow: '0 0 15px rgba(212, 175, 55, 0.4)', // Larger glow
+                            filter: 'blur(1px)' // Soften the edges
+                        }}
+                    />
+                ))}
+            </div>
             <div className="services-hero">
                 <h1>Our Premium Services</h1>
                 <p>Experience luxury and perfection with our curated range of beauty services designed just for you.</p>

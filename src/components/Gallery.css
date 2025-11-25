@@ -1,6 +1,5 @@
 .gallery-container {
     padding: 8rem 2rem;
-    /* Increased top padding for grandeur */
     background-color: #000000;
     min-height: 100vh;
     overflow: hidden;
@@ -24,7 +23,6 @@
     left: 50%;
     transform: translateX(-50%);
     width: 800px;
-    /* Larger glow */
     height: 800px;
     background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
     pointer-events: none;
@@ -34,25 +32,24 @@
 .gallery-header {
     text-align: center;
     margin-bottom: 6rem;
-    /* More breathing room */
     position: relative;
     z-index: 1;
 }
 
 .gallery-header h1 {
     font-size: 4.5rem;
-    /* Larger, more impactful */
-    color: #ffffff;
+    color: #d4af37;
     margin-bottom: 1.5rem;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     letter-spacing: -1px;
-    background: linear-gradient(to right, #fff, #d4af37, #fff);
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     background-size: 200% auto;
-    animation: shine 6s linear infinite;
+    animation: shine 4s linear infinite;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .gallery-header p {
@@ -71,7 +68,6 @@
     overflow: hidden;
     padding: 3rem 0;
     z-index: 1;
-    /* Improved mask for smoother fade */
     mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
@@ -81,8 +77,6 @@
     gap: var(--card-gap);
     width: max-content;
     animation: scroll 60s linear infinite;
-    /* Slower, more elegant scroll */
-    /* No padding-left needed if we calculate scroll correctly from 0 */
 }
 
 .carousel-track:hover {
@@ -92,7 +86,7 @@
 .gallery-card {
     width: var(--card-width);
     height: 480px;
-    background: #0f0f0f;
+    background: #000000;
     border: 1px solid #222;
     border-radius: 4px;
     overflow: hidden;
@@ -114,7 +108,6 @@
 
 .gallery-card:hover {
     transform: translateY(-20px);
-    /* More dramatic lift */
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
     z-index: 2;
 }
@@ -210,7 +203,6 @@
     .gallery-container {
         padding: 5rem 1rem;
         --card-width: 280px;
-        /* Update variable for mobile */
         --card-gap: 1.5rem;
     }
 
