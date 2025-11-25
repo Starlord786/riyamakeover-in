@@ -10,7 +10,9 @@ import Preloader from './components/Preloader'
 import NoInternet from './components/NoInternet'
 import OfflineNotification from './components/OfflineNotification'
 import Contact from './components/Contact'
+import Home from './components/Home'
 import { useNetworkStatus } from './hooks/useNetworkStatus'
+
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -37,7 +39,12 @@ function App() {
       <OfflineNotification show={showNotification} countdown={countdown} />
       <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
       <Navbar />
-      <Hero />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
       <Footer />
     </>
   )
