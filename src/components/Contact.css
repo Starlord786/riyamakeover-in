@@ -1,7 +1,7 @@
 .contact-section {
     padding: 4rem 2rem;
-    background: #0a0a0a;
-    color: #e0e0e0;
+    background: #000000;
+    color: #d4af37;
     position: relative;
     overflow: hidden;
 }
@@ -12,7 +12,9 @@
 }
 
 .contact-heading {
-    font-size: 3rem;
+    font-family: 'Playfair Display', serif;
+    color: #d4af37;
+    font-size: 4rem;
     text-align: center;
     margin-bottom: 3rem;
     background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
@@ -21,7 +23,7 @@
     color: transparent;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: -1px;
 }
 
 .contact-content {
@@ -72,6 +74,7 @@
 }
 
 .info-text h4 {
+    font-family: 'Playfair Display', serif;
     font-size: 0.9rem;
     color: #D4AF37;
     text-transform: uppercase;
