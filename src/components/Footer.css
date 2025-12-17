@@ -1,4 +1,8 @@
 /* Color Variables for easy theme changing */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
 :root {
     --dark-background: black;
     /* Very dark/deep background */
@@ -11,7 +15,7 @@
 }
 
 .premium-footer {
-    background-color: var(--dark-background);
+    background: linear-gradient(0deg,#d4af37, #000000, #000000);
     color: var(--text-white);
     padding: 80px 5%;
     /* Generous padding for a luxury feel */
@@ -57,18 +61,19 @@
     border: 2px solid var(--text-gold);
     padding: 10px;
     /* Optional: adds space inside the border */
-    background: rgba(255, 255, 255, 0.05);
-    /* Subtle background */
 }
 
 .footer-social {
     margin-top: auto;
+    margin-left: 18%;
     /* Pushes it down if there's extra height, or just sits there */
 }
 
 .footer-social p {
+    font-family: "Google Sans Flex", sans-serif;
     font-size: 0.95rem;
-    color: var(--text-light-grey);
+    font-weight: 600;
+    color: #ffffff;
     margin-bottom: 15px;
 }
 
@@ -78,7 +83,8 @@
 }
 
 .social-icons a {
-    color: var(--text-gold);
+    color: var(--text-white);
+    font-family: "Google Sans Flex", sans-serif;
     font-size: 1.2rem;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -89,7 +95,7 @@
 }
 
 .social-icons a:hover {
-    color: var(--text-white);
+    color: var(--text-gold);
 }
 
 /* --- Right Side: Links & Designer --- */
@@ -113,6 +119,7 @@
 }
 
 .column-heading {
+    font-family: "Google Sans Flex", sans-serif;
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 25px;
@@ -122,7 +129,8 @@
 }
 
 .footer-link {
-    color: var(--text-light-grey);
+    font-family: "Google Sans Flex", sans-serif;
+    color: #ffffff;
     text-decoration: none;
     margin-bottom: 15px;
     font-size: 0.95rem;
@@ -130,7 +138,7 @@
 }
 
 .footer-link:hover {
-    color: var(--text-white);
+    color: #bfb5b5;
 }
 
 /* --- Designer Text --- */
@@ -202,4 +210,12 @@
         /* Smaller on mobile */
         letter-spacing: 3px;
     }
+}
+
+@media (max-width: 480px) {
+
+    .footer-social {
+        margin-left: 0;
+    }
+    
 }

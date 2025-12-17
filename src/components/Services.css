@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Damion&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BBH+Hegarty&family=Bebas+Neue&family=Changa+One:ital@0;1&family=Damion&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sekuya&family=Syncopate:wght@400;700&display=swap');
+
+
 .services-page {
     padding-top: 80px;
     /* Account for fixed navbar */
@@ -16,10 +22,10 @@
 }
 
 .services-hero h1 {
-    font-size: 4.5rem;
+    font-size: 4rem;
     color: #d4af37;
     margin-bottom: 1.5rem;
-    font-family: 'Playfair Display', serif;
+    font-family: 'BBH Hegarty', serif;
     font-weight: 700;
     letter-spacing: -1px;
     background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
@@ -32,11 +38,11 @@
 }
 
 .services-hero p {
+    font-family: 'Damion', serif;
     color: #a0a0a0;
-    font-size: 1.4rem;
+    font-size: 1.7rem;
     max-width: 700px;
     margin: 0 auto;
-    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     letter-spacing: 0.5px;
 }
@@ -80,7 +86,7 @@
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: #fff;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Paytone One', serif;
 }
 
 .service-card p {
@@ -88,7 +94,7 @@
     margin-bottom: 1.5rem;
     line-height: 1.6;
     flex-grow: 1;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Google Sans Flex', sans-serif;
 }
 
 .service-price {
@@ -96,7 +102,7 @@
     color: #d4af37;
     margin-bottom: 1.5rem;
     font-weight: 500;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'google sans flex', serif;
 }
 
 .service-btn {
@@ -110,7 +116,7 @@
     font-weight: 500;
     text-align: center;
     text-decoration: none;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'google sans flex', sans-serif;
 }
 
 .service-btn:hover {
