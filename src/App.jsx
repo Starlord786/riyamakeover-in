@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import Footer from './components/Footer'
+import Footer from './components/Footer'          
 import './App.css'
 import { Routes, Route, Outlet, useLocation } from 'react-router-dom'
 import Services from './components/Services'

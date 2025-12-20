@@ -2,14 +2,22 @@ import React from 'react';
 import './TattooLoader.css';
 
 const TattooLoader = () => {
-    React.useEffect(() => {
-        // Search and destroy any lingering global preloader
-        const globalPreloader = document.querySelector('.preloader-container');
-        if (globalPreloader) {
-            globalPreloader.style.display = 'none';
-            globalPreloader.style.visibility = 'hidden';
-            globalPreloader.style.opacity = '0';
-        }
+    React.useLayoutEffect(() => {
+        // Nuclear option: Inject a style tag to force hide the global preloader
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .preloader-container { 
+                display: none !important; 
+                opacity: 0 !important; 
+                visibility: hidden !important; 
+                pointer-events: none !important;
+            }
+        `;
+        document.head.appendChild(style);
+
+        return () => {
+            document.head.removeChild(style);
+        };
     }, []);
 
     return (
