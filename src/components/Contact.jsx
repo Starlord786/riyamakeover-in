@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Mail, Phone, Send, MessageCircle } from 'lucide-react';
-import logo from '../assets/logo.png';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import chatAnimation from '../assets/Chat.lottie';
 import './Contact.css';
 
 const Contact = () => {
@@ -55,15 +56,14 @@ const Contact = () => {
                     whileInView="visible"
                     viewport={{ once: true }}
                 >
-                    {/* Left Side - Animated Favicon */}
+    /* Left Side - Animated Favicon */
                     <div className="contact-left">
-                        <motion.div
-                            className="favicon-container"
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                        >
-                            <img src={logo} alt="Riya Makeover" className="contact-favicon" />
-                        </motion.div>
+                        <DotLottieReact
+                            src={chatAnimation}
+                            loop
+                            autoplay
+                            className="contact-lottie"
+                        />
                     </div>
 
                     {/* Right Side - Info & Form */}
