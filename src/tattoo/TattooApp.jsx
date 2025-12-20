@@ -28,8 +28,8 @@ const TattooApp = () => {
 
     return (
         <Routes>
-            <Route path="/" element={<TattooHome />} />
-            <Route path="/home" element={<TattooHome />} />
+            <Route index element={<TattooHome />} />
+            <Route path="home" element={<TattooHome />} />
             {/* Catch-all redirect to home within the tattoo section */}
             <Route path="*" element={<Navigate to="/tattoo" replace />} />
         </Routes>
