@@ -5,18 +5,18 @@ import dragonLogo from '../../assets/dragon-animated.svg';
 
 const Footer = () => {
     return (
-        <footer className="premium-footer">
-            <div className="footer-content">
-                <div className="footer-left">
+        <footer className="tattoo-footer-wrapper">
+            <div className="tattoo-footer-content">
+                <div className="tattoo-footer-left">
                     {/* Logo Section */}
-                    <div className="footer-logo-container">
-                        <img src={dragonLogo} alt="Dragon Logo" className="footer-logo" />
+                    <div className="tattoo-footer-logo-container">
+                        <img src={dragonLogo} alt="Dragon Logo" className="tattoo-footer-logo" />
                     </div>
 
                     {/* Social Media Section */}
-                    <div className="footer-social">
+                    <div className="tattoo-footer-social">
                         <p>Follow us on:</p>
-                        <div className="social-icons">
+                        <div className="tattoo-social-icons">
                             <a href="#" className="social-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.251-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.149-3.227 1.664-4.771 4.919-4.919 1.266-.058 1.644-.07 4.85-.07zm0-2.163c-3.259 0-3.668.014-4.944.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.276-.073 1.685-.073 4.943s.014 3.668.072 4.944c.2 4.358 2.618 6.78 6.98 6.98 1.276.059 1.685.073 4.944.073s3.668-.014 4.944-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.276.073-1.685.073-4.943s-.014-3.668-.072-4.944c-.2-4.358-2.618-6.78-6.98-6.98-1.276-.059-1.685-.073-4.944-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
@@ -37,39 +37,39 @@ const Footer = () => {
                 </div>
 
                 {/* Links Section */}
-                <div className="footer-right">
-                    <div className="footer-links-group">
+                <div className="tattoo-footer-right">
+                    <div className="tattoo-footer-links-group">
                         {/* Platform Column */}
-                        <div className="footer-column">
-                            <h3 className="column-heading">Studio</h3>
-                            <span className="footer-link">About</span>
-                            <span className="footer-link">Artists</span>
-                            <span className="footer-link">Gallery</span>
-                            <span className="footer-link">Contact</span>
+                        <div className="tattoo-footer-column">
+                            <h3 className="tattoo-column-heading">Studio</h3>
+                            <span className="tattoo-footer-link">About</span>
+                            <span className="tattoo-footer-link">Artists</span>
+                            <span className="tattoo-footer-link">Gallery</span>
+                            <span className="tattoo-footer-link">Contact</span>
                         </div>
 
                         {/* Resources Column */}
-                        <div className="footer-column">
-                            <h3 className="column-heading">Resources</h3>
-                            <span className="footer-link">Aftercare</span>
-                            <span className="footer-link">FAQ</span>
-                            <span className="footer-link">Consultation</span>
-                            <span className="footer-link">Pricing</span>
+                        <div className="tattoo-footer-column">
+                            <h3 className="tattoo-column-heading">Resources</h3>
+                            <span className="tattoo-footer-link">Aftercare</span>
+                            <span className="tattoo-footer-link">FAQ</span>
+                            <span className="tattoo-footer-link">Consultation</span>
+                            <span className="tattoo-footer-link">Pricing</span>
                         </div>
 
                         {/* Legals Column */}
-                        <div className="footer-column">
-                            <h3 className="column-heading">Policy</h3>
-                            <span className="footer-link">Hygiene</span>
-                            <span className="footer-link">Terms</span>
-                            <span className="footer-link">Waiver</span>
-                            <span className="footer-link">Privacy</span>
+                        <div className="tattoo-footer-column">
+                            <h3 className="tattoo-column-heading">Policy</h3>
+                            <span className="tattoo-footer-link">Hygiene</span>
+                            <span className="tattoo-footer-link">Terms</span>
+                            <span className="tattoo-footer-link">Waiver</span>
+                            <span className="tattoo-footer-link">Privacy</span>
                         </div>
                     </div>
 
                     {/* Designer Credit */}
-                    <div className="footer-designer">
-                        <h2 className="designer-text">INK & SOUL</h2>
+                    <div className="tattoo-footer-designer">
+                        <h2 className="tattoo-designer-text">INK & SOUL</h2>
                     </div>
                 </div>
             </div>
