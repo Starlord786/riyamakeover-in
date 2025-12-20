@@ -78,49 +78,131 @@
     /* Above particles */
 }
 
+
 .service-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(212, 175, 55, 0.1);
-    border-radius: 16px;
-    padding: 2rem;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+    background-color: transparent;
+    width: 100%;
+    height: 400px;
+    perspective: 1000px;
+    border: none;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.service-card-inner {
     position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.service-card:hover .service-card-inner {
+    transform: rotateY(180deg);
+}
+
+.service-card-front,
+.service-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 16px;
     overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.service-card-front {
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    /* Fixed: Was relative, causing layout collapse */
+    top: 0;
+    left: 0;
+}
+
+.service-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+    filter: brightness(0.7) contrast(0.8);
+}
+
+/* Subtle Vignette Overlay */
+.service-card-front::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.4) 80%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 16px;
+    /* Match card radius */
+}
+
+.service-card:hover .service-card-front img {
+    transform: scale(1.1);
+    opacity: 0.6;
+}
+
+.card-front-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    padding: 20px;
+    background: transparent;
+    text-align: center;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.card-front-overlay h3 {
+    color: #d4af37;
+    font-family: 'BBH Hegarty', serif;
+    font-size: 2.2rem;
+    margin: 0;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+    letter-spacing: 1px;
+}
+
+.service-card-back {
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: white;
+    transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
-}
-
-.service-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(212, 175, 55, 0.4);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.service-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: #d4af37;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
 }
 
 .service-card h3 {
-    font-size: 1.5rem;
+    font-size: 2.3rem;
     margin-bottom: 1rem;
-    color: #fff;
-    font-family: 'Paytone One', serif;
+    color: #ffffff;
+    font-family: 'Damion', serif;
 }
 
 .service-card p {
-    color: #a5a5a5;
+    color: #e0e0e0;
     margin-bottom: 1.5rem;
     line-height: 1.6;
-    flex-grow: 1;
     font-family: 'Google Sans Flex', sans-serif;
+    font-size: 1rem;
 }
 
 .service-price {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #d4af37;
     margin-bottom: 1.5rem;
     font-weight: 500;
@@ -139,6 +221,7 @@
     text-align: center;
     text-decoration: none;
     font-family: 'google sans flex', sans-serif;
+    display: inline-block;
 }
 
 .service-btn:hover {
@@ -152,6 +235,32 @@
     }
 }
 
+/* Mobile Hint Styles */
+.mobile-hint {
+    display: none;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 0.5rem;
+    font-family: 'Google Sans Flex', sans-serif;
+    letter-spacing: 0.5px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+@keyframes pulse-opacity {
+
+    0%,
+    100% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
 @media (max-width: 768px) {
     .services-hero h1 {
         font-size: 3rem;
@@ -160,4 +269,70 @@
     .services-grid {
         padding: 1rem;
     }
+
+    .mobile-hint {
+        display: inline-block;
+        animation: pulse-opacity 2s infinite ease-in-out;
+    }
+}
+
+
+/* View More Card Styles */
+.view-more-card {
+    cursor: pointer;
+    /* height is inherited from service-card */
+}
+
+/* Prevent flip on view more card */
+.service-card.view-more-card:hover .service-card-inner {
+    transform: none;
+}
+
+.view-more-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: 100%;
+}
+
+.service-card.view-more-card:hover .view-more-inner {
+    background: rgba(212, 175, 55, 0.08);
+}
+
+.view-more-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.view-more-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid #d4af37;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #d4af37;
+    transition: all 0.3s ease;
+}
+
+.service-card.view-more-card:hover .view-more-icon {
+    background: #d4af37;
+    color: #000;
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+.view-more-card h3 {
+    color: #d4af37;
+    font-size: 1.5rem;
+    margin: 0;
+    font-family: 'BBH Hegarty', serif;
 }
