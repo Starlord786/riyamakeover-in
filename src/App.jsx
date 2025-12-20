@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import Footer from './components/Footer'          
+import Footer from './components/Footer'
 import './App.css'
 import { Routes, Route, Outlet, useLocation } from 'react-router-dom'
 import Services from './components/Services'
@@ -23,6 +23,8 @@ import Signup from './pages/Signup'
 import ScrollToTop from './components/ScrollToTop'
 import { useNetworkStatus } from './hooks/useNetworkStatus'
 
+
+import TattooApp from './tattoo/TattooApp'
 
 function App() {
   const location = useLocation();
@@ -52,7 +54,13 @@ function App() {
     <>
       <ScrollToTop />
       <OfflineNotification show={showNotification} countdown={countdown} />
-      <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
+
+      {!isTattooRoute && (
+        <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
+      )}
+
+      {/* Show Navbar on all pages except the tattoo section */}
+      {!isTattooRoute && <Navbar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -68,8 +76,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/tattoo/*" element={<TattooApp />} />
       </Routes>
-      <Footer />
+      {!isTattooRoute && <Footer />}
     </>
   )
 }
