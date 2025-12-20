@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import './TattooHome.css';
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 
 const TattooHome = () => {
 
@@ -175,13 +176,7 @@ const TattooHome = () => {
             </div>
 
             {/* Footer */}
-            <footer className="tattoo-footer">
-                <div className="footer-logo">INK & SOUL</div>
-                <p>&copy; 2025 Riya Makeover Group. All Rights Reserved.</p>
-                <div style={{ marginTop: '20px', color: '#444' }}>
-                    EST. 2024 // SECTOR 7
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 };
