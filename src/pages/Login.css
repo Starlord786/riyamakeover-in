@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=BBH+Hegarty&family=Bebas+Neue&family=Changa+One:ital@0;1&family=Damion&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sekuya&family=Syncopate:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BBH+Hegarty&family=Bebas+Neue&family=Changa+One:ital@0;1&family=Damion&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sekuya&family=Syncopate:wght@400;700&display=swap');
 
 .login-container {
     min-height: 100vh;
@@ -56,10 +57,10 @@
 
 .login-header p {
     text-align: center;
-    color: #a0a0a0;
+    color: #ffffff;
     font-size: 1rem;
     margin-bottom: 40px;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Damion', serif;
     font-style: italic;
     font-size: 1.2rem;
 }
@@ -70,6 +71,7 @@
 }
 
 .form-group label {
+    font-family: "Google Sans Flex", sans-serif;
     display: block;
     font-size: 0.9rem;
     margin-bottom: 8px;
@@ -88,7 +90,7 @@
     border: 1px solid #333;
     border-radius: 10px;
     color: #fff;
-    font-family: 'Outfit', sans-serif;
+    font-family: "Google Sans Flex", sans-serif;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
@@ -121,6 +123,7 @@
 }
 
 .remember-me input {
+    font-family: "Google Sans Flex", sans-serif;
     accent-color: #d4af37;
     width: 16px;
     height: 16px;
@@ -128,6 +131,7 @@
 }
 
 .forgot-password {
+    font-family: "Google Sans Flex", sans-serif;
     color: #d4af37;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -145,13 +149,11 @@
     border: none;
     border-radius: 30px;
     color: #000;
-    font-weight: 600;
+    font-weight: 800;
     font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Google Sans Flex', serif;
 }
 
 .login-btn:hover {
@@ -168,6 +170,7 @@
 }
 
 .login-footer a {
+    font-family: "Google Sans Flex", sans-serif;
     color: #d4af37;
     text-decoration: none;
     font-weight: 600;

@@ -18,6 +18,8 @@ import Guides from './pages/Guides'
 import Terms from './pages/Terms'
 import Privacy from './pages/Privacy'
 import Licensing from './pages/Licensing'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
 import ScrollToTop from './components/ScrollToTop'
 import { useNetworkStatus } from './hooks/useNetworkStatus'
 
@@ -47,7 +49,7 @@ function App() {
       <ScrollToTop />
       <OfflineNotification show={showNotification} countdown={countdown} />
       <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
-
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
@@ -60,7 +62,10 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/licensing" element={<Licensing />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
+      <Footer />
     </>
   )
 }
