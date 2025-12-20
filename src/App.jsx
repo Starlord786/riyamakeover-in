@@ -18,7 +18,6 @@ import Guides from './pages/Guides'
 import Terms from './pages/Terms'
 import Privacy from './pages/Privacy'
 import Licensing from './pages/Licensing'
-import TattooApp from './tattoo/TattooApp'
 import ScrollToTop from './components/ScrollToTop'
 import { useNetworkStatus } from './hooks/useNetworkStatus'
 
@@ -58,29 +57,17 @@ function App() {
       )}
 
       <Routes>
-        {/* Tattoo Shop Sub-Application */}
-        <Route path="/tattoo/*" element={<TattooApp />} />
-
-        {/* Main Site - With Navbar/Footer */}
-        <Route element={
-          <>
-            <Navbar />
-            <Outlet />
-            <Footer />
-          </>
-        }>
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/guides" element={<Guides />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/licensing" element={<Licensing />} />
-          <Route path="/contact" element={<Contact />} />
-        </Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/guides" element={<Guides />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/licensing" element={<Licensing />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </>
   )

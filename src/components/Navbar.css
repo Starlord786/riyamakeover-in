@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Damion&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BBH+Hegarty&family=Bebas+Neue&family=Changa+One:ital@0;1&family=Damion&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sekuya&family=Syncopate:wght@400;700&display=swap');
+
+
 .navbar {
     background: transparent;
     height: 100px;
@@ -58,14 +62,13 @@
 .navbar-item {
     color: #e0e0e0;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 500;
     letter-spacing: 0.5px;
-    text-transform: uppercase;
     position: relative;
     transition: color 0.3s ease;
     padding: 5px 0;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Damion', serif;
 }
 
 .navbar-item::after {
@@ -195,7 +198,7 @@
     color: #e0e0e0;
     font-size: 0.9rem;
     padding: 0 10px;
-    font-family: inherit;
+    font-family: 'Google Sans Flex', sans-serif;
     height: 100%;
     line-height: 34px;
     position: relative;
@@ -251,6 +254,7 @@
     }
 
     .navbar-item {
+        font-family: 'Damion', serif;
         font-size: 1.5rem;
         width: 100%;
         display: block;
