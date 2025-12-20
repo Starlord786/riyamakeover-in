@@ -1,9 +1,9 @@
 import React from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import Footer from './components/Footer'
+import Footer from './components/Footer'          
 import './App.css'
-import { Routes, Route, Outlet } from 'react-router-dom'
+import { Routes, Route, Outlet, useLocation } from 'react-router-dom'
 import Services from './components/Services'
 import Gallery from './components/Gallery'
 import Preloader from './components/Preloader'
@@ -25,6 +25,7 @@ import { useNetworkStatus } from './hooks/useNetworkStatus'
 
 
 function App() {
+  const location = useLocation();
   const [isLoading, setIsLoading] = React.useState(true);
   const [isImageLoaded, setIsImageLoaded] = React.useState(false);
   const { showOfflinePage, showNotification, countdown } = useNetworkStatus();
@@ -44,12 +45,15 @@ function App() {
     return <NoInternet onRetry={() => window.location.reload()} />;
   }
 
+  // Check if we are in the tattoo section (case-insensitive)
+  const isTattooRoute = location.pathname.toLowerCase().startsWith('/tattoo');
+
   return (
     <>
       <ScrollToTop />
       <OfflineNotification show={showNotification} countdown={countdown} />
       <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
-      <Navbar />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />

@@ -8,7 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 9000;
     opacity: 1;
     transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
 }
@@ -127,4 +127,13 @@
         width: 60px;
         height: 60px;
     }
+}
+
+/* Force hide preloader when inside tattoo section */
+body.tattoo-mode .preloader-container {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
 }

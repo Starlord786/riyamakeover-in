@@ -1,0 +1,75 @@
+/* src/tattoo/TattooLoader.css */
+.tattoo-loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #050505 !important;
+    /* Very dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2147483647 !important;
+}
+
+.tattoo-loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.tattoo-loader-spinner {
+    width: 80px;
+    height: 80px;
+    border: 4px solid rgba(0, 255, 0, 0.1);
+    border-top: 4px solid #00ff41;
+    /* Neon Green */
+    border-radius: 50%;
+    animation: spin 1s linear infinite, glow 2s ease-in-out infinite alternate;
+    box-shadow: 0 0 15px #00ff41, 0 0 30px #00ff41 inset;
+}
+
+.tattoo-loader-text {
+    font-family: 'Cinzel', serif;
+    /* Or any premium font you are using */
+    font-size: 1.5rem;
+    color: #00ff41;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    animation: textGlow 2s ease-in-out infinite alternate;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41 inset;
+    }
+
+    to {
+        box-shadow: 0 0 20px #00ff41, 0 0 40px #00ff41 inset;
+    }
+}
+
+@keyframes textGlow {
+    from {
+        opacity: 0.8;
+        text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    }
+
+    to {
+        opacity: 1;
+        text-shadow: 0 0 20px rgba(0, 255, 65, 0.8), 0 0 40px rgba(0, 255, 65, 0.4);
+    }
+}
