@@ -1,0 +1,167 @@
+/* src/pages/TattooHome.css */
+.tattoo-body {
+    background-color: #000000;
+    color: #D4AF37;
+    font-family: 'Cinzel', serif;
+    /* Or a standard serif if not available */
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.tattoo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Hero Section */
+.tattoo-hero {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+    border-bottom: 2px solid #D4AF37;
+}
+
+.tattoo-hero h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #D4AF37;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.tattoo-hero p {
+    font-size: 1.5rem;
+    color: #f0f0f0;
+    margin-bottom: 40px;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.tattoo-btn {
+    padding: 15px 40px;
+    background: transparent;
+    border: 2px solid #D4AF37;
+    color: #D4AF37;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: all 0.3s ease;
+}
+
+.tattoo-btn:hover {
+    background: #D4AF37;
+    color: #000000;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+}
+
+/* About Section */
+.tattoo-section {
+    padding: 80px 0;
+    border-bottom: 1px solid #333;
+}
+
+.tattoo-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 60px;
+    color: #fff;
+    position: relative;
+}
+
+.tattoo-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: #D4AF37;
+    margin: 20px auto 0;
+}
+
+.tattoo-about-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+}
+
+.tattoo-about-text {
+    flex: 1;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #ccc;
+}
+
+/* Services Grid */
+.tattoo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.tattoo-card {
+    background: #111;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.tattoo-card:hover {
+    border-color: #D4AF37;
+    transform: translateY(-10px);
+}
+
+.tattoo-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.tattoo-card p {
+    color: #888;
+}
+
+/* Footer */
+.tattoo-footer {
+    padding: 50px 0;
+    text-align: center;
+    background: #050505;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .tattoo-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .tattoo-hero p {
+        font-size: 1.1rem;
+    }
+}

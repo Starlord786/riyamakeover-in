@@ -11,6 +11,22 @@
     background-color: #000000;
     color: #fff;
     padding-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.particles-container {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+    /* Behind everything */
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
 }
 
 .services-hero {
@@ -19,6 +35,9 @@
     background: radial-gradient(circle at center, rgba(212, 175, 55, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    /* Above particles */
 }
 
 .services-hero h1 {
@@ -54,6 +73,9 @@
     padding: 2rem 5%;
     max-width: 1400px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    /* Above particles */
 }
 
 .service-card {
