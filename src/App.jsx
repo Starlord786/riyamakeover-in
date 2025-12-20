@@ -3,7 +3,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Footer from './components/Footer'
 import './App.css'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Outlet } from 'react-router-dom'
 import Services from './components/Services'
 import Gallery from './components/Gallery'
 import Preloader from './components/Preloader'
@@ -18,6 +18,7 @@ import Guides from './pages/Guides'
 import Terms from './pages/Terms'
 import Privacy from './pages/Privacy'
 import Licensing from './pages/Licensing'
+import TattooApp from './tattoo/TattooApp'
 import ScrollToTop from './components/ScrollToTop'
 import { useNetworkStatus } from './hooks/useNetworkStatus'
 
@@ -47,21 +48,32 @@ function App() {
       <ScrollToTop />
       <OfflineNotification show={showNotification} countdown={countdown} />
       <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
-      <Navbar />
+
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/features" element={<Features />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/guides" element={<Guides />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/licensing" element={<Licensing />} />
-        <Route path="/contact" element={<Contact />} />
+        {/* Tattoo Shop Sub-Application */}
+        <Route path="/tattoo/*" element={<TattooApp />} />
+
+        {/* Main Site - With Navbar/Footer */}
+        <Route element={
+          <>
+            <Navbar />
+            <Outlet />
+            <Footer />
+          </>
+        }>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/guides" element={<Guides />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/licensing" element={<Licensing />} />
+          <Route path="/contact" element={<Contact />} />
+        </Route>
       </Routes>
-      <Footer />
     </>
   )
 }
