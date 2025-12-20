@@ -76,6 +76,7 @@ const Navbar = () => {
                     <Link to="/services" className="navbar-item" onClick={() => setIsOpen(false)}>Services</Link>
                     <Link to="/gallery" className="navbar-item" onClick={() => setIsOpen(false)}>Gallery</Link>
                     <a href="#contact" className="navbar-item" onClick={() => setIsOpen(false)}>Contact</a>
+                    <Link to="/login" className="navbar-item" onClick={() => setIsOpen(false)}>Login</Link>
 
                     <div
                         className="mobile-phone"
