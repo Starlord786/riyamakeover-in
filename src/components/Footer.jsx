@@ -62,10 +62,10 @@ const Footer = () => {
                         {/* Legals Column */}
                         <div className="footer-column">
                             <h3 className="column-heading">Legals</h3>
-                            <a href="/guides" className="footer-link">Guides</a>
-                            <a href="/terms" className="footer-link">Terms & Conditions</a>
-                            <a href="/privacy" className="footer-link">Privacy Policy</a>
-                            <a href="/licensing" className="footer-link">Licensing</a>
+                            <Link to="/guides" className="footer-link">Guides</Link>
+                            <Link to="/terms" className="footer-link">Terms & Conditions</Link>
+                            <Link to="/privacy" className="footer-link">Privacy Policy</Link>
+                            <Link to="/licensing" className="footer-link">Licensing</Link>
                         </div>
                     </div>
 
