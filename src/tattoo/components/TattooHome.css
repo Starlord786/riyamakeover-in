@@ -291,18 +291,20 @@ h6 {
 /* Sections */
 .tattoo-section {
     padding: 100px 0;
-    border-bottom: 1px solid rgba(57, 255, 20, 0.1);
+    border-bottom: 1px solid rgba(57, 255, 20, 0.05);
+    /* Softer divider */
     position: relative;
 }
 
 .tattoo-title {
     text-align: center;
     font-size: 3.5rem;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
     color: #fff;
     position: relative;
     text-shadow: 2px 2px 0px rgba(57, 255, 20, 0.2);
     z-index: 2;
+    letter-spacing: 0.05em;
 }
 
 .tattoo-about-content {
@@ -455,60 +457,126 @@ h6 {
 .contact-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    padding-top: 50px;
+    gap: 60px;
+    padding-top: 20px;
+    align-items: start;
 }
 
 .contact-info {
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
 }
 
 .contact-item {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
+    padding: 20px;
+    background: rgba(10, 10, 10, 0.6);
+    border: 1px solid rgba(57, 255, 20, 0.1);
+    transition: all 0.3s ease;
 }
 
-.contact-icon {
-    width: 50px;
-    height: 50px;
+.contact-item:hover {
+    border-color: rgba(57, 255, 20, 0.4);
+    background: rgba(15, 15, 15, 0.8);
+    transform: translateX(10px);
+}
+
+.contact-icon-wrapper {
+    width: 60px;
+    height: 60px;
     border: 1px solid var(--neon-green);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--neon-green);
-    font-size: 1.2rem;
-    box-shadow: 0 0 10px var(--neon-green-dim);
+    background: rgba(57, 255, 20, 0.05);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
+    flex-shrink: 0;
+}
+
+.contact-icon-lucide {
+    width: 28px;
+    height: 28px;
 }
 
 .contact-text h4 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
     color: #fff;
+    letter-spacing: 1px;
 }
 
 .contact-text p {
     color: #aaa;
     margin: 0;
+    font-size: 1rem;
+    font-family: var(--font-body);
+}
+
+.contact-form-wrapper {
+    background: rgba(15, 15, 15, 0.5);
+    padding: 40px;
+    border: 1px solid #222;
+    position: relative;
+}
+
+.contact-form-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+    opacity: 0.5;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    color: var(--neon-green);
+    margin-bottom: 10px;
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
 }
 
 .contact-form input,
 .contact-form textarea {
     width: 100%;
-    padding: 15px;
-    margin-bottom: 20px;
-    background: #111;
+    padding: 16px;
+    background: rgba(5, 5, 5, 0.8);
     border: 1px solid #333;
     color: #fff;
     font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all 0.3s;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
     border-color: var(--neon-green);
     outline: none;
-    box-shadow: 0 0 10px var(--neon-green-dim);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.contact-form .tattoo-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
 }
 
 /* Footer */
@@ -550,5 +618,23 @@ h6 {
     /* Simplified mobile nav for now */
     .contact-container {
         grid-template-columns: 1fr;
+        gap: 40px;
+        padding-top: 0;
+    }
+
+    .contact-form-wrapper {
+        padding: 25px;
+    }
+
+    .contact-item {
+        padding: 15px;
+        margin-bottom: 20px;
+        background: transparent;
+        border: none;
+    }
+
+    .contact-item:hover {
+        transform: none;
+        background: transparent;
     }
 }

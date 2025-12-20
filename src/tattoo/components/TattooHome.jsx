@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './TattooHome.css';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
+import Contact from './Contact';
 
 const TattooHome = () => {
 
@@ -136,43 +137,7 @@ const TattooHome = () => {
                 </section>
 
                 {/* Contact Section */}
-                <section id="contact" className="tattoo-section reveal">
-                    <h2 className="tattoo-title">Get Inked</h2>
-                    <div className="contact-container">
-                        <div className="contact-info">
-                            <div className="contact-item">
-                                <div className="contact-icon">📍</div>
-                                <div className="contact-text">
-                                    <h4>Location</h4>
-                                    <p>Sector 7, Underground Level<br />New Delhi, India</p>
-                                </div>
-                            </div>
-                            <div className="contact-item">
-                                <div className="contact-icon">📱</div>
-                                <div className="contact-text">
-                                    <h4>Link</h4>
-                                    <p>+91 98765 43210</p>
-                                </div>
-                            </div>
-                            <div className="contact-item">
-                                <div className="contact-icon">✉️</div>
-                                <div className="contact-text">
-                                    <h4>Signal</h4>
-                                    <p>book@inksoul.com</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="contact-form-wrapper">
-                            <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
-                                <input type="text" placeholder="CODENAME (Name)" />
-                                <input type="email" placeholder="SIGNAL FREQUENCY (Email)" />
-                                <textarea rows="4" placeholder="DESCRIBE YOUR VISION"></textarea>
-                                <button type="submit" className="tattoo-btn" style={{ width: '100%' }}>TRANSMIT REQUEST</button>
-                            </form>
-                        </div>
-                    </div>
-                </section>
+                <Contact />
             </div>
 
             {/* Footer */}
