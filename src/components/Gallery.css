@@ -239,4 +239,12 @@
     .card-content p{
         font-size: 0.8rem;
     }
+
+    .gallery-header h1{
+        font-size: 3rem;
+    }
+
+    .gallery-header p{
+        font-size: 1.8rem;
+    }
 }
