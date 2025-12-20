@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Mail, Phone, Send } from 'lucide-react';
+import { MapPin, Mail, Phone, Send, MessageCircle } from 'lucide-react';
+import logo from '../assets/logo.png';
 import './Contact.css';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
-        name: '',
+        firstName: '',
+        lastName: '',
         email: '',
         phone: '',
         message: ''
@@ -20,7 +22,7 @@ const Contact = () => {
         // Handle form submission logic here
         console.log('Form submitted:', formData);
         alert('Message sent successfully!');
-        setFormData({ name: '', email: '', phone: '', message: '' });
+        setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' });
     };
 
     const containerVariants = {
@@ -46,111 +48,119 @@ const Contact = () => {
     return (
         <section className="contact-section" id="contact">
             <div className="contact-container">
-                <motion.h2
-                    className="contact-heading"
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                >
-                    Contact Us
-                </motion.h2>
-
                 <motion.div
-                    className="contact-content"
+                    className="contact-content contents-wrapper"
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
                 >
-                    {/* Left Side - Info */}
-                    <div className="contact-info">
-                        <motion.div className="info-item" variants={itemVariants}>
-                            <div className="icon-box">
-                                <MapPin size={24} />
-                            </div>
-                            <div className="info-text">
-                                <h4>Address</h4>
-                                <p>123 Fashion Street, Makeover City, India</p>
-                            </div>
-                        </motion.div>
-
-                        <motion.div className="info-item" variants={itemVariants}>
-                            <div className="icon-box">
-                                <Mail size={24} />
-                            </div>
-                            <div className="info-text">
-                                <h4>Email</h4>
-                                <p>info@riyamakeover.in</p>
-                            </div>
-                        </motion.div>
-
-                        <motion.div className="info-item" variants={itemVariants}>
-                            <div className="icon-box">
-                                <Phone size={24} />
-                            </div>
-                            <div className="info-text">
-                                <h4>Phone</h4>
-                                <p>+91 98765 43210</p>
-                            </div>
+                    {/* Left Side - Animated Favicon */}
+                    <div className="contact-left">
+                        <motion.div
+                            className="favicon-container"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                        >
+                            <img src={logo} alt="Riya Makeover" className="contact-favicon" />
                         </motion.div>
                     </div>
 
-                    {/* Right Side - Form */}
-                    <motion.div className="contact-form-wrapper" variants={itemVariants}>
-                        <form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <input
-                                    type="text"
-                                    name="name"
-                                    placeholder="Your Name"
-                                    className="form-input"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    required
-                                />
+                    {/* Right Side - Info & Form */}
+                    <div className="contact-right">
+                        <motion.h2 className="form-heading" variants={itemVariants}>
+                            CONTACT US
+                        </motion.h2>
+
+                        <motion.a
+                            href="https://chat.whatsapp.com/DfAdXUj7SCD7I5yq3C9bJq" // Replace with actual link if known, else keeping generic or commented
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="whatsapp-link"
+                            variants={itemVariants}
+                        >
+                            <div className="whatsapp-btn">
+                                <MessageCircle size={24} />
+                                <span>Join our WhatsApp Group</span>
                             </div>
-                            <div className="form-group">
-                                <input
-                                    type="email"
-                                    name="email"
-                                    placeholder="Your Email"
-                                    className="form-input"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required
-                                />
+                        </motion.a>
+
+                        <motion.form onSubmit={handleSubmit} className="new-contact-form" variants={itemVariants}>
+                            <div className="form-row">
+                                <div className="form-group-new">
+                                    <label>FIRST NAME</label>
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        placeholder=""
+                                        className="form-input-new"
+                                        value={formData.firstName}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="form-group-new">
+                                    <label>LAST NAME</label>
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        placeholder=""
+                                        className="form-input-new"
+                                        value={formData.lastName}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
                             </div>
-                            <div className="form-group">
-                                <input
-                                    type="tel"
-                                    name="phone"
-                                    placeholder="Your Phone"
-                                    className="form-input"
-                                    value={formData.phone}
-                                    onChange={handleChange}
-                                />
+
+                            <div className="form-row">
+                                <div className="form-group-new">
+                                    <label>EMAIL</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder=" "
+                                        className="form-input-new"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="form-group-new">
+                                    <label>PHONE NUMBER</label>
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        placeholder=""
+                                        className="form-input-new"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                    />
+                                </div>
                             </div>
-                            <div className="form-group">
+
+                            <div className="form-group-new">
+                                <label>WHAT DO YOU HAVE IN MIND</label>
                                 <textarea
                                     name="message"
-                                    placeholder="Your Message"
-                                    className="form-textarea"
+                                    placeholder="Please enter query..."
+                                    className="form-textarea-new"
                                     value={formData.message}
                                     onChange={handleChange}
                                     required
                                 ></textarea>
                             </div>
+
                             <motion.button
                                 type="submit"
-                                className="submit-btn"
+                                className="submit-btn-new"
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                             >
-                                Send Message <Send size={18} style={{ marginLeft: '8px', verticalAlign: 'middle' }} />
+                                Submit
                             </motion.button>
-                        </form>
-                    </motion.div>
+                        </motion.form>
+                    </div>
                 </motion.div>
             </div>
         </section>
