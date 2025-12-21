@@ -56,18 +56,8 @@ const Contact = () => {
                     whileInView="visible"
                     viewport={{ once: true }}
                 >
-    /* Left Side - Animated Favicon */
-                    <div className="contact-left">
-                        <DotLottieReact
-                            src={chatAnimation}
-                            loop
-                            autoplay
-                            className="contact-lottie"
-                        />
-                    </div>
-
-                    {/* Right Side - Info & Form */}
-                    <div className="contact-right">
+                    {/* Left Side - Info & Form (Formerly Right) */}
+                    <div className="contact-form-section">
                         <motion.h2 className="form-heading" variants={itemVariants}>
                             CONTACT US
                         </motion.h2>
@@ -113,30 +103,29 @@ const Contact = () => {
                                 </div>
                             </div>
 
-                            <div className="form-row">
-                                <div className="form-group-new">
-                                    <label>EMAIL</label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        placeholder=" "
-                                        className="form-input-new"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group-new">
-                                    <label>PHONE NUMBER</label>
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        placeholder=""
-                                        className="form-input-new"
-                                        value={formData.phone}
-                                        onChange={handleChange}
-                                    />
-                                </div>
+                            {/* Email and Phone - Stacked One by One */}
+                            <div className="form-group-new">
+                                <label>EMAIL</label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder=" "
+                                    className="form-input-new"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group-new">
+                                <label>PHONE NUMBER</label>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    placeholder=""
+                                    className="form-input-new"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                />
                             </div>
 
                             <div className="form-group-new">
@@ -160,6 +149,16 @@ const Contact = () => {
                                 Submit
                             </motion.button>
                         </motion.form>
+                    </div>
+
+                    {/* Right Side - Animated Lottie (Formerly Left) */}
+                    <div className="contact-visual">
+                        <DotLottieReact
+                            src={chatAnimation}
+                            loop
+                            autoplay
+                            className="contact-lottie"
+                        />
                     </div>
                 </motion.div>
             </div>

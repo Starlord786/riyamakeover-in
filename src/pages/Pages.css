@@ -31,7 +31,7 @@
 
 .page-subtitle {
     font-size: 1.6rem;
-    color: #a0a0a0;
+    color: #f3dede;
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
@@ -143,7 +143,7 @@
 }
 
 .plan-name {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Google Sans Flex', serif;
     font-size: 1.8rem;
     margin-bottom: 10px;
     color: #888;

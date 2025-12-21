@@ -72,6 +72,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     font-family: 'Damion', serif;
+    margin-left: 25%;
 }
 
 .hero-subtitle {
@@ -85,6 +86,7 @@
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     max-width: 600px;
     line-height: 1.6;
+    margin-left: 25%;
 }
 
 .hero-cta {
@@ -103,6 +105,7 @@
     /* Align start position with text */
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    margin-left: 25%;
 }
 
 .hero-cta:hover {
@@ -231,12 +234,18 @@
     .hero-title {
         font-size: 3rem;
         transform: translateY(20px);
+        margin-left: 0%;
         /* Slide up instead of left on mobile */
     }
 
     .hero-subtitle {
+        margin-left: 0%;
         font-size: 1.2rem;
         transform: translateY(20px);
+    }
+
+    .hero-cta {
+        margin-left: 0%;
     }
 
     .hero-overlay {

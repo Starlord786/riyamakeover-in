@@ -47,12 +47,16 @@
     align-items: center;
 }
 
-/* Left Side - Favicon */
-.contact-left {
+/* Right Side - Lottie (Formerly Left) */
+.contact-visual {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    /* Push to right */
     align-items: center;
     height: 100%;
+    width: 100%;
+    padding-right: 2rem;
+    /* Add some spacing from edge */
 }
 
 .favicon-container {
@@ -76,23 +80,27 @@
 }
 
 .contact-lottie {
-    width: 100%;
-    max-width: 500px;
+    width: 120%;
+    /* Increased size */
+    max-width: 800px;
+    /* Increased max-width */
     height: auto;
+    transform: scale(1.2);
+    /* Make it even bigger as requested */
 }
 
-/* Right Side - New White Card Design */
-.contact-right {
+/* Left Side - Form (Formerly Right) */
+.contact-form-section {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     background: #000000;
     border-radius: 30px;
-    border: 1px solid #ffffff;
+    /* Removed border to fix "line appearance" issue */
+    /* border: 1px solid #ffffff; */
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     padding: 2rem;
     color: #ffffff;
-    /* Dark text for light card */
 }
 
 /* Heading */
@@ -233,17 +241,13 @@
         gap: 3rem;
     }
 
-    .contact-right {
+    .contact-form-section {
         padding: 2rem;
     }
 
-    .contact-left {
-        /* Keep favicon at top or bottom? Default grid sets it top if order not changed.
-           If we want form first, use order.
-           Reference code had -1 order for left.
-           Let's keep left (favicon) on top for now as it's a nice intro.
-        */
-        order: -1;
+    .contact-visual {
+        /* Hide visual (lottie) on mobile as requested */
+        display: none;
     }
 
     .favicon-container {
@@ -261,7 +265,7 @@
         padding: 4rem 1rem;
     }
 
-    .contact-right {
+    .contact-form-section {
         padding: 1.5rem;
         border-radius: 20px;
     }
