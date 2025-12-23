@@ -1,30 +1,48 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const TattooContact = () => {
     return (
-        <section id="contact" className="contact-footer-section">
-            <div className="contact-layout">
+        <section id="contact" className="contact-footer-section section-wrapper" style={{ borderTop: '1px solid #222', paddingTop: '100px' }}>
+            <div className="contact-layout" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '4rem', maxWidth: '1200px', margin: '0 auto' }}>
                 <div className="contact-intro">
-                    <h2>Let's Create <br />Something <span className="span-neon">Permanent.</span></h2>
-                    <p className="contact-quote">"Your body is a canvas, let's make it a masterpiece."</p>
+                    <h2 className="t-heading-lg" style={{ lineHeight: 0.9 }}>
+                        READY TO <br /> <span className="t-outline">BLEED?</span>
+                    </h2>
+                    <p className="contact-quote" style={{ marginTop: '2rem', color: '#666', fontStyle: 'italic' }}>
+                        "Pain is temporary. Glory is forever. Let's make art."
+                    </p>
 
-                    <div style={{ marginTop: '3rem' }}>
-                        <p style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '1rem' }}>CONTACT INFO</p>
-                        <p style={{ color: '#888' }}>booking@inksoul.com</p>
-                        <p style={{ color: '#888' }}>+91 98765 43210</p>
+                    <div style={{ marginTop: '4rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        <p style={{ color: '#fff', letterSpacing: '0.1em' }}>BOOKING@INKSOUL.COM</p>
+                        <p style={{ color: '#666' }}>+91 98765 43210</p>
+                        <p style={{ color: '#666' }}>123, DARK ALLEY, UNDERGROUND CITY</p>
                     </div>
                 </div>
 
                 <form className="minimal-form" onSubmit={(e) => e.preventDefault()}>
-                    <input type="text" placeholder="Your Name" />
-                    <input type="email" placeholder="Email Address" />
-                    <textarea rows="4" placeholder="Tell me about your tattoo idea..."></textarea>
-                    <button type="submit" className="submit-pill">Send Request</button>
-                </form>
-            </div>
+                    <div style={{ marginBottom: '2rem' }}>
+                        <input type="text" placeholder="NAME" style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: '1px solid #333', padding: '1rem 0', color: '#fff', fontFamily: 'var(--font-heading)', fontSize: '1.5rem', outline: 'none' }} />
+                    </div>
+                    <div style={{ marginBottom: '2rem' }}>
+                        <input type="email" placeholder="EMAIL" style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: '1px solid #333', padding: '1rem 0', color: '#fff', fontFamily: 'var(--font-heading)', fontSize: '1.5rem', outline: 'none' }} />
+                    </div>
+                    <div style={{ marginBottom: '3rem' }}>
+                        <textarea rows="3" placeholder="DESCRIBE YOUR IDEA" style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: '1px solid #333', padding: '1rem 0', color: '#fff', fontFamily: 'var(--font-heading)', fontSize: '1.5rem', outline: 'none', resize: 'none' }}></textarea>
+                    </div>
 
-            <div className="footer-brand">
-                ROWAN BLACK
+                    <div style={{ marginTop: '3rem' }}>
+                        <motion.button
+                            type="submit"
+                            className="tattoo-btn"
+                            style={{ width: '100%', fontSize: '1.2rem', padding: '1.5rem', cursor: 'pointer', background: '#fff', color: '#000', border: 'none', fontWeight: 'bold' }}
+                            whileHover={{ scale: 1.02, backgroundColor: 'var(--tattoo-accent)' }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            SUBMIT REQUEST
+                        </motion.button>
+                    </div>
+                </form>
             </div>
         </section>
     );

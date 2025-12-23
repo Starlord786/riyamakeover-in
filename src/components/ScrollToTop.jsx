@@ -24,7 +24,8 @@ const ScrollToTop = () => {
     // Handle button visibility
     useEffect(() => {
         const toggleVisibility = () => {
-            if (window.pageYOffset > 300) {
+            const isTattoo = pathname.toLowerCase().startsWith('/tattoo');
+            if (window.pageYOffset > 300 && !isTattoo) {
                 setIsVisible(true);
             } else {
                 setIsVisible(false);

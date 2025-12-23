@@ -62,7 +62,10 @@
     list-style: none;
     text-align: center;
     gap: 2rem;
-    margin-left: 100px;
+    margin-left: auto;
+    /* Push to the right */
+    align-items: center;
+    /* Vertical align */
 }
 
 .navbar-item {
@@ -118,18 +121,19 @@
     display: none;
 }
 
-/* Desktop positioning for Tattoo Button */
+/* Desktop styling for Tattoo Button */
 @media screen and (min-width: 961px) {
     .tattoo-btn {
-        position: absolute;
-        right: 40px;
-        top: 50%;
-        transform: translateY(-50%);
-        margin-left: 0;
+        margin-left: 2rem;
+        /* Ensure specific button styles stick */
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
     }
 
     .tattoo-btn:hover {
-        transform: translateY(-50%) scale(1.05);
+        transform: scale(1.05);
         box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         background-image: linear-gradient(rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.1)), linear-gradient(to right, #bf953f, #fcf6ba, #aa771c);
     }

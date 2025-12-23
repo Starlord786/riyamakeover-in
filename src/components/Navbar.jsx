@@ -80,16 +80,9 @@ const Navbar = () => {
                     <Link to="/#services" className="navbar-item" onClick={() => setIsOpen(false)}>Services</Link>
                     <Link to="/#gallery" className="navbar-item" onClick={() => setIsOpen(false)}>Gallery</Link>
                     <Link to="/#contact" className="navbar-item" onClick={() => setIsOpen(false)}>Contact</Link>
-                    <Link to="/tattoo" className="navbar-item tattoo-btn" onClick={() => setIsOpen(false)}>Riya Tattoo</Link>
                     <Link to="/login" className="navbar-item" onClick={() => setIsOpen(false)}>Login</Link>
 
-                    <div
-                        className="mobile-phone"
-                        onClick={handleCopyNumber}
-                    >
-                        +91 86674 59193
-                    </div>
-
+                    {/* Search Component */}
                     <div className="navbar-search">
                         <div className={`search-box ${isSearchOpen ? 'active' : ''}`} ref={searchInputRef}>
                             <input type="text" placeholder="Search..." />
@@ -101,6 +94,8 @@ const Navbar = () => {
                             </svg>
                         </div>
                     </div>
+
+                    <Link to="/tattoo" className="navbar-item tattoo-btn" onClick={() => setIsOpen(false)}>Riya Tattoo</Link>
                 </div>
                 <div className="navbar-toggle" onClick={() => setIsOpen(!isOpen)}>
                     <span className={`bar ${isOpen ? 'open' : ''}`}></span>

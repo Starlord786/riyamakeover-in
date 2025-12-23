@@ -1,610 +1,562 @@
-@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Pirata+One&family=Rye&family=Caveat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Oswald:wght@300;400;700&family=UnifrakturMaguntia&display=swap');
 
 :root {
-    --neon-green: #39FF14;
-    --neon-green-dim: rgba(57, 255, 20, 0.2);
-    --matte-black: #050505;
-    --dark-grey: #111;
-    --text-color: #eee;
-    --card-bg: #1a1a1a;
-    --font-heading: 'Pirata One', cursive;
-    /* Gothic */
-    --font-body: 'Segoe UI', Roboto, sans-serif;
-    --font-hand: 'Caveat', cursive;
-    /* For notes */
+    --tattoo-black: #000000;
+    --tattoo-dark: #0a0a0a;
+    --tattoo-gray: #1a1a1a;
+    --tattoo-light: #f5f5f5;
+    --tattoo-accent: #ff003c;
+    /* Cyberpunk Red/Pink */
+    --tattoo-accent-2: #ccff00;
+    /* Acid Green */
+
+    --font-heading: 'Oswald', sans-serif;
+    --font-display: 'Syne', sans-serif;
+    --font-gothic: 'UnifrakturMaguntia', cursive;
+    --font-body: 'Syne', sans-serif;
+
+    --easing: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 /* Global Reset & Body */
-.tattoo-body {
-    background-color: var(--matte-black);
-    color: var(--text-color);
+html {
+    scroll-behavior: smooth;
+}
+
+body.tattoo-mode {
+    background-color: var(--tattoo-black);
+    color: var(--tattoo-light);
     font-family: var(--font-body);
     overflow-x: hidden;
-    scroll-behavior: smooth;
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
 
-.tattoo-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Typography */
-h1,
-h2,
-h3 {
-    font-family: var(--font-heading);
-    color: #fff;
-    font-weight: 400;
-}
-
-.span-neon {
-    color: var(--neon-green);
-}
-
-.section-title {
-    font-size: 4rem;
-    text-align: center;
-    margin-bottom: 3rem;
-    text-transform: capitalize;
-    line-height: 1.1;
-    color: #fff;
-}
-
-/* ================== NAVIGATION ================== */
-.tattoo-nav {
-    padding: 20px 40px;
+/* Grain Overlay */
+.tattoo-body::before {
+    content: "";
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.tattoo-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 4vw;
+}
+
+/* Typography Utility Classes */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0;
+}
+
+.t-display-xl {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 12rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--tattoo-light);
+    line-height: 0.8;
+}
+
+.t-heading-lg {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 5rem);
+    font-weight: 700;
+}
+
+.t-gothic-accent {
+    font-family: var(--font-gothic);
+    font-size: 1.5em;
+    color: var(--tattoo-accent);
+}
+
+.t-outline {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    color: transparent;
+}
+
+.t-outline-hover:hover {
+    color: var(--tattoo-light);
+    -webkit-text-stroke: 0;
+}
+
+/* Common Components */
+.tattoo-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--tattoo-light);
+    padding: 1em 2em;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.4s var(--easing);
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.tattoo-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: var(--tattoo-light);
+    transition: width 0.4s var(--easing);
+    z-index: -1;
+}
+
+.tattoo-btn:hover {
+    color: var(--tattoo-black);
+    border-color: var(--tattoo-light);
+}
+
+.tattoo-btn:hover::before {
+    width: 100%;
+}
+
+.section-wrapper {
+    padding: 15vh 0;
+    position: relative;
+}
+
+/* Hide scrollbar but keep functionality */
+::-webkit-scrollbar {
+    width: 8px;
+    background: var(--tattoo-black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* ================= NAVIGATION ================= */
+.tattoo-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 0;
+    transition: all 0.4s var(--easing);
+    /* mix-blend-mode: difference; Remove global difference to prevent color weirdness */
+}
+
+/* Scrolled State */
+.tattoo-nav.scrolled {
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Initial state (optional specific styling for transparencies) */
+.tattoo-nav:not(.scrolled) {
+    background: transparent;
+    border-bottom: 1px solid transparent;
+}
+
+.tattoo-nav.menu-open {
+    mix-blend-mode: normal;
+}
+
+.nav-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 4vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(5, 5, 5, 0.9);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(57, 255, 20, 0.1);
 }
 
 .nav-brand {
     font-family: var(--font-heading);
-    color: #fff;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    font-weight: 700;
     text-decoration: none;
+    color: #fff;
     display: flex;
-    align-items: center;
-    gap: 10px;
+    gap: 0.5em;
+    letter-spacing: 0.1em;
 }
 
 .nav-links {
     display: flex;
-    gap: 30px;
+    gap: 3vw;
+    align-items: center;
 }
 
 .nav-link {
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
+    font-family: var(--font-body);
     font-size: 0.9rem;
-    letter-spacing: 1px;
-    transition: color 0.3s;
+    text-transform: uppercase;
+    color: #fff;
     cursor: pointer;
+    position: relative;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    text-decoration: none;
 }
 
 .nav-link:hover {
-    color: var(--neon-green);
-    text-shadow: 0 0 5px var(--neon-green);
+    opacity: 1;
 }
 
-/* ================== HERO SECTION (Redesigned) ================== */
-.tattoo-hero {
-    min-height: 100vh;
+.nav-link.exit-link {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.mobile-toggle {
+    display: none;
+    cursor: pointer;
+    z-index: 1002;
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--tattoo-black);
+    z-index: 1001;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    position: relative;
-    padding-top: 100px;
-    background: #050505;
-    overflow: hidden;
-    perspective: 1000px;
-    /* Essential for 3D effect */
+    gap: 2rem;
+    transform: translateY(-100%);
+    transition: transform 0.6s var(--easing);
 }
 
-/* Smoke Effect */
-.smoke-container {
+.mobile-menu.active {
+    transform: translateY(0);
+}
+
+.mobile-link {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: var(--tattoo-light);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* ================= HERO SECTION V2 (CINEMATIC) ================= */
+.tattoo-hero-v2 {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--tattoo-black);
+}
+
+.hero-v2-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    /* Extra height for parallax */
+    z-index: 1;
+}
+
+.hero-v2-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center top;
+    /* Key change: subtle filter, not total darkness */
+    filter: brightness(0.6) contrast(1.1) grayscale(60%);
+}
+
+.hero-v2-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
-    opacity: 0.4;
-    pointer-events: none;
+    /* Gradient to make text readable at bottom but keep face clear */
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0) 40%,
+            rgba(0, 0, 0, 0.8) 80%,
+            rgba(0, 0, 0, 1) 100%);
 }
 
-.smoke {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(100, 100, 100, 0.2) 0%, transparent 60%);
-    filter: blur(50px);
-    animation: smokeFloat 10s infinite alternate;
-}
-
-.smoke-2 {
-    animation-duration: 15s;
-    top: 30%;
-    left: 30%;
-    background: radial-gradient(circle, rgba(100, 100, 100, 0.15) 0%, transparent 50%);
-}
-
-.smoke-3 {
-    animation-duration: 20s;
-    top: 70%;
-    left: 70%;
-    background: radial-gradient(circle, rgba(80, 80, 80, 0.1) 0%, transparent 50%);
-}
-
-@keyframes smokeFloat {
-    0% {
-        transform: translate(-50%, -50%) scale(1);
-    }
-
-    100% {
-        transform: translate(-50%, -50%) scale(1.2) rotate(10deg);
-    }
-}
-
-.hero-content {
-    width: 100%;
-    max-width: 1400px;
-    padding: 0 20px;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.hero-main-heading {
-    font-family: 'Rye', serif;
-    font-size: 6rem;
-    line-height: 1;
-    margin-bottom: 1.5rem;
-    color: #fff;
-    font-weight: normal;
-    letter-spacing: -2px;
-}
-
-.serif-italic {
-    font-family: 'Times New Roman', serif;
-    font-style: italic;
-    font-weight: 300;
-    color: #ddd;
-}
-
-.hero-subheading {
-    font-size: 1.1rem;
-    color: #aaa;
-    margin-bottom: 3rem;
-    line-height: 1.6;
-    letter-spacing: 1px;
-    max-width: 600px;
-}
-
-/* 3D Curved Gallery */
-.hero-3d-container {
-    width: 100%;
-    height: 450px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 3rem;
-    perspective: 1200px;
-    overflow: hidden;
+.hero-v2-content {
     position: relative;
-    /* Mask edges */
-    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-}
-
-.hero-3d-gallery {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    transform-style: preserve-3d;
-    padding: 20px;
-    position: relative;
-    left: 0;
-}
-
-.hero-3d-card {
-    min-width: 280px;
-    height: 400px;
-    border-radius: 20px;
-    overflow: hidden;
-    position: relative;
-    background: #111;
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    /* The Curve Style */
-    transform: rotateY(calc((var(--i) - 3) * 5deg)) translateZ(calc(abs(var(--i) - 3) * -50px)) scale(0.9);
-    filter: brightness(0.7) grayscale(0.5);
-    border: 1px solid #333;
-}
-
-.hero-3d-card:hover {
-    transform: rotateY(0deg) translateZ(50px) scale(1.05);
-    filter: brightness(1) grayscale(0);
     z-index: 10;
-    border-color: var(--neon-green);
-    box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
-}
-
-.hero-3d-card img {
-    width: 100%;
     height: 100%;
-    object-fit: cover;
-}
-
-/* Actions */
-.hero-actions {
-    display: flex;
-    gap: 20px;
-}
-
-.cta-pill {
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.cta-pill.filled {
-    background: #fff;
-    color: #000;
-    border: 2px solid #fff;
-}
-
-.cta-pill.filled:hover {
-    background: var(--neon-green);
-    border-color: var(--neon-green);
-    color: #000;
-    box-shadow: 0 0 20px var(--neon-green-dim);
-}
-
-.cta-pill.outline {
-    background: transparent;
-    color: #fff;
-    border: 1px solid #555;
-}
-
-.cta-pill.outline:hover {
-    border-color: #fff;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-/* ================== MEET THE ARTIST ================== */
-.artist-section {
-    padding: 100px 0;
-    background: #080808;
-    border-top: 1px solid #222;
-}
-
-.artist-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-}
-
-.artist-text h2 {
-    font-size: 6rem;
-    line-height: 0.9;
-    margin-bottom: 2rem;
-}
-
-.artist-image-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-.artist-image-wrapper img {
-    width: 100%;
-    max-width: 400px;
-    border-radius: 20px;
-    filter: sepia(20%) contrast(1.1);
-    border: 1px solid #333;
-}
-
-.bio-points {
-    margin-top: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-}
-
-.bio-point {
-    display: flex;
-    gap: 1rem;
-    font-size: 1.1rem;
-    color: #ccc;
-    line-height: 1.6;
-}
-
-.star-bullet {
-    color: var(--neon-green);
-    font-size: 1.5rem;
-}
-
-/* ================== GALLERY (ON THE BOARD) ================== */
-.gallery-section {
-    padding: 100px 0;
-    background: #111;
-    overflow: hidden;
-    position: relative;
-}
-
-.polaroid-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4rem;
-    padding: 4rem 2rem;
-}
-
-.polaroid-card {
-    background: #f0f0f0;
-    padding: 15px 15px 50px 15px;
-    color: #000;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    transform: rotate(var(--rotation));
-    transition: 0.3s;
-    position: relative;
-    width: 250px;
-    cursor: pointer;
-}
-
-.polaroid-card:hover {
-    transform: scale(1.1) rotate(0deg);
-    z-index: 10;
-}
-
-.polaroid-card img {
-    width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    filter: grayscale(100%);
-    transition: 0.3s;
-}
-
-.polaroid-card:hover img {
-    filter: grayscale(0%);
-}
-
-.tape {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 25px;
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.sticky-note {
-    position: absolute;
-    bottom: 20px;
-    right: -20px;
-    background: var(--neon-green);
-    color: #000;
-    padding: 10px;
-    font-family: 'Caveat', cursive;
-    transform: rotate(-10deg);
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-/* ================== PROCESS (IDEA TO INK) ================== */
-.process-section {
-    padding: 100px 0;
-    position: relative;
-    background: var(--matte-black);
-}
-
-.process-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.process-step {
-    display: flex;
-    gap: 2rem;
-    background: #111;
-    padding: 2rem;
-    border-radius: 20px;
-    border: 1px solid #333;
-    position: relative;
-}
-
-.step-number {
-    font-size: 4rem;
-    color: #333;
-    font-family: var(--font-heading);
-    line-height: 1;
-}
-
-.step-info h3 {
-    color: #fff;
-    margin-bottom: 0.5rem;
-    font-size: 1.8rem;
-}
-
-.step-info p {
-    color: #888;
-    line-height: 1.6;
-}
-
-/* ================== FAQ ================== */
-.faq-section {
-    padding: 100px 0;
-    max-width: 800px;
-    margin: 0 auto;
-    background: #080808;
-}
-
-.faq-item {
-    border-bottom: 1px solid #333;
-    padding: 1.5rem 0;
-    cursor: pointer;
-}
-
-.faq-question {
-    display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.3rem;
-    color: #fff;
-    font-weight: 500;
+    padding: 120px 20px 40px;
+    /* Top padding clears navbar */
+    text-align: center;
 }
 
-.faq-toggle {
-    color: var(--neon-green);
-    font-size: 1.5rem;
-}
-
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: 0.3s;
-    color: #aaa;
-    margin-top: 0;
-    padding-right: 2rem;
-    line-height: 1.6;
-}
-
-.faq-item.active .faq-answer {
-    max-height: 200px;
-    margin-top: 1rem;
-}
-
-/* ================== CONTACT ================== */
-.contact-footer-section {
-    padding: 100px 20px;
-    background: #000;
-    border-top: 1px solid #222;
-}
-
-.contact-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.contact-intro h2 {
-    font-size: 4rem;
-    line-height: 1;
-    margin-bottom: 2rem;
-}
-
-.contact-quote {
-    font-style: italic;
-    color: #888;
-    margin-top: 2rem;
-    font-size: 1.1rem;
-}
-
-.minimal-form input,
-.minimal-form textarea {
+.hero-v2-header {
     width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #333;
-    padding: 1rem 0;
+}
+
+.hero-v2-subtitle {
+    font-family: var(--font-heading);
+    letter-spacing: 0.3em;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0;
+}
+
+.hero-v2-main-title h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(4rem, 15vw, 15rem);
+    line-height: 0.8;
+    letter-spacing: -0.02em;
     color: #fff;
+    margin: 0;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hero-v2-main-title .amp {
+    font-family: var(--font-gothic);
+    color: var(--tattoo-accent);
+    font-weight: 400;
+}
+
+.hero-v2-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.hero-v2-tagline {
     font-family: var(--font-body);
+    letter-spacing: 0.1em;
     font-size: 1rem;
-    margin-bottom: 1.5rem;
-    transition: 0.3s;
+    color: #ccc;
+    text-transform: uppercase;
+    margin: 0;
 }
 
-.minimal-form input:focus,
-.minimal-form textarea:focus {
-    outline: none;
-    border-bottom-color: var(--neon-green);
+.tattoo-btn-v2 {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 1rem 3rem;
+    font-family: var(--font-heading);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.submit-pill {
-    width: 100%;
-    padding: 15px;
+.tattoo-btn-v2:hover {
     background: #fff;
     color: #000;
-    border: none;
-    border-radius: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 1rem;
-    text-transform: uppercase;
 }
 
-.submit-pill:hover {
-    background: var(--neon-green);
+.scroll-line {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 20;
+    transform: translateX(-50%);
 }
 
-.footer-brand {
-    text-align: center;
-    margin-top: 6rem;
-    font-size: 8vw;
-    /* Responsive huge footer text */
-    font-family: var(--font-heading);
-    color: #222;
-    opacity: 0.8;
-    letter-spacing: 5px;
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+    .t-display-xl {
+        font-size: 5rem !important;
+    }
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 768px) {
-
-    .section-title,
-    .hero-main-heading,
-    .artist-text h2,
-    .contact-intro h2 {
-        font-size: 3rem;
+    .desktop-only {
+        display: none;
     }
 
-    .artist-content,
+    .mobile-toggle {
+        display: block;
+    }
+
+    .t-display-xl {
+        font-size: 15vw !important;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    /* V2 Mobile Adjustments (Magazine Cover Style) */
+    .hero-v2-content {
+        padding: 100px 20px 60px;
+        justify-content: flex-end;
+        /* Push everything to bottom like magazine cover */
+        gap: 2rem;
+    }
+
+    .hero-v2-header {
+        position: absolute;
+        top: 100px;
+        left: 0;
+        width: 100%;
+    }
+
+    .hero-v2-main-title {
+        margin-bottom: auto;
+        /* Pushes footer down */
+        margin-top: auto;
+        /* Centers title vertically */
+    }
+
+    .hero-v2-footer {
+        width: 100%;
+    }
+
+    .tattoo-btn-v2 {
+        width: 100%;
+        padding: 1.2rem;
+        background: #fff;
+        /* Solid button for better tappability */
+        color: #000;
+    }
+
+    /* === ARTIST SECTION RESPONSIVE === */
+    .artist-section {
+        padding: 50px 0 !important;
+    }
+
+    .artist-content {
+        grid-template-columns: 1fr !important;
+        gap: 3rem !important;
+    }
+
+    .artist-image-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .artist-text {
+        text-align: center;
+    }
+
+    /* === GALLERY/WORK SECTION RESPONSIVE === */
+    .gallery-section {
+        height: auto !important;
+        padding-bottom: 5rem !important;
+    }
+
+    .gallery-section .sticky-wrapper {
+        position: static !important;
+        height: auto !important;
+        overflow: visible !important;
+        display: block !important;
+    }
+
+    .gallery-track {
+        transform: none !important;
+        /* Kill framer motion x-scroll */
+        flex-direction: column !important;
+        padding: 0 !important;
+        gap: 3rem !important;
+        width: 100% !important;
+    }
+
+    .gallery-header {
+        min-width: 0 !important;
+        width: 100% !important;
+        text-align: center;
+        margin-bottom: 2rem;
+        align-items: center !important;
+        padding: 0 !important;
+    }
+
+    .work-card {
+        min-width: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 4/5;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    /* === PROCESS SECTION RESPONSIVE === */
+    .process-section {
+        padding: 50px 0 !important;
+    }
+
+    .process-step {
+        flex-direction: column;
+        gap: 1.5rem !important;
+        text-align: center;
+        margin-bottom: 3rem !important;
+    }
+
+    .process-step .step-number {
+        margin: 0 auto;
+    }
+
+    /* Hide the vertical line on mobile */
+    .process-steps>div:first-child {
+        display: none;
+    }
+
+    /* === CONTACT SECTION RESPONSIVE === */
+    .contact-footer-section {
+        padding-top: 50px !important;
+    }
+
     .contact-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
+        gap: 3rem !important;
     }
 
-    .polaroid-grid {
-        padding: 2rem 0;
+    .contact-intro {
+        text-align: center;
     }
 
-    .hero-3d-card {
-        min-width: 200px;
-        height: 280px;
+    .contact-intro div {
+        align-items: center;
     }
 
-    .hero-main-heading {
-        font-size: 3.5rem;
+    .minimal-form input,
+    .minimal-form textarea {
+        font-size: 1.2rem !important;
     }
 }
