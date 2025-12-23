@@ -27,12 +27,13 @@
 
 .navbar-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
     max-width: 100%;
     padding: 0 40px;
+    position: relative;
 }
 
 .navbar-logo {
@@ -40,6 +41,10 @@
     align-items: center;
     cursor: pointer;
     text-decoration: none;
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .logo-img {
@@ -57,10 +62,16 @@
     list-style: none;
     text-align: center;
     gap: 2rem;
+    margin-left: 100px;
 }
 
 .navbar-item {
-    color: #e0e0e0;
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: shine 4s linear infinite;
     text-decoration: none;
     font-size: 1.5rem;
     font-weight: 500;
@@ -70,6 +81,7 @@
     padding: 5px 0;
     font-family: 'Damion', serif;
 }
+
 
 .navbar-item::after {
     content: '';
@@ -221,10 +233,13 @@
 @media screen and (max-width: 960px) {
     .navbar-container {
         padding: 0 10px 0 5px;
+        justify-content: space-between;
     }
 
     .navbar-logo {
         margin-left: 10px;
+        position: static;
+        transform: none;
     }
 
     .navbar-search {
@@ -245,6 +260,7 @@
         justify-content: center;
         align-items: center;
         gap: 2rem;
+        margin-left: 0;
     }
 
     .navbar-menu.active {

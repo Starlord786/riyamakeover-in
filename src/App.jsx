@@ -25,6 +25,7 @@ import { useNetworkStatus } from './hooks/useNetworkStatus'
 
 
 import TattooApp from './tattoo/TattooApp'
+import ServiceDetail from './pages/ServiceDetail'
 
 function App() {
   const location = useLocation();
@@ -65,6 +66,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/service/:slug" element={<ServiceDetail />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/about" element={<About />} />
         <Route path="/features" element={<Features />} />

@@ -3,111 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './Services.css';
 
-import serviceEyebrow from '../assets/service_eyebrow.png';
-import serviceSkincare from '../assets/service_skincare.png';
-import serviceHair from '../assets/service_hair.png';
-import serviceBridal from '../assets/service_bridal.png';
-import serviceNails from '../assets/service_nails.png';
-import serviceMassage from '../assets/service_massage.png';
-import serviceWaxing from '../assets/service_waxing.png';
-import serviceBleach from '../assets/service_bleach.png';
-import serviceHairColor from '../assets/service_hair_color.png';
-import serviceHairSpa from '../assets/service_hair_spa.png';
-import serviceAesthetics from '../assets/service_aesthetics.png';
-
-const servicesData = [
-    {
-        id: 1,
-        title: "Threading",
-        description: "Precise brow shaping and facial hair removal for a clean, defined look.",
-        price: "Starts from ₹50",
-        image: serviceEyebrow,
-    },
-    {
-        id: 2,
-        title: "Bleaching",
-        description: "Gentle skin lightening treatment to reduce dark spots and even out skin tone.",
-        price: "Starts from ₹350",
-        image: serviceBleach,
-    },
-    {
-        id: 3,
-        title: "Facial",
-        description: "Rejuvenating facials to cleanse, exfoliate, and hydrate for a radiant glow.",
-        price: "Starts from ₹800",
-        image: serviceSkincare,
-    },
-    {
-        id: 4,
-        title: "Hair Styling",
-        description: "Expert styling for any occasion, from elegant updos to bouncy blowouts.",
-        price: "Starts from ₹500",
-        image: serviceHair,
-    },
-    {
-        id: 5,
-        title: "Pre-Bridal Packages",
-        description: "Comprehensive beauty regimens to prep your skin and hair for the big day.",
-        price: "Customizable",
-        image: serviceBridal,
-    },
-    {
-        id: 6,
-        title: "Waxing",
-        description: "Smooth and long-lasting hair removal services for silky soft skin.",
-        price: "Starts from ₹200",
-        image: serviceWaxing,
-    },
-    {
-        id: 7,
-        title: "Hair Spa",
-        description: "Deep conditioning therapy to restore health, shine, and softness to your hair.",
-        price: "Starts from ₹1,000",
-        image: serviceHairSpa,
-    },
-    {
-        id: 8,
-        title: "Hair Colouring",
-        description: "Vibrant global color, highlights, and balayage using premium ammonia-free products.",
-        price: "Starts from ₹2,500",
-        image: serviceHairColor,
-    },
-    {
-        id: 9,
-        title: "Hair Treatment",
-        description: "Specialized solutions for dandruff, hair fall, and damaged hair repair.",
-        price: "Starts from ₹1,500",
-        image: serviceHairSpa, // Reusing Hair Spa image as it fits well
-    },
-    {
-        id: 10,
-        title: "Pedicure & Manicure",
-        description: "Relaxing hand and foot care with nail shaping, cuticle work, and polish.",
-        price: "Starts from ₹600",
-        image: serviceNails,
-    },
-    {
-        id: 11,
-        title: "Face Treatment",
-        description: "Targeted treatments for acne, pigmentation, and anti-aging concerns.",
-        price: "Starts from ₹1,200",
-        image: serviceSkincare,
-    },
-    {
-        id: 12,
-        title: "Aesthetics",
-        description: "Advanced non-invasive procedures for skin rejuvenation and contouring.",
-        price: "Consultation based",
-        image: serviceAesthetics,
-    },
-    {
-        id: 13,
-        title: "Massage",
-        description: "Therapeutic massages to relieve stress, tension, and improve circulation.",
-        price: "Starts from ₹1,500",
-        image: serviceMassage,
-    }
-];
+import { servicesData } from '../data/services';
 
 const Services = () => {
     const [showAll, setShowAll] = React.useState(false);
@@ -167,7 +63,7 @@ const Services = () => {
                                 <h3>{service.title}</h3>
                                 <p>{service.description}</p>
                                 <div className="service-price">{service.price}</div>
-                                <Link to="/contact" className="service-btn">View More</Link>
+                                <Link to={`/service/${service.slug}`} className="service-btn">View More</Link>
                             </div>
                         </div>
                     </div>
