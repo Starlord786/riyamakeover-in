@@ -118,6 +118,15 @@
     flex-direction: column;
 }
 
+.footer-column h3{
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: shine 4s linear infinite;
+}
+
 .column-heading {
     font-family: "Google Sans Flex", sans-serif;
     font-size: 1.1rem;
@@ -138,7 +147,7 @@
 }
 
 .footer-link:hover {
-    color: #bfb5b5;
+    color: #d4af37;
 }
 
 /* --- Designer Text --- */

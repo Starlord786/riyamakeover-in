@@ -53,3 +53,18 @@ html {
   scrollbar-width: none;
   /* Firefox */
 }
+
+/* Global Text Selection Color */
+::selection {
+  background-color: #d4af37;
+  /* Gold */
+  color: #000000;
+  /* Black text for readability */
+}
+
+::-moz-selection {
+  background-color: #d4af37;
+  /* Gold */
+  color: #000000;
+  /* Black text for readability */
+}

@@ -58,7 +58,7 @@
 
 .services-hero p {
     font-family: 'Damion', serif;
-    color: #a0a0a0;
+    color: #ffffff;
     font-size: 1.7rem;
     max-width: 700px;
     margin: 0 auto;
@@ -264,6 +264,10 @@
 @media (max-width: 768px) {
     .services-hero h1 {
         font-size: 3rem;
+    }
+
+    .services-hero p{
+        font-size: 1.2rem;
     }
 
     .services-grid {

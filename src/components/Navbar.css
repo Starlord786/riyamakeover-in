@@ -102,6 +102,53 @@
     width: 100%;
 }
 
+.tattoo-btn {
+    border: 2px solid transparent;
+    border-radius: 20px;
+    padding: 5px 15px;
+    background-image: linear-gradient(#0a0a0a, #0a0a0a), linear-gradient(to right, #bf953f, #fcf6ba, #aa771c);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    color: #d4af37 !important;
+    background-clip: padding-box, border-box;
+    margin-left: 10px;
+}
+
+.tattoo-btn::after {
+    display: none;
+}
+
+/* Desktop positioning for Tattoo Button */
+@media screen and (min-width: 961px) {
+    .tattoo-btn {
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 0;
+    }
+
+    .tattoo-btn:hover {
+        transform: translateY(-50%) scale(1.05);
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        background-image: linear-gradient(rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.1)), linear-gradient(to right, #bf953f, #fcf6ba, #aa771c);
+    }
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 960px) {
+    .tattoo-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        background-image: linear-gradient(rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.1)), linear-gradient(to right, #bf953f, #fcf6ba, #aa771c);
+    }
+
+    .tattoo-btn {
+        margin: 1rem 0;
+        width: 80%;
+    }
+}
+
 /* Search Bar Styles */
 .navbar-search {
     display: flex;

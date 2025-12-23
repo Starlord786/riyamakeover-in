@@ -55,7 +55,7 @@
 }
 
 .gallery-header p {
-    color: #a0a0a0;
+    color: #ffffff;
     font-size: 1.7rem;
     max-width: 700px;
     margin: 0 auto;
@@ -245,6 +245,6 @@
     }
 
     .gallery-header p{
-        font-size: 1.8rem;
+        font-size: 1.2rem;
     }
 }
