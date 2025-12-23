@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Home } from 'lucide-react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Navbar.css';
@@ -72,10 +73,13 @@ const Navbar = () => {
                     <img src={logo} alt="Riya Makeover" className="logo-img" />
                 </Link>
                 <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
-                    <Link to="/" className="navbar-item" onClick={() => setIsOpen(false)}>Home</Link>
-                    <Link to="/services" className="navbar-item" onClick={() => setIsOpen(false)}>Services</Link>
-                    <Link to="/gallery" className="navbar-item" onClick={() => setIsOpen(false)}>Gallery</Link>
-                    <a href="#contact" className="navbar-item" onClick={() => setIsOpen(false)}>Contact</a>
+                    <Link to="/" className="navbar-item home-link" onClick={() => setIsOpen(false)}>
+                        <Home size={20} className="home-icon" strokeWidth={2.5} />
+                        <span>Home</span>
+                    </Link>
+                    <Link to="/#services" className="navbar-item" onClick={() => setIsOpen(false)}>Services</Link>
+                    <Link to="/#gallery" className="navbar-item" onClick={() => setIsOpen(false)}>Gallery</Link>
+                    <Link to="/#contact" className="navbar-item" onClick={() => setIsOpen(false)}>Contact</Link>
                     <Link to="/login" className="navbar-item" onClick={() => setIsOpen(false)}>Login</Link>
 
                     <div

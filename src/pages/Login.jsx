@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Home } from 'lucide-react';
 import './Login.css';
 
 const Login = () => {
+    // ... (state and handlers remain unchanged)
+
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -25,6 +28,9 @@ const Login = () => {
 
     return (
         <div className="login-container">
+            <Link to="/" className="home-exit-btn" aria-label="Back to Home">
+                <Home size={28} />
+            </Link>
             <div className="login-bg-glow"></div>
 
             <div className="login-card">

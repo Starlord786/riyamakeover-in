@@ -113,7 +113,7 @@ const Services = () => {
     const [showAll, setShowAll] = React.useState(false);
 
     return (
-        <div className="services-page">
+        <div className="services-page" id="services">
             {/* Golden Particles Animation */}
             <div className="particles-container">
                 {[...Array(70)].map((_, i) => (

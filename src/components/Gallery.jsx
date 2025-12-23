@@ -56,7 +56,7 @@ const Gallery = () => {
     };
 
     return (
-        <div className="gallery-container">
+        <div className="gallery-container" id="gallery">
             <div className="gallery-header">
                 <h1>Our Masterpieces</h1>
                 <p>Explore our latest work and transformations</p>

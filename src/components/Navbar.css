@@ -302,8 +302,27 @@
         opacity: 0;
     }
 
+
     .bar.open:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
         background-color: #d4af37;
     }
+}
+
+/* Home Link Styles */
+.home-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    /* Center content for consistency */
+}
+
+.home-icon {
+    transition: transform 0.3s ease;
+}
+
+.home-link:hover .home-icon {
+    transform: scale(1.1);
+    color: #d4af37;
 }
