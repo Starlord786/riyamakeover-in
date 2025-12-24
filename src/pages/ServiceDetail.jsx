@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, CheckCircle } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { servicesData } from '../data/services';
-import '../components/Services.css';
+import '../components/Services.css'; // Inherit key animations/fonts
 import './ServiceDetail.css';
 
 const ServiceDetail = () => {
@@ -19,7 +19,7 @@ const ServiceDetail = () => {
                     servicesData
                         .filter(s => s.id !== service.id)
                         .sort(() => 0.5 - Math.random())
-                        .slice(0, 4)
+                        .slice(0, 3) // Show 3 other services
                 );
             }, 0);
             return () => clearTimeout(timer);
@@ -38,186 +38,100 @@ const ServiceDetail = () => {
     return (
         <div className="service-detail-page">
             <div className="service-detail-container">
-                <Link to="/services" className="back-link" style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    color: '#d4af37',
-                    textDecoration: 'none',
-                    marginBottom: '2rem',
-                    fontSize: '1rem',
-                    fontWeight: '500'
-                }}>
-                    <ArrowLeft size={20} /> Back to Services
+                <Link to="/" className="back-link">
+                    <ArrowLeft size={20} /> Back to Home
                 </Link>
 
-                <div className="service-detail-header">
-                    <motion.h1
-                        className="service-detail-title"
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        {service.title}
-                    </motion.h1>
+                <div className="detail-hero">
                     <motion.div
-                        className="service-detail-price"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3, duration: 0.8 }}
-                    >
-                        {service.price}
-                    </motion.div>
-                </div>
-
-                <div className="service-detail-content">
-                    <motion.div
-                        className="service-detail-image-container"
+                        className="detail-content-side"
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <img src={service.image} alt={service.title} className="service-detail-image" />
+                        <span className="detail-subtitle">PREMIUM SERVICE</span>
+                        <h1 className="detail-title">{service.title}</h1>
+                        <div className="detail-price-main">{service.price}</div>
+                        <p className="detail-description">{service.description}</p>
                     </motion.div>
 
                     <motion.div
-                        className="service-detail-info"
+                        className="detail-image-side"
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        style={{ width: '100%' }}
+                        transition={{ duration: 0.8 }}
                     >
-                        <h2 style={{ color: '#d4af37', marginBottom: '2rem', fontFamily: 'Damion, serif', fontSize: '2.5rem', textAlign: 'center' }}>Choose Your Type</h2>
-
-                        <div className="sub-services-grid" style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                            gap: '2rem',
-                            marginTop: '2rem'
-                        }}>
-                            {service.features && service.features.map((feature, index) => (
-                                <div key={index} className="sub-service-card" style={{
-                                    background: 'rgba(255, 255, 255, 0.03)',
-                                    border: '1px solid rgba(212, 175, 55, 0.2)',
-                                    borderRadius: '16px',
-                                    padding: '2rem',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    textAlign: 'center',
-                                    transition: 'all 0.3s ease',
-                                    backdropFilter: 'blur(10px)'
-                                }}>
-                                    <h3 style={{
-                                        color: '#d4af37',
-                                        marginBottom: '1rem',
-                                        fontFamily: 'BBH Hegarty, serif',
-                                        fontSize: '1.8rem'
-                                    }}>{feature}</h3>
-
-                                    <p style={{
-                                        color: '#cccccc',
-                                        marginBottom: '1.5rem',
-                                        lineHeight: '1.6',
-                                        fontSize: '0.95rem'
-                                    }}>
-                                        {service.description}
-                                    </p>
-
-                                    <div style={{
-                                        color: '#d4af37',
-                                        marginBottom: '1.5rem',
-                                        fontWeight: '500',
-                                        fontSize: '1.1rem'
-                                    }}>
-                                        {service.price}
-                                    </div>
-
-                                    <Link to="/contact" className="book-now-btn" style={{ fontSize: '0.9rem', padding: '10px 25px' }}>
-                                        Book {feature}
-                                    </Link>
-                                </div>
-                            ))}
-                            {/* Fill if less than 5 to meet user request of "5" */}
-                            {(!service.features || service.features.length < 5) &&
-                                [...Array(5 - (service.features ? service.features.length : 0))].map((_, i) => (
-                                    <div key={`extra-${i}`} className="sub-service-card" style={{
-                                        background: 'rgba(255, 255, 255, 0.03)',
-                                        border: '1px solid rgba(212, 175, 55, 0.2)',
-                                        borderRadius: '16px',
-                                        padding: '2rem',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                        textAlign: 'center',
-                                        transition: 'all 0.3s ease',
-                                        backdropFilter: 'blur(10px)'
-                                    }}>
-                                        <h3 style={{
-                                            color: '#d4af37',
-                                            marginBottom: '1rem',
-                                            fontFamily: 'BBH Hegarty, serif',
-                                            fontSize: '1.8rem'
-                                        }}>{service.title} Special {i + 1}</h3>
-
-                                        <p style={{
-                                            color: '#cccccc',
-                                            marginBottom: '1.5rem',
-                                            lineHeight: '1.6',
-                                            fontSize: '0.95rem'
-                                        }}>
-                                            {service.description}
-                                        </p>
-
-                                        <div style={{
-                                            color: '#d4af37',
-                                            marginBottom: '1.5rem',
-                                            fontWeight: '500',
-                                            fontSize: '1.1rem'
-                                        }}>
-                                            {service.price}
-                                        </div>
-
-                                        <Link to="/contact" className="book-now-btn" style={{ fontSize: '0.9rem', padding: '10px 25px' }}>
-                                            Book Now
-                                        </Link>
-                                    </div>
-                                ))}
+                        <div className="image-glow-wrapper">
+                            <img src={service.image} alt={service.title} className="main-detail-image" />
                         </div>
                     </motion.div>
                 </div>
-            </div>
 
-            {/* Other Services Section */}
-            <div className="other-services-section" style={{ padding: '4rem 5%', maxWidth: '1400px', margin: '0 auto' }}>
-                <h2 style={{
-                    textAlign: 'center',
-                    color: '#d4af37',
-                    marginBottom: '3rem',
-                    fontFamily: 'BBH Hegarty, serif',
-                    fontSize: '2.5rem'
-                }}>Other Services You Might Like</h2>
+                <div className="sub-services-section">
+                    <h2 className="section-heading">CHOOSE YOUR <span className="gold-accent">PREFERENCE</span></h2>
 
-                <div className="services-grid">
-                    {otherServices.map((otherService) => (
-                        <div key={otherService.id} className="service-card" style={{ height: '350px' }}>
-                            <div className="service-card-inner">
-                                <div className="service-card-front">
-                                    <img src={otherService.image} alt={otherService.title} />
-                                    <div className="card-front-overlay">
-                                        <h3>{otherService.title}</h3>
-                                    </div>
+                    <div className="variants-list">
+                        {service.features && service.features.map((feature, index) => (
+                            <motion.div
+                                key={index}
+                                className="variant-item"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                                viewport={{ once: true }}
+                            >
+                                <div className="variant-info">
+                                    <span className="variant-number">0{index + 1}</span>
+                                    <h3 className="variant-name">{feature}</h3>
                                 </div>
-                                <div className="service-card-back">
-                                    <h3>{otherService.title}</h3>
-                                    <div className="service-price">{otherService.price}</div>
-                                    <Link to={`/service/${otherService.slug}`} className="service-btn" onClick={() => window.scrollTo(0, 0)}>
-                                        View Details
+                                <div className="variant-action">
+                                    <span className="variant-price">{service.price}</span>
+                                    <Link to="/contact" className="variant-book-btn">
+                                        BOOK NOW <ArrowRight size={16} />
                                     </Link>
                                 </div>
-                            </div>
-                        </div>
-                    ))}
+                            </motion.div>
+                        ))}
+                        {/* Fallback if no features, generate some generic ones as per previous logic (or just show "Standard") */}
+                        {(!service.features || service.features.length === 0) && (
+                            <motion.div
+                                className="variant-item"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                            >
+                                <div className="variant-info">
+                                    <span className="variant-number">01</span>
+                                    <h3 className="variant-name">Standard Session</h3>
+                                </div>
+                                <div className="variant-action">
+                                    <span className="variant-price">{service.price}</span>
+                                    <Link to="/contact" className="variant-book-btn">
+                                        BOOK NOW <ArrowRight size={16} />
+                                    </Link>
+                                </div>
+                            </motion.div>
+                        )}
+                    </div>
+                </div>
+
+                {/* Other Services Section */}
+                <div className="other-services-section">
+                    <h2 className="section-heading">EXPLORE <span className="gold-accent">MORE</span></h2>
+                    <div className="other-services-grid">
+                        {otherServices.map((otherService) => (
+                            <Link to={`/service/${otherService.slug}`} key={otherService.id} className="other-service-card">
+                                <div className="other-service-image-box">
+                                    <img src={otherService.image} alt={otherService.title} />
+                                    <div className="other-service-overlay"></div>
+                                </div>
+                                <div className="other-service-info">
+                                    <h3>{otherService.title}</h3>
+                                    <span className="view-link">View Details</span>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

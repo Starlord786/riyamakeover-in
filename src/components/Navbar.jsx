@@ -9,8 +9,6 @@ import logo from '../assets/logo.png';
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const searchInputRef = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,20 +20,12 @@ const Navbar = () => {
             }
         };
 
-        const handleClickOutside = (event) => {
-            if (isSearchOpen && searchInputRef.current && !searchInputRef.current.contains(event.target) && !event.target.closest('.search-trigger')) {
-                setIsSearchOpen(false);
-            }
-        };
-
         window.addEventListener('scroll', handleScroll);
-        document.addEventListener('mousedown', handleClickOutside);
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [isSearchOpen]);
+    }, []);
 
 
 
@@ -46,7 +36,7 @@ const Navbar = () => {
                 <Link to="/" className="navbar-logo">
                     <img src={logo} alt="Riya Makeover" className="logo-img" />
                 </Link>
-                <div className={`navbar-menu ${isOpen ? 'active' : ''} ${isSearchOpen ? 'search-active' : ''}`}>
+                <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
                     <Link to="/" className="navbar-item home-link" onClick={() => setIsOpen(false)}>
                         <Home size={15} className="home-icon" strokeWidth={2.5} />
                         <span>Home</span>
@@ -56,18 +46,7 @@ const Navbar = () => {
                     <Link to="/#contact" className="navbar-item" onClick={() => setIsOpen(false)}>Contact</Link>
                     <Link to="/login" className="navbar-item" onClick={() => setIsOpen(false)}>Login</Link>
 
-                    {/* Search Component */}
-                    <div className="navbar-search">
-                        <div className={`search-box ${isSearchOpen ? 'active' : ''}`} ref={searchInputRef}>
-                            <input type="text" placeholder="Search..." />
-                        </div>
-                        <div className="search-trigger" onClick={() => setIsSearchOpen(!isSearchOpen)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            </svg>
-                        </div>
-                    </div>
+
 
                     <Link to="/tattoo" className="navbar-item tattoo-btn" onClick={() => setIsOpen(false)}>Riya Tattoo</Link>
                 </div>

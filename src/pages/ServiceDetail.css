@@ -1,142 +1,355 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Oswald:wght@200..700&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Agency+FB:wght@700&display=swap');
+
+/* --- Premium Service Detail Page --- */
 
 .service-detail-page {
-    background-color: #0a0a0a;
-    color: #e0e0e0;
+    background-color: #000;
+    color: #fff;
     min-height: 100vh;
     padding-top: 100px;
-    font-family: 'Poppins', sans-serif;
+    /* Offset for fixed navbar */
+    font-family: 'Google Sans Flex', sans-serif;
     overflow-x: hidden;
 }
 
 .service-detail-container {
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0 5vw;
 }
 
-.service-detail-header {
+/* --- Navigation --- */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #888;
+    text-decoration: none;
+    margin-bottom: 3rem;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.back-link:hover {
+    color: #d4af37;
+}
+
+/* --- Hero Section (Split View) --- */
+.detail-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-bottom: 8rem;
+}
+
+.detail-content-side {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 4rem;
-    text-align: center;
+    justify-content: center;
 }
 
-.service-detail-title {
-    font-family: 'Damion', serif;
-    font-size: 4rem;
-    background: linear-gradient(45deg, #d4af37, #f2d06b, #d4af37);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+.detail-subtitle {
+    font-family: 'Agency FB', sans-serif;
+    color: #d4af37;
+    letter-spacing: 5px;
+    font-size: 1.2rem;
     margin-bottom: 1rem;
-    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    display: block;
 }
 
-.service-detail-price {
-    font-size: 1.5rem;
+.detail-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    line-height: 1;
+    color: #fff;
+    margin: 0 0 2rem 0;
+    text-transform: uppercase;
+}
+
+.detail-price-main {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
     color: #d4af37;
     margin-bottom: 2rem;
-    font-weight: 500;
+    font-weight: 300;
 }
 
-.service-detail-content {
-    display: flex;
-    gap: 4rem;
-    align-items: flex-start;
+.detail-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #ccc;
+    max-width: 600px;
 }
 
-.service-detail-image-container {
-    flex: 1;
+/* --- Image Side --- */
+.detail-image-side {
     position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.service-detail-image {
+.image-glow-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.image-glow-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: -1;
+    filter: blur(20px);
+}
+
+.main-detail-image {
     width: 100%;
     height: auto;
     display: block;
-    transition: transform 0.5s ease;
+    object-fit: cover;
+    filter: brightness(0.9) contrast(1.1);
+    transition: transform 0.7s ease;
 }
 
-.service-detail-image-container:hover .service-detail-image {
-    transform: scale(1.05);
+.image-glow-wrapper:hover .main-detail-image {
+    transform: scale(1.03);
 }
 
-.service-detail-info {
-    flex: 1;
+/* --- Sub Services (Variants) List --- */
+.sub-services-section {
+    margin-bottom: 8rem;
 }
 
-.service-detail-description {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 2rem;
-    color: #cccccc;
-}
-
-.service-features-list {
-    list-style: none;
-    padding: 0;
+.section-heading {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    color: #fff;
     margin-bottom: 3rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
 }
 
-.service-feature-item {
+.gold-accent {
+    color: #d4af37;
+    font-family: 'Damion', cursive;
+    /* Optional script touch from Services page style */
+    text-transform: capitalize;
+}
+
+.variants-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.variant-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.variant-item:hover {
+    border-bottom-color: #d4af37;
+    padding-left: 20px;
+    /* Slide effect */
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%);
+}
+
+.variant-info {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.variant-number {
+    font-family: 'Agency FB', sans-serif;
+    color: #444;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.variant-item:hover .variant-number {
+    color: #d4af37;
+}
+
+.variant-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    color: #fff;
+    /* Solid white by default */
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.variant-action {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.variant-price {
+    font-family: 'Google Sans Flex', sans-serif;
+    color: #ccc;
+    font-size: 1.2rem;
+}
+
+.variant-book-btn {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 1rem;
-    color: #e0e0e0;
-}
-
-.feature-icon {
+    background: transparent;
+    border: 1px solid #d4af37;
     color: #d4af37;
-    flex-shrink: 0;
-}
-
-.book-now-btn {
-    display: inline-block;
-    padding: 15px 40px;
-    background: linear-gradient(45deg, #d4af37, #aa8a29);
-    color: #000;
-    text-decoration: none;
+    padding: 10px 25px;
+    font-family: 'Agency FB', sans-serif;
     font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 30px;
+    letter-spacing: 2px;
+    text-decoration: none;
     transition: all 0.3s ease;
+}
+
+.variant-book-btn:hover {
+    background: #d4af37;
+    color: #000;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+/* --- Other Services Grid --- */
+.other-services-section {
+    margin-bottom: 5rem;
+}
+
+.other-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.other-service-card {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #050505;
+    transition: all 0.4s ease;
+}
+
+.other-service-card:hover {
+    border-color: #d4af37;
+    transform: translateY(-5px);
+}
+
+.other-service-image-box {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.other-service-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: grayscale(100%);
+}
+
+.other-service-card:hover .other-service-image-box img {
+    transform: scale(1.1);
+    filter: grayscale(0%);
+}
+
+.other-service-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+}
+
+.other-service-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    z-index: 2;
+}
+
+.other-service-info h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem;
+    color: #fff;
+    margin: 0 0 0.5rem 0;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
 }
 
-.book-now-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
-    background: linear-gradient(45deg, #f2d06b, #d4af37);
+.view-link {
+    font-family: 'Agency FB', sans-serif;
+    color: #d4af37;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
-@media (max-width: 900px) {
-    .service-detail-content {
-        flex-direction: column;
-    }
-
-    .service-detail-title {
-        font-size: 3rem;
-    }
+.other-service-card:hover .view-link {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-@media (max-width: 600px) {
-    .service-features-list {
+/* --- Mobile Responsive --- */
+@media (max-width: 1024px) {
+    .detail-hero {
         grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
     }
 
-    .service-detail-container {
-        padding: 1rem;
+    .detail-content-side {
+        order: 1;
+        /* Title first */
+    }
+
+    .detail-image-side {
+        order: 2;
+    }
+
+    .detail-title {
+        font-size: 3.5rem;
+    }
+
+    .detail-description {
+        margin: 0 auto;
+    }
+
+    .variant-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    .variant-action {
+        width: 100%;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .variant-name {
+        font-size: 1.5rem;
     }
 }
