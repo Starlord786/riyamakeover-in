@@ -1,164 +1,105 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Mail, Phone, Send, MessageCircle } from 'lucide-react';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import chatAnimation from '../assets/Chat.lottie';
+import { MessageCircle, Phone, Mail, Sparkles } from 'lucide-react';
 import './Contact.css';
 
 const Contact = () => {
-    const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        message: ''
-    });
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Handle form submission logic here
-        console.log('Form submitted:', formData);
-        alert('Message sent successfully!');
-        setFormData({ firstName: '', lastName: '', email: '', phone: '', message: '' });
-    };
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.3
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { y: 20, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: { duration: 0.5, ease: "easeOut" }
-        }
-    };
-
     return (
-        <section className="contact-section" id="contact">
-            <div className="contact-container">
+        <section className="epic-contact-section" id="contact">
+            {/* Background Watermark Elements - Kept for vibe */}
+            <div className="epic-watermark">
+                <span>GLOW</span>
+                <span>RISE</span>
+            </div>
+
+            <div className="epic-split-container">
+                {/* LEFT COLUMN: text & info */}
                 <motion.div
-                    className="contact-content contents-wrapper"
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
+                    className="epic-col-left"
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
                 >
-                    {/* Left Side - Info & Form (Formerly Right) */}
-                    <div className="contact-form-section">
-                        <motion.h2 className="form-heading" variants={itemVariants}>
-                            CONTACT US
-                        </motion.h2>
-
-                        <motion.a
-                            href="https://chat.whatsapp.com/DfAdXUj7SCD7I5yq3C9bJq" // Replace with actual link if known, else keeping generic or commented
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="whatsapp-link"
-                            variants={itemVariants}
+                    <div className="epic-header-content">
+                        <motion.div
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            transition={{ delay: 0.5, type: "spring" }}
+                            className="icon-crown-left"
                         >
-                            <div className="whatsapp-btn">
-                                <MessageCircle size={24} />
-                                <span>Join our WhatsApp Group</span>
-                            </div>
-                        </motion.a>
+                            <Sparkles size={40} color="#d4af37" />
+                        </motion.div>
 
-                        <motion.form onSubmit={handleSubmit} className="new-contact-form" variants={itemVariants}>
-                            <div className="form-row">
-                                <div className="form-group-new">
-                                    <label>FIRST NAME</label>
-                                    <input
-                                        type="text"
-                                        name="firstName"
-                                        placeholder=""
-                                        className="form-input-new"
-                                        value={formData.firstName}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group-new">
-                                    <label>LAST NAME</label>
-                                    <input
-                                        type="text"
-                                        name="lastName"
-                                        placeholder=""
-                                        className="form-input-new"
-                                        value={formData.lastName}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                </div>
-                            </div>
+                        <h2 className="epic-title-left">START YOUR <br /><motion.span
+                            className="highlight-gold-left"
+                            initial={{
+                                clipPath: "inset(0 100% 0 0)",
+                                opacity: 1
+                            }}
+                            whileInView={{
+                                clipPath: "inset(0 0% 0 0)",
+                                opacity: 1
+                            }}
+                            viewport={{ once: true }}
+                            transition={{
+                                duration: 2,
+                                ease: "easeInOut",
+                                delay: 0.2
+                            }}
+                            style={{ display: "inline-block" }}
+                        >Transformation</motion.span></h2>
+                        <p className="epic-subtitle-left">Exquisite makeup artistry for the moments that matter.</p>
 
-                            {/* Email and Phone - Stacked One by One */}
-                            <div className="form-group-new">
-                                <label>EMAIL</label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    placeholder=" "
-                                    className="form-input-new"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="form-group-new">
-                                <label>PHONE NUMBER</label>
-                                <input
-                                    type="tel"
-                                    name="phone"
-                                    placeholder=""
-                                    className="form-input-new"
-                                    value={formData.phone}
-                                    onChange={handleChange}
-                                />
-                            </div>
-
-                            <div className="form-group-new">
-                                <label>WHAT DO YOU HAVE IN MIND</label>
-                                <textarea
-                                    name="message"
-                                    placeholder="Please enter query..."
-                                    className="form-textarea-new"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    required
-                                ></textarea>
-                            </div>
-
-                            <motion.button
-                                type="submit"
-                                className="submit-btn-new"
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                            >
-                                Submit
-                            </motion.button>
-                        </motion.form>
+                        <div className="epic-contact-list">
+                            <a href="mailto:booking@riyamakeover.in" className="contact-row">
+                                <div className="icon-box"><Mail size={20} /></div>
+                                <span>booking@riyamakeover.in</span>
+                            </a>
+                            <a href="tel:+918667459193" className="contact-row">
+                                <div className="icon-box"><Phone size={20} /></div>
+                                <span>+91 86674 59193</span>
+                            </a>
+                            <a href="https://chat.whatsapp.com/DfAdXUj7SCD7I5yq3C9bJq" className="contact-row highlight-row">
+                                <div className="icon-box"><MessageCircle size={20} /></div>
+                                <span>WhatsApp Group</span>
+                            </a>
+                        </div>
                     </div>
+                </motion.div>
 
-                    {/* Right Side - Animated Lottie (Formerly Left) */}
-                    <div className="contact-visual">
-                        <DotLottieReact
-                            src={chatAnimation}
-                            loop
-                            autoplay
-                            className="contact-lottie"
-                        />
+                {/* RIGHT COLUMN: The Form Card */}
+                <motion.div
+                    className="epic-col-right"
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    viewport={{ once: true }}
+                >
+                    <div className="epic-form-card">
+                        <form className="epic-form-compact" onSubmit={(e) => e.preventDefault()}>
+                            <div className="input-split">
+                                <div className="compact-group">
+                                    <label>FULL NAME</label>
+                                    <input type="text" placeholder="Jane Doe" required />
+                                </div>
+                                <div className="compact-group">
+                                    <label>PHONE</label>
+                                    <input type="tel" placeholder="+91..." required />
+                                </div>
+                            </div>
+
+
+
+                            <div className="compact-group">
+                                <label>MESSAGE</label>
+                                <textarea placeholder="Your vision..." rows="3"></textarea>
+                            </div>
+
+                            <button type="submit" className="epic-submit-btn-full">
+                                CONFIRM BOOKING
+                            </button>
+                        </form>
                     </div>
                 </motion.div>
             </div>

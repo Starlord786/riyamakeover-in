@@ -1,87 +1,114 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import { servicesData } from '../data/services';
 import './Services.css';
 
-import { servicesData } from '../data/services';
-
 const Services = () => {
-    const [showAll, setShowAll] = React.useState(false);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 1024);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    const handleServiceClick = (e, index) => {
+        // If clicking the arrow, let it navigate immediately (by stopping propagation of this logic if needed, 
+        // but here we just check if it was meant to be a simple toggle)
+
+        // Check if the click target or its parent is the arrow icon
+        const isArrow = e.target.closest('.arrow-icon');
+
+        if (isArrow) {
+            // Allow navigation
+            return;
+        }
+
+        // If not active, prevent nav and expand
+        if (activeIndex !== index) {
+            e.preventDefault();
+            setActiveIndex(index);
+        }
+        // If active, allow default Link behavior (navigation)
+    };
 
     return (
-        <div className="services-page" id="services">
-            {/* Golden Particles Animation */}
-            <div className="particles-container">
-                {[...Array(70)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className="particle"
+        <section className="services-spotlight-section" id="services">
+            <div className="spotlight-content">
+                <div className="spotlight-header">
+                    <span className="premium-tag">OUR EXPERTISE</span>
+                    <h2 className="premium-heading">PREMIUM <motion.span
+                        className="gold-text"
                         initial={{
-                            opacity: 0,
-                            scale: 0,
+                            clipPath: "inset(0 100% 0 0)",
+                            opacity: 1
                         }}
-                        animate={{
-                            y: [0, -200], // Move up more
-                            opacity: [0, 0.8, 0], // Fade in then out
-                            scale: [0, Math.random() * 0.5 + 0.8, 0], // Larger scale
+                        whileInView={{
+                            clipPath: "inset(0 0% 0 0)",
+                            opacity: 1
                         }}
+                        viewport={{ once: true }}
                         transition={{
-                            duration: Math.random() * 7 + 8, // Slower, more majestic
-                            repeat: Infinity,
+                            duration: 2,
                             ease: "easeInOut",
-                            delay: Math.random() * 5,
+                            delay: 0.2
                         }}
-                        style={{
-                            left: `${Math.random() * 100}vw`,
-                            top: `${Math.random() * 100}vh`,
-                            width: Math.random() * 10 + 5 + 'px', // Much bigger: 5px to 15px
-                            height: Math.random() * 10 + 5 + 'px',
-                            background: `rgba(212, 175, 55, ${Math.random() * 0.3 + 0.2})`, // Slightly more transparent to not block text too much
-                            boxShadow: '0 0 15px rgba(212, 175, 55, 0.4)', // Larger glow
-                            filter: 'blur(1px)' // Soften the edges
-                        }}
-                    />
-                ))}
-            </div>
-            <div className="services-hero">
-                <h1>Our Premium Services</h1>
-                <p>Experience luxury and perfection with our curated range of beauty services designed just for you.</p>
-            </div>
+                        style={{ display: "inline-block" }}
+                    >Services</motion.span></h2>
+                </div>
 
-            <div className="services-grid">
-                {(showAll ? servicesData : servicesData.slice(0, 5)).map((service) => (
-                    <div key={service.id} className="service-card">
-                        <div className="service-card-inner">
-                            <div className="service-card-front">
-                                <img src={service.image} alt={service.title} />
-                                <div className="card-front-overlay">
-                                    <h3>{service.title}</h3>
-                                    <p className="mobile-hint">Tap to View</p>
-                                </div>
-                            </div>
-                            <div className="service-card-back">
-                                <h3>{service.title}</h3>
-                                <p>{service.description}</p>
-                                <div className="service-price">{service.price}</div>
-                                <Link to={`/service/${service.slug}`} className="service-btn">View More</Link>
-                            </div>
+                <div className="services-list-container">
+                    {servicesData.map((service, index) => (
+                        <div
+                            key={service.id}
+                            className="service-wrapper"
+                            onMouseEnter={() => !isMobile && setActiveIndex(index)}
+                        >
+                            <Link
+                                to={`/service/${service.slug}`}
+                                className={`spotlight-item ${activeIndex === index ? 'active' : ''}`}
+                                onClick={(e) => handleServiceClick(e, index)}
+                            >
+                                <span className="service-number">0{index + 1}</span>
+                                <h3 className="service-name">{service.title}</h3>
+                                <motion.div
+                                    className="arrow-icon"
+                                    animate={{ x: activeIndex === index ? 10 : 0, opacity: activeIndex === index ? 1 : 0 }}
+                                >
+                                    <ArrowRight size={32} color="#d4af37" />
+                                </motion.div>
+                            </Link>
+
+                            <AnimatePresence>
+                                {activeIndex === index && (
+                                    <motion.div
+                                        className="inline-details"
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: 'auto', opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <div className="details-content">
+                                            <h4 className="detail-price-inline">{service.price}</h4>
+                                            <p className="detail-desc-inline">{service.description}</p>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
-                    </div>
-                ))}
-                {!showAll && (
-                    <div className="service-card view-more-card" onClick={() => setShowAll(true)}>
-                        <div className="service-card-inner view-more-inner">
-                            <div className="view-more-content">
-                                <h3>View More Services</h3>
-                                <div className="view-more-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )}
+                    ))}
+
+
+                </div>
             </div>
-        </div>
+        </section>
     );
 };
 

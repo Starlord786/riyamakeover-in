@@ -3,8 +3,7 @@ import './Preloader.css';
 import loaderImg from '../assets/loader.png';
 
 const Preloader = ({ isLoading, onImageLoaded }) => {
-    // Defensive check: Never show on tattoo pages
-    if (window.location.pathname.toLowerCase().includes('tattoo')) return null;
+
 
     const [show, setShow] = useState(true);
     const [imageReady, setImageReady] = useState(false);

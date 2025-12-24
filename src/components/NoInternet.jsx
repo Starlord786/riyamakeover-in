@@ -1,37 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { WifiOff, RefreshCw } from 'lucide-react';
 import './NoInternet.css';
 
 const NoInternet = ({ onRetry }) => {
+    const [particles] = useState(() => [...Array(20)].map(() => ({
+        x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
+        y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000),
+        yTarget: Math.random() * -100,
+        scale: [0, 1.5, 0],
+        opacity: [0, 0.8, 0],
+        duration: Math.random() * 3 + 2,
+        delay: Math.random() * 2,
+        width: Math.random() * 10 + 2 + 'px',
+        height: Math.random() * 10 + 2 + 'px',
+    })));
+
+    // Removed useEffect as state is initialized lazily
+
     return (
         <div className="no-internet-container">
             {/* Background Animated Particles */}
             <div className="particles-container">
-                {[...Array(20)].map((_, i) => (
+                {particles.map((p, i) => (
                     <motion.div
                         key={i}
                         className="particle"
                         initial={{
-                            x: Math.random() * window.innerWidth,
-                            y: Math.random() * window.innerHeight,
+                            x: p.x,
+                            y: p.y,
                             scale: 0,
                             opacity: 0,
                         }}
                         animate={{
-                            y: [null, Math.random() * -100],
-                            scale: [0, 1.5, 0],
-                            opacity: [0, 0.8, 0],
+                            y: [null, p.yTarget],
+                            scale: p.scale,
+                            opacity: p.opacity,
                         }}
                         transition={{
-                            duration: Math.random() * 3 + 2,
+                            duration: p.duration,
                             repeat: Infinity,
                             ease: "easeInOut",
-                            delay: Math.random() * 2,
+                            delay: p.delay,
                         }}
                         style={{
-                            width: Math.random() * 10 + 2 + 'px',
-                            height: Math.random() * 10 + 2 + 'px',
+                            width: p.width,
+                            height: p.height,
                         }}
                     />
                 ))}

@@ -1,35 +1,48 @@
 /* Color Variables for easy theme changing */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Agency+FB:wght@700&family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cinzel:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 
 :root {
     --dark-background: black;
-    /* Very dark/deep background */
     --text-white: #ffffff;
-    /* Main text color */
-    --text-gold: #c5b358;
-    /* Luxurious, slightly muted gold */
+    --text-gold: #d4af37;
     --text-light-grey: #a0a0a0;
-    /* Subtle color for links/subtext */
 }
 
 .premium-footer {
-    background: linear-gradient(0deg,#d4af37, #000000, #000000);
+    background: linear-gradient(0deg, #0a0a0a, #000000);
+    /* Restored subtle gradient depth */
     color: var(--text-white);
     padding: 80px 5%;
-    /* Generous padding for a luxury feel */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    /* Changed from Bodoni */
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Optional: Slight light leak background effect */
+.premium-footer::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.15), transparent 70%);
+    pointer-events: none;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: 1.2fr 2fr;
-    /* Left side takes ~37%, Right side takes ~63% */
+    grid-template-columns: 1fr 2fr;
     gap: 80px;
-    /* Consistent gap between main sections */
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 /* --- Left Side: Logo & Social --- */
@@ -39,42 +52,71 @@
     flex-direction: column;
     align-items: flex-start;
     height: 100%;
-    /* Ensure it takes full height for margin-top: auto to work */
 }
 
 .footer-logo-container {
     margin-bottom: 40px;
-    /* Space before social icons */
+    position: relative;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+/* Circular Glow behind the Dragon */
+.footer-logo-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    /* Base glow size */
+    height: 100px;
+    background: rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 50px 30px rgba(212, 175, 55, 0.3);
+    /* The diffusion */
+    border-radius: 50%;
+    /* Force circle */
+    z-index: 0;
+    pointer-events: none;
+    transition: all 0.4s ease;
+}
+
+.footer-logo-container:hover::before {
+    background: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 70px 40px rgba(212, 175, 55, 0.5);
+    /* Stronger diffusion */
+    width: 120px;
+    height: 120px;
 }
 
 .footer-logo {
-    width: 180px;
-    /* Bigger */
-    height: 180px;
-    border-radius: 50%;
-    /* Round the logo */
-    object-fit: cover;
-    /* Ensure it fills the circle */
+    width: 160px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    /* Sit on top of glow */
+    filter: brightness(1.1) drop-shadow(0 0 2px rgba(0, 0, 0, 0.8));
+    /* Sharpness only */
+    transition: transform 0.3s ease;
+}
 
-    border: 2px solid var(--text-gold);
-    padding: 10px;
-    /* Optional: adds space inside the border */
+.footer-logo:hover {
+    transform: scale(1.05);
 }
 
 .footer-social {
     margin-top: auto;
-    margin-left: 18%;
-    /* Pushes it down if there's extra height, or just sits there */
 }
 
 .footer-social p {
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: var(--text-gold);
     margin-bottom: 15px;
+    font-weight: 500;
 }
 
 .social-icons {
@@ -84,18 +126,13 @@
 
 .social-icons a {
     color: var(--text-white);
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 1.2rem;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    display: flex;
-    /* Centers SVG */
-    align-items: center;
-    justify-content: center;
+    transition: all 0.3s ease;
 }
 
 .social-icons a:hover {
     color: var(--text-gold);
+    transform: translateY(-3px);
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
 }
 
 /* --- Right Side: Links & Designer --- */
@@ -109,7 +146,6 @@
 .footer-links-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* 3 Equal columns */
     gap: 40px;
 }
 
@@ -118,113 +154,92 @@
     flex-direction: column;
 }
 
-.footer-column h3{
-    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    background-size: 200% auto;
-    animation: shine 4s linear infinite;
-}
-
 .column-heading {
-    font-family: "Google Sans Flex", sans-serif;
+    font-family: 'Cinzel', serif;
+    /* Keep headings fancy */
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 25px;
-    color: var(--text-gold);
+    color: var(--text-white);
     text-transform: uppercase;
     letter-spacing: 1px;
+    border-bottom: 2px solid rgba(212, 175, 55, 0.5);
+    /* Thicker accent */
+    padding-bottom: 10px;
+    width: fit-content;
 }
 
 .footer-link {
-    font-family: "Google Sans Flex", sans-serif;
-    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    /* Clean readable font */
+    color: #b0b0b0;
     text-decoration: none;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     font-size: 0.95rem;
-    transition: color 0.3s ease;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
 }
 
 .footer-link:hover {
     color: #d4af37;
+    padding-left: 5px;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 /* --- Designer Text --- */
 .footer-designer {
-    margin-top: 60px;
+    margin-top: 80px;
     text-align: right;
     width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 20px;
 }
 
 .designer-text {
-    font-family: 'Outfit', sans-serif;
-    font-size: 5rem;
-    font-weight: 200;
+    font-family: 'Bodoni Moda', serif;
+    /* Elegant serif for signature */
+    font-size: clamp(2rem, 4vw, 5rem);
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 10px;
-    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.15);
+    /* Slightly brighter */
     margin: 0;
     line-height: 1;
-    white-space: nowrap;
+    transition: color 0.5s ease;
+    cursor: default;
 }
 
-/* --- Media Query for Responsiveness --- */
+.designer-text:hover {
+    color: rgba(212, 175, 55, 0.4);
+}
+
+/* --- Media Query --- */
 
 @media (max-width: 900px) {
     .footer-content {
         grid-template-columns: 1fr;
-        /* Stack vertically */
         gap: 60px;
     }
 
     .footer-left {
         align-items: center;
         text-align: center;
-        padding-right: 0;
-        height: auto;
-    }
-
-    .footer-links-group {
-        grid-template-columns: repeat(3, 1fr);
-        /* Keep 3 columns on tablet if possible */
     }
 
     .footer-designer {
         text-align: center;
-        margin-top: 40px;
-    }
-
-    .designer-text {
-        font-size: 2.5rem;
-        /* Smaller on tablet */
-        white-space: normal;
     }
 }
 
 @media (max-width: 600px) {
     .footer-links-group {
         grid-template-columns: 1fr;
-        /* Stack links on mobile */
         text-align: center;
-        gap: 40px;
     }
 
-    .footer-left {
-        margin-bottom: 20px;
+    .column-heading {
+        margin: 0 auto 25px auto;
     }
-
-    .designer-text {
-        font-size: 1.8rem;
-        /* Smaller on mobile */
-        letter-spacing: 3px;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .footer-social {
-        margin-left: 0;
-    }
-    
 }

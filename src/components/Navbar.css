@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Damion&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=BBH+Hegarty&family=Bebas+Neue&family=Changa+One:ital@0;1&family=Damion&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sekuya&family=Syncopate:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Agency+FB:wght@700&family=Bebas+Neue&family=Changa+One:ital@0;1&family=Damion&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Oswald:wght@300;400;600&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
+/* --- Premium Navbar --- */
 .navbar {
     background: transparent;
     height: 100px;
@@ -9,20 +8,28 @@
     justify-content: center;
     align-items: center;
     font-size: 1rem;
-    position: sticky;
+    position: fixed;
+    /* Fixed position for overlay */
     top: 0;
     z-index: 999;
     transition: all 0.4s ease-in-out;
     width: 100%;
 }
 
+.home-icon {
+    margin-right: 5px;
+    margin-bottom: -1px;
+}
+
 .navbar.scrolled {
-    background: rgba(10, 10, 10, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    background: rgba(5, 5, 5, 0.6);
+    /* Darker, more transparent */
+    backdrop-filter: blur(15px);
+    /* Heavier blur */
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    /* Subtle border */
     height: 80px;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .navbar-container {
@@ -31,7 +38,8 @@
     align-items: center;
     height: 100%;
     width: 100%;
-    max-width: 100%;
+    max-width: 1400px;
+    /* Match other sections */
     padding: 0 40px;
     position: relative;
 }
@@ -48,9 +56,10 @@
 }
 
 .logo-img {
-    height: 90px;
+    height: 80px;
     width: auto;
     transition: transform 0.3s ease, height 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
 }
 
 .navbar.scrolled .logo-img {
@@ -61,40 +70,37 @@
     display: flex;
     list-style: none;
     text-align: center;
-    gap: 2rem;
+    gap: 3.5rem;
+    /* Wider gap for premium feel */
     margin-left: auto;
-    /* Push to the right */
     align-items: center;
-    /* Vertical align */
 }
 
 .navbar-item {
-    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    background-size: 200% auto;
-    animation: shine 4s linear infinite;
+    color: #fff;
     text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: 500;
-    letter-spacing: 0.5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    /* Spaced out caps */
+    text-transform: uppercase;
     position: relative;
     transition: color 0.3s ease;
     padding: 5px 0;
-    font-family: 'Damion', serif;
+    font-family: 'Google Sans Flex', 'Oswald', sans-serif;
+    /* Clean premium font */
 }
 
-
+/* Gold Underline Effect on Hover */
 .navbar-item::after {
     content: '';
     position: absolute;
     width: 0;
-    height: 2px;
-    bottom: 0;
+    height: 1px;
+    bottom: -5px;
     left: 0;
     background-color: #d4af37;
-    transition: width 0.3s ease;
+    transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .navbar-item:hover {
@@ -105,152 +111,73 @@
     width: 100%;
 }
 
+/* Tattoo Button */
 .tattoo-btn {
-    border: 2px solid transparent;
-    border-radius: 20px;
-    padding: 5px 15px;
-    background-image: linear-gradient(#0a0a0a, #0a0a0a), linear-gradient(to right, #bf953f, #fcf6ba, #aa771c);
-    background-origin: border-box;
-    background-clip: content-box, border-box;
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 0;
+    /* Boxy */
+    padding: 8px 25px;
+    background: transparent;
     color: #d4af37 !important;
-    background-clip: padding-box, border-box;
-    margin-left: 10px;
+    font-family: 'Agency FB', sans-serif;
+    letter-spacing: 3px;
+    margin-left: 2rem;
+    transition: all 0.3s ease;
+}
+
+.tattoo-btn:hover {
+    background: #d4af37;
+    color: #000 !important;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .tattoo-btn::after {
     display: none;
 }
 
-/* Desktop styling for Tattoo Button */
-@media screen and (min-width: 961px) {
-    .tattoo-btn {
-        margin-left: 2rem;
-        /* Ensure specific button styles stick */
-        position: relative;
-        right: auto;
-        top: auto;
-        transform: none;
-    }
-
-    .tattoo-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-        background-image: linear-gradient(rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.1)), linear-gradient(to right, #bf953f, #fcf6ba, #aa771c);
-    }
-}
-
-/* Mobile adjustments */
-@media screen and (max-width: 960px) {
-    .tattoo-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-        background-image: linear-gradient(rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.1)), linear-gradient(to right, #bf953f, #fcf6ba, #aa771c);
-    }
-
-    .tattoo-btn {
-        margin: 1rem 0;
-        width: 80%;
-    }
-}
-
-/* Search Bar Styles */
+/* Search Bar Styles - Minimalist */
 .navbar-search {
     display: flex;
     align-items: center;
     position: relative;
-    margin-left: 1rem;
+    margin-left: 2rem;
     height: 40px;
 }
 
 .search-trigger {
     cursor: pointer;
-    color: #e0e0e0;
+    color: #fff;
     transition: color 0.3s ease, transform 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 5px;
     z-index: 2;
-    height: 40px;
-    width: 40px;
 }
 
 .search-trigger:hover {
     color: #d4af37;
-    transform: scale(1.1);
 }
 
 .search-box {
     width: 0;
     height: 36px;
     overflow: hidden;
-    will-change: width, opacity;
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.3s ease,
-        margin 0.3s ease;
+    transition: width 0.4s ease, opacity 0.3s ease;
     opacity: 0;
-    background: transparent;
-    border-radius: 20px;
+    background: #000;
+    /* Added background to fix transparency overlap */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    /* Bottom border minimal style */
     display: flex;
     align-items: center;
-    white-space: nowrap;
-    position: relative;
-    z-index: 1;
-    padding: 2px;
-    /* Space for the border */
-    margin-right: 0;
-}
-
-/* Rotating Border Effect */
-.search-box::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(#C5A35C,
-            #345DFF,
-            #7A2BE2,
-            #0CC276,
-            #C5A35C);
-
-    animation: rotate-border 10s linear infinite;
-    z-index: -2;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-/* Inner Background */
-.search-box::after {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    /* Matches padding */
-    background: #0a0a0a;
-    border-radius: 18px;
-    /* Slightly less than parent */
-    z-index: -1;
+    /* Removed absolute positioning to prevent overlap */
 }
 
 .search-box.active {
-    width: 200px;
+    width: 250px;
     opacity: 1;
-    margin-right: 10px;
-}
-
-.search-box.active::before {
-    opacity: 1;
-}
-
-@keyframes rotate-border {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+    border-color: #d4af37;
 }
 
 .search-box input {
@@ -258,138 +185,116 @@
     background: transparent;
     border: none;
     outline: none;
-    color: #e0e0e0;
-    font-size: 0.9rem;
-    padding: 0 10px;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0 40px 0 10px;
+    /* Added right padding to avoid text under icon */
     font-family: 'Google Sans Flex', sans-serif;
-    height: 100%;
-    line-height: 34px;
-    position: relative;
-    z-index: 2;
+    letter-spacing: 1px;
 }
 
-.search-box input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+/* Hide other items when search is active to prevent collision */
+.navbar-menu.search-active>.navbar-item,
+.navbar-menu.search-active>.tattoo-btn {
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Ensure search component stays visible and takes space */
+.navbar-menu.search-active .navbar-search {
+    opacity: 1;
+    pointer-events: auto;
+    margin-left: 0;
+    /* Reset margin to fit */
+    width: 100%;
+    /* Allow full width if needed */
+    justify-content: flex-end;
+    /* Align right */
+}
+
+/* Mobile Responsive */
+.mobile-tattoo-btn {
+    display: none;
 }
 
 .navbar-toggle {
     display: none;
+    cursor: pointer;
+    z-index: 1000;
 }
 
-.mobile-phone {
-    display: none;
+.bar {
+    display: block;
+    /* Fix: spans need block display to respect width/height */
+    width: 30px;
+    height: 2px;
+    background: #fff;
+    margin: 6px 0;
+    transition: 0.4s;
 }
 
-/* Mobile Responsive */
 @media screen and (max-width: 960px) {
     .navbar-container {
-        padding: 0 10px 0 5px;
+        padding: 0 20px;
         justify-content: space-between;
     }
 
     .navbar-logo {
-        margin-left: 10px;
         position: static;
         transform: none;
+        left: auto;
+    }
+
+    .navbar-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #000;
+        /* Solid black for mobile menu */
+        flex-direction: column;
+        justify-content: center;
+        transform: translateX(100%);
+        transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 998;
+    }
+
+    .navbar-menu.active {
+        transform: translateX(0);
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-item {
+        font-size: 2rem;
+        margin: 1rem 0;
+    }
+
+    .tattoo-btn {
+        margin-left: 0;
+        margin-top: 2rem;
+        border: 1px solid #d4af37;
+        font-size: 1.5rem;
     }
 
     .navbar-search {
         display: none;
     }
 
-    .navbar-menu {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 100vh;
-        position: absolute;
-        top: 0;
-        left: -100%;
-        opacity: 0;
-        transition: all 0.5s ease;
-        background: #0a0a0a;
-        justify-content: center;
-        align-items: center;
-        gap: 2rem;
-        margin-left: 0;
-    }
-
-    .navbar-menu.active {
-        left: 0;
-        opacity: 1;
-        z-index: 998;
-    }
-
-    .navbar-item {
-        font-family: 'Damion', serif;
-        font-size: 1.5rem;
-        width: 100%;
+    .mobile-tattoo-btn {
         display: block;
+        margin-left: auto;
+        margin-right: 20px;
+        padding: 5px 15px;
+        font-size: 1rem;
+        border: 1px solid #d4af37;
+        color: #d4af37;
     }
-
-    .mobile-phone {
-        display: block;
-        color: #ff4d4d;
-        /* Premium Bright Red */
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-top: 1.5rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-shadow: 0 2px 10px rgba(255, 77, 77, 0.2);
-        letter-spacing: 1px;
-    }
-
-    .mobile-phone:active {
-        transform: scale(0.95);
-        opacity: 0.8;
-    }
-
-    .navbar-toggle {
-        display: block;
-        cursor: pointer;
-        z-index: 999;
-    }
-
-    .bar {
-        display: block;
-        width: 25px;
-        height: 2px;
-        margin: 6px auto;
-        transition: all 0.3s ease-in-out;
-        background-color: #e0e0e0;
-    }
-
-    .bar.open:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-        background-color: #d4af37;
-    }
-
-    .bar.open:nth-child(2) {
-        opacity: 0;
-    }
-
-
-    .bar.open:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-        background-color: #d4af37;
-    }
-}
-
-/* Home Link Styles */
-.home-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    justify-content: center;
-    /* Center content for consistency */
-}
-
-.home-icon {
-    transition: transform 0.3s ease;
-}
-
-.home-link:hover .home-icon {
-    transform: scale(1.1);
-    color: #d4af37;
 }

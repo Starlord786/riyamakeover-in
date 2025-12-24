@@ -34,7 +34,7 @@ const ScrollToTop = () => {
 
         window.addEventListener('scroll', toggleVisibility);
         return () => window.removeEventListener('scroll', toggleVisibility);
-    }, []);
+    }, [pathname]);
 
     const scrollToTop = () => {
         window.scrollTo({

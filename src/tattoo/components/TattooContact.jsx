@@ -10,7 +10,7 @@ const TattooContact = () => {
                         READY TO <br /> <span className="t-outline">BLEED?</span>
                     </h2>
                     <p className="contact-quote" style={{ marginTop: '2rem', color: '#666', fontStyle: 'italic' }}>
-                        "Pain is temporary. Glory is forever. Let's make art."
+                        &quot;Pain is temporary. Glory is forever. Let&apos;s make art.&quot;
                     </p>
 
                     <div style={{ marginTop: '4rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>

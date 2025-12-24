@@ -1,293 +1,369 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Damion&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Syncopate:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Damion&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sekuya&family=Syncopate:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=BBH+Hegarty&family=Bebas+Neue&family=Changa+One:ital@0;1&family=Damion&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sekuya&family=Syncopate:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Agency+FB:wght@700&family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cinzel:wght@400..900&family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Changa+One:ital@0;1&family=Damion&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Momo+Signature&family=Momo+Trust+Display&family=Notable&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-.contact-section {
-    padding: 6rem 2rem;
-    background: #000000;
-    /* Dark Purple Base */
-    color: #fff;
+/* --- Epic Contact Section: Split 100vh Layout --- */
+
+.epic-contact-section {
     position: relative;
-    overflow: hidden;
-    min-height: 100vh;
+    height: 100vh;
+    /* Force full viewport */
+    min-height: 700px;
+    /* Prevent crushing on small heights */
+    background: #000;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 0;
+    /* Remove padding to let grid control spacing */
+}
+
+/* Watermark Background - Adjusted opacity */
+.epic-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-/* Aurora Effect Background */
-.contact-section::before,
-.contact-section::after {
-    content: '';
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.4;
     z-index: 0;
-    animation: aurora 15s infinite alternate;
+    pointer-events: none;
+    line-height: 0.8;
+    opacity: 0.04;
+    width: 100%;
 }
 
+.epic-watermark span {
+    font-family: 'Agency FB', sans-serif;
+    font-size: 35vw;
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: 2px #fff;
+    white-space: nowrap;
+}
 
-.contact-container {
-    max-width: 1200px;
+/* --- Split Container --- */
+.epic-split-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
+    height: 100%;
+    max-width: 1600px;
+    /* Maximize width usage */
     margin: 0 auto;
     position: relative;
     z-index: 1;
 }
 
-.contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-}
-
-/* Right Side - Lottie (Formerly Left) */
-.contact-visual {
-    display: flex;
-    justify-content: flex-end;
-    /* Push to right */
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    padding-right: 2rem;
-    /* Add some spacing from edge */
-}
-
-.favicon-container {
-    width: 300px;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 50%;
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 50px rgba(118, 75, 162, 0.3);
-}
-
-.contact-favicon {
-    width: 60%;
-    height: 60%;
-    object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
-}
-
-.contact-lottie {
-    width: 120%;
-    /* Increased size */
-    max-width: 800px;
-    /* Increased max-width */
-    height: auto;
-    transform: scale(1.2);
-    /* Make it even bigger as requested */
-}
-
-/* Left Side - Form (Formerly Right) */
-.contact-form-section {
+/* --- Left Column: Hero Content --- */
+.epic-col-left {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    background: #000000;
-    border-radius: 30px;
-    /* Removed border to fix "line appearance" issue */
-    /* border: 1px solid #ffffff; */
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    padding: 2rem;
-    color: #ffffff;
+    justify-content: center;
+    align-items: flex-start;
+    /* Align left */
+    padding: 0 5vw;
+    position: relative;
 }
 
-/* Heading */
-.form-heading {
-    font-family: 'BBH Hegarty', sans-serif;
-    color: #d4af37;
-    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    background-size: 200% auto;
-    animation: shine 4s linear infinite;
-    letter-spacing: -1px;
-    /* Dark Blue */
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 1rem;
-    margin-left: 5rem;
-    line-height: 1.2;
+/* Vertical Line Separator */
+.epic-col-left::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 15%;
+    bottom: 15%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(212, 175, 55, 0.3), transparent);
+}
+
+.icon-crown-left {
     margin-bottom: 2rem;
 }
 
-/* WhatsApp Button */
-.whatsapp-link {
-    text-decoration: none;
-    width: fit-content;
+.epic-title-left {
+    font-family: 'Cinzel', serif;
+    color: #fff;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1;
+    margin: 0;
+    text-align: left;
 }
 
-.whatsapp-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: #25D366;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+.highlight-gold-left {
+    color: #d4af37;
+    font-family: 'Damion', serif;
+    text-transform: capitalize;
+    letter-spacing: 5px;
+    font-size: clamp(3.5rem, 5vw, 6rem);
+    display: block;
+    margin-top: 5px;
 }
 
-.whatsapp-btn:hover {
-    background: #06c64c;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+.epic-subtitle-left {
+    font-family: 'Google Sans Flex', sans-serif;
+    color: #ffffff;
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 300;
+    max-width: 500px;
+    line-height: 1.6;
 }
 
-/* New Form Styling */
-.new-contact-form {
+/* Contact Details List */
+.epic-contact-list {
+    margin-top: 3rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    margin-top: 1rem;
 }
 
-.form-row {
+.contact-row {
     display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #aeaeae;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.contact-row:hover {
+    color: #d4af37;
+    transform: translateX(10px);
+}
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d4af37;
+    transition: all 0.3s ease;
+}
+
+.contact-row:hover .icon-box {
+    background: #d4af37;
+    color: #000;
+    border-color: #d4af37;
+}
+
+/* --- Right Column: Form Card --- */
+.epic-col-right {
+    display: flex;
+    justify-content: center;
+    /* Center horizontally in col */
+    align-items: center;
+    /* Center vertically */
+    padding: 0 5vw;
+}
+
+.epic-form-card {
+    background: rgba(10, 10, 10, 0.4);
+    /* Darker glass */
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    padding: 3rem;
+    width: 100%;
+    max-width: 550px;
+    border-radius: 4px;
+    /* premium minimal round */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    position: relative;
+    /* Corner Accents */
+}
+
+/* Top Right Corner Accent */
+.epic-form-card::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 40px;
+    height: 40px;
+    border-top: 2px solid #d4af37;
+    border-right: 2px solid #d4af37;
+}
+
+/* Bottom Left Corner Accent */
+.epic-form-card::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: -1px;
+    width: 40px;
+    height: 40px;
+    border-bottom: 2px solid #d4af37;
+    border-left: 2px solid #d4af37;
+}
+
+
+/* Compact Form Styles */
+.epic-form-compact {
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
 }
 
-.form-group-new {
-    flex: 1;
+.input-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.compact-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.form-group-new label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #ffffff;
-    /* Uppercase Label Color */
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-family: 'Inter', sans-serif;
+.compact-group label {
+    font-family: 'Agency FB', sans-serif;
+    color: #999;
+    letter-spacing: 1.5px;
+    font-size: 0.9rem;
 }
 
-.form-input-new,
-.form-textarea-new {
-    width: 100%;
-    padding: 1rem 1.25rem;
-    background: #f0f4f8;
-    /* Light blue-grey background */
+.compact-group input,
+.compact-group select,
+.compact-group textarea {
+    background: rgba(255, 255, 255, 0.04);
     border: none;
-    border-radius: 12px;
-    color: #000000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.8rem 0;
+    /* Line style inputs */
+    color: #fff;
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
+    outline: none;
+    transition: all 0.3s ease;
+    border-radius: 0;
 }
 
-.form-input-new:focus,
-.form-textarea-new:focus {
-    outline: 2px solid #aec7e4;
-    background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(66, 153, 225, 0.1);
+.compact-group input:focus,
+.compact-group select:focus,
+.compact-group textarea:focus {
+    border-bottom-color: #d4af37;
+    background: rgba(255, 255, 255, 0.06);
 }
 
-.form-input-new::placeholder,
-.form-textarea-new::placeholder {
-    color: #4c5462;
-    font-weight: 500;
+.compact-group textarea {
+    resize: none;
 }
 
-.form-textarea-new {
-    min-height: 120px;
-    resize: vertical;
-}
-
-.submit-btn-new {
-    width: fit-content;
-    margin-left: 35%;
-    padding: 1rem 3rem;
+.epic-submit-btn-full {
     background: #d4af37;
-    /* Dark Blue matching heading for better contrast */
-    color: #ffffff;
+    color: #000;
     border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
+    padding: 1.2rem;
+    font-family: 'Agency FB', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+    width: 100%;
+    text-transform: uppercase;
 }
 
-.submit-btn-new:hover {
-    background: #f7c00e;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
+.epic-submit-btn-full:hover {
+    background: #fff;
+    letter-spacing: 5px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
 }
 
-/* Mobile Responsive */
-@media (max-width: 968px) {
-    .contact-content {
-        grid-template-columns: 1fr;
+/* --- Responsive --- */
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .epic-contact-section {
+        height: auto;
+        /* Allow scroll */
+        min-height: 100vh;
+        overflow-y: auto;
+        padding: 40px 0;
+        display: block;
+        /* Remove flex centering to allow natural flow */
+    }
+
+    .epic-split-container {
+        display: flex;
+        flex-direction: column;
         gap: 3rem;
+        padding-bottom: 3rem;
     }
 
-    .contact-form-section {
-        padding: 2rem;
-    }
-
-    .contact-visual {
-        /* Hide visual (lottie) on mobile as requested */
+    .epic-col-left::after {
         display: none;
     }
 
-    .favicon-container {
-        width: 200px;
-        height: 200px;
-    }
-
-    .form-heading {
-        font-size: 2.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .contact-section {
-        padding: 4rem 1rem;
-    }
-
-    .contact-form-section {
-        padding: 1.5rem;
-        border-radius: 20px;
-    }
-
-    .form-row {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .form-heading {
-        font-size: 2rem;
+    .epic-col-left {
+        align-items: center;
+        /* Center content */
         text-align: center;
-        margin-left: 10%;
+        padding: 0 20px;
     }
 
-    .whatsapp-link {
+    .epic-title-left {
+        text-align: center;
+        font-size: 2.5rem;
+        /* Smaller title mobile */
+    }
+
+    .highlight-gold-left {
+        font-size: 3.5rem;
+    }
+
+    .epic-subtitle-left {
+        text-align: center;
+        margin: 1rem auto;
+    }
+
+    .epic-contact-list {
+        align-items: center;
         width: 100%;
-        display: flex;
-        justify-content: center;
     }
 
-    .submit-btn-new {
-        margin-left: 22%;
+    .contact-row {
+        justify-content: center;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .epic-col-right {
+        padding: 0 20px;
+        width: 100%;
+    }
+
+    /* FIX: Stack inputs on mobile */
+    .input-split {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .epic-form-card {
+        padding: 1.5rem;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    /* FIX: Resize headings to prevent overflow */
+    .epic-title-left {
+        font-size: 2rem;
+    }
+
+    .highlight-gold-left {
+        font-size: 2.8rem;
+    }
+
+    .epic-watermark span {
+        display: none;
     }
 }

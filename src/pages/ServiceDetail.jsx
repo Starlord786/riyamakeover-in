@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, CheckCircle } from 'lucide-react';
@@ -10,6 +10,21 @@ const ServiceDetail = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
     const service = servicesData.find(s => s.slug === slug);
+    const [otherServices, setOtherServices] = useState([]);
+
+    useEffect(() => {
+        if (service) {
+            const timer = setTimeout(() => {
+                setOtherServices(
+                    servicesData
+                        .filter(s => s.id !== service.id)
+                        .sort(() => 0.5 - Math.random())
+                        .slice(0, 4)
+                );
+            }, 0);
+            return () => clearTimeout(timer);
+        }
+    }, [service]);
 
     useEffect(() => {
         if (!service) {
@@ -184,29 +199,25 @@ const ServiceDetail = () => {
                 }}>Other Services You Might Like</h2>
 
                 <div className="services-grid">
-                    {servicesData
-                        .filter(s => s.id !== service.id) // Exclude current service
-                        .sort(() => 0.5 - Math.random()) // Shuffle
-                        .slice(0, 4) // Take 4
-                        .map((otherService) => (
-                            <div key={otherService.id} className="service-card" style={{ height: '350px' }}>
-                                <div className="service-card-inner">
-                                    <div className="service-card-front">
-                                        <img src={otherService.image} alt={otherService.title} />
-                                        <div className="card-front-overlay">
-                                            <h3>{otherService.title}</h3>
-                                        </div>
-                                    </div>
-                                    <div className="service-card-back">
+                    {otherServices.map((otherService) => (
+                        <div key={otherService.id} className="service-card" style={{ height: '350px' }}>
+                            <div className="service-card-inner">
+                                <div className="service-card-front">
+                                    <img src={otherService.image} alt={otherService.title} />
+                                    <div className="card-front-overlay">
                                         <h3>{otherService.title}</h3>
-                                        <div className="service-price">{otherService.price}</div>
-                                        <Link to={`/service/${otherService.slug}`} className="service-btn" onClick={() => window.scrollTo(0, 0)}>
-                                            View Details
-                                        </Link>
                                     </div>
                                 </div>
+                                <div className="service-card-back">
+                                    <h3>{otherService.title}</h3>
+                                    <div className="service-price">{otherService.price}</div>
+                                    <Link to={`/service/${otherService.slug}`} className="service-btn" onClick={() => window.scrollTo(0, 0)}>
+                                        View Details
+                                    </Link>
+                                </div>
                             </div>
-                        ))}
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './Hero.css';
 import hero1 from '../assets/hero1.png';
 import hero2 from '../assets/hero2.png';
@@ -42,6 +43,10 @@ const Hero = () => {
     const [touchStart, setTouchStart] = useState(null);
     const [touchEnd, setTouchEnd] = useState(null);
 
+    // Parallax logic
+    const { scrollY } = useScroll();
+    const yBg = useTransform(scrollY, [0, 1000], [0, 400]);
+
     // Minimum swipe distance (in px)
     const minSwipeDistance = 50;
 
@@ -49,7 +54,7 @@ const Hero = () => {
         if (isAnimating) return;
         setIsAnimating(true);
         setCurrentSlide((prev) => (prev + 1) % heroData.length);
-        setTimeout(() => setIsAnimating(false), 1000); // Match CSS transition
+        setTimeout(() => setIsAnimating(false), 1000);
     }, [isAnimating]);
 
     const prevSlide = useCallback(() => {
@@ -90,14 +95,12 @@ const Hero = () => {
 
     // Auto-play logic
     useEffect(() => {
-        if (isAnimating) return; // Don't set timer if currently animating
-
         const timer = setTimeout(() => {
             nextSlide();
-        }, 4000); // 4 seconds auto-play
+        }, 5000); // Slower autoplay for better readability
 
         return () => clearTimeout(timer);
-    }, [currentSlide, isAnimating, nextSlide]);
+    }, [currentSlide, nextSlide]);
 
     return (
         <section
@@ -107,26 +110,58 @@ const Hero = () => {
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
         >
-            {heroData.map((slide, index) => (
-                <div
-                    key={slide.id}
-                    className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
-                    style={{ backgroundImage: `url(${slide.image})` }}
-                >
-                    <div className="hero-overlay"></div>
-                    <div className="hero-content">
-                        <h1 className={`hero-title ${index === currentSlide ? 'animate-text' : ''}`}>
-                            {slide.title}
-                        </h1>
-                        <p className={`hero-subtitle ${index === currentSlide ? 'animate-text-delay' : ''}`}>
-                            {slide.subtitle}
-                        </p>
-                        <button className={`hero-cta ${index === currentSlide ? 'animate-btn' : ''}`}>
-                            {slide.cta}
-                        </button>
+            {heroData.map((slide, index) => {
+                const isActive = index === currentSlide;
+                return (
+                    <div
+                        key={slide.id}
+                        className={`hero-slide ${isActive ? 'active' : ''}`}
+                    >
+                        {/* Background with Parallax */}
+                        <motion.div
+                            className="hero-bg"
+                            style={{
+                                backgroundImage: `url(${slide.image})`,
+                                y: yBg
+                            }}
+                        />
+
+                        <div className="hero-overlay"></div>
+
+                        {/* Content with Framer Motion Animations */}
+                        <div className="hero-content">
+                            <motion.p
+                                className="hero-subtitle"
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+                                transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+                            >
+                                {slide.subtitle}
+                            </motion.p>
+
+                            <motion.h1
+                                className="hero-title"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                            >
+                                {slide.title}
+                            </motion.h1>
+
+                            <motion.button
+                                className="hero-cta"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                transition={{ delay: 0.8, duration: 0.8 }}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                {slide.cta}
+                            </motion.button>
+                        </div>
                     </div>
-                </div>
-            ))}
+                );
+            })}
 
             {/* Navigation Arrows */}
             <button className="nav-arrow prev" onClick={prevSlide} aria-label="Previous Slide">

@@ -23,7 +23,7 @@ const About = () => {
                 <div className="content-block">
                     <h2 className="section-title">Our Philosophy</h2>
                     <p className="content-text">
-                        At Riya Makeover, we believe that makeup is not a mask, but a tool to reveal your inner radiance. Our philosophy is rooted in the balance of modern trends and timeless elegance. We strive to understand each client's individual style and personality, crafting bespoke looks that feel authentic and empowering.
+                        At Riya Makeover, we believe that makeup is not a mask, but a tool to reveal your inner radiance. Our philosophy is rooted in the balance of modern trends and timeless elegance. We strive to understand each client&apos;s individual style and personality, crafting bespoke looks that feel authentic and empowering.
                     </p>
                     <p className="content-text">
                         We use only the finest, premium-grade products to ensure that your skin is cared for while you look your best. Perfection is not just a goal; it is our standard.

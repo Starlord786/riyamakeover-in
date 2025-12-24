@@ -20,7 +20,7 @@ const Guides = () => {
                 <div className="content-block">
                     <h2 className="section-title">Long-Lasting Bridal Makeup</h2>
                     <p className="content-text">
-                        To ensure your bridal makeup lasts through tears and dancing, we recommend airbrush or HD makeup. Setting sprays are your best friend—don't skip this crucial step!
+                        To ensure your bridal makeup lasts through tears and dancing, we recommend airbrush or HD makeup. Setting sprays are your best friend—don&apos;t skip this crucial step!
                     </p>
                 </div>
 

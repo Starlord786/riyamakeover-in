@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Home } from 'lucide-react';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Navbar.css';
 import logo from '../assets/logo.png';
@@ -10,21 +10,9 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const [toastPosition, setToastPosition] = useState('bottom-right');
     const searchInputRef = useRef(null);
 
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth <= 960) {
-                setToastPosition('top-center');
-            } else {
-                setToastPosition('bottom-right');
-            }
-        };
-
-        handleResize(); // Initial check
-        window.addEventListener('resize', handleResize);
-
         const handleScroll = () => {
             const offset = window.scrollY;
             if (offset > 50) {
@@ -44,26 +32,12 @@ const Navbar = () => {
         document.addEventListener('mousedown', handleClickOutside);
 
         return () => {
-            window.removeEventListener('resize', handleResize);
             window.removeEventListener('scroll', handleScroll);
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [isSearchOpen]);
 
-    const handleCopyNumber = () => {
-        navigator.clipboard.writeText('+918667459193');
-        toast.success('Number copied successfully!', {
-            position: toastPosition,
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            style: window.innerWidth <= 960 ? { fontSize: '14px', width: 'auto', minWidth: '250px', margin: '0 auto' } : {}
-        });
-    };
+
 
     return (
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
@@ -72,9 +46,9 @@ const Navbar = () => {
                 <Link to="/" className="navbar-logo">
                     <img src={logo} alt="Riya Makeover" className="logo-img" />
                 </Link>
-                <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
+                <div className={`navbar-menu ${isOpen ? 'active' : ''} ${isSearchOpen ? 'search-active' : ''}`}>
                     <Link to="/" className="navbar-item home-link" onClick={() => setIsOpen(false)}>
-                        <Home size={20} className="home-icon" strokeWidth={2.5} />
+                        <Home size={15} className="home-icon" strokeWidth={2.5} />
                         <span>Home</span>
                     </Link>
                     <Link to="/#services" className="navbar-item" onClick={() => setIsOpen(false)}>Services</Link>
@@ -97,6 +71,7 @@ const Navbar = () => {
 
                     <Link to="/tattoo" className="navbar-item tattoo-btn" onClick={() => setIsOpen(false)}>Riya Tattoo</Link>
                 </div>
+                <Link to="/tattoo" className="tattoo-btn mobile-tattoo-btn">Riya Tattoo</Link>
                 <div className="navbar-toggle" onClick={() => setIsOpen(!isOpen)}>
                     <span className={`bar ${isOpen ? 'open' : ''}`}></span>
                     <span className={`bar ${isOpen ? 'open' : ''}`}></span>

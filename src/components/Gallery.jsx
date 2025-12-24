@@ -1,99 +1,118 @@
-import React, { useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import './Gallery.css';
 
 const galleryImages = [
     {
         id: 1,
         url: 'https://images.unsplash.com/photo-1487412947132-28c53af9fbe3?q=80&w=800&auto=format&fit=crop',
-        title: 'Bridal Makeup',
-        desc: 'Radiant look for your special day'
+        title: 'BRIDAL RADIANCE',
+        category: 'WEDDING',
+        span: 'col-2' // Wide item
     },
     {
         id: 2,
         url: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=800&auto=format&fit=crop',
-        title: 'Party Glam',
-        desc: 'Shine bright at every event'
+        title: 'EVENING GLAM',
+        category: 'PARTY',
+        span: 'row-2' // Tall item
     },
     {
         id: 3,
         url: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=800&auto=format&fit=crop',
-        title: 'Editorial',
-        desc: 'High fashion artistic looks'
+        title: 'EDITORIAL ARTS',
+        category: 'FASHION',
+        span: ''
     },
     {
         id: 4,
         url: 'https://images.unsplash.com/photo-1457972729786-0411a3b2b626?q=80&w=800&auto=format&fit=crop',
-        title: 'Hairstyling',
-        desc: 'Elegant styles for any occasion'
+        title: 'ELEGANT STYLES',
+        category: 'HAIR',
+        span: ''
     },
     {
         id: 5,
         url: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800&auto=format&fit=crop',
-        title: 'Engagement',
-        desc: 'Subtle yet stunning makeover'
+        title: 'ENGAGEMENT GLOW',
+        category: 'EVENTS',
+        span: ''
     },
     {
         id: 6,
         url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop',
-        title: 'Reception',
-        desc: 'Bold and beautiful evening look'
+        title: 'RECEPTION QUEEN',
+        category: 'BRIDAL',
+        span: 'col-2'
     }
 ];
 
 const Gallery = () => {
-    const scrollContainer = useRef(null);
-
-    const scroll = (direction) => {
-        const container = scrollContainer.current;
-        if (container) {
-            const scrollAmount = 340; // card width + gap roughly
-            container.scrollBy({
-                left: direction === 'left' ? -scrollAmount : scrollAmount,
-                behavior: 'smooth'
-            });
-        }
-    };
-
     return (
-        <div className="gallery-container" id="gallery">
-            <div className="gallery-header">
-                <h1>Our Masterpieces</h1>
-                <p>Explore our latest work and transformations</p>
+        <section className="gallery-premium-section" id="gallery">
+            <div className="gallery-premium-header">
+                <motion.h2
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="gallery-title-lg"
+                >
+                    SELECTED <motion.span
+                        className="gallery-outline"
+                        initial={{
+                            clipPath: "inset(0 100% 0 0)",
+                            opacity: 1
+                        }}
+                        whileInView={{
+                            clipPath: "inset(0 0% 0 0)",
+                            opacity: 1
+                        }}
+                        viewport={{ once: true }}
+                        transition={{
+                            duration: 2,
+                            ease: "easeInOut",
+                            delay: 0.2
+                        }}
+                        style={{ display: "inline-block" }}
+                    >
+                        Works
+                    </motion.span>
+                </motion.h2>
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                    className="gallery-subtitle-premium"
+                >
+                    A curate portfolio of our finest transformations.
+                </motion.p>
             </div>
 
-            <div className="carousel-wrapper">
-                <button
-                    className="nav-btn prev-btn"
-                    onClick={() => scroll('left')}
-                    aria-label="Scroll left"
-                >
-                    <ChevronLeft size={32} />
-                </button>
-
-                <div className="carousel-track" ref={scrollContainer}>
-                    {galleryImages.map((image) => (
-                        <div className="gallery-card" key={image.id}>
-                            <div className="card-image-wrapper">
-                                <img src={image.url} alt={image.title} loading="lazy" />
-                            </div>
-                            <div className="card-content">
-                                <h3>{image.title}</h3>
-                                <p>{image.desc}</p>
+            <div className="gallery-grid-premium">
+                {galleryImages.map((img, index) => (
+                    <motion.div
+                        key={img.id}
+                        className={`gallery-item-premium ${img.span}`}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                        viewport={{ margin: "-100px" }}
+                    >
+                        <div className="gallery-img-container">
+                            <img src={img.url} alt={img.title} className="gallery-img-p" />
+                            <div className="gallery-overlay-p">
+                                <span className="gallery-cat">{img.category}</span>
+                                <h3 className="gallery-item-title">{img.title}</h3>
                             </div>
                         </div>
-                    ))}
-                </div>
-
-                <button
-                    className="nav-btn next-btn"
-                    onClick={() => scroll('right')}
-                    aria-label="Scroll right"
-                >
-                    <ChevronRight size={32} />
-                </button>
+                    </motion.div>
+                ))}
             </div>
-        </div>
+
+            <div className="gallery-footer-p">
+                <button className="view-all-btn-p">VIEW FULL PORTFOLIO</button>
+            </div>
+        </section>
     );
 };
 
