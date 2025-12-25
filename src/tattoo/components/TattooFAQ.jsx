@@ -16,7 +16,7 @@ const TattooFAQ = () => {
     ];
 
     return (
-        <section className="faq-section section-wrapper" style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <section className="faq-section section-wrapper" style={{ maxWidth: '800px', margin: '0 auto', padding: '0 20px' }}>
             <h2 className="t-heading-lg" style={{ textAlign: 'center', marginBottom: '4rem' }}>
                 COMMON <span className="t-gothic-accent">QUERIES</span>
             </h2>
@@ -25,10 +25,10 @@ const TattooFAQ = () => {
                 {faqs.map((faq, index) => (
                     <div key={index} className="faq-item" onClick={() => toggleFaq(index)} style={{ borderBottom: '1px solid #333', padding: '1.5rem 0', cursor: 'pointer' }}>
                         <div className="faq-question" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <h3 style={{ fontSize: '1.2rem', fontFamily: 'var(--font-body)', fontWeight: 400 }}>{faq.q}</h3>
+                            <h3 style={{ fontSize: '1.2rem', fontFamily: 'var(--font-body)', fontWeight: 400, color: '#f5f5f5' }}>{faq.q}</h3>
                             <motion.span
                                 animate={{ rotate: faqOpen === index ? 45 : 0 }}
-                                style={{ fontSize: '1.5rem', color: 'var(--tattoo-accent)' }}
+                                style={{ fontSize: '1.5rem', color: 'var(--accent-color)' }}
                             >+</motion.span>
                         </div>
                         <AnimatePresence>

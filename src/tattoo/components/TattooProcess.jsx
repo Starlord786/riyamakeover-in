@@ -33,20 +33,22 @@ const TattooProcess = () => {
                             border: '1px solid #333',
                             width: '54px',
                             height: '54px',
+                            minWidth: '54px',
                             borderRadius: '50%',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             zIndex: 2,
-                            color: 'var(--tattoo-accent)',
+                            color: 'var(--accent-color)',
                             fontFamily: 'var(--font-heading)',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            boxShadow: '0 0 10px rgba(0,0,0,0.5)'
                         }}>
                             {step.id}
                         </div>
 
                         <div className="step-info" style={{ paddingTop: '0.5rem' }}>
-                            <h3 style={{ fontSize: '2rem', marginBottom: '1rem', fontFamily: 'var(--font-heading)' }}>{step.title}</h3>
+                            <h3 style={{ fontSize: '2rem', marginBottom: '1rem', fontFamily: 'var(--font-heading)', color: '#fff' }}>{step.title}</h3>
                             <p style={{ color: '#aaa', fontSize: '1.1rem', lineHeight: '1.6' }}>{step.desc}</p>
                         </div>
                     </motion.div>

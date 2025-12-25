@@ -69,7 +69,7 @@ const Footer = () => {
 
                     {/* Designer Credit */}
                     <div className="tattoo-footer-designer">
-                        <h2 className="tattoo-designer-text">INK & SOUL</h2>
+                        <h2 className="tattoo-designer-text">RIYA TATTOO</h2>
                     </div>
                 </div>
             </div>

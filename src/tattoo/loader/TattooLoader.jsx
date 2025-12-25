@@ -30,12 +30,12 @@ const TattooLoader = () => {
             <div className="tattoo-loader-content">
                 <motion.div
                     className="glitch-text"
-                    data-text="INK & SOUL"
+                    data-text="RIYA TATTOO"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    INK & SOUL
+                    RIYA TATTOO
                 </motion.div>
 
                 <motion.div
