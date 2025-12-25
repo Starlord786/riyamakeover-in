@@ -39,7 +39,6 @@ const Navbar = () => {
                 </Link>
                 <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
                     <Link to="/" className="navbar-item home-link" onClick={() => setIsOpen(false)}>
-                        <Home size={15} className="home-icon" strokeWidth={2.5} />
                         <span>Home</span>
                     </Link>
                     <Link to="/#services" className="navbar-item" onClick={() => setIsOpen(false)}>Services</Link>

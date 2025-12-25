@@ -142,14 +142,14 @@
 }
 
 .hs-subtitle {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 200;
-    font-size: 1.1rem;
+    font-family: 'Google Sans flex', serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 1rem;
     line-height: 1.6;
     letter-spacing: 0.05rem;
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 3rem;
-    max-width: 400px;
     margin-left: auto;
     /* Push to right */
     margin-right: 0;
@@ -235,31 +235,30 @@
     .hero-slide-container.alternated {
         flex-direction: column;
         height: auto;
-        padding-top: 60px;
-        gap: 2rem;
+        padding-top: 40px;
+        gap: 0;
     }
 
     .hs-image-wrapper {
-        height: 50vh;
+        height: 45vh;
+        /* Reduced height */
         width: 100%;
         order: 1;
-        /* Always image top on mobile? Or follow alternation? */
-        /* Let's keep alternation for fun, or maybe stack logically */
     }
 
     .hero-slide-container.alternated {
         flex-direction: column;
-        /* Keep vertical stack */
     }
-
-    /* Override alternation for mobile to consistent layout if preferred,
-       but user didn't specify. I'll stick to alternation but vertical. */
 
     .hs-content-wrapper {
         text-align: center !important;
         align-items: center !important;
         padding: 0 1rem;
         order: 2;
+        margin-top: -80px;
+        /* Pull text up into the image fade */
+        position: relative;
+        z-index: 5;
     }
 
     .hero-slide-container.alternated .hs-content-wrapper {
@@ -269,6 +268,8 @@
 
     .hs-subtitle {
         margin: 0 auto 2rem auto !important;
+        font-size: 0.9rem;
+        /* Slightly smaller for mobile */
     }
 
     .epic-controls {

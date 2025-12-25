@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Home } from 'lucide-react';
+import { Home, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import './Login.css';
 
 const Login = () => {
-    // ... (state and handlers remain unchanged)
-
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -22,77 +21,95 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle login logic here
         console.log('Login attempt:', formData);
     };
 
     return (
-        <div className="login-container">
-            <Link to="/" className="home-exit-btn" aria-label="Back to Home">
-                <Home size={28} />
-            </Link>
-            <div className="login-bg-glow"></div>
+        <div className="login-epic-wrapper">
+            {/* Visual Side (Hidden on small mobile, shown on tablet+) */}
+            <div className="login-visual-side">
+                <div className="visual-overlay"></div>
+                <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1.2 }}
+                    className="visual-content"
+                >
+                    <span className="visual-label">Private Atelier</span>
+                    <h1 className="visual-title">The Beauty <br /><span>Sanctuary</span></h1>
+                </motion.div>
+            </div>
 
-            <div className="login-card">
-                <div className="login-header">
-                    <h2>Welcome Back</h2>
-                    <p>Sign in to continue your journey</p>
-                </div>
+            {/* Form Side */}
+            <div className="login-form-side">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.8 }}
+                    className="form-container"
+                >
+                    <header className="form-header">
+                        <h2>Sign In</h2>
+                        <p>Welcome back to your elite aesthetic journey.</p>
+                    </header>
 
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="email">Email Address</label>
-                        <div className="input-wrapper">
+                    <form onSubmit={handleSubmit} className="epic-form">
+                        <div className="epic-input-group">
                             <input
                                 type="email"
-                                id="email"
                                 name="email"
-                                className="form-input"
-                                placeholder="Enter your email"
+                                placeholder="Email Address"
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
                             />
+                            <label>Email Address</label>
                         </div>
-                    </div>
 
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <div className="input-wrapper">
+                        <div className="epic-input-group">
                             <input
                                 type="password"
-                                id="password"
                                 name="password"
-                                className="form-input"
-                                placeholder="Enter your password"
+                                placeholder="Password"
                                 value={formData.password}
                                 onChange={handleChange}
                                 required
                             />
+                            <label>Password</label>
                         </div>
+
+                        <div className="form-utils">
+                            <label className="epic-checkbox">
+                                <input
+                                    type="checkbox"
+                                    name="rememberMe"
+                                    checked={formData.rememberMe}
+                                    onChange={handleChange}
+                                />
+                                <span className="checkmark"></span>
+                                Remember Me
+                            </label>
+                            <a href="#" className="epic-forgot">Forgot?</a>
+                        </div>
+
+                        <button type="submit" className="epic-submit-btn">
+                            <span>Continue</span>
+                            <ArrowRight size={18} />
+                        </button>
+                    </form>
+
+                    <footer className="form-footer">
+                        <span>New to the Atelier?</span>
+                        <Link to="/signup">Create Account</Link>
+                    </footer>
+
+                    <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+                        <Link to="/" className="epic-exit-btn">
+                            <Home size={18} />
+                            <span>Back to Home</span>
+                        </Link>
                     </div>
-
-                    <div className="form-options">
-                        <label className="remember-me">
-                            <input
-                                type="checkbox"
-                                name="rememberMe"
-                                checked={formData.rememberMe}
-                                onChange={handleChange}
-                            />
-                            Remember me
-                        </label>
-                        <a href="#" className="forgot-password">Forgot Password?</a>
-                    </div>
-
-                    <button type="submit" className="login-btn">
-                        Sign In
-                    </button>
-                </form>
-
-                <div className="login-footer">
-                    <p>Don&apos;t have an account? <Link to="/signup">Sign Up</Link></p>
-                </div>
+                </motion.div>
             </div>
         </div>
     );

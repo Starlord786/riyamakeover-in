@@ -33,6 +33,16 @@ const ServiceDetail = () => {
         window.scrollTo(0, 0);
     }, [service, navigate]);
 
+    const handleBookNow = (e) => {
+        e.preventDefault();
+        const isLoggedIn = localStorage.getItem('authToken'); // Check for token
+        if (isLoggedIn) {
+            navigate('/contact');
+        } else {
+            navigate('/login');
+        }
+    };
+
     if (!service) return null;
 
     return (
@@ -100,9 +110,9 @@ const ServiceDetail = () => {
                                 </div>
                                 <div className="variant-action">
                                     <span className="variant-price">{service.price}</span>
-                                    <Link to="/contact" className="variant-book-btn">
+                                    <button onClick={handleBookNow} className="variant-book-btn">
                                         BOOK NOW <ArrowRight size={16} />
-                                    </Link>
+                                    </button>
                                 </div>
                             </motion.div>
                         ))}
@@ -120,9 +130,9 @@ const ServiceDetail = () => {
                                 </div>
                                 <div className="variant-action">
                                     <span className="variant-price">{service.price}</span>
-                                    <Link to="/contact" className="variant-book-btn">
+                                    <button onClick={handleBookNow} className="variant-book-btn">
                                         BOOK NOW <ArrowRight size={16} />
-                                    </Link>
+                                    </button>
                                 </div>
                             </motion.div>
                         )}

@@ -178,6 +178,26 @@
     border-bottom-color: #d4af37;
 }
 
+.book-now-inline-btn {
+    background: transparent;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    padding: 10px 25px;
+    font-family: 'Agency FB', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.book-now-inline-btn:hover {
+    background: #d4af37;
+    color: #000;
+}
+
 /* --- Responsive --- */
 @media (max-width: 1024px) {
     .services-spotlight-section {

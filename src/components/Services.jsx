@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { servicesData } from '../data/services';
@@ -8,6 +8,7 @@ import './Services.css';
 const Services = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const checkMobile = () => {
@@ -37,6 +38,16 @@ const Services = () => {
             setActiveIndex(index);
         }
         // If active, allow default Link behavior (navigation)
+    };
+
+    const handleBookNow = (e) => {
+        e.preventDefault();
+        const isLoggedIn = localStorage.getItem('authToken');
+        if (isLoggedIn) {
+            navigate('/contact');
+        } else {
+            navigate('/login');
+        }
     };
 
     return (
@@ -98,6 +109,9 @@ const Services = () => {
                                         <div className="details-content">
                                             <h4 className="detail-price-inline">{service.price}</h4>
                                             <p className="detail-desc-inline">{service.description}</p>
+                                            <button onClick={handleBookNow} className="book-now-inline-btn">
+                                                BOOK NOW <ArrowRight size={20} style={{ marginLeft: 10 }} />
+                                            </button>
                                         </div>
                                     </motion.div>
                                 )}

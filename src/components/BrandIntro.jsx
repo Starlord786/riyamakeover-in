@@ -15,7 +15,34 @@ const BrandIntro = () => {
                 >
                     <span className="intro-label">Welcome to</span>
                     <h2 className="intro-title">RIYA <span className="gold-text">MAKEOVER</span></h2>
-                    <p className="intro-tagline">Where Art Meets Beauty</p>
+                    <motion.h3
+                        className="intro-tagline"
+                        variants={{
+                            hidden: { opacity: 1 },
+                            visible: {
+                                opacity: 1,
+                                transition: {
+                                    delayChildren: 0.3,
+                                    staggerChildren: 0.05
+                                }
+                            }
+                        }}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                    >
+                        {"Where Art Meets Beauty".split("").map((char, index) => (
+                            <motion.span
+                                key={index}
+                                variants={{
+                                    hidden: { opacity: 0, y: 20 },
+                                    visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 12, stiffness: 100 } }
+                                }}
+                            >
+                                {char === " " ? "\u00A0" : char}
+                            </motion.span>
+                        ))}
+                    </motion.h3>
                     <p className="intro-description">
                         Discover a world where elegance is redefined. From bridal mastery to
                         advanced skincare, we don't just transform looks; we craft confidence.
