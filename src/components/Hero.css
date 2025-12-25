@@ -78,29 +78,29 @@
 }
 
 /* Typography matching Tattoo Vibe */
+/* Typography matching Tattoo Vibe */
 .hero-title {
-    font-size: clamp(4rem, 12vw, 10rem);
+    font-size: clamp(3rem, 10vw, 8rem);
     margin: 0;
-    text-transform: capitalize;
-    line-height: 1;
-    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    background: linear-gradient(45deg, #fff, #d4af37);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: 'Damion', serif;
-    letter-spacing: -2px;
+    text-transform: uppercase;
+    line-height: 0.9;
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 5px;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
 .hero-subtitle {
-    font-family: 'Damion', serif;
-    font-size: 2rem;
+    font-family: 'Damion', cursive;
+    font-size: 2.5rem;
     margin: 0;
-    font-weight: 300;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-    max-width: 800px;
-    /* Spaced out like Tattoo subtitle */
-    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    color: #d4af37;
+    margin-bottom: 2rem;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+    letter-spacing: 2px;
 }
 
 .hero-cta {
@@ -195,26 +195,47 @@
 @media screen and (max-width: 768px) {
     .hero-content {
         padding: 0 20px;
-        justify-content: flex-end;
-        padding-bottom: 15vh;
+        justify-content: center;
+        /* Center content vertically too */
+        padding-bottom: 20vh;
+        /* Lift it up a bit */
+        text-align: center;
     }
 
     .hero-title {
-        font-size: 4rem;
+        font-size: 3rem;
+        /* Smaller for mobile */
+        letter-spacing: 2px;
+        line-height: 1.1;
+        margin-top: 15rem;
     }
 
     .hero-subtitle {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
     }
 
     .hero-cta {
-        width: 100%;
-        text-align: center;
-        padding: 1.2rem;
-        background: rgba(212, 175, 55, 0.2);
+        width: auto;
+        /* Don't force full width, keep button look */
+        min-width: 200px;
+        padding: 1rem 2rem;
+        font-size: 0.9rem;
     }
 
     .nav-arrow {
         display: none;
     }
+}
+
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    /* Between background and content */
+    pointer-events: none;
+    /* Let clicks pass through */
 }

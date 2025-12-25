@@ -1,0 +1,118 @@
+.brand-intro {
+    background-color: #000;
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.brand-intro-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.intro-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.intro-label {
+    font-family: 'Google Sans Flex', sans-serif;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.9rem;
+}
+
+.intro-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: #fff;
+    margin: 0;
+    line-height: 1.1;
+    font-weight: 400;
+}
+
+.intro-title .gold-text {
+    color: #d4af37;
+    font-size: 7rem;
+    font-family: "cinzel", serif;
+    position: relative;
+    display: inline-block;
+}
+
+.intro-tagline {
+    font-family: 'Damion', cursive;
+    font-size: 2.5rem;
+    color: #d4af37;
+    margin: 1rem 0;
+    transform: rotate(-2deg);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+}
+
+.intro-description {
+    font-family: 'Google Sans Flex', sans-serif;
+    color: #ccc;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 600px;
+    font-weight: 300;
+}
+
+.intro-divider {
+    width: 60px;
+    height: 2px;
+    background: #d4af37;
+    margin-top: 2rem;
+    position: relative;
+}
+
+.intro-divider::before,
+.intro-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: #d4af37;
+    border-radius: 50%;
+}
+
+.intro-divider::before {
+    left: -10px;
+}
+
+.intro-divider::after {
+    right: -10px;
+}
+
+@media screen and (max-width: 768px) {
+    .brand-intro {
+        padding: 4rem 1.5rem;
+    }
+
+    .intro-title {
+        font-size: 2rem;
+        /* Smaller for mobile */
+    }
+
+    .intro-tagline {
+        font-size: 2rem;
+    }
+
+    .intro-description {
+        font-size: 1rem;
+    }
+
+    .intro-title .gold-text {
+        font-size: 4rem;
+    }
+}

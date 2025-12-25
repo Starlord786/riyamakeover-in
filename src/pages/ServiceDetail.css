@@ -22,10 +22,10 @@
 .back-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: .5rem;
     color: #888;
     text-decoration: none;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     font-size: 1rem;
     font-weight: 500;
     transition: color 0.3s ease;
@@ -53,7 +53,7 @@
 }
 
 .detail-subtitle {
-    font-family: 'Agency FB', sans-serif;
+    font-family: 'Google Sans Flex', sans-serif;
     color: #d4af37;
     letter-spacing: 5px;
     font-size: 1.2rem;
@@ -121,9 +121,6 @@
     transition: transform 0.7s ease;
 }
 
-.image-glow-wrapper:hover .main-detail-image {
-    transform: scale(1.03);
-}
 
 /* --- Sub Services (Variants) List --- */
 .sub-services-section {
@@ -143,8 +140,14 @@
 .gold-accent {
     color: #d4af37;
     font-family: 'Damion', cursive;
-    /* Optional script touch from Services page style */
+    font-size: 4rem;
     text-transform: capitalize;
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1.2;
+    padding-right: 15px;
+    /* Prevent cursive overflow */
 }
 
 .variants-list {
@@ -215,8 +218,8 @@
     border: 1px solid #d4af37;
     color: #d4af37;
     padding: 10px 25px;
-    font-family: 'Agency FB', sans-serif;
-    font-size: 1.1rem;
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: 0.8rem;
     letter-spacing: 2px;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -231,6 +234,12 @@
 /* --- Other Services Grid --- */
 .other-services-section {
     margin-bottom: 5rem;
+}
+
+.other-services-section .gold-accent{
+    font-family: 'cinzel', serif;
+    text-transform: lowercase;
+    font-size: 3rem;
 }
 
 .other-services-grid {

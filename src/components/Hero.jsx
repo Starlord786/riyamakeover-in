@@ -37,6 +37,9 @@ const heroData = [
     }
 ];
 
+import { loadSlim } from "tsparticles-slim";
+import Particles from "react-particles";
+
 const Hero = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
@@ -46,6 +49,11 @@ const Hero = () => {
     // Parallax logic
     const { scrollY } = useScroll();
     const yBg = useTransform(scrollY, [0, 1000], [0, 400]);
+
+    // Particles Init
+    const particlesInit = useCallback(async (engine) => {
+        await loadSlim(engine);
+    }, []);
 
     // Minimum swipe distance (in px)
     const minSwipeDistance = 50;
@@ -110,6 +118,60 @@ const Hero = () => {
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
         >
+            <Particles
+                id="tsparticles"
+                init={particlesInit}
+                options={{
+                    fullScreen: { enable: false },
+                    background: {
+                        color: {
+                            value: "transparent",
+                        },
+                    },
+                    fpsLimit: 120,
+                    particles: {
+                        color: {
+                            value: "#d4af37",
+                        },
+                        move: {
+                            enable: true,
+                            direction: "none",
+                            outModes: {
+                                default: "bounce",
+                            },
+                            random: true,
+                            speed: 1,
+                            straight: false,
+                        },
+                        number: {
+                            density: {
+                                enable: true,
+                                area: 800,
+                            },
+                            value: 40,
+                        },
+                        opacity: {
+                            value: 0.5,
+                            random: true,
+                            animation: {
+                                enable: true,
+                                speed: 1,
+                                minimumValue: 0.1,
+                                sync: false
+                            }
+                        },
+                        shape: {
+                            type: "circle",
+                        },
+                        size: {
+                            value: { min: 1, max: 3 },
+                        },
+                    },
+                    detectRetina: true,
+                }}
+                className="hero-particles"
+            />
+
             {heroData.map((slide, index) => {
                 const isActive = index === currentSlide;
                 return (
@@ -130,15 +192,6 @@ const Hero = () => {
 
                         {/* Content with Framer Motion Animations */}
                         <div className="hero-content">
-                            <motion.p
-                                className="hero-subtitle"
-                                initial={{ opacity: 0, y: -20 }}
-                                animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                                transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
-                            >
-                                {slide.subtitle}
-                            </motion.p>
-
                             <motion.h1
                                 className="hero-title"
                                 initial={{ opacity: 0, scale: 0.9 }}
@@ -147,6 +200,15 @@ const Hero = () => {
                             >
                                 {slide.title}
                             </motion.h1>
+
+                            <motion.p
+                                className="hero-subtitle"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+                            >
+                                {slide.subtitle}
+                            </motion.p>
 
                             <motion.button
                                 className="hero-cta"

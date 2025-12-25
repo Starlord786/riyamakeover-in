@@ -38,9 +38,7 @@ const ServiceDetail = () => {
     return (
         <div className="service-detail-page">
             <div className="service-detail-container">
-                <Link to="/" className="back-link">
-                    <ArrowLeft size={20} /> Back to Home
-                </Link>
+
 
                 <div className="detail-hero">
                     <motion.div
@@ -68,7 +66,23 @@ const ServiceDetail = () => {
                 </div>
 
                 <div className="sub-services-section">
-                    <h2 className="section-heading">CHOOSE YOUR <span className="gold-accent">PREFERENCE</span></h2>
+                    <h2 className="section-heading">CHOOSE YOUR <span className="gold-accent">
+                        Preference
+                        <motion.span
+                            initial={{ width: "100%" }}
+                            whileInView={{ width: "0%" }}
+                            transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
+                            viewport={{ once: true }}
+                            style={{
+                                position: "absolute",
+                                top: 0,
+                                right: 0,
+                                bottom: 0,
+                                background: "#000",
+                                zIndex: 2
+                            }}
+                        />
+                    </span></h2>
 
                     <div className="variants-list">
                         {service.features && service.features.map((feature, index) => (
@@ -115,9 +129,13 @@ const ServiceDetail = () => {
                     </div>
                 </div>
 
+                <Link to="/" className="back-link" style={{ marginBottom: '2rem', display: 'inline-flex' }}>
+                    <ArrowLeft size={20} /> Back to Home
+                </Link>
+
                 {/* Other Services Section */}
                 <div className="other-services-section">
-                    <h2 className="section-heading">EXPLORE <span className="gold-accent">MORE</span></h2>
+                    <h2 className="section-heading">EXPLORE <span className="gold-accent">more</span></h2>
                     <div className="other-services-grid">
                         {otherServices.map((otherService) => (
                             <Link to={`/service/${otherService.slug}`} key={otherService.id} className="other-service-card">

@@ -54,7 +54,7 @@
     margin: 0;
 }
 
-.gold-text {
+.premium-heading .gold-text {
     color: #d4af37;
     font-family: 'Damion', serif;
     display: block;
@@ -219,9 +219,10 @@
         font-size: 3rem;
     }
 
-    .gold-text {
-        font-size: 4rem;
+    .premium-heading .gold-text {
+        font-size: 5rem;
     }
+
 
     .services-list-container {
         width: 100%;

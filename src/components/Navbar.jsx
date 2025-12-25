@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Navbar.css';
 import logo from '../assets/logo.png';
+import riyaTattoo from '../assets/Riya_Tattoo.png';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -48,9 +49,13 @@ const Navbar = () => {
 
 
 
-                    <Link to="/tattoo" className="navbar-item tattoo-btn" onClick={() => setIsOpen(false)}>Riya Tattoo</Link>
+                    <Link to="/tattoo" className="navbar-item tattoo-img-link" onClick={() => setIsOpen(false)}>
+                        <img src={riyaTattoo} alt="Riya Tattoo" className="tattoo-img" />
+                    </Link>
                 </div>
-                <Link to="/tattoo" className="tattoo-btn mobile-tattoo-btn">Riya Tattoo</Link>
+                <Link to="/tattoo" className="tattoo-img-link mobile-tattoo-img-link">
+                    <img src={riyaTattoo} alt="Riya Tattoo" className="tattoo-img" />
+                </Link>
                 <div className="navbar-toggle" onClick={() => setIsOpen(!isOpen)}>
                     <span className={`bar ${isOpen ? 'open' : ''}`}></span>
                     <span className={`bar ${isOpen ? 'open' : ''}`}></span>
