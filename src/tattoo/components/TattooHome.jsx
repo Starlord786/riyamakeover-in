@@ -52,6 +52,8 @@ const TattooHome = () => {
                         <span onClick={() => scrollToSection('home')}>Studio</span>
 
                         <span onClick={() => scrollToSection('work')}>Work</span>
+                        <span onClick={() => scrollToSection('process')}>Process</span>
+                        <span onClick={() => scrollToSection('faq')}>FAQ</span>
                         <span onClick={() => scrollToSection('contact')}>Contact</span>
                     </div>
 
@@ -68,8 +70,9 @@ const TattooHome = () => {
                 {/* Mobile Menu Overlay */}
                 <div className={`mobile-menu-minimal ${isMenuOpen ? 'active' : ''}`}>
                     <span onClick={() => scrollToSection('home')}>Studio</span>
-
                     <span onClick={() => scrollToSection('work')}>Work</span>
+                    <span onClick={() => scrollToSection('process')}>Process</span>
+                    <span onClick={() => scrollToSection('faq')}>FAQ</span>
                     <span onClick={() => scrollToSection('contact')}>Contact</span>
                     <Link to="/" className="mobile-exit">Exit Site</Link>
                 </div>
@@ -81,7 +84,7 @@ const TattooHome = () => {
 
                 <div id="work" className="section-minimal"><TattooWork /></div>
                 <div id="process" className="section-minimal"><TattooProcess /></div>
-                <TattooFAQ />
+                <div id="faq" className="section-minimal"><TattooFAQ /></div>
                 <div id="contact" className="section-minimal"><TattooContact /></div>
             </div>
 

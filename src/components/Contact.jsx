@@ -97,7 +97,7 @@ const Contact = () => {
                             </div>
 
                             <button type="submit" className="epic-submit-btn-full">
-                                CONFIRM BOOKING
+                                Send Message
                             </button>
                         </form>
                     </div>

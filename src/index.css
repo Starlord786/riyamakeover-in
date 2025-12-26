@@ -78,3 +78,14 @@ html {
   background-color: #d4af37;
   color: #000000;
 }
+
+/* --- Tattoo Mode Selection Override --- */
+body.tattoo-mode ::selection {
+  background-color: #00e676;
+  color: #000000;
+}
+
+body.tattoo-mode ::-moz-selection {
+  background-color: #00e676;
+  color: #000000;
+}

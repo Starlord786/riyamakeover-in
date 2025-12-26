@@ -11,6 +11,18 @@ const TattooApp = () => {
         // Add a class to body to indicate we are in tattoo mode
         document.body.classList.add('tattoo-mode');
 
+        // Save original title and favicon
+        const originalTitle = document.title;
+        const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.type = 'image/svg+xml';
+        link.rel = 'icon';
+        const originalFavicon = link.href;
+
+        // Update Title and Favicon
+        document.title = "Riya Tattoo";
+        link.href = '/dragon-tattoo.svg';
+        document.head.appendChild(link); // Ensure it's in head if we created it
+
         // Simulate loading resources for the tattoo section
         const timer = setTimeout(() => {
             setIsLoading(false);
@@ -19,6 +31,10 @@ const TattooApp = () => {
         return () => {
             clearTimeout(timer);
             document.body.classList.remove('tattoo-mode');
+
+            // Restore Title and Favicon
+            document.title = originalTitle;
+            link.href = originalFavicon;
         };
     }, []);
 

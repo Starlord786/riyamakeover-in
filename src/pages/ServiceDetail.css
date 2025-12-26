@@ -218,16 +218,19 @@
     border: 1px solid #d4af37;
     color: #d4af37;
     padding: 10px 25px;
-    font-family: 'Google Sans Flex', sans-serif;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
     font-size: 0.8rem;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-decoration: none;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .variant-book-btn:hover {
-    background: #d4af37;
+    background: #ffffff;
     color: #000;
+    letter-spacing: 2px;
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
 
@@ -306,9 +309,9 @@
 }
 
 .view-link {
-    font-family: 'Agency FB', sans-serif;
+    font-family: 'Google Sans Flex', sans-serif;
     color: #d4af37;
-    letter-spacing: 2px;
+    letter-spacing: 0px;
     font-size: 1rem;
     opacity: 0;
     transform: translateY(10px);
