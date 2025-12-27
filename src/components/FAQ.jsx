@@ -25,8 +25,8 @@ const FAQ = () => {
             answer: "Yes, we provide paid trial sessions for brides-to-be. This allows us to craft specifically for your skin type and preferences. The trial fee is adjustable against your final bridal package."
         },
         {
-            question: "Are tattoo inks safe?",
-            answer: "Safety is paramount. We use only high-quality, organic, and sterilized vegan inks. All needles effectively single-use and sterilized, complying with the highest hygiene standards."
+            question: "Do you travel to venues for bridal makeup?",
+            answer: "Yes, we offer on-site bridal makeup services at your venue or home. Travel charges may apply depending on the location."
         },
         {
             question: "What is the cancellation policy?",

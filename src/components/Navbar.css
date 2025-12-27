@@ -56,14 +56,14 @@
 }
 
 .logo-img {
-    height: 80px;
+    height: 120px;
     width: auto;
     transition: transform 0.3s ease, height 0.3s ease;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
 }
 
 .navbar.scrolled .logo-img {
-    height: 60px;
+    height: 90px;
 }
 
 .navbar-menu {

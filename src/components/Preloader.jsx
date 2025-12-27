@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './Preloader.css';
-import loaderImg from '../assets/loader.png';
+import logo from '../assets/logo.png';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Preloader = ({ isLoading, onImageLoaded }) => {
-
-
     const [show, setShow] = useState(true);
-    const [imageReady, setImageReady] = useState(false);
 
     useEffect(() => {
         const img = new Image();
-        img.src = loaderImg;
+        img.src = logo;
 
         const handleLoad = () => {
-            setImageReady(true);
             if (onImageLoaded) onImageLoaded();
         };
 
@@ -25,7 +22,7 @@ const Preloader = ({ isLoading, onImageLoaded }) => {
         if (!isLoading) {
             const timer = setTimeout(() => {
                 setShow(false);
-            }, 500);
+            }, 500); // Wait for fade out transition
             return () => clearTimeout(timer);
         }
     }, [isLoading]);
@@ -34,12 +31,28 @@ const Preloader = ({ isLoading, onImageLoaded }) => {
 
     return (
         <div className={`preloader-container ${!isLoading ? 'fade-out' : ''}`}>
-            {imageReady && (
-                <div className="loader-wrapper">
-                    <div className="loader-circle"></div>
-                    <img src={loaderImg} alt="Loading..." className="loader-image" />
+            <div className="loader-wrapper">
+                <motion.img
+                    src={logo}
+                    alt="Riya Makeover"
+                    className="loader-logo"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                />
+
+                <div className="loading-bar-container">
+                    <motion.div
+                        className="loading-bar-progress"
+                        initial={{ width: "0%" }}
+                        animate={{ width: isLoading ? "100%" : "100%" }}
+                        transition={{
+                            duration: 2.5,
+                            ease: "easeInOut"
+                        }}
+                    />
                 </div>
-            )}
+            </div>
         </div>
     );
 };
