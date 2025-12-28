@@ -3,6 +3,7 @@ import './TattooHome.css';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import TattooHero from './TattooHero';
+import riyaTattoo from '../../assets/Riya_Tattoo.png';
 
 import TattooWork from './TattooWork';
 import TattooProcess from './TattooProcess';
@@ -45,13 +46,17 @@ const TattooHome = () => {
             {/* Minimal Navigation */}
             <nav className={`nav-minimal ${scrolled ? 'scrolled' : ''}`}>
                 <div className="nav-minimal-container">
-                    <div className="nav-brand-minimal">RIYA TATTOO</div>
+                    <div className="nav-brand-minimal">
+                        <img src={riyaTattoo} alt="Riya Tattoo" className="brand-logo" />
+                    </div>
 
                     {/* Desktop Menu */}
                     <div className="nav-links-minimal desktop-only">
                         <span onClick={() => scrollToSection('home')}>Studio</span>
 
                         <span onClick={() => scrollToSection('work')}>Work</span>
+                        <span onClick={() => scrollToSection('process')}>Process</span>
+                        <span onClick={() => scrollToSection('faq')}>FAQ</span>
                         <span onClick={() => scrollToSection('contact')}>Contact</span>
                     </div>
 
@@ -68,8 +73,9 @@ const TattooHome = () => {
                 {/* Mobile Menu Overlay */}
                 <div className={`mobile-menu-minimal ${isMenuOpen ? 'active' : ''}`}>
                     <span onClick={() => scrollToSection('home')}>Studio</span>
-
                     <span onClick={() => scrollToSection('work')}>Work</span>
+                    <span onClick={() => scrollToSection('process')}>Process</span>
+                    <span onClick={() => scrollToSection('faq')}>FAQ</span>
                     <span onClick={() => scrollToSection('contact')}>Contact</span>
                     <Link to="/" className="mobile-exit">Exit Site</Link>
                 </div>
@@ -81,7 +87,7 @@ const TattooHome = () => {
 
                 <div id="work" className="section-minimal"><TattooWork /></div>
                 <div id="process" className="section-minimal"><TattooProcess /></div>
-                <TattooFAQ />
+                <div id="faq" className="section-minimal"><TattooFAQ /></div>
                 <div id="contact" className="section-minimal"><TattooContact /></div>
             </div>
 

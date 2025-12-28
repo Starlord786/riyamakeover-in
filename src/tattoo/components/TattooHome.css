@@ -55,7 +55,6 @@ body {
 .t-outline {
     color: transparent;
     -webkit-text-stroke: 1px var(--accent-color);
-    text-stroke: 1px var(--accent-color);
 }
 
 .t-gothic-accent {
@@ -98,6 +97,19 @@ body {
     color: var(--accent-color);
     text-transform: uppercase;
     text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
+}
+
+.brand-logo {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 5px rgba(0, 230, 118, 0.4));
+    transition: transform 0.3s ease;
+}
+
+.brand-logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 8px rgba(0, 230, 118, 0.6));
 }
 
 .nav-links-minimal {
@@ -513,11 +525,13 @@ body {
         margin-bottom: 0.5rem;
     }
 }
+
 /* Hover Overlay for Work Cards */
 .work-card {
     cursor: pointer;
     overflow: hidden;
 }
+
 .work-overlay {
     position: absolute;
     inset: 0;
@@ -529,9 +543,11 @@ body {
     transition: opacity 0.3s ease;
     z-index: 10;
 }
+
 .work-card:hover .work-overlay {
     opacity: 1;
 }
+
 .work-overlay-text {
     color: #fff;
     font-family: var(--font-heading);
@@ -544,6 +560,7 @@ body {
     backdrop-filter: blur(4px);
     transition: transform 0.3s ease;
 }
+
 .work-card:hover .work-overlay-text {
     transform: scale(1.05);
 }

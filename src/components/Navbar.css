@@ -56,14 +56,14 @@
 }
 
 .logo-img {
-    height: 80px;
+    height: 120px;
     width: auto;
     transition: transform 0.3s ease, height 0.3s ease;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
 }
 
 .navbar.scrolled .logo-img {
-    height: 60px;
+    height: 90px;
 }
 
 .navbar-menu {
@@ -71,10 +71,9 @@
     list-style: none;
     text-align: center;
     gap: 3.5rem;
-    /* Wider gap for premium feel */
-    margin-left: auto;
     align-items: center;
-    margin-right: 6rem;
+    justify-content: flex-end;
+    width: 100%;
 }
 
 .navbar-item {
@@ -83,13 +82,11 @@
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: 2px;
-    /* Spaced out caps */
     text-transform: uppercase;
     position: relative;
     transition: color 0.3s ease;
     padding: 5px 0;
     font-family: 'cinzel', sans-serif;
-    /* Clean premium font */
 }
 
 /* Gold Underline Effect on Hover */
@@ -121,7 +118,7 @@
 }
 
 .tattoo-img {
-    height: 180px;
+    height: 60px;
     /* Adjust as needed */
     width: auto;
     object-fit: contain;
@@ -157,11 +154,11 @@
 
 .bar {
     display: block;
-    width: 35px;
-    height: 3px;
+    width: 25px;
+    height: 2px;
     background: #ffffff;
     /* Gold */
-    margin: 6px 0;
+    margin: 4px 0;
     transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
     /* Bouncy effect */
     border-radius: 2px;
@@ -171,7 +168,7 @@
 
 /* Staggered widths for "Epic" look */
 .bar:nth-child(2) {
-    width: 25px;
+    width: 18px;
     /* Shorter middle bar */
     margin-left: auto;
     /* Align right effect if in flex column */
@@ -183,19 +180,19 @@
 
 /* Open State Animation */
 .bar.open:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 6px);
-    width: 35px;
+    transform: rotate(45deg) translate(5px, 5px);
+    width: 25px;
 }
 
 .bar.open:nth-child(2) {
     opacity: 0;
     transform: translateX(-20px);
-    width: 35px;
+    width: 25px;
 }
 
 .bar.open:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -5px);
-    width: 35px;
+    transform: rotate(-45deg) translate(5px, -5px);
+    width: 25px;
 }
 
 @media screen and (max-width: 960px) {

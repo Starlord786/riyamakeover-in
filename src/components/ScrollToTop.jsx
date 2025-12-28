@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ArrowUp } from 'lucide-react';
+import './ScrollToTop.css';
 
 const ScrollToTop = () => {
     const { pathname, hash } = useLocation();
     const [isVisible, setIsVisible] = useState(false);
+    const [scrollProgress, setScrollProgress] = useState(0);
 
     // Handle scroll restoration on route change
     useEffect(() => {
@@ -21,19 +23,27 @@ const ScrollToTop = () => {
         }
     }, [pathname, hash]);
 
-    // Handle button visibility
+    // Handle button visibility and progress
     useEffect(() => {
-        const toggleVisibility = () => {
+        const handleScroll = () => {
+            // Calculate visibility
             const isTattoo = pathname.toLowerCase().startsWith('/tattoo');
             if (window.pageYOffset > 300 && !isTattoo) {
                 setIsVisible(true);
             } else {
                 setIsVisible(false);
             }
+
+            // Calculate progress
+            const totalScroll = document.documentElement.scrollTop;
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scroll = `${totalScroll / windowHeight}`;
+
+            setScrollProgress(Number(scroll));
         };
 
-        window.addEventListener('scroll', toggleVisibility);
-        return () => window.removeEventListener('scroll', toggleVisibility);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, [pathname]);
 
     const scrollToTop = () => {
@@ -43,43 +53,48 @@ const ScrollToTop = () => {
         });
     };
 
+    // SVG Circle setup
+    const radius = 23;
+    const circumference = 2 * Math.PI * radius;
+    const strokeDashoffset = circumference - scrollProgress * circumference;
+
     return (
         <>
             {isVisible && (
                 <div
+                    className="scroll-to-top-container"
                     onClick={scrollToTop}
-                    style={{
-                        position: 'fixed',
-                        bottom: '40px',
-                        right: '40px',
-                        backgroundColor: 'transparent',
-                        border: '2px solid #d4af37',
-                        color: '#d4af37',
-                        width: '50px',
-                        height: '50px',
-                        borderRadius: '50%',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        cursor: 'pointer',
-                        zIndex: 1000,
-                        transition: 'all 0.3s ease',
-                        boxShadow: '0 4px 15px rgba(212, 175, 55, 0.3)',
-                        backdropFilter: 'blur(5px)'
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = '#d4af37';
-                        e.currentTarget.style.color = '#000';
-                        e.currentTarget.style.transform = 'translateY(-5px)';
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.color = '#d4af37';
-                        e.currentTarget.style.transform = 'translateY(0)';
-                    }}
                     aria-label="Scroll to top"
                 >
-                    <ArrowUp size={24} strokeWidth={2.5} />
+                    <svg
+                        className="progress-ring"
+                        width="50"
+                        height="50"
+                    >
+                        <circle
+                            className="progress-ring__circle-bg"
+                            strokeWidth="2"
+                            fill="transparent"
+                            r={radius}
+                            cx="25"
+                            cy="25"
+                        />
+                        <circle
+                            className="progress-ring__circle"
+                            strokeWidth="2"
+                            fill="transparent"
+                            r={radius}
+                            cx="25"
+                            cy="25"
+                            style={{
+                                strokeDasharray: `${circumference} ${circumference}`,
+                                strokeDashoffset: strokeDashoffset
+                            }}
+                        />
+                    </svg>
+                    <div className="scroll-to-top-icon">
+                        <ArrowUp size={24} strokeWidth={2.5} />
+                    </div>
                 </div>
             )}
         </>

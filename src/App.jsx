@@ -20,7 +20,6 @@ import Privacy from './pages/Privacy'
 import Licensing from './pages/Licensing'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import AdminLogin from './pages/AdminLogin'
 import ScrollToTop from './components/ScrollToTop'
 import { useNetworkStatus } from './hooks/useNetworkStatus'
 
@@ -82,7 +81,6 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/admin_login" element={<AdminLogin />} />
         <Route path="/tattoo/*" element={<TattooApp />} />
       </Routes>
       {shouldShowLayout && <Footer />}

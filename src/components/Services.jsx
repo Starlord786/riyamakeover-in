@@ -20,35 +20,9 @@ const Services = () => {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
-    const handleServiceClick = (e, index) => {
-        // If clicking the arrow, let it navigate immediately (by stopping propagation of this logic if needed, 
-        // but here we just check if it was meant to be a simple toggle)
 
-        // Check if the click target or its parent is the arrow icon
-        const isArrow = e.target.closest('.arrow-icon');
 
-        if (isArrow) {
-            // Allow navigation
-            return;
-        }
 
-        // If not active, prevent nav and expand
-        if (activeIndex !== index) {
-            e.preventDefault();
-            setActiveIndex(index);
-        }
-        // If active, allow default Link behavior (navigation)
-    };
-
-    const handleBookNow = (e) => {
-        e.preventDefault();
-        const isLoggedIn = localStorage.getItem('authToken');
-        if (isLoggedIn) {
-            navigate('/contact');
-        } else {
-            navigate('/login');
-        }
-    };
 
     return (
         <section className="services-spotlight-section" id="services">
@@ -82,20 +56,15 @@ const Services = () => {
                             className="service-wrapper"
                             onMouseEnter={() => !isMobile && setActiveIndex(index)}
                         >
-                            <Link
-                                to={`/service/${service.slug}`}
+                            <div
                                 className={`spotlight-item ${activeIndex === index ? 'active' : ''}`}
-                                onClick={(e) => handleServiceClick(e, index)}
+                                onClick={() => setActiveIndex(index)}
+                                style={{ cursor: 'pointer' }}
                             >
                                 <span className="service-number">0{index + 1}</span>
                                 <h3 className="service-name">{service.title}</h3>
-                                <motion.div
-                                    className="arrow-icon"
-                                    animate={{ x: activeIndex === index ? 10 : 0, opacity: activeIndex === index ? 1 : 0 }}
-                                >
-                                    <ArrowRight size={32} color="#d4af37" />
-                                </motion.div>
-                            </Link>
+
+                            </div>
 
                             <AnimatePresence>
                                 {activeIndex === index && (
@@ -109,8 +78,8 @@ const Services = () => {
                                         <div className="details-content">
                                             <h4 className="detail-price-inline">{service.price}</h4>
                                             <p className="detail-desc-inline">{service.description}</p>
-                                            <button onClick={handleBookNow} className="book-now-inline-btn">
-                                                BOOK NOW <ArrowRight size={20} style={{ marginLeft: 10 }} />
+                                            <button onClick={() => navigate(`/service/${service.slug}`)} className="book-now-inline-btn">
+                                                VIEW MORE <ArrowRight size={20} style={{ marginLeft: 10 }} />
                                             </button>
                                         </div>
                                     </motion.div>

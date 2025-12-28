@@ -180,12 +180,13 @@
 
 .book-now-inline-btn {
     background: transparent;
+    font-weight: bold;
     border: 1px solid #d4af37;
     color: #d4af37;
     padding: 10px 25px;
-    font-family: 'Agency FB', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: 2px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -194,8 +195,9 @@
 }
 
 .book-now-inline-btn:hover {
-    background: #d4af37;
+    background: #ffffff;
     color: #000;
+    letter-spacing: 3px;
 }
 
 /* --- Responsive --- */
@@ -225,7 +227,7 @@
     .spotlight-content {
         display: flex;
         flex-direction: column;
-        padding: 2rem;
+        padding: 1.5rem;
         gap: 2rem;
         width: 100%;
     }
@@ -250,7 +252,9 @@
 
     .spotlight-item {
         padding: 1.5rem 0;
-        justify-content: space-between;
+        justify-content: flex-start;
+        /* Align left */
+        gap: 1.5rem;
     }
 
     .service-name {
