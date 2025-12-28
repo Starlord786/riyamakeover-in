@@ -227,7 +227,7 @@
     .spotlight-content {
         display: flex;
         flex-direction: column;
-        padding: 2rem;
+        padding: 1.5rem;
         gap: 2rem;
         width: 100%;
     }
@@ -252,7 +252,9 @@
 
     .spotlight-item {
         padding: 1.5rem 0;
-        justify-content: space-between;
+        justify-content: flex-start;
+        /* Align left */
+        gap: 1.5rem;
     }
 
     .service-name {

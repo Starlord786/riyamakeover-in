@@ -5,42 +5,42 @@ import './Gallery.css';
 const galleryImages = [
     {
         id: 1,
-        url: 'https://images.unsplash.com/photo-1487412947132-28c53af9fbe3?q=80&w=800&auto=format&fit=crop',
+        url: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=800&auto=format&fit=crop', // Woman portrait
         title: 'BRIDAL RADIANCE',
         category: 'WEDDING',
-        span: 'col-2' // Wide item
+        span: 'col-2'
     },
     {
         id: 2,
-        url: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=800&auto=format&fit=crop',
+        url: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=800&auto=format&fit=crop', // Makeup close up
         title: 'EVENING GLAM',
         category: 'PARTY',
-        span: 'row-2' // Tall item
+        span: 'row-2'
     },
     {
         id: 3,
-        url: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=800&auto=format&fit=crop',
+        url: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800&auto=format&fit=crop', // Eye makeup
         title: 'EDITORIAL ARTS',
         category: 'FASHION',
         span: ''
     },
     {
         id: 4,
-        url: 'https://images.unsplash.com/photo-1457972729786-0411a3b2b626?q=80&w=800&auto=format&fit=crop',
+        url: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=800&auto=format&fit=crop', // Makeup products (Safe)
         title: 'ELEGANT STYLES',
         category: 'HAIR',
         span: ''
     },
     {
         id: 5,
-        url: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800&auto=format&fit=crop',
+        url: 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=800&auto=format&fit=crop', // Indian Bride
         title: 'ENGAGEMENT GLOW',
         category: 'EVENTS',
         span: ''
     },
     {
         id: 6,
-        url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop',
+        url: 'https://images.unsplash.com/photo-1457972729786-0411a3b2b626?q=80&w=800&auto=format&fit=crop', // Roses/Soft
         title: 'RECEPTION QUEEN',
         category: 'BRIDAL',
         span: 'col-2'
@@ -94,12 +94,19 @@ const Gallery = () => {
                         key={img.id}
                         className={`gallery-item-premium ${img.span}`}
                         initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6, delay: index * 0.1 }}
-                        viewport={{ margin: "-100px" }}
                     >
                         <div className="gallery-img-container">
-                            <img src={img.url} alt={img.title} className="gallery-img-p" />
+                            <img
+                                src={img.url}
+                                alt={img.title}
+                                className="gallery-img-p"
+                                onError={(e) => {
+                                    e.target.style.display = 'none';
+                                    e.target.parentElement.style.backgroundColor = '#1a1a1a'; // Fallback bg
+                                }}
+                            />
                             <div className="gallery-overlay-p">
                                 <span className="gallery-cat">{img.category}</span>
                                 <h3 className="gallery-item-title">{img.title}</h3>
@@ -109,9 +116,7 @@ const Gallery = () => {
                 ))}
             </div>
 
-            <div className="gallery-footer-p">
-                <button className="view-all-btn-p">VIEW FULL PORTFOLIO</button>
-            </div>
+
         </section>
     );
 };

@@ -3,6 +3,7 @@ import './TattooHome.css';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import TattooHero from './TattooHero';
+import riyaTattoo from '../../assets/Riya_Tattoo.png';
 
 import TattooWork from './TattooWork';
 import TattooProcess from './TattooProcess';
@@ -45,7 +46,9 @@ const TattooHome = () => {
             {/* Minimal Navigation */}
             <nav className={`nav-minimal ${scrolled ? 'scrolled' : ''}`}>
                 <div className="nav-minimal-container">
-                    <div className="nav-brand-minimal">RIYA TATTOO</div>
+                    <div className="nav-brand-minimal">
+                        <img src={riyaTattoo} alt="Riya Tattoo" className="brand-logo" />
+                    </div>
 
                     {/* Desktop Menu */}
                     <div className="nav-links-minimal desktop-only">

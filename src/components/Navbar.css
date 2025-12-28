@@ -71,10 +71,9 @@
     list-style: none;
     text-align: center;
     gap: 3.5rem;
-    /* Wider gap for premium feel */
-    margin-left: auto;
     align-items: center;
-    margin-right: 6rem;
+    justify-content: flex-end;
+    width: 100%;
 }
 
 .navbar-item {
@@ -83,13 +82,11 @@
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: 2px;
-    /* Spaced out caps */
     text-transform: uppercase;
     position: relative;
     transition: color 0.3s ease;
     padding: 5px 0;
     font-family: 'cinzel', sans-serif;
-    /* Clean premium font */
 }
 
 /* Gold Underline Effect on Hover */
@@ -121,7 +118,7 @@
 }
 
 .tattoo-img {
-    height: 180px;
+    height: 60px;
     /* Adjust as needed */
     width: auto;
     object-fit: contain;

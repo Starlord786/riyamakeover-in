@@ -99,6 +99,19 @@ body {
     text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
 }
 
+.brand-logo {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 5px rgba(0, 230, 118, 0.4));
+    transition: transform 0.3s ease;
+}
+
+.brand-logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 8px rgba(0, 230, 118, 0.6));
+}
+
 .nav-links-minimal {
     display: flex;
     gap: 40px;
