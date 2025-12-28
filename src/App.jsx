@@ -20,6 +20,7 @@ import Privacy from './pages/Privacy'
 import Licensing from './pages/Licensing'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import AdminLogin from './pages/AdminLogin'
 import ScrollToTop from './components/ScrollToTop'
 import { useNetworkStatus } from './hooks/useNetworkStatus'
 
@@ -50,18 +51,21 @@ function App() {
 
   // Check if we are in the tattoo section (case-insensitive)
   const isTattooRoute = location.pathname.toLowerCase().startsWith('/tattoo');
+  const isAdminLogin = location.pathname === '/admin_login';
+
+  const shouldShowLayout = !isTattooRoute && !isAdminLogin;
 
   return (
     <>
       <ScrollToTop />
       <OfflineNotification show={showNotification} countdown={countdown} />
 
-      {!isTattooRoute && (
+      {shouldShowLayout && (
         <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
       )}
 
-      {/* Show Navbar on all pages except the tattoo section */}
-      {!isTattooRoute && <Navbar />}
+      {/* Show Navbar on all pages except the tattoo section and admin login */}
+      {shouldShowLayout && <Navbar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -78,9 +82,10 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/admin_login" element={<AdminLogin />} />
         <Route path="/tattoo/*" element={<TattooApp />} />
       </Routes>
-      {!isTattooRoute && <Footer />}
+      {shouldShowLayout && <Footer />}
     </>
   )
 }

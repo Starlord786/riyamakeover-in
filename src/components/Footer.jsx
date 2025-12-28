@@ -53,8 +53,8 @@ const Footer = () => {
                         {/* Resources Column */}
                         <div className="footer-column">
                             <h3 className="column-heading">Resources</h3>
-                            <a href="/login" className="footer-link">Login</a>
-                            <a href="/register" className="footer-link">Register</a>
+                            <Link to="/login" className="footer-link">Login</Link>
+                            <Link to="/admin_login" className="footer-link">Admin Login</Link>
                             <a href="/newsletter" className="footer-link">Newsletter</a>
                             <a href="/faq" className="footer-link">FAQ</a>
                         </div>
@@ -75,7 +75,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer >
     );
 };
 
