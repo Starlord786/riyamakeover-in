@@ -22,6 +22,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import ScrollToTop from './components/ScrollToTop'
 import { useNetworkStatus } from './hooks/useNetworkStatus'
+import AdminLogin from './pages/AdminLogin'
 
 
 import TattooApp from './tattoo/TattooApp'
@@ -50,7 +51,7 @@ function App() {
 
   // Check if we are in the tattoo section (case-insensitive)
   const isTattooRoute = location.pathname.toLowerCase().startsWith('/tattoo');
-  const isAdminLogin = location.pathname === '/admin_login';
+  const isAdminLogin = location.pathname === '/AdminLogin';
 
   const shouldShowLayout = !isTattooRoute && !isAdminLogin;
 
@@ -81,6 +82,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/AdminLogin" element={<AdminLogin />} />
         <Route path="/tattoo/*" element={<TattooApp />} />
       </Routes>
       {shouldShowLayout && <Footer />}

@@ -1,277 +1,461 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-.admin-login-wrapper {
-    display: flex;
+.admin-login-container {
     min-height: 100vh;
-    background: #ffffff;
-    font-family: 'Lato', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    background: radial-gradient(circle at center, #ffffff 0%, #f4f4f5 100%);
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    /* Prevent scrollbars from moving dragon */
+}
+
+/* Floating Beauty Icons Background */
+.beauty-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
     overflow: hidden;
 }
 
-/* LEFT VISUAL SIDE - EDITORIAL STYLE */
-.admin-visual-side {
-    flex: 1;
-    position: relative;
-    /* Use a high quality image, ensure it covers well */
-    background-image: url('../assets/service_bridal.png');
-    background-size: cover;
-    background-position: center top;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-}
-
-/* Elegant dark overlay for text contrast, but keeping image visible */
-.visual-overlay {
+.beauty-icon {
     position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.2);
+    color: #D4AF37;
+    opacity: 0.12;
+    /* Low opacity as requested */
 }
 
-.visual-content {
+/* Individual Icon Positions & Dynamic Animations */
+.icon-1 {
+    top: 10%;
+    left: 8%;
+    animation: float-diagonal 18s ease-in-out infinite alternate;
+}
+
+.icon-2 {
+    top: 15%;
+    right: 12%;
+    animation: float-vertical 15s ease-in-out infinite;
+}
+
+.icon-3 {
+    bottom: 25%;
+    left: 15%;
+    animation: float-circular 25s linear infinite;
+}
+
+.icon-4 {
+    top: 8%;
+    left: 45%;
+    animation: float-vertical 20s ease-in-out infinite reverse;
+}
+
+.icon-5 {
+    bottom: 10%;
+    right: 8%;
+    animation: float-diagonal 22s ease-in-out infinite alternate-reverse;
+}
+
+.icon-6 {
+    top: 55%;
+    left: 2%;
+    animation: float-horizontal 17s ease-in-out infinite alternate;
+}
+
+.icon-7 {
+    bottom: 35%;
+    right: 25%;
+    animation: float-circular 30s linear infinite reverse;
+}
+
+.icon-8 {
+    top: 35%;
+    right: 5%;
+    animation: float-vertical 19s ease-in-out infinite;
+}
+
+.icon-9 {
+    top: 5%;
+    right: 40%;
+    animation: float-horizontal 24s ease-in-out infinite alternate;
+}
+
+.icon-10 {
+    bottom: 5%;
+    left: 35%;
+    animation: float-vertical 16s ease-in-out infinite alternate;
+}
+
+.icon-11 {
+    top: 45%;
+    left: 25%;
+    animation: float-circular 28s linear infinite;
+}
+
+.icon-12 {
+    bottom: 50%;
+    right: 40%;
+    animation: float-diagonal 20s ease-in-out infinite alternate;
+}
+
+.icon-13 {
+    top: 80%;
+    left: 60%;
+    animation: float-horizontal 21s ease-in-out infinite alternate-reverse;
+}
+
+.icon-14 {
+    top: 20%;
+    left: 75%;
+    animation: float-vertical 18s ease-in-out infinite;
+}
+
+.icon-15 {
+    bottom: 15%;
+    right: 55%;
+    animation: float-diagonal 23s ease-in-out infinite alternate;
+}
+
+/* Animation Keyframes */
+@keyframes float-vertical {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-40px) rotate(10deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+@keyframes float-horizontal {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateX(50px) rotate(-15deg);
+    }
+
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+@keyframes float-diagonal {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(30px, -30px) rotate(20deg);
+    }
+}
+
+@keyframes float-circular {
+    0% {
+        transform: rotate(0deg) translate(20px) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg) translate(20px) rotate(-360deg);
+    }
+}
+
+.admin-login-card {
     position: relative;
-    z-index: 5;
-    text-align: center;
-    color: white;
-    backdrop-filter: blur(2px);
-    padding: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.visual-label {
-    display: block;
-    text-transform: uppercase;
-    letter-spacing: 0.4rem;
-    font-size: 0.75rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.visual-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    line-height: 1.1;
-    font-weight: 400;
-    font-style: italic;
-    color: #fff;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-.visual-title span {
-    font-style: normal;
-    font-weight: 700;
-    display: block;
-    margin-top: 0.5rem;
-}
-
-/* RIGHT FORM SIDE - CLEAN & MINIMAL */
-.admin-form-side {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 60px;
-    background: #ffffff;
-    position: relative;
-}
-
-.form-container {
+    z-index: 10;
+    /* Above the dragon */
+    background: rgba(255, 255, 255, 0.95);
+    /* Slight backdrop blur for readability */
+    backdrop-filter: blur(10px);
     width: 100%;
     max-width: 400px;
-    /* Tighter width for elegance */
-    padding: 0 20px;
+    padding: 48px 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
-.form-header {
+.admin-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 40px;
 }
 
-.form-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
+.admin-logo-wrapper {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    /* Optional: sleek gold border or shadow if desired */
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+    background-color: #f8f8f8;
+    /* fallback bg */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.admin-header h1 {
+    font-size: 26px;
+    font-weight: 600;
     color: #1a1a1a;
-    margin-bottom: 0.5rem;
+    margin: 0 0 10px;
+    letter-spacing: -0.5px;
 }
 
-.form-header p {
+.admin-header p {
+    font-size: 14px;
     color: #888;
-    font-size: 0.9rem;
-    letter-spacing: 0.05rem;
+    margin: 0;
 }
 
-/* MINIMALIST INPUTS */
-.epic-form {
+.admin-form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 24px;
 }
 
-.epic-input-group {
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-with-icon {
     position: relative;
 }
 
-.epic-input-group input {
-    width: 100%;
-    padding: 12px 0;
-    font-size: 1rem;
-    color: #1a1a1a;
-    border: none;
-    border-bottom: 1px solid #e0e0e0;
-    background: transparent;
-    outline: none;
-    transition: all 0.3s ease;
-    font-family: 'Lato', sans-serif;
-}
-
-.epic-input-group input:focus {
-    border-bottom-color: #d4af37;
-}
-
-.epic-input-group label {
+.input-icon {
     position: absolute;
-    left: 0;
-    top: 12px;
-    color: #999;
-    font-size: 0.9rem;
-    pointer-events: none;
-    transition: 0.3s ease all;
-    text-transform: uppercase;
-    letter-spacing: 0.05rem;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #D4AF37;
+    /* Gold Icon */
+    opacity: 0.8;
 }
 
-.epic-input-group input:focus~label,
-.epic-input-group input:not(:placeholder-shown)~label {
-    top: -10px;
-    font-size: 0.65rem;
-    color: #d4af37;
-    font-weight: 700;
-}
-
-.epic-input-group::after {
-    display: none;
-    /* Remove the old glow line */
-}
-
-/* UTILS - Checkbox & Forgot */
-.form-utils {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8rem;
-    margin-top: -0.5rem;
-}
-
-.epic-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    color: #666;
-    user-select: none;
-}
-
-.epic-checkbox input {
-    display: none;
-}
-
-/* Custom Checkbox */
-.checkmark {
-    width: 16px;
-    height: 16px;
-    border: 1px solid #ccc;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.input-with-icon input {
+    width: 100%;
+    padding: 14px 14px 14px 44px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #1a1a1a;
     transition: all 0.2s;
-    border-radius: 2px;
+    background: #fafafa;
+    font-family: 'Inter', sans-serif;
 }
 
-.checkmark::after {
-    content: '';
-    display: block;
-    width: 8px;
-    height: 4px;
-    border-left: 2px solid white;
-    border-bottom: 2px solid white;
-    transform: rotate(-45deg) translate(1px, -1px);
-    opacity: 0;
+.input-with-icon input:focus {
+    outline: none;
+    border-color: #D4AF37;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
 }
 
-.epic-checkbox input:checked~.checkmark {
-    background: #d4af37;
-    border-color: #d4af37;
+.input-with-icon input::placeholder {
+    color: #ccc;
 }
 
-.epic-checkbox input:checked~.checkmark::after {
-    opacity: 1;
-}
-
-
-/* BUTTON */
-.epic-submit-btn {
-    width: 100%;
-    background: #1a1a1a;
-    color: #fff;
-    border: none;
-    padding: 1rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-    letter-spacing: 0.2rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.form-actions {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin-top: 1rem;
-    clip-path: none;
-    /* Remove the angled cut for a cleaner look */
-    border-radius: 0;
-    /* Sharp corners */
+    justify-content: flex-end;
+    /* right align the forgot password link since check box is gone */
+    font-size: 13px;
+    margin-top: -8px;
 }
 
-.epic-submit-btn:hover {
-    background: #d4af37;
-    transform: translateY(-2px);
+.forgot-password-link {
+    color: #888;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
 }
 
-/* EXIT BUTTON */
-.exit-container {
-    margin-top: 3rem;
+.forgot-password-link:hover {
+    color: #D4AF37;
+    text-decoration: none;
+}
+
+.login-btn {
+    background-color: #D4AF37;
+    /* Real Gold */
+    background: linear-gradient(135deg, #D4AF37 0%, #C5A028 100%);
+    color: #ffffff;
+    font-weight: 600;
+    padding: 16px;
+    border-radius: 12px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 10px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
+}
+
+.login-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.35);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.admin-footer {
+    margin-top: 40px;
     text-align: center;
-    width: 100%;
 }
 
-.epic-exit-btn {
+.back-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    color: #999;
     text-decoration: none;
-    color: #b0b0b0;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    transition: 0.3s;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #D4AF37;
+}
+
+/* Forgot Password Loader Styles */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    min-height: 250px;
+}
+
+.simple-loader {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(212, 175, 55, 0.2);
+    border-top: 5px solid #D4AF37;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Error Container Styles */
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 0;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.error-icon-wrapper {
+    margin-bottom: 20px;
+}
+
+.error-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #c3d334;
+    margin: 0 0 12px;
+}
+
+.error-message {
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 24px;
+    line-height: 1.5;
+}
+
+.back-to-login-btn {
+    background-color: transparent;
+    border: 1px solid #D4AF37;
+    color: #D4AF37;
     padding: 10px 20px;
-    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
 }
 
-.epic-exit-btn:hover {
-    color: #1a1a1a;
-    border-color: #e0e0e0;
+.back-to-login-btn:hover {
+    background-color: #D4AF37;
+    color: #fff;
 }
 
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-    .admin-visual-side {
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.forgot-password-link {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .beauty-bg-container {
         display: none;
     }
 }

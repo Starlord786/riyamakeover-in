@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Home, ArrowRight, Lock } from 'lucide-react';
+import { Lock, Mail, ArrowLeft, Scissors, Palette, Sparkles, Feather, Gem, Brush, Heart, Star, Fingerprint, AlertTriangle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import './AdminLogin.css';
 
 const AdminLogin = () => {
     const [formData, setFormData] = useState({
         email: '',
-        password: '',
-        rememberMe: false
+        password: ''
     });
+    const [viewState, setViewState] = useState('login'); // 'login', 'loading', 'error'
 
     const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
+        const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
-            [name]: type === 'checkbox' ? checked : value
+            [name]: value
         }));
     };
 
@@ -25,87 +25,135 @@ const AdminLogin = () => {
         // Add administration login logic here
     };
 
+    const handleForgotPassword = (e) => {
+        e.preventDefault();
+        setViewState('loading');
+
+        setTimeout(() => {
+            setViewState('error');
+        }, 2000);
+    };
+
+    const handleBackToLogin = () => {
+        setViewState('login');
+    };
+
     return (
-        <div className="admin-login-wrapper">
-            {/* Visual Side */}
-            <div className="admin-visual-side">
-                <div className="visual-overlay"></div>
-                <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 1.2 }}
-                    className="visual-content"
-                >
-                    <span className="visual-label">Restricted Access</span>
-                    <h1 className="visual-title">Administration <br /><span>Panel</span></h1>
-                </motion.div>
+        <div className="admin-login-container">
+            <div className="beauty-bg-container">
+                <Scissors className="beauty-icon icon-1" size={60} />
+                <Palette className="beauty-icon icon-2" size={70} />
+                <Sparkles className="beauty-icon icon-3" size={45} />
+                <Feather className="beauty-icon icon-4" size={55} />
+                <Gem className="beauty-icon icon-5" size={65} />
+                <Scissors className="beauty-icon icon-6" size={50} />
+                <Sparkles className="beauty-icon icon-7" size={48} />
+                <Palette className="beauty-icon icon-8" size={58} />
+
+                <Brush className="beauty-icon icon-9" size={75} />
+                <Heart className="beauty-icon icon-10" size={50} />
+                <Star className="beauty-icon icon-11" size={45} />
+                <Brush className="beauty-icon icon-12" size={60} />
+                <Gem className="beauty-icon icon-13" size={55} />
+                <Feather className="beauty-icon icon-14" size={62} />
+                <Heart className="beauty-icon icon-15" size={52} />
             </div>
+            <motion.div
+                className="admin-login-card"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+                <div className="admin-header">
+                    <motion.div
+                        className="admin-logo-wrapper"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        <img src="/dragon-animated.svg" alt="Admin Logo" className="admin-logo-img" />
+                    </motion.div>
+                    <h1>Admin Portal</h1>
+                </div>
 
-            {/* Form Side */}
-            <div className="admin-form-side">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.8 }}
-                    className="form-container"
-                >
-                    <header className="form-header">
-                        <h2>Admin Portal</h2>
-                        <p>Secure authentication required.</p>
-                    </header>
-
-                    <form onSubmit={handleSubmit} className="epic-form">
-                        <div className="epic-input-group">
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Admin Email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
-                            <label>Admin Email</label>
-                        </div>
-
-                        <div className="epic-input-group">
-                            <input
-                                type="password"
-                                name="password"
-                                placeholder="Password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                required
-                            />
-                            <label>Password</label>
-                        </div>
-
-                        <div className="form-utils">
-                            <label className="epic-checkbox">
+                {viewState === 'login' && (
+                    <form onSubmit={handleSubmit} className="admin-form">
+                        <div className="form-group">
+                            <label htmlFor="email">Email Address</label>
+                            <div className="input-with-icon">
+                                <Mail size={18} className="input-icon" />
                                 <input
-                                    type="checkbox"
-                                    name="rememberMe"
-                                    checked={formData.rememberMe}
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="admin@domain.com"
+                                    value={formData.email}
                                     onChange={handleChange}
+                                    required
                                 />
-                                <span className="checkmark"></span>
-                                Remember Session
-                            </label>
+                            </div>
                         </div>
 
-                        <button type="submit" className="epic-submit-btn">
-                            <span>Access Panel</span>
-                            <ArrowRight size={18} />
-                        </button>
-                    </form>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <div className="input-with-icon">
+                                <Lock size={18} className="input-icon" />
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="••••••••"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        </div>
 
-                    <div className="exit-container">
-                        <Link to="/" className="epic-exit-btn">
-                            <Home size={18} />
-                            <span>Return to Site</span>
-                        </Link>
+                        <div className="form-actions">
+                            <button type="button" onClick={handleForgotPassword} className="forgot-password-link">Forgot password?</button>
+                        </div>
+
+                        <motion.button
+                            type="submit"
+                            className="login-btn"
+                            whileHover={{ scale: 1.01 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            Sign In
+                        </motion.button>
+                    </form>
+                )}
+
+                {viewState === 'loading' && (
+                    <div className="loader-container">
+                        <div className="simple-loader"></div>
                     </div>
-                </motion.div>
-            </div>
+                )}
+
+                {viewState === 'error' && (
+                    <div className="error-container">
+                        <motion.div
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            className="error-icon-wrapper"
+                        >
+                            <AlertTriangle size={60} color="#f2f528ff" />
+                        </motion.div>
+                        <h2 className="error-title">We're Sorry</h2>
+                        <p className="error-message">We can't recognize your device. Please contact the webmaster.</p>
+                        <button onClick={handleBackToLogin} className="back-to-login-btn">
+                            Back to Login
+                        </button>
+                    </div>
+                )}
+
+                <div className="admin-footer">
+                    <Link to="/" className="back-link">
+                        <ArrowLeft size={16} />
+                        Back to Website
+                    </Link>
+                </div>
+            </motion.div>
         </div>
     );
 };

@@ -59,7 +59,7 @@ const Footer = () => {
                         <div className="footer-column">
                             <h3 className="column-heading">Resources</h3>
                             <a href="/login" className="footer-link">Login</a>
-                            <a href="/register" className="footer-link">Register</a>
+                            <Link to="/AdminLogin" className="footer-link">Admin login</Link>
                             <a href="/newsletter" className="footer-link">Newsletter</a>
                             <Link to="/#faq" className="footer-link">FAQ</Link>
                         </div>
