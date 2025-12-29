@@ -9,6 +9,7 @@ import TattooWork from './TattooWork';
 import TattooProcess from './TattooProcess';
 import TattooFAQ from './TattooFAQ';
 import TattooContact from './TattooContact';
+import Footer from './Footer';
 import { Menu, X } from 'lucide-react';
 
 const TattooHome = () => {
@@ -91,12 +92,7 @@ const TattooHome = () => {
                 <div id="contact" className="section-minimal"><TattooContact /></div>
             </div>
 
-            <footer className="footer-minimal">
-                <div className="footer-cont">
-                    <h2>RIYA TATTOO</h2>
-                    <p>&copy; 2024 Tattoo Studio. All rights reserved.</p>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 };
