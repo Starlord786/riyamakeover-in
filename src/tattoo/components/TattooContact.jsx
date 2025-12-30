@@ -1,57 +1,83 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import './TattooContact.css';
 
 const TattooContact = () => {
     return (
-        <section id="contact" className="contact-footer-section section-wrapper" style={{ borderTop: '1px solid rgba(0, 230, 118, 0.1)', paddingTop: '100px' }}>
-            <div className="contact-layout" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '4rem', maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-                <div className="contact-intro">
-                    <h2 className="t-heading-lg" style={{ lineHeight: 0.9, fontFamily: 'var(--font-heading)', fontSize: '3.5rem', color: '#fff' }}>
-                        READY TO <br /> <span className="t-outline" style={{ color: 'transparent', WebkitTextStroke: '1px var(--accent-color)' }}>BLEED?</span>
-                    </h2>
-                    <p className="contact-quote" style={{ marginTop: '2rem', color: '#888', fontStyle: 'italic', borderLeft: '3px solid var(--accent-color)', paddingLeft: '1rem' }}>
-                        &quot;Pain is temporary. Glory is forever. Let&apos;s make art.&quot;
-                    </p>
+        <section id="contact" className="tattoo-contact-section">
+            <div className="contact-container">
+                {/* Vertical Divider */}
+                <div className="contact-divider"></div>
 
-                    <div style={{ marginTop: '4rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <p style={{ color: 'var(--accent-color)', letterSpacing: '0.1em', fontWeight: 'bold' }}>BOOKING@INKSOUL.COM</p>
-                        <p style={{ color: '#aaa' }}>+91 98765 43210</p>
-                        <p style={{ color: '#aaa' }}>123, DARK ALLEY, UNDERGROUND CITY</p>
-                    </div>
+                {/* Left Side: Info & Branding */}
+                <div className="contact-left">
+                    <motion.h2
+                        className="contact-heading"
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        READY TO <br />
+                        <span className="highlight-green">BLEED?</span>
+                    </motion.h2>
+
+                    <motion.div
+                        className="quote-box"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.3, duration: 0.6 }}
+                    >
+                        &quot;Pain is temporary. Glory is forever. Let&apos;s make art.&quot;
+                    </motion.div>
+
+                    <motion.div
+                        className="contact-info-block"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5, duration: 0.6 }}
+                    >
+                        <a href="mailto:booking@inksoul.com" className="email-link">BOOKING@INKSOUL.COM</a>
+                        <p>+91 98765 43210</p>
+                        <p>123, DARK ALLEY, UNDERGROUND CITY</p>
+                    </motion.div>
+
+                    {/* Placeholder for Skull Graphic - can be added as background or img later */}
+                    {/* <div className="skull-art"></div> */}
                 </div>
 
-                <form className="minimal-form" onSubmit={(e) => e.preventDefault()}>
-                    <div style={{ marginBottom: '2rem' }}>
-                        <input type="text" placeholder="NAME" style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: '1px solid #333', padding: '1rem 0', color: '#fff', fontFamily: 'var(--font-heading)', fontSize: '1.5rem', outline: 'none', transition: 'border-color 0.3s' }}
-                            onFocus={(e) => e.target.style.borderBottom = '1px solid var(--accent-color)'}
-                            onBlur={(e) => e.target.style.borderBottom = '1px solid #333'}
-                        />
-                    </div>
-                    <div style={{ marginBottom: '2rem' }}>
-                        <input type="email" placeholder="EMAIL" style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: '1px solid #333', padding: '1rem 0', color: '#fff', fontFamily: 'var(--font-heading)', fontSize: '1.5rem', outline: 'none', transition: 'border-color 0.3s' }}
-                            onFocus={(e) => e.target.style.borderBottom = '1px solid var(--accent-color)'}
-                            onBlur={(e) => e.target.style.borderBottom = '1px solid #333'}
-                        />
-                    </div>
-                    <div style={{ marginBottom: '3rem' }}>
-                        <textarea rows="3" placeholder="DESCRIBE YOUR IDEA" style={{ width: '100%', background: 'transparent', border: 'none', borderBottom: '1px solid #333', padding: '1rem 0', color: '#fff', fontFamily: 'var(--font-heading)', fontSize: '1.5rem', outline: 'none', resize: 'none', transition: 'border-color 0.3s' }}
-                            onFocus={(e) => e.target.style.borderBottom = '1px solid var(--accent-color)'}
-                            onBlur={(e) => e.target.style.borderBottom = '1px solid #333'}
-                        ></textarea>
-                    </div>
+                {/* Right Side: Form */}
+                <div className="contact-right">
+                    <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+                        <div className="form-header">
+                            <span className="form-title">Submit Request</span>
+                        </div>
 
-                    <div style={{ marginTop: '3rem' }}>
+                        <div className="input-group">
+                            <label className="input-label">Name</label>
+                            <input type="text" className="contact-input" />
+                        </div>
+
+                        <div className="input-group">
+                            <label className="input-label">Email</label>
+                            <input type="email" className="contact-input" />
+                        </div>
+
+                        <div className="input-group">
+                            <label className="input-label">Describe Your Idea</label>
+                            <textarea className="contact-textarea"></textarea>
+                        </div>
+
                         <motion.button
                             type="submit"
-                            className="tattoo-btn"
-                            style={{ width: '100%', fontSize: '1.2rem', padding: '1.5rem', cursor: 'pointer', background: 'var(--accent-color)', color: '#000', border: 'none', fontWeight: 'bold', fontFamily: 'var(--font-heading)', letterSpacing: '1px' }}
-                            whileHover={{ scale: 1.02, backgroundColor: '#fff', letterSpacing: '3px' }}
+                            className="submit-btn"
+                            whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                         >
-                            SUBMIT REQUEST
+                            Submit Request
                         </motion.button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </section>
     );

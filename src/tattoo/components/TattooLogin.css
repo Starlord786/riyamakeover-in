@@ -1,0 +1,243 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+    --riya-gold: #C5A059;
+    --riya-gold-hover: #D4B06A;
+    --riya-neon-green: #39ff14;
+    --riya-bg-dark: #050505;
+    --riya-bg-charcoal: #1a1a1a;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+/* Page Wrapper */
+.riya-login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%);
+    position: relative;
+    overflow: hidden;
+    color: #e0e0e0;
+    font-family: var(--font-body);
+}
+
+/* Texture Overlay */
+.riya-login-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23C5A059' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Login Card */
+.riya-login-card {
+    background: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 3rem 2.5rem;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(197, 160, 89, 0.05);
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Logo Section */
+.riya-login-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.riya-login-logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.3));
+}
+
+.riya-login-title {
+    font-family: var(--font-heading);
+    color: var(--riya-gold);
+    font-size: 1.8rem;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+.riya-login-subtitle {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 0.5rem;
+    letter-spacing: 1px;
+}
+
+/* Form Styles */
+.riya-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.riya-input-group {
+    position: relative;
+}
+
+.riya-input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.riya-login-input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(197, 160, 89, 0.15);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.95rem;
+    font-family: var(--font-body);
+    transition: all 0.3s ease;
+}
+
+.riya-login-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--riya-neon-green);
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+}
+
+.riya-login-input:focus+.riya-input-icon {
+    color: var(--riya-neon-green);
+}
+
+.riya-password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.riya-password-toggle:hover {
+    color: var(--riya-gold);
+}
+
+/* Checkbox & Forgot Password */
+.riya-form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+.riya-remember-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.riya-remember-checkbox {
+    accent-color: var(--riya-gold);
+}
+
+.riya-forgot-link {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.riya-forgot-link:hover {
+    color: var(--riya-gold);
+}
+
+/* Login Button */
+.riya-login-btn {
+    background: linear-gradient(135deg, var(--riya-gold), #b89146);
+    color: #000;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.riya-login-btn:hover {
+    background: var(--riya-neon-green);
+    color: #000;
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Admin Link */
+.riya-admin-link-wrapper {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.riya-admin-link {
+    color: rgba(197, 160, 89, 0.6);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.riya-admin-link:hover {
+    color: var(--riya-gold);
+    border-bottom-color: var(--riya-gold);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .riya-login-card {
+        padding: 2rem 1.5rem;
+        max-width: 90%;
+    }
+
+    .riya-login-title {
+        font-size: 1.5rem;
+    }
+}

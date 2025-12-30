@@ -20,7 +20,7 @@ const Footer = () => {
 
                 {/* 2. Menu Section */}
                 <div className="riya-footer-column">
-                    <h3 className="riya-column-heading">Menu</h3>
+                    <h3 className="riya-column-heading riya-neon-glow">Menu</h3>
                     <ul className="riya-footer-links">
                         <li><Link to="/tattoo" className="riya-footer-link">Studio</Link></li>
                         <li><Link to="/tattoo/work" className="riya-footer-link">Work</Link></li>
@@ -31,7 +31,7 @@ const Footer = () => {
 
                 {/* 3. Studio Info Section */}
                 <div className="riya-footer-column">
-                    <h3 className="riya-column-heading">Studio</h3>
+                    <h3 className="riya-column-heading riya-neon-glow">Studio</h3>
                     <div className="riya-contact-info">
                         <div className="riya-contact-item">
                             <span className="riya-icon">
@@ -54,9 +54,20 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* 4. Follow Section */}
+                {/* 4. Resources Section */}
+                <div className="riya-footer-column">
+                    <h3 className="riya-column-heading riya-neon-glow">Resources</h3>
+                    <ul className="riya-footer-links">
+                        <li><Link to="/tattoo/login" className="riya-footer-link">Login</Link></li>
+                        <li><Link to="/tattoo/admin" className="riya-footer-link">Admin Login</Link></li>
+                        <li><Link to="/tattoo/newsletter" className="riya-footer-link">Newsletter</Link></li>
+                        <li><Link to="/tattoo/faq" className="riya-footer-link">FAQ</Link></li>
+                    </ul>
+                </div>
+
+                {/* 5. Follow Section */}
                 <div className="riya-footer-column riya-follow-section">
-                    <h3 className="riya-column-heading">Follow</h3>
+                    <h3 className="riya-column-heading riya-neon-glow">Follow</h3>
                     <div className="riya-social-icons">
                         <a href="#" className="riya-social-icon" aria-label="Instagram">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
