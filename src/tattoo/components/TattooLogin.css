@@ -73,7 +73,11 @@
 
 .riya-login-logo {
     width: 100px;
-    height: auto;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 2px solid var(--riya-neon-green);
+    background: #000;
     margin-bottom: 1rem;
     filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.3));
 }

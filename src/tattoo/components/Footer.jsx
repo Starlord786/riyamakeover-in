@@ -91,7 +91,7 @@ const Footer = () => {
 
             {/* Bottom Bar */}
             <div className="riya-footer-bottom">
-                <div className="riya-footer-emblem"><img src={dragonLogo} alt="Riya Tattoo Emblem" style={{ height: '40px' }} /></div>
+                <div className="riya-footer-emblem"><img src={dragonLogo} alt="Riya Tattoo Emblem" /></div>
                 <p>&copy; 2025 RIYA TATTOO. ALL RIGHTS RESERVED.</p>
             </div>
         </footer>
