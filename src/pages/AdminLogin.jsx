@@ -29,14 +29,20 @@ const AdminLogin = () => {
         setViewState('loading');
         setLoginError('');
 
+        const cleanEmail = formData.email.trim();
+
         try {
             // 1. Authenticate with Firebase Auth
-            const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+            const userCredential = await signInWithEmailAndPassword(auth, cleanEmail, formData.password);
             const user = userCredential.user;
 
+            // Normalize email: lowercase and trim
+            const paramsEmail = user.email.toLowerCase().trim();
+
             // 2. Check strict "admins" collection authorization
-            // Assuming document ID is the email address as per requirement
-            const adminDocRef = doc(db, 'admins', user.email);
+            console.log(`Checking admin privileges for: ${paramsEmail}`);
+
+            const adminDocRef = doc(db, 'admins', paramsEmail);
             const adminDoc = await getDoc(adminDocRef);
 
             if (adminDoc.exists()) {
@@ -45,13 +51,18 @@ const AdminLogin = () => {
             } else {
                 // 4. Unauthorized: Sign out immediately
                 await signOut(auth);
-                setLoginError("Access Denied: You do not have administrator privileges.");
+                // Detailed error for debugging
+                setLoginError(`Access Denied: No admin record found for '${paramsEmail}'. Check your Firestore Document ID for spaces.`);
                 setViewState('login');
             }
 
         } catch (error) {
             console.error("Admin Login Error:", error);
-            setLoginError("Invalid email or password.");
+            if (error.code === 'permission-denied') {
+                setLoginError("Permission Denied: Check your Firestore Database Rules.");
+            } else {
+                setLoginError("Invalid email or password.");
+            }
             setViewState('login');
         }
     };

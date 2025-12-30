@@ -15,9 +15,13 @@ import {
     UserCheck,
     Lock,
     Key,
-    Activity
+    Activity,
+    MessageSquare,
+    CheckCircle
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -27,6 +31,11 @@ const AdminDashboard = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [activeTab, setActiveTab] = useState('dashboard');
 
+    // Analytics State
+    const [chartData, setChartData] = useState([]);
+    const [chartPeriod, setChartPeriod] = useState('weekly');
+    const [isLoadingChart, setIsLoadingChart] = useState(false);
+
     // Get the pushed state from AdminLogin (email/password)
     const { email, password } = location.state || { email: 'Admin', password: '***' };
 
@@ -34,6 +43,47 @@ const AdminDashboard = () => {
         const timer = setInterval(() => setCurrentTime(new Date()), 1000);
         return () => clearInterval(timer);
     }, []);
+
+    // Fetch Analytics Data
+    useEffect(() => {
+        const fetchAnalytics = async () => {
+            setIsLoadingChart(true);
+            try {
+                const today = new Date();
+                let startDate = new Date();
+
+                if (chartPeriod === 'weekly') {
+                    startDate.setDate(today.getDate() - 7);
+                } else if (chartPeriod === 'monthly') {
+                    startDate.setDate(today.getDate() - 30);
+                } else if (chartPeriod === 'yearly') {
+                    startDate.setDate(today.getDate() - 365);
+                }
+
+                const dateString = startDate.toISOString().split('T')[0];
+                const analyticsRef = collection(db, 'analytics');
+                const q = query(
+                    analyticsRef,
+                    where('date', '>=', dateString),
+                    orderBy('date', 'asc')
+                );
+
+                const querySnapshot = await getDocs(q);
+                const data = querySnapshot.docs.map(doc => ({
+                    date: doc.id,
+                    views: doc.data().views || 0
+                }));
+
+                setChartData(data);
+            } catch (error) {
+                console.error("Error fetching analytics:", error);
+            } finally {
+                setIsLoadingChart(false);
+            }
+        };
+
+        fetchAnalytics();
+    }, [chartPeriod]);
 
     const handleLogout = () => {
         navigate('/AdminLogin');
@@ -165,24 +215,165 @@ const AdminDashboard = () => {
                             <div className="stat-label">Pending Bookings</div>
                         </motion.div>
 
-                        <motion.div className="stat-card" variants={itemVariants}>
+                        <motion.button
+                            className="stat-card action-btn-large"
+                            variants={itemVariants}
+                            whileHover={{ scale: 1.03, backgroundColor: 'rgba(255,255,255,0.95)' }}
+                            whileTap={{ scale: 0.97 }}
+                        >
                             <div className="stat-header">
-                                <div className="stat-icon"><TrendingUp /></div>
-                                <span className="stat-trend negative">-2.1%</span>
+                                <div className="stat-icon" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>
+                                    <MessageSquare />
+                                </div>
+                                <span className="stat-trend" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>Action</span>
                             </div>
-                            <div className="stat-value">₹85.4k</div>
-                            <div className="stat-label">Monthly Revenue</div>
-                        </motion.div>
+                            <div className="stat-value">Messages</div>
+                            <div className="stat-label">View Today's Inbox</div>
+                        </motion.button>
 
-                        <motion.div className="stat-card" variants={itemVariants}>
+                        <motion.button
+                            className="stat-card action-btn-large"
+                            variants={itemVariants}
+                            whileHover={{ scale: 1.03, backgroundColor: 'rgba(255,255,255,0.95)' }}
+                            whileTap={{ scale: 0.97 }}
+                        >
                             <div className="stat-header">
-                                <div className="stat-icon"><Activity /></div>
-                                <span className="stat-trend">Stable</span>
+                                <div className="stat-icon" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
+                                    <CheckCircle />
+                                </div>
+                                <span className="stat-trend" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>Verified</span>
                             </div>
-                            <div className="stat-value">98%</div>
-                            <div className="stat-label">System Health</div>
-                        </motion.div>
+                            <div className="stat-value">Bookings</div>
+                            <div className="stat-label">View Accepted List</div>
+                        </motion.button>
                     </div>
+
+                    {/* Analytics Chart Section */}
+                    <motion.div
+                        className="chart-section"
+                        variants={itemVariants}
+                    >
+                        <div className="card-header">
+                            <span className="card-title"><TrendingUp size={18} color="#c5a059" /> Analytics Overview</span>
+                            <div className="chart-actions">
+                                {['weekly', 'monthly', 'yearly'].map(period => (
+                                    <button
+                                        key={period}
+                                        className={`chart-period ${chartPeriod === period ? 'active' : ''}`}
+                                        onClick={() => setChartPeriod(period)}
+                                    >
+                                        {period.charAt(0).toUpperCase() + period.slice(1)}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="chart-container">
+                            {isLoadingChart ? (
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', color: '#ccc' }}>
+                                    Loading Data...
+                                </div>
+                            ) : (
+                                <div className="chart-wrapper">
+                                    {/* Tooltip or Legend could go here */}
+                                    <div style={{ position: 'absolute', top: 10, right: 10, fontSize: '0.8rem', color: '#888' }}>
+                                        Views: {chartData.reduce((acc, curr) => acc + curr.views, 0)} Total
+                                    </div>
+
+                                    {/* Custom SVG Line Chart */}
+                                    <svg width="100%" height="100%" viewBox="0 0 800 300" preserveAspectRatio="none">
+                                        <defs>
+                                            <linearGradient id="gradientArea" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stopColor="#c5a059" stopOpacity="0.4" />
+                                                <stop offset="100%" stopColor="#c5a059" stopOpacity="0" />
+                                            </linearGradient>
+                                        </defs>
+
+                                        {/* Grid Lines */}
+                                        {[0, 1, 2, 3, 4].map(i => (
+                                            <line
+                                                key={i}
+                                                x1="0"
+                                                y1={300 - (i * 75)}
+                                                x2="800"
+                                                y2={300 - (i * 75)}
+                                                stroke="rgba(0,0,0,0.05)"
+                                                strokeWidth="1"
+                                            />
+                                        ))}
+
+                                        {/* Dynamic Data Paths */
+                                            (() => {
+                                                if (chartData.length === 0) return null;
+
+                                                const maxViews = Math.max(...chartData.map(d => d.views), 10);
+                                                const width = 800;
+                                                const height = 300;
+                                                const padding = 20; // internal padding
+
+                                                // Calculate points
+                                                const points = chartData.map((d, i) => {
+                                                    const x = (i / (chartData.length - 1 || 1)) * width;
+                                                    const y = height - ((d.views / maxViews) * (height - 50)); // Leave 50px buffer at top
+                                                    return `${x},${y}`;
+                                                });
+
+                                                // If single point, synthesize a line
+                                                const pathD = points.length === 1
+                                                    ? `M0,${height} L800,${height}` // Flat line if 1 point
+                                                    : `M${points.join(' L')}`;
+
+                                                // Area needs to close at bottom
+                                                const areaD = points.length === 1
+                                                    ? `M0,${height} L800,${height} L800,300 L0,300 Z`
+                                                    : `M${points[0].split(',')[0]},300 L${points.join(' L')} L${points[points.length - 1].split(',')[0]},300 Z`;
+
+                                                return (
+                                                    <>
+                                                        <motion.path
+                                                            d={areaD}
+                                                            fill="url(#gradientArea)"
+                                                            initial={{ opacity: 0 }}
+                                                            animate={{ opacity: 1 }}
+                                                            transition={{ duration: 1 }}
+                                                        />
+                                                        <motion.path
+                                                            d={pathD}
+                                                            fill="none"
+                                                            stroke="#c5a059"
+                                                            strokeWidth="3"
+                                                            initial={{ pathLength: 0 }}
+                                                            animate={{ pathLength: 1 }}
+                                                            transition={{ duration: 1.5, ease: "easeInOut" }}
+                                                        />
+                                                        {/* Render Points */}
+                                                        {chartData.map((d, i) => {
+                                                            const x = (i / (chartData.length - 1 || 1)) * width;
+                                                            const y = height - ((d.views / maxViews) * (height - 50));
+                                                            return (
+                                                                <motion.circle
+                                                                    key={i}
+                                                                    cx={x}
+                                                                    cy={y}
+                                                                    r="4"
+                                                                    fill="#fff"
+                                                                    stroke="#c5a059"
+                                                                    strokeWidth="2"
+                                                                    initial={{ scale: 0 }}
+                                                                    animate={{ scale: 1 }}
+                                                                    transition={{ delay: 1 + (i * 0.1) }}
+                                                                >
+                                                                    <title>{d.date}: {d.views} views</title>
+                                                                </motion.circle>
+                                                            );
+                                                        })}
+                                                    </>
+                                                );
+                                            })()}
+                                    </svg>
+                                </div>
+                            )}
+                        </div>
+                    </motion.div>
 
                     <div className="dashboard-content-grid">
                         {/* Recent Activity */}
@@ -206,7 +397,7 @@ const AdminDashboard = () => {
 
                                 <div className="recent-login-item">
                                     <div className="login-info">
-                                        <div className="login-avatar" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: '#888' }}>
+                                        <div className="login-avatar" style={{ backgroundColor: 'rgba(0,0,0,0.05)', color: '#888' }}>
                                             <Users size={20} />
                                         </div>
                                         <div className="login-details">
@@ -219,7 +410,7 @@ const AdminDashboard = () => {
 
                                 <div className="recent-login-item">
                                     <div className="login-info">
-                                        <div className="login-avatar" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: '#888' }}>
+                                        <div className="login-avatar" style={{ backgroundColor: 'rgba(0,0,0,0.05)', color: '#888' }}>
                                             <Settings size={20} />
                                         </div>
                                         <div className="login-details">

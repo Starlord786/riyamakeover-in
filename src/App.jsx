@@ -46,6 +46,33 @@ function App() {
     }
   }, [isImageLoaded]);
 
+  // Analytics Tracker
+  React.useEffect(() => {
+    const trackView = async () => {
+      const hasViewed = sessionStorage.getItem('view_counted');
+      if (!hasViewed) {
+        try {
+          // Dynamic import to avoid initial bundle bloat
+          const { doc, setDoc, increment } = await import('firebase/firestore');
+          const { db } = await import('./firebase');
+
+          const today = new Date().toISOString().split('T')[0];
+          const analyticsRef = doc(db, 'analytics', today);
+
+          await setDoc(analyticsRef, {
+            views: increment(1),
+            date: today
+          }, { merge: true });
+
+          sessionStorage.setItem('view_counted', 'true');
+        } catch (error) {
+          console.error("Analytics Error:", error);
+        }
+      }
+    };
+    trackView();
+  }, []);
+
   // If offline page should be shown, render it exclusively (or on top)
   if (showOfflinePage) {
     return <NoInternet onRetry={() => window.location.reload()} />;

@@ -2,19 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 
 :root {
-    --admin-bg: #030303;
-    --admin-sidebar-bg: rgba(10, 10, 10, 0.7);
-    --admin-card-bg: rgba(26, 26, 26, 0.4);
-    --admin-card-hover: rgba(40, 40, 40, 0.5);
-    --admin-border: rgba(255, 215, 0, 0.1);
+    --admin-bg: #f4f7f6;
+    --admin-sidebar-bg: rgba(255, 255, 255, 0.85);
+    --admin-card-bg: rgba(255, 255, 255, 0.9);
+    --admin-card-hover: #ffffff;
+    --admin-border: rgba(197, 160, 89, 0.15);
     /* Subtle Gold border */
     --admin-accent-gold: #c5a059;
-    --admin-accent-glow: rgba(197, 160, 89, 0.3);
-    --admin-text-main: #f0f0f0;
+    --admin-accent-glow: rgba(197, 160, 89, 0.15);
+    --admin-text-main: #2d2d2d;
+    --admin-text-secondary: #4a4a4a;
     --admin-text-muted: #888888;
     --glass-effect: blur(20px) saturate(180%);
-    --gradient-gold: linear-gradient(135deg, #c5a059 0%, #f2d088 100%);
-    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --gradient-gold: linear-gradient(135deg, #c5a059 0%, #dab46e 100%);
+    --shadow-soft: 0 10px 40px -10px rgba(197, 160, 89, 0.15);
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
 body {
@@ -31,8 +33,8 @@ body {
     overflow-x: hidden;
     position: relative;
     background-image:
-        radial-gradient(circle at 15% 50%, rgba(197, 160, 89, 0.03) 0%, transparent 25%),
-        radial-gradient(circle at 85% 30%, rgba(197, 160, 89, 0.03) 0%, transparent 25%);
+        radial-gradient(circle at 10% 20%, rgba(197, 160, 89, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(197, 160, 89, 0.05) 0%, transparent 40%);
 }
 
 /* Sidebar */
@@ -40,12 +42,13 @@ body {
     width: 280px;
     background: var(--admin-sidebar-bg);
     backdrop-filter: var(--glass-effect);
-    border-right: 1px solid var(--admin-border);
+    border-right: 1px solid rgba(0, 0, 0, 0.03);
     display: flex;
     flex-direction: column;
     padding: 2rem 1.5rem;
     position: relative;
     z-index: 50;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.02);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -62,17 +65,14 @@ body {
     width: 45px;
     height: 45px;
     object-fit: contain;
-    filter: drop-shadow(0 0 8px rgba(197, 160, 89, 0.3));
+    filter: drop-shadow(0 4px 6px rgba(197, 160, 89, 0.2));
 }
 
 .sidebar-title {
     font-family: 'Cinzel', serif;
     font-size: 1.4rem;
     font-weight: 700;
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #1a1a1a;
     letter-spacing: 1px;
 }
 
@@ -89,7 +89,7 @@ body {
     gap: 1rem;
     padding: 1rem 1.25rem;
     border-radius: 12px;
-    color: var(--admin-text-muted);
+    color: var(--admin-text-secondary);
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -98,16 +98,16 @@ body {
 }
 
 .nav-item:hover {
-    background: rgba(255, 255, 255, 0.03);
-    color: #fff;
+    background: rgba(197, 160, 89, 0.08);
+    color: var(--admin-accent-gold);
     transform: translateX(5px);
 }
 
 .nav-item.active {
-    background: rgba(197, 160, 89, 0.1);
+    background: #fff;
     border: 1px solid var(--admin-border);
     color: var(--admin-accent-gold);
-    box-shadow: 0 0 15px rgba(197, 160, 89, 0.05);
+    box-shadow: 0 4px 15px rgba(197, 160, 89, 0.15);
 }
 
 .nav-item svg {
@@ -127,9 +127,10 @@ body {
     align-items: center;
     gap: 1rem;
     padding: 0.75rem;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.03), transparent);
+    background: #fff;
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
 .user-avatar-mini {
@@ -140,10 +141,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #000;
+    color: #fff;
     font-weight: 800;
     font-size: 0.9rem;
-    box-shadow: 0 0 10px rgba(197, 160, 89, 0.4);
+    box-shadow: 0 2px 8px rgba(197, 160, 89, 0.3);
 }
 
 .user-info-mini {
@@ -154,7 +155,7 @@ body {
 
 .user-email-mini {
     font-size: 0.8rem;
-    color: #fff;
+    color: #333;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
@@ -178,7 +179,7 @@ body {
 }
 
 .logout-btn:hover {
-    background: rgba(255, 77, 77, 0.1);
+    background: rgba(255, 77, 77, 0.05);
     opacity: 1;
 }
 
@@ -207,15 +208,16 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     position: relative;
 }
 
 .welcome-msg h2 {
     font-size: 2.5rem;
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 0.5rem;
     letter-spacing: -0.5px;
+    color: #1a1a1a;
 }
 
 .welcome-msg p {
@@ -223,14 +225,12 @@ body {
     font-size: 0.95rem;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    font-weight: 500;
 }
 
 .header-accent {
     font-weight: 700;
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--admin-accent-gold);
 }
 
 .dashboard-actions {
@@ -242,23 +242,22 @@ body {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background-color: var(--admin-card-bg);
-    border: 1px solid var(--admin-border);
-    color: var(--admin-text-muted);
+    background-color: #fff;
+    border: 1px solid transparent;
+    color: var(--admin-text-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
 }
 
 .action-btn:hover {
     border-color: var(--admin-accent-gold);
     color: var(--admin-accent-gold);
-    background-color: rgba(197, 160, 89, 0.1);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 15px rgba(197, 160, 89, 0.15);
 }
 
 /* Stats Grid */
@@ -266,38 +265,39 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
 .stat-card {
     background: var(--admin-card-bg);
-    border: 1px solid var(--admin-border);
+    border: 1px solid #fff;
     border-radius: 20px;
     padding: 1.75rem;
     position: relative;
     overflow: hidden;
     backdrop-filter: var(--glass-effect);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-card);
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
     background: var(--admin-card-hover);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    border-color: rgba(197, 160, 89, 0.3);
+    box-shadow: 0 15px 30px rgba(197, 160, 89, 0.12);
+    border-color: rgba(197, 160, 89, 0.1);
 }
 
-/* Animated shine effect on card hover */
+/* Shine effect - tailored for light mode */
 .stat-card::after {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
-    width: 50%;
+    width: 60%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
     transform: skewX(-25deg);
-    transition: 0.5s;
+    transition: 0.6s;
 }
 
 .stat-card:hover::after {
@@ -313,17 +313,16 @@ body {
 
 .stat-icon {
     padding: 12px;
-    background: linear-gradient(135deg, rgba(197, 160, 89, 0.2), rgba(197, 160, 89, 0.05));
+    background: rgba(197, 160, 89, 0.1);
     border-radius: 12px;
     color: var(--admin-accent-gold);
-    border: 1px solid rgba(197, 160, 89, 0.1);
 }
 
 .stat-value {
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #fff;
+    color: #1a1a1a;
 }
 
 .stat-label {
@@ -349,6 +348,56 @@ body {
     color: #ff3d00;
 }
 
+/* Chart Section */
+.chart-section {
+    background: var(--admin-card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-card);
+    border: 1px solid #fff;
+    backdrop-filter: var(--glass-effect);
+}
+
+.chart-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.chart-period {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--admin-text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chart-period:hover {
+    background: rgba(197, 160, 89, 0.05);
+    color: var(--admin-accent-gold);
+}
+
+.chart-period.active {
+    background: rgba(197, 160, 89, 0.1);
+    color: var(--admin-accent-gold);
+    font-weight: 600;
+}
+
+.chart-container {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    margin-top: 1rem;
+}
+
+.chart-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
 /* Content Sections */
 .dashboard-content-grid {
     display: grid;
@@ -358,13 +407,14 @@ body {
 
 .content-card {
     background: var(--admin-card-bg);
-    border: 1px solid var(--admin-border);
+    border: 1px solid #fff;
     border-radius: 20px;
     padding: 2rem;
     backdrop-filter: var(--glass-effect);
     height: 100%;
     display: flex;
     flex-direction: column;
+    box-shadow: var(--shadow-card);
 }
 
 .card-header {
@@ -377,7 +427,7 @@ body {
 .card-title {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #fff;
+    color: #1a1a1a;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -404,16 +454,17 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: #fff;
     border-radius: 12px;
-    border: 1px solid transparent;
+    border: 1px solid rgba(0, 0, 0, 0.03);
     transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
 .recent-login-item:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(197, 160, 89, 0.2);
     transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-color: rgba(197, 160, 89, 0.2);
 }
 
 .login-info {
@@ -436,7 +487,8 @@ body {
 .login-details h4 {
     font-size: 0.95rem;
     margin: 0 0 0.25rem 0;
-    color: #eee;
+    color: #333;
+    font-weight: 600;
 }
 
 .login-details p {
@@ -448,7 +500,7 @@ body {
 .login-time {
     font-size: 0.8rem;
     color: var(--admin-text-muted);
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.05);
     padding: 4px 8px;
     border-radius: 6px;
 }
@@ -462,12 +514,14 @@ body {
 
 .vault-container {
     margin-top: auto;
-    background: linear-gradient(145deg, rgba(20, 20, 20, 0.8), rgba(10, 10, 10, 0.9));
-    border: 1px solid rgba(197, 160, 89, 0.2);
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border: 1px solid rgba(197, 160, 89, 0.3);
     border-radius: 16px;
     padding: 1.5rem;
     position: relative;
     overflow: hidden;
+    color: #fff;
+    /* Keeping vault dark for contrast and "security" feel */
 }
 
 /* Vault glow effect */
@@ -478,7 +532,7 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(197, 160, 89, 0.05) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(197, 160, 89, 0.1) 0%, transparent 70%);
     animation: rotate 20s linear infinite;
     pointer-events: none;
 }
@@ -501,7 +555,7 @@ body {
     color: var(--admin-accent-gold);
     font-weight: 600;
     font-size: 0.9rem;
-    border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
     padding-bottom: 0.75rem;
 }
 
@@ -512,14 +566,14 @@ body {
 .credential-label {
     display: block;
     font-size: 0.75rem;
-    color: #888;
+    color: #aaa;
     margin-bottom: 0.4rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .credential-value-box {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.05);
     padding: 0.75rem 1rem;
     border-radius: 8px;
     font-family: 'Courier New', monospace;
@@ -528,18 +582,18 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: border-color 0.3s;
 }
 
 .credential-value-box:hover {
-    border-color: rgba(197, 160, 89, 0.3);
+    border-color: rgba(197, 160, 89, 0.4);
 }
 
 .toggle-pass-btn {
     background: none;
     border: none;
-    color: #666;
+    color: #888;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -548,6 +602,18 @@ body {
 
 .toggle-pass-btn:hover {
     color: var(--admin-accent-gold);
+}
+
+
+/* Action Button Styles */
+.action-btn-large {
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 /* Mobile Responsiveness */
@@ -569,6 +635,8 @@ body {
         align-items: center;
         justify-content: space-between;
         overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .sidebar-header {
