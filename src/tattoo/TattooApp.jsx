@@ -1,6 +1,8 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import TattooHome from './components/TattooHome';
+import TattooWorksPage from './components/TattooWork';
+import TattooDetail from './components/TattooDetail';
 import './components/TattooHome.css'; // Ensure styles are loaded for this sub-app
 import TattooLoader from './loader/TattooLoader';
 
@@ -45,7 +47,8 @@ const TattooApp = () => {
     return (
         <Routes>
             <Route index element={<TattooHome />} />
-            <Route path="home" element={<TattooHome />} />
+            <Route path="works" element={<TattooWorksPage />} />
+            <Route path="work/:id" element={<TattooDetail />} />
             {/* Catch-all redirect to home within the tattoo section */}
             <Route path="*" element={<Navigate to="/tattoo" replace />} />
         </Routes>

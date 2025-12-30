@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Footer.css'; // Link to the CSS file
-
+import './Footer.css';
 import dragonLogo from '../assets/dragon-animated.svg';
 import hybixLogo from '../assets/Darkmode.png';
 
@@ -10,30 +9,23 @@ const Footer = () => {
         <footer className="premium-footer">
             <div className="footer-content">
                 <div className="footer-left">
-                    {/* Logo Section */}
                     <div className="footer-logo-container">
                         <img src={dragonLogo} alt="Dragon Logo" className="footer-logo" />
                     </div>
 
-                    {/* Social Media Section */}
                     <div className="footer-social">
                         <p>Follow us on:</p>
                         <div className="social-icons">
-                            {/* Instagram */}
                             <a href="#" className="social-icon" aria-label="Instagram">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.251-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.149-3.227 1.664-4.771 4.919-4.919 1.266-.058 1.644-.07 4.85-.07zm0-2.163c-3.259 0-3.668.014-4.944.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.276-.073 1.685-.073 4.943s.014 3.668.072 4.944c.2 4.358 2.618 6.78 6.98 6.98 1.276.059 1.685.073 4.944.073s3.668-.014 4.944-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.276.073-1.685.073-4.943s-.014-3.668-.072-4.944c-.2-4.358-2.618-6.78-6.98-6.98-1.276-.059-1.685-.073-4.944-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                                 </svg>
                             </a>
-
-                            {/* Facebook */}
                             <a href="#" className="social-icon" aria-label="Facebook">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.271 0-4.192 1.58-4.192 4.615v3.385z" />
                                 </svg>
                             </a>
-
-                            {/* WhatsApp (Corrected) */}
                             <a href="#" className="social-icon" aria-label="WhatsApp">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
@@ -43,29 +35,24 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* Links Section */}
-                {/* Right Side: Links & Designer Credit */}
                 <div className="footer-right">
                     <div className="footer-links-group">
-                        {/* Platform Column */}
                         <div className="footer-column">
                             <h3 className="column-heading">Platform</h3>
                             <Link to="/about" className="footer-link">About</Link>
                             <Link to="/features" className="footer-link">Features</Link>
                             <Link to="/pricing" className="footer-link">Pricing & Plans</Link>
-                            <a href="/contact" className="footer-link">Contact</a>
+                            <Link to="/contact" className="footer-link">Contact</Link>
                         </div>
 
-                        {/* Resources Column */}
                         <div className="footer-column">
                             <h3 className="column-heading">Resources</h3>
-                            <a href="/login" className="footer-link">Login</a>
+                            <Link to="/login" className="footer-link">Login</Link>
                             <Link to="/AdminLogin" className="footer-link">Admin login</Link>
-                            <a href="/newsletter" className="footer-link">Newsletter</a>
+                            <Link to="/newsletter" className="footer-link">Newsletter</Link>
                             <Link to="/#faq" className="footer-link">FAQ</Link>
                         </div>
 
-                        {/* Legals Column */}
                         <div className="footer-column">
                             <h3 className="column-heading">Legals</h3>
                             <Link to="/guides" className="footer-link">Guides</Link>
@@ -73,23 +60,17 @@ const Footer = () => {
                             <Link to="/privacy" className="footer-link">Privacy Policy</Link>
                             <Link to="/licensing" className="footer-link">Licensing</Link>
                         </div>
-
-                        {/* Designer Credit (Placed here for ordering control) */}
-                        <div className="designer-inline-container">
-                            <span className="designed-by-text-inline">Designed by</span>
-                            <a href="https://hybixgroups.com/" target="_blank" rel="noopener noreferrer">
-                                <img src={hybixLogo} alt="Hybix" className="hybix-logo-inline" />
-                            </a>
-                        </div>
                     </div>
 
-                    {/* Designer Credit */}
-
+                    <div className="designer-inline-container">
+                        <span className="designed-by-text-inline">Designed by</span>
+                        <a href="https://hybixgroups.com/" target="_blank" rel="noopener noreferrer">
+                            <img src={hybixLogo} alt="Hybix" className="hybix-logo-inline" />
+                        </a>
+                    </div>
                 </div>
-
-
             </div>
-        </footer >
+        </footer>
     );
 };
 

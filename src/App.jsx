@@ -1,16 +1,13 @@
 import React from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
 import Footer from './components/Footer'
-import './App.css'
-import { Routes, Route, Outlet, useLocation } from 'react-router-dom'
+import Home from './components/Home'
 import Services from './components/Services'
 import Gallery from './components/Gallery'
 import Preloader from './components/Preloader'
 import NoInternet from './components/NoInternet'
-import OfflineNotification from './components/OfflineNotification'
 import Contact from './components/Contact'
-import Home from './components/Home'
 import About from './pages/About'
 import Features from './pages/Features'
 import Pricing from './pages/Pricing'
@@ -21,24 +18,22 @@ import Licensing from './pages/Licensing'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import ScrollToTop from './components/ScrollToTop'
-import { useNetworkStatus } from './hooks/useNetworkStatus'
 import AdminLogin from './pages/AdminLogin'
 import AdminDashboard from './pages/AdminDashboard'
 import Newsletter from './pages/Newsletter'
-
-
 import TattooApp from './tattoo/TattooApp'
 import ServiceDetail from './pages/ServiceDetail'
+import { useNetworkStatus } from './hooks/useNetworkStatus'
+import './App.css'
 
 function App() {
   const location = useLocation();
   const [isLoading, setIsLoading] = React.useState(true);
   const [isImageLoaded, setIsImageLoaded] = React.useState(false);
-  const { showOfflinePage, showNotification, countdown } = useNetworkStatus();
+  const { showOfflinePage } = useNetworkStatus();
 
   React.useEffect(() => {
-    if (isImageLoaded) {
-      // Start the timer only after the image has loaded to ensure user sees the full loader
+    if (isImageLoaded && isLoading) {
       const timer = setTimeout(() => {
         setIsLoading(false);
       }, 2500);
@@ -46,56 +41,25 @@ function App() {
     }
   }, [isImageLoaded]);
 
-  // Analytics Tracker
-  React.useEffect(() => {
-    const trackView = async () => {
-      const hasViewed = sessionStorage.getItem('view_counted');
-      if (!hasViewed) {
-        try {
-          // Dynamic import to avoid initial bundle bloat
-          const { doc, setDoc, increment } = await import('firebase/firestore');
-          const { db } = await import('./firebase');
-
-          const today = new Date().toISOString().split('T')[0];
-          const analyticsRef = doc(db, 'analytics', today);
-
-          await setDoc(analyticsRef, {
-            views: increment(1),
-            date: today
-          }, { merge: true });
-
-          sessionStorage.setItem('view_counted', 'true');
-        } catch (error) {
-          console.error("Analytics Error:", error);
-        }
-      }
-    };
-    trackView();
-  }, []);
-
   // If offline page should be shown, render it exclusively (or on top)
   if (showOfflinePage) {
     return <NoInternet onRetry={() => window.location.reload()} />;
   }
 
-  // Check if we are in the tattoo section (case-insensitive)
   const isTattooRoute = location.pathname.toLowerCase().startsWith('/tattoo');
   const isAdminLogin = location.pathname === '/AdminLogin';
   const isAdminDashboard = location.pathname === '/admin-dashboard';
-
   const shouldShowLayout = !isTattooRoute && !isAdminLogin && !isAdminDashboard;
 
   return (
     <>
+      {/* 1. Global Scroll Reset & Floating Button */}
       <ScrollToTop />
-      <OfflineNotification show={showNotification} countdown={countdown} />
 
-      {shouldShowLayout && (
-        // <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
-        null
+      {!isTattooRoute && (
+        <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
       )}
 
-      {/* Show Navbar on all pages except the tattoo section and admin login */}
       {shouldShowLayout && <Navbar />}
 
       <Routes>
@@ -118,6 +82,7 @@ function App() {
         <Route path="/newsletter" element={<Newsletter />} />
         <Route path="/tattoo/*" element={<TattooApp />} />
       </Routes>
+
       {shouldShowLayout && <Footer />}
     </>
   )

@@ -1,6 +1,4 @@
-/* Color Variables for easy theme changing */
-@import url('https://fonts.googleapis.com/css2?family=Agency+FB:wght@700&family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cinzel:wght@400..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Cinzel:wght@400..900&display=swap');
 
 :root {
     --dark-background: black;
@@ -21,45 +19,34 @@
 
 .footer-content {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 60px;
+    grid-template-columns: 1fr 2.5fr; /* Adjusted for better spacing */
+    gap: 40px;
     max-width: 1400px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
 }
 
-/* --- Left Side: Logo & Social --- */
 .footer-left {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.footer-logo-container {
-    margin-bottom: 30px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: fit-content;
-}
-
 .footer-logo {
     width: 160px;
     height: auto;
     filter: brightness(1.1);
-    transition: transform 0.3s ease;
 }
 
 .social-icons {
     display: flex;
-    gap: 40px;
+    gap: 25px;
     margin-top: 20px;
 }
 
 .social-icons a {
     color: var(--text-white);
-    font-size: 1.5rem;
     transition: all 0.3s ease;
 }
 
@@ -68,45 +55,36 @@
     transform: translateY(-3px);
 }
 
-/* --- Right Side: Links & Designer --- */
 .footer-right {
     display: flex;
     flex-direction: column;
-    gap: 40px; /* Space between links and designer */
 }
 
 .footer-links-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-}
-
-.footer-column {
-    display: flex;
-    flex-direction: column;
+    gap: 20px;
 }
 
 .column-heading {
     font-family: 'Cinzel', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 20px;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
     color: var(--text-white);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-    padding-bottom: 8px;
+    padding-bottom: 5px;
     width: fit-content;
 }
 
 .footer-link {
     color: #b0b0b0;
     text-decoration: none;
-    margin-bottom: 10px;
-    font-size: 1rem;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
     transition: all 0.3s ease;
-    text-align: center;
-    margin-left: -150px;
+    display: block; /* Ensures links stack correctly */
 }
 
 .footer-link:hover {
@@ -114,29 +92,25 @@
     padding-left: 5px;
 }
 
-/* --- Designer Section: FIXED TO BE ONE BY ONE --- */
 .designer-inline-container {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-top: 20px;
+    margin-top: 40px;
     padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    width: 100%;
-    margin-left: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .designed-by-text-inline {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #666;
     letter-spacing: 2px;
     text-transform: uppercase;
 }
 
 .hybix-logo-inline {
-    width: 120px;
-    height: auto;
-    opacity: 0.7;
+    width: 100px;
+    opacity: 0.6;
     transition: opacity 0.3s ease;
 }
 
@@ -144,39 +118,22 @@
     opacity: 1;
 }
 
-/* --- Media Queries --- */
+/* Media Queries */
 @media (max-width: 900px) {
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 40px;
     }
-
-    .footer-left {
+    .footer-left, .column-heading, .designer-inline-container {
         align-items: center;
-    }
-
-    .footer-logo-container {
-        margin: 0 auto;
-    }
-
-    .column-heading {
-        margin: 0 auto 15px auto;
-    }
-
-    .designer-inline-container {
         justify-content: center;
-        flex-direction: row;
-    }
-
-    .designer-inline-container {
-        margin-left: 0;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
 @media (max-width: 600px) {
     .footer-links-group {
         grid-template-columns: 1fr;
-        gap: 40px;
     }
 }
