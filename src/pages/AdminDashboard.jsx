@@ -12,9 +12,12 @@ import {
     Shield,
     Eye,
     EyeOff,
-    UserCheck
+    UserCheck,
+    Lock,
+    Key,
+    Activity
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -22,12 +25,13 @@ const AdminDashboard = () => {
     const navigate = useNavigate();
     const [currentTime, setCurrentTime] = useState(new Date());
     const [showPassword, setShowPassword] = useState(false);
+    const [activeTab, setActiveTab] = useState('dashboard');
 
     // Get the pushed state from AdminLogin (email/password)
     const { email, password } = location.state || { email: 'Admin', password: '***' };
 
     useEffect(() => {
-        const timer = setInterval(() => setCurrentTime(new Date()), 60000);
+        const timer = setInterval(() => setCurrentTime(new Date()), 1000);
         return () => clearInterval(timer);
     }, []);
 
@@ -40,24 +44,41 @@ const AdminDashboard = () => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1
+                staggerChildren: 0.15,
+                delayChildren: 0.2
             }
         }
     };
 
     const itemVariants = {
-        hidden: { y: 20, opacity: 0 },
-        visible: { y: 0, opacity: 1 }
+        hidden: { y: 30, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 100,
+                damping: 15
+            }
+        }
     };
+
+    const navItems = [
+        { id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+        { id: 'clients', icon: Users, label: 'Clients' },
+        { id: 'bookings', icon: Calendar, label: 'Bookings' },
+        { id: 'analytics', icon: TrendingUp, label: 'Analytics' },
+        { id: 'settings', icon: Settings, label: 'Settings' },
+    ];
 
     return (
         <div className="admin-dashboard-container">
             {/* Sidebar */}
             <motion.aside
                 className="admin-sidebar"
-                initial={{ x: -50, opacity: 0 }}
+                initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
             >
                 <div className="sidebar-header">
                     <img src="/dragon-animated.svg" alt="Logo" className="sidebar-logo" />
@@ -65,26 +86,16 @@ const AdminDashboard = () => {
                 </div>
 
                 <nav className="sidebar-nav">
-                    <div className="nav-item active">
-                        <LayoutDashboard />
-                        <span>Dashboard</span>
-                    </div>
-                    <div className="nav-item">
-                        <Users />
-                        <span>Clients</span>
-                    </div>
-                    <div className="nav-item">
-                        <Calendar />
-                        <span>Bookings</span>
-                    </div>
-                    <div className="nav-item">
-                        <TrendingUp />
-                        <span>Analytics</span>
-                    </div>
-                    <div className="nav-item">
-                        <Settings />
-                        <span>Settings</span>
-                    </div>
+                    {navItems.map((item) => (
+                        <div
+                            key={item.id}
+                            className={`nav-item ${activeTab === item.id ? 'active' : ''}`}
+                            onClick={() => setActiveTab(item.id)}
+                        >
+                            <item.icon />
+                            <span>{item.label}</span>
+                        </div>
+                    ))}
                 </nav>
 
                 <div className="sidebar-footer">
@@ -94,12 +105,12 @@ const AdminDashboard = () => {
                         </div>
                         <div className="user-info-mini">
                             <span className="user-email-mini">{email}</span>
-                            <span className="user-role-mini" style={{ fontSize: '0.7em', color: '#f2f528' }}>Super Admin</span>
+                            <span style={{ fontSize: '0.7em', color: '#c5a059', letterSpacing: '0.5px' }}>Super Admin</span>
                         </div>
                     </div>
-                    <div className="nav-item" onClick={handleLogout} style={{ marginTop: '0.5rem' }}>
-                        <LogOut size={16} />
-                        <span style={{ fontSize: '0.9rem' }}>Logout</span>
+                    <div className="logout-btn" onClick={handleLogout}>
+                        <LogOut size={18} />
+                        <span>Logout System</span>
                     </div>
                 </div>
             </motion.aside>
@@ -115,15 +126,21 @@ const AdminDashboard = () => {
                     {/* Header */}
                     <header className="dashboard-header">
                         <div className="welcome-msg">
-                            <h2>Welcome back, <span className="header-accent">{email.split('@')[0]}</span></h2>
-                            <p>{currentTime.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                            <motion.h2
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5 }}
+                            >
+                                Welcome back, <span className="header-accent">{email.split('@')[0]}</span>
+                            </motion.h2>
+                            <p>{currentTime.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} • {currentTime.toLocaleTimeString()}</p>
                         </div>
                         <div className="dashboard-actions">
                             <button className="action-btn">
-                                <Search size={18} />
+                                <Search size={20} />
                             </button>
                             <button className="action-btn">
-                                <Bell size={18} />
+                                <Bell size={20} />
                             </button>
                         </div>
                     </header>
@@ -136,7 +153,7 @@ const AdminDashboard = () => {
                                 <span className="stat-trend">+12.5%</span>
                             </div>
                             <div className="stat-value">1,234</div>
-                            <div className="stat-label">Total Users</div>
+                            <div className="stat-label">Total Clients</div>
                         </motion.div>
 
                         <motion.div className="stat-card" variants={itemVariants}>
@@ -153,25 +170,25 @@ const AdminDashboard = () => {
                                 <div className="stat-icon"><TrendingUp /></div>
                                 <span className="stat-trend negative">-2.1%</span>
                             </div>
-                            <div className="stat-value">$12.5k</div>
+                            <div className="stat-value">₹85.4k</div>
                             <div className="stat-label">Monthly Revenue</div>
                         </motion.div>
 
                         <motion.div className="stat-card" variants={itemVariants}>
                             <div className="stat-header">
-                                <div className="stat-icon"><Shield /></div>
-                                <span className="stat-trend">Secure</span>
+                                <div className="stat-icon"><Activity /></div>
+                                <span className="stat-trend">Stable</span>
                             </div>
-                            <div className="stat-value">Active</div>
-                            <div className="stat-label">System Status</div>
+                            <div className="stat-value">98%</div>
+                            <div className="stat-label">System Health</div>
                         </motion.div>
                     </div>
 
-                    {/* Recent Activity & Credential Reveal (For user request) */}
                     <div className="dashboard-content-grid">
+                        {/* Recent Activity */}
                         <motion.div className="content-card" variants={itemVariants}>
                             <div className="card-header">
-                                <span className="card-title">Recent Logins</span>
+                                <span className="card-title"><Shield size={18} color="#c5a059" /> Recent Security Logs</span>
                             </div>
                             <div className="recent-logins-list">
                                 <div className="recent-login-item">
@@ -181,12 +198,12 @@ const AdminDashboard = () => {
                                         </div>
                                         <div className="login-details">
                                             <h4>{email}</h4>
-                                            <p>Just now via Admin Portal</p>
+                                            <p>Admin Portal Access</p>
                                         </div>
                                     </div>
-                                    <span className="login-time">Active Now</span>
+                                    <span className="login-time" style={{ color: '#00c853' }}>Active Now</span>
                                 </div>
-                                {/* Mock Data */}
+
                                 <div className="recent-login-item">
                                     <div className="login-info">
                                         <div className="login-avatar" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: '#888' }}>
@@ -194,51 +211,75 @@ const AdminDashboard = () => {
                                         </div>
                                         <div className="login-details">
                                             <h4>manager@riyamakeover.in</h4>
-                                            <p>2 hours ago via Web</p>
+                                            <p>Dashboard Check</p>
                                         </div>
                                     </div>
                                     <span className="login-time">2h ago</span>
                                 </div>
+
+                                <div className="recent-login-item">
+                                    <div className="login-info">
+                                        <div className="login-avatar" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: '#888' }}>
+                                            <Settings size={20} />
+                                        </div>
+                                        <div className="login-details">
+                                            <h4>System Auto-Backup</h4>
+                                            <p>Automated Task</p>
+                                        </div>
+                                    </div>
+                                    <span className="login-time">5h ago</span>
+                                </div>
                             </div>
                         </motion.div>
 
+                        {/* Session Vault */}
                         <motion.div className="content-card" variants={itemVariants}>
                             <div className="card-header">
-                                <span className="card-title">Session Details</span>
+                                <span className="card-title"><Lock size={18} color="#c5a059" /> Secure Session Vault</span>
                             </div>
+
                             <div className="session-info">
-                                <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '1rem' }}>
-                                    You are currently logged in with administrative privileges.
+                                <p style={{ color: '#888', fontSize: '0.85rem', marginBottom: '1.5rem', lineHeight: '1.6' }}>
+                                    You are currently operating with Level-5 Administrative Privileges. All actions are logged.
                                 </p>
 
-                                {/* 
-                                    USER REQUEST: "if use click the adminlogi wherever the eail passowrd show it"
-                                    IMPLICATION: Show the credentials used to login.
-                                */}
-                                <div className="credentials-display">
-                                    <div className="credentials-title">
-                                        <Shield size={14} />
-                                        <span>Current Session Creds</span>
+                                <div className="vault-container">
+                                    <div className="vault-header">
+                                        <Shield size={16} />
+                                        <span>ENCRYPTED_CREDENTIALS_DISPLAY</span>
                                     </div>
-                                    <div style={{ marginBottom: '0.5rem' }}>
-                                        <small style={{ color: '#aaa' }}>Email:</small>
-                                        <div className="credentials-value">
-                                            {email}
+
+                                    <div className="credential-row">
+                                        <span className="credential-label">Admin Identity</span>
+                                        <div className="credential-value-box">
+                                            <span>{email}</span>
+                                            <UserCheck size={14} color="#00c853" />
                                         </div>
                                     </div>
-                                    <div>
-                                        <small style={{ color: '#aaa' }}>Password:</small>
-                                        <div className="credentials-value">
-                                            <span style={{ filter: showPassword ? 'none' : 'blur(4px)' }}>
+
+                                    <div className="credential-row">
+                                        <span className="credential-label">Access Key (Password)</span>
+                                        <div className="credential-value-box">
+                                            <span style={{
+                                                filter: showPassword ? 'none' : 'blur(5px)',
+                                                transition: 'all 0.3s',
+                                                userSelect: 'none'
+                                            }}>
                                                 {password}
                                             </span>
                                             <button
+                                                className="toggle-pass-btn"
                                                 onClick={() => setShowPassword(!showPassword)}
-                                                style={{ background: 'none', border: 'none', color: '#aaa', cursor: 'pointer' }}
+                                                title={showPassword ? "Hide Password" : "Show Password"}
                                             >
-                                                {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
+                                                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                                             </button>
                                         </div>
+                                    </div>
+
+                                    <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem', alignItems: 'center', fontSize: '0.7rem', color: '#666' }}>
+                                        <Key size={12} />
+                                        <span>End-to-end encryption active</span>
                                     </div>
                                 </div>
                             </div>
