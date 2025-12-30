@@ -16,6 +16,7 @@
     "@capacitor/core": "^7.4.4",
     "@emotion/is-prop-valid": "^1.4.0",
     "@lottiefiles/dotlottie-react": "^0.17.10",
+    "firebase": "^12.7.0",
     "framer-motion": "^12.23.24",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.554.0",
