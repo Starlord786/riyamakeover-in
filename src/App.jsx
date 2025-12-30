@@ -64,7 +64,8 @@ function App() {
       <OfflineNotification show={showNotification} countdown={countdown} />
 
       {shouldShowLayout && (
-        <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
+        // <Preloader isLoading={isLoading} onImageLoaded={() => setIsImageLoaded(true)} />
+        null
       )}
 
       {/* Show Navbar on all pages except the tattoo section and admin login */}
