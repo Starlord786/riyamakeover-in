@@ -73,6 +73,7 @@ const Navbar = () => {
                     <Link to="/#services" className="navbar-item" onClick={() => setIsOpen(false)}>Services</Link>
                     <Link to="/#gallery" className="navbar-item" onClick={() => setIsOpen(false)}>Gallery</Link>
                     <Link to="/#faq" className="navbar-item" onClick={() => setIsOpen(false)}>FAQ</Link>
+                    <Link to="/#reviews" className="navbar-item" onClick={() => setIsOpen(false)}>Reviews</Link>
                     <Link to="/#contact" className="navbar-item" onClick={() => setIsOpen(false)}>Contact</Link>
 
                     {!user ? (

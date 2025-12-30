@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { loadSlim } from "tsparticles-slim";
 import Particles from "react-particles";
+import { ArrowRight } from 'lucide-react';
 import './TattooHome.css';
 
 // Importing assets
@@ -14,33 +15,29 @@ const heroData = [
     {
         id: 1,
         image: img1,
-        title: "Ink",
-        highlight: "Legacy",
-        subtitle: "Stories etched in skin forever. A tribute to your journey.",
+        title: "INK LEGACY",
+        subtitle: "Stories etched in skin forever.",
         cta: "Book Session"
     },
     {
         id: 2,
         image: img2,
-        title: "Art",
-        highlight: "Soul",
-        subtitle: "Expression beyond words. Wear your truth with pride.",
+        title: "ART & SOUL",
+        subtitle: "Expression beyond words.",
         cta: "View Portfolio"
     },
     {
         id: 3,
         image: img3,
-        title: "Bold",
-        highlight: "Spirit",
-        subtitle: "Unleash your inner rebel. Precision meets passion.",
+        title: "BOLD SPIRIT",
+        subtitle: "Unleash your inner rebel.",
         cta: "Meet Artists"
     },
     {
         id: 4,
         image: img4,
-        title: "Pure",
-        highlight: "Vision",
-        subtitle: "Where imagination becomes permanence. The ultimate canvas.",
+        title: "PURE VISION",
+        subtitle: "The ultimate canvas is you.",
         cta: "Get Consult"
     }
 ];
@@ -53,30 +50,19 @@ const TattooHero = ({ scrollToSection }) => {
     }, []);
 
     useEffect(() => {
-        const timer = setInterval(nextSlide, 5000);
+        const timer = setInterval(nextSlide, 6000);
         return () => clearInterval(timer);
     }, [nextSlide]);
 
     const particlesInit = useCallback(async (engine) => { await loadSlim(engine); }, []);
 
-    // Animation Variants
-    const containerVariants = {
-        initial: { opacity: 0, scale: 1.2, filter: "blur(10px)" },
-        animate: {
-            opacity: 1,
-            scale: 1,
-            filter: "blur(0px)",
-            transition: { duration: 1.2, ease: [0.19, 1, 0.22, 1] }
-        },
-        exit: {
-            opacity: 0,
-            scale: 0.8,
-            filter: "blur(5px)",
-            transition: { duration: 0.8, ease: "easeInOut" }
-        }
-    };
-
-    const isAlternated = current % 2 !== 0;
+    // Preload images to prevent stutter
+    useEffect(() => {
+        heroData.forEach((slide) => {
+            const img = new Image();
+            img.src = slide.image;
+        });
+    }, []);
 
     const handleCtaClick = () => {
         if (scrollToSection) {
@@ -86,74 +72,84 @@ const TattooHero = ({ scrollToSection }) => {
 
     return (
         <section className="t-hero-epic" id="home">
+            {/* Background Image Layer */}
+            {/* Removing mode='wait' allows cross-fading (overlap) logic for smoother transitions */}
+            <AnimatePresence initial={false}>
+                <motion.div
+                    key={current}
+                    className="t-hero-bg-layer"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                >
+                    <img src={heroData[current].image} alt="Background" className="t-hero-bg-img" />
+                    <div className="t-hero-overlay"></div>
+                </motion.div>
+            </AnimatePresence>
+
+            {/* Particles Layer */}
             <Particles
                 id="tsparticles"
                 init={particlesInit}
                 options={{
                     fullScreen: { enable: false },
                     particles: {
-                        number: { value: 30, density: { enable: true, area: 800 } },
-                        color: { value: "#00e676" }, // Green Theme
+                        number: { value: 40, density: { enable: true, area: 800 } },
+                        color: { value: "#00e676" },
                         shape: { type: "circle" },
-                        opacity: { value: { min: 0.1, max: 0.3 } },
-                        size: { value: { min: 1, max: 2 } },
-                        move: { enable: true, speed: 0.6, direction: "top", random: true }
+                        opacity: { value: { min: 0.1, max: 0.5 } },
+                        size: { value: { min: 1, max: 3 } },
+                        move: { enable: true, speed: 1, direction: "none", random: true, straight: false, outModes: "out" },
+                        links: { enable: true, color: "#00e676", opacity: 0.2, distance: 150 }
+                    },
+                    interactivity: {
+                        events: { onHover: { enable: true, mode: "grab" } },
+                        modes: { grab: { distance: 200, links: { opacity: 0.5 } } }
                     }
                 }}
                 className="t-hero-particles"
             />
 
-            <div className="t-hero-stage">
+            {/* Content Layer */}
+            <div className="t-hero-content-container">
                 <AnimatePresence mode='wait'>
                     <motion.div
                         key={current}
-                        className={`t-hero-slide-container ${isAlternated ? 'alternated' : ''}`}
-                        variants={containerVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
+                        className="t-hero-text-block"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -30, transition: { duration: 0.5 } }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
                     >
-                        {/* Image Side */}
-                        <div className="t-hs-image-wrapper">
-                            <motion.img
-                                src={heroData[current].image}
-                                alt={heroData[current].title}
-                                className="t-hs-image"
-                                initial={{ scale: 1.1 }}
-                                animate={{ scale: 1 }}
-                                transition={{ duration: 5 }}
-                            />
-                        </div>
+                        <h5 className="t-hero-pretitle">EST. MMXXIV // RIYA TATTOO</h5>
+                        <h1 className="t-hero-title">{heroData[current].title}</h1>
+                        <p className="t-hero-subtitle">{heroData[current].subtitle}</p>
 
-                        {/* Content Side */}
-                        <div className="t-hs-content-wrapper">
-                            <motion.div className="t-hs-content-inner">
-                                <span className="t-hs-label">Est. MMXXIV</span>
-                                <h1 className="t-hs-title">
-                                    {heroData[current].title}
-                                    <span className="t-hs-highlight">{heroData[current].highlight}</span>
-                                </h1>
-                                <p className="t-hs-subtitle">{heroData[current].subtitle}</p>
-                                <button className="t-hs-cta" onClick={handleCtaClick}>
-                                    {heroData[current].cta}
-                                </button>
-                            </motion.div>
-                        </div>
+                        <motion.button
+                            className="t-hero-cta"
+                            onClick={handleCtaClick}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <span>{heroData[current].cta}</span>
+                            <ArrowRight size={20} />
+                        </motion.button>
                     </motion.div>
                 </AnimatePresence>
             </div>
 
-            <div className="t-epic-controls">
-                {heroData.map((_, i) => (
-                    <button
-                        key={i}
-                        onClick={() => setCurrent(i)}
-                        className={`t-epic-dot ${i === current ? 'active' : ''}`}
-                    >
-                        <span className="t-dot-number">0{i + 1}</span>
-                        <div className="t-dot-bar" />
-                    </button>
-                ))}
+            {/* Controls */}
+            <div className="t-hero-controls">
+                <div className="t-slide-indicators">
+                    {heroData.map((_, index) => (
+                        <div
+                            key={index}
+                            className={`t-indicator ${index === current ? 'active' : ''}`}
+                            onClick={() => setCurrent(index)}
+                        ></div>
+                    ))}
+                </div>
             </div>
         </section>
     );

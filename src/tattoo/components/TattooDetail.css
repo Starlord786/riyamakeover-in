@@ -1,7 +1,7 @@
 /* Global Vars for Tattoo Detail Page */
 :root {
     --td-bg: #050505;
-    --td-accent: #d4af37;
+    --td-accent: #00e676;
     --td-text: #ffffff;
     --td-text-muted: #888888;
     --td-font-display: 'Agency FB', sans-serif;
@@ -32,8 +32,10 @@
 
 /* Navigation */
 .td-nav-bar {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
     z-index: 100;
     display: flex;
     justify-content: space-between;
@@ -41,7 +43,7 @@
     padding: 1.5rem 3rem;
     background: rgba(5, 5, 5, 0.85);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 230, 118, 0.1);
 }
 
 .td-nav-brand {
@@ -49,7 +51,8 @@
     font-size: 1.5rem;
     letter-spacing: 0.2em;
     font-weight: bold;
-    color: var(--td-text);
+    color: var(--td-accent);
+    text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
 }
 
 .td-back-studio-btn {
@@ -70,7 +73,7 @@
 .td-back-studio-btn:hover {
     border-color: var(--td-accent);
     color: var(--td-accent);
-    background: rgba(212, 175, 55, 0.05);
+    background: rgba(0, 230, 118, 0.05);
 }
 
 /* Main Layout */
@@ -86,7 +89,7 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 4rem;
-    padding-top: 4rem;
+    padding-top: 8rem;
     min-height: 90vh;
 }
 
@@ -102,7 +105,7 @@
 .td-image-frame {
     position: relative;
     width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 230, 118, 0.2);
     padding: 10px;
 }
 
@@ -119,7 +122,7 @@
     left: 10px;
     right: 10px;
     bottom: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 230, 118, 0.1);
     pointer-events: none;
 }
 
@@ -195,8 +198,9 @@
     display: inline-flex;
     align-items: center;
     gap: 1rem;
-    background: var(--td-accent);
-    color: #000;
+    background: transparent;
+    border: 1px solid var(--td-accent);
+    color: var(--td-accent);
     padding: 1.25rem 2.5rem;
     font-family: var(--td-font-display);
     font-size: 1.25rem;
@@ -208,9 +212,10 @@
 }
 
 .td-book-btn:hover {
-    background: #fff;
+    background: var(--td-accent);
+    color: #000;
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
 }
 
 /* Related Works */

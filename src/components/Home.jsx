@@ -5,6 +5,7 @@ import Gallery from './Gallery';
 import FAQ from './FAQ';
 import Contact from './Contact';
 import BrandIntro from './BrandIntro';
+import Reviews from './Reviews';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <Services />
             <Gallery />
             <FAQ />
+            <Reviews />
             <Contact />
         </>
     );

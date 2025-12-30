@@ -12,14 +12,22 @@
 
     --font-heading: 'Oswald', sans-serif;
     --font-heading-hero: 'Cinzel', serif;
-    /* Added for Hero look */
     --font-body: 'Inter', sans-serif;
     --font-sub: 'Montserrat', sans-serif;
-    /* Added for Hero look */
 }
 
 html {
     scroll-behavior: smooth;
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+html::-webkit-scrollbar {
+    display: none;
 }
 
 body {
@@ -29,40 +37,11 @@ body {
     color: var(--text-color);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
 }
 
-/* ================== TYPOGRAPHY UTILS ================== */
-.t-heading-lg {
-    font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700;
-    color: #fff;
-    margin: 0;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-}
-
-.t-display-xl {
-    font-family: var(--font-heading);
-    font-size: clamp(3rem, 6vw, 6rem);
-    font-weight: 700;
-    line-height: 0.9;
-    color: #fff;
-    margin: 0;
-    text-transform: uppercase;
-}
-
-.t-outline {
-    color: transparent;
-    -webkit-text-stroke: 1px var(--accent-color);
-}
-
-.t-gothic-accent {
-    color: var(--accent-color);
-    font-family: var(--font-heading);
-}
-
-/* ================== MINIMAL NAV ================== */
+/* ================== NAV ================== */
 .nav-minimal {
     position: fixed;
     top: 0;
@@ -90,13 +69,7 @@ body {
 }
 
 .nav-brand-minimal {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--accent-color);
-    text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
+    cursor: pointer;
 }
 
 .brand-logo {
@@ -131,7 +104,6 @@ body {
     color: var(--accent-color);
 }
 
-/* Updated Exit Logo Styles */
 .exit-link-img {
     display: block;
     transition: transform 0.3s ease;
@@ -145,50 +117,15 @@ body {
     height: 70px;
     width: auto;
     filter: brightness(1.1) saturate(1.3);
-    opacity: 1;
-    transition: transform 0.3s ease;
 }
 
-.exit-logo:hover {
-    transform: scale(1.1);
-    filter: brightness(1.2) saturate(1.4);
-}
-
-.mobile-exit-img {
-    margin-top: 2rem;
-    display: block;
-}
-
-.exit-logo-mobile {
-    height: 90px;
-    width: auto;
-    filter: brightness(1.1) saturate(1.3);
-    opacity: 1;
-}
-
-/* Remove old text styles if not used (optional to keep for revert safety) */
-.exit-link {
-    font-size: 0.8rem;
-    color: var(--gray-color);
-    text-decoration: none;
-    text-transform: uppercase;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 8px 16px;
-    transition: all 0.3s;
-}
-
-.exit-link:hover {
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-}
-
+/* Mobile Nav */
 .mobile-toggle-minimal {
     display: none;
     cursor: pointer;
     color: var(--text-color);
 }
 
-/* Mobile Menu */
 .mobile-menu-minimal {
     position: fixed;
     top: 0;
@@ -223,351 +160,6 @@ body {
     color: var(--accent-color);
 }
 
-.mobile-exit {
-    margin-top: 2rem;
-    color: var(--gray-color);
-    text-decoration: none;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-}
-
-/* ================== HERO EPIC STYLE ADAPTATION (GREEN THEME) ================== */
-
-.t-hero-epic {
-    height: 100vh;
-    width: 100%;
-    background: var(--bg-color);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Background Particles Container */
-.t-hero-particles {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    opacity: 0.5;
-}
-
-/* Main Stage */
-.t-hero-stage {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-    z-index: 10;
-    display: grid;
-    place-items: center;
-    padding: 2rem;
-}
-
-.t-hero-slide-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 80vh;
-    gap: 4rem;
-    position: absolute;
-    /* Essential for AnimatePresence stacking */
-}
-
-.t-hero-slide-container.alternated {
-    flex-direction: row-reverse;
-}
-
-/* Image Side */
-.t-hs-image-wrapper {
-    flex: 1.5;
-    height: 100%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: none;
-    width: 100%;
-    /* seamless blend - no borders */
-    height: 90vh;
-    overflow: hidden;
-}
-
-.t-hs-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 20%;
-    /* Focus high on face */
-    transform: scale(1.2);
-    /* Zoom in on face */
-    filter: grayscale(20%) contrast(1.2) brightness(0.9);
-    transition: transform 6s ease;
-    z-index: 2;
-    /* refined seamless blend */
-    -webkit-mask-image: radial-gradient(circle closest-side at center, black 30%, rgba(0, 0, 0, 0.5) 60%, transparent 100%);
-    mask-image: radial-gradient(circle closest-side at center, black 30%, rgba(0, 0, 0, 0.5) 60%, transparent 100%);
-}
-
-/* Content Side */
-.t-hs-content-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    /* Default: Push to far right */
-    text-align: right;
-    /* Default: Right align text */
-    padding: 0 4rem;
-    /* Increased padding */
-    color: white;
-}
-
-.t-hero-slide-container.alternated .t-hs-content-wrapper {
-    align-items: flex-start;
-    /* Alternated: Push to far left */
-    text-align: left;
-}
-
-.t-hs-content-inner {
-    max-width: 600px;
-}
-
-.t-hs-label {
-    display: block;
-    font-family: var(--font-sub);
-    letter-spacing: 0.5rem;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    color: var(--accent-color);
-    margin-bottom: 1.5rem;
-}
-
-.t-hs-title {
-    font-family: var(--font-heading-hero);
-    font-size: clamp(4rem, 8vw, 6rem);
-    line-height: 1;
-    margin: 0 0 1.5rem 0;
-    font-weight: 700;
-}
-
-.t-hs-highlight {
-    display: block;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
-    font-size: clamp(4rem, 8vw, 7rem);
-}
-
-.t-hs-subtitle {
-    font-family: var(--font-sub);
-    font-weight: 200;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    letter-spacing: 0.05rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 3rem;
-    max-width: 400px;
-    margin-left: auto;
-    /* Push to right */
-    margin-right: 0;
-}
-
-.t-hero-slide-container.alternated .t-hs-subtitle {
-    margin-left: 0;
-    margin-right: auto;
-    /* Push to left */
-}
-
-/* Button */
-.t-hs-cta {
-    background: transparent;
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-    padding: 1rem 2.5rem;
-    font-family: var(--font-sub);
-    text-transform: uppercase;
-    letter-spacing: 0.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
-}
-
-.t-hs-cta:hover {
-    background: var(--accent-color);
-    color: var(--bg-color);
-    box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
-}
-
-
-/* Controls */
-.t-epic-controls {
-    position: absolute;
-    right: 40px;
-    bottom: 40px;
-    display: flex;
-    gap: 1.5rem;
-    z-index: 20;
-}
-
-.t-epic-dot {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    opacity: 0.5;
-    transition: 0.3s;
-}
-
-.t-dot-number {
-    color: white;
-    font-family: var(--font-sub);
-    font-size: 0.8rem;
-}
-
-.t-dot-bar {
-    width: 40px;
-    height: 1px;
-    background: white;
-    transition: 0.3s;
-}
-
-.t-epic-dot.active {
-    opacity: 1;
-}
-
-.t-epic-dot.active .t-dot-bar {
-    background: var(--accent-color);
-    width: 60px;
-}
-
-/* Mobile Responsiveness for Tattoo Hero */
-@media (max-width: 1024px) {
-
-    .t-hero-slide-container,
-    .t-hero-slide-container.alternated {
-        flex-direction: column;
-        height: auto;
-        padding-top: 60px;
-        gap: 2rem;
-    }
-
-    .t-hs-image-wrapper {
-        height: 50vh;
-        width: 100%;
-        order: 1;
-    }
-
-    .t-hero-slide-container.alternated {
-        flex-direction: column;
-    }
-
-    .t-hs-content-wrapper {
-        text-align: center !important;
-        align-items: center !important;
-        padding: 0 1rem;
-        order: 2;
-    }
-
-    .t-hero-slide-container.alternated .t-hs-content-wrapper {
-        align-items: center;
-        text-align: center;
-    }
-
-    .t-hs-subtitle {
-        margin: 0 auto 2rem auto !important;
-    }
-
-    .t-epic-controls {
-        display: none;
-    }
-}
-
-
-/* ================== SECTIONS ================== */
-.minimal-content-wrapper {
-    background: var(--bg-color);
-    position: relative;
-    z-index: 5;
-}
-
-.section-minimal {
-    padding: 100px 0;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.section-wrapper {
-    width: 100%;
-}
-
-/* Footer */
-.footer-minimal {
-    padding: 60px 0;
-    border-top: 1px solid rgba(0, 230, 118, 0.1);
-    text-align: center;
-    background: var(--bg-color);
-}
-
-.footer-cont h2 {
-    font-family: var(--font-heading);
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    color: var(--accent-color);
-}
-
-.footer-cont p {
-    color: var(--gray-color);
-    font-size: 0.9rem;
-}
-
-/* ================== RESPONSIVE ================== */
-@media (max-width: 768px) {
-    .desktop-only {
-        display: none;
-    }
-
-    .mobile-toggle-minimal {
-        display: block;
-    }
-
-    .nav-minimal-container {
-        padding: 0 20px;
-    }
-
-    .section-minimal {
-        padding: 60px 20px;
-    }
-
-    /* Ensure content in sections doesn't overflow */
-    .section-wrapper {
-        overflow-x: hidden;
-    }
-
-    .process-step {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .process-step .step-number {
-        margin-bottom: 0.5rem;
-    }
-
-    /* Reduce Logo Size on Mobile */
-    .brand-logo {
-        height: 50px;
-        /* Reduced from 60px */
-    }
-}
-
-/* Mobile Close Button (Inside Overlay) */
 .mobile-close-btn {
     position: absolute;
     top: 30px;
@@ -580,10 +172,6 @@ body {
     padding: 10px;
 }
 
-.mobile-close-btn:hover {
-    color: var(--accent-color);
-}
-
 .mobile-exit-img {
     margin-top: 2rem;
     display: block;
@@ -591,57 +179,226 @@ body {
 
 .exit-logo-mobile {
     height: 60px;
-    /* Reduced from 90px */
     width: auto;
-    filter: brightness(1.1) saturate(1.3);
-    opacity: 1;
 }
 
-/* Hover Overlay for Work Cards */
-.work-card {
-    cursor: pointer;
+
+/* ================== NEW HERO STYLES ================== */
+.t-hero-epic {
+    height: 100dvh;
+    /* Dynamic viewport height for mobile */
+    width: 100%;
+    position: relative;
     overflow: hidden;
-}
-
-.work-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background-color: var(--bg-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+}
+
+.t-hero-bg-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.t-hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Ensure background color is always present to avoid white flashes */
+.t-hero-epic::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--bg-color);
+    z-index: 0;
+}
+
+.t-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 50%, #050505 100%);
+}
+
+.t-hero-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.t-hero-content-container {
+    position: relative;
     z-index: 10;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+    /* Offset for Nav */
 }
 
-.work-card:hover .work-overlay {
-    opacity: 1;
+.t-hero-text-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.work-overlay-text {
-    color: #fff;
-    font-family: var(--font-heading);
-    font-size: 1.2rem;
+.t-hero-pretitle {
+    font-family: var(--font-sub);
+    color: var(--accent-color);
+    letter-spacing: 0.4em;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    border: 1px solid var(--accent-color);
-    padding: 12px 24px;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    transition: transform 0.3s ease;
+    font-weight: 600;
 }
 
-.work-card:hover .work-overlay-text {
-    transform: scale(1.05);
+.t-hero-title {
+    font-family: var(--font-heading-hero);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 1;
+    margin: 0 0 1.5rem 0;
+    color: #fff;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    letter-spacing: -0.02em;
 }
 
-/* --- LOADING OVERLAY --- */
+.t-hero-subtitle {
+    font-family: var(--font-sub);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    line-height: 1.6;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.t-hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent-color);
+    color: #000;
+    padding: 16px 40px;
+    border: none;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
+    transition: background 0.3s ease;
+}
+
+.t-hero-cta:hover {
+    background: #fff;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+/* Controls */
+.t-hero-controls {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    z-index: 20;
+}
+
+.t-control-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.t-control-btn:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #000;
+    transform: scale(1.1);
+}
+
+.t-slide-indicators {
+    display: flex;
+    gap: 12px;
+}
+
+.t-indicator {
+    width: 40px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.t-indicator.active {
+    background: var(--accent-color);
+    width: 60px;
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+
+/* ================== OTHER SECTIONS ================== */
+.minimal-content-wrapper {
+    background: var(--bg-color);
+    position: relative;
+    z-index: 5;
+}
+
+.section-minimal {
+    padding: 100px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Footer Minimal */
+.footer-minimal {
+    padding: 60px 0;
+    border-top: 1px solid rgba(0, 230, 118, 0.1);
+    text-align: center;
+    background: var(--bg-color);
+}
+
+.footer-cont h2 {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.footer-cont p {
+    color: var(--gray-color);
+    font-size: 0.9rem;
+}
+
+/* Loading */
 .tattoo-loader {
     position: fixed;
     inset: 0;
-    width: 100vw;
-    height: 100vh;
     background: #000;
     z-index: 2000;
     display: flex;
@@ -649,33 +406,71 @@ body {
     align-items: center;
 }
 
-.loader-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .nav-minimal-container {
+        padding: 0 20px;
+    }
+
+    .brand-logo {
+        height: 60px;
+    }
 }
 
-.loader-logo {
-    width: 150px;
-    height: auto;
-    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
-}
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
 
-.loader-bar {
-    width: 200px;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    overflow: hidden;
-    /* Important for inner bar to be contained */
-    position: relative;
-}
+    .mobile-toggle-minimal {
+        display: block;
+    }
 
-.loader-progress {
-    height: 100%;
-    background: #d4af37;
-    /* Gold for Riya Makeover destination */
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
-    /* width is controlled by framer motion inline */
+    .t-hero-title {
+        font-size: 3.5rem;
+        /* Ensure readable on mobile */
+        letter-spacing: 0;
+    }
+
+    .t-hero-pretitle {
+        font-size: 0.75rem;
+        letter-spacing: 0.3em;
+    }
+
+    .t-hero-subtitle {
+        font-size: 1rem;
+        padding: 0 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .t-hero-cta {
+        padding: 14px 30px;
+        font-size: 0.9rem;
+    }
+
+    .t-hero-controls {
+        display: none;
+    }
+
+    .t-control-btn {
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+    }
+
+    .t-indicator {
+        width: 25px;
+    }
+
+    .t-indicator.active {
+        width: 40px;
+    }
+
+    .t-hero-content-container {
+        margin-top: 0;
+    }
+
+    .section-minimal {
+        padding: 60px 20px;
+    }
 }
