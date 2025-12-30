@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Lock, Mail, ArrowLeft, Scissors, Palette, Sparkles, Feather, Gem, Brush, Heart, Star, Fingerprint, AlertTriangle } from 'lucide-react';
+import { Lock, Mail, ArrowLeft, Scissors, Palette, Sparkles, Feather, Gem, Brush, Heart, Star, AlertTriangle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase';
 import './AdminLogin.css';
-
 
 const AdminLogin = () => {
     const navigate = useNavigate();
@@ -12,6 +14,7 @@ const AdminLogin = () => {
         password: ''
     });
     const [viewState, setViewState] = useState('login'); // 'login', 'loading', 'error'
+    const [loginError, setLoginError] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -21,20 +24,36 @@ const AdminLogin = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Admin Login attempt:', formData);
         setViewState('loading');
+        setLoginError('');
 
-        // Simulate API call
-        setTimeout(() => {
-            navigate('/admin-dashboard', {
-                state: {
-                    email: formData.email,
-                    password: formData.password
-                }
-            });
-        }, 1500);
+        try {
+            // 1. Authenticate with Firebase Auth
+            const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+            const user = userCredential.user;
+
+            // 2. Check strict "admins" collection authorization
+            // Assuming document ID is the email address as per requirement
+            const adminDocRef = doc(db, 'admins', user.email);
+            const adminDoc = await getDoc(adminDocRef);
+
+            if (adminDoc.exists()) {
+                // 3. Success: Redirect to Dashboard
+                navigate('/admin-dashboard');
+            } else {
+                // 4. Unauthorized: Sign out immediately
+                await signOut(auth);
+                setLoginError("Access Denied: You do not have administrator privileges.");
+                setViewState('login');
+            }
+
+        } catch (error) {
+            console.error("Admin Login Error:", error);
+            setLoginError("Invalid email or password.");
+            setViewState('login');
+        }
     };
 
     const handleForgotPassword = (e) => {
@@ -89,6 +108,11 @@ const AdminLogin = () => {
 
                 {viewState === 'login' && (
                     <form onSubmit={handleSubmit} className="admin-form">
+                        {loginError && (
+                            <div style={{ color: '#ff4d4d', textAlign: 'center', marginBottom: '1rem', background: 'rgba(255,0,0,0.1)', padding: '10px', borderRadius: '4px' }}>
+                                {loginError}
+                            </div>
+                        )}
                         <div className="form-group">
                             <label htmlFor="email">Email Address</label>
                             <div className="input-with-icon">
