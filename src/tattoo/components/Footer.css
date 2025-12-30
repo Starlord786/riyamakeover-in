@@ -25,7 +25,7 @@
     font-family: var(--font-body);
     position: relative;
     overflow: hidden;
-    border-top: 1px solid rgba(197, 160, 89, 0.2);
+    border-top: 1px solid rgba(120, 201, 77, 0.2);
 }
 
 /* Texture Overlay */
@@ -59,7 +59,7 @@
     width: 1px;
     height: 100%;
     min-height: 250px;
-    background: linear-gradient(180deg, transparent, rgba(197, 160, 89, 0.4), transparent);
+    background: linear-gradient(180deg, transparent, rgba(120, 201, 77, 0.4), transparent);
 }
 
 /* 1. Brand Section */
@@ -76,13 +76,13 @@
     width: 140px;
     height: auto;
     margin-bottom: 25px;
-    filter: drop-shadow(0 0 15px rgba(197, 160, 89, 0.2));
+    filter: drop-shadow(0 0 15px rgba(120, 201, 77, 0.2));
     transition: transform 0.5s ease;
 }
 
 .riya-footer-logo:hover {
     transform: scale(1.05) rotate(2deg);
-    filter: drop-shadow(0 0 20px rgba(197, 160, 89, 0.4));
+    filter: drop-shadow(0 0 20px rgba(120, 201, 77, 0.4));
 }
 
 .riya-brand-title {
@@ -203,11 +203,11 @@
     justify-content: center;
     width: 42px;
     height: 42px;
-    border: 1px solid rgba(197, 160, 89, 0.4);
+    border: 1px solid rgba(120, 201, 77, 0.4);
     border-radius: 50%;
     color: var(--riya-gold);
     transition: all 0.4s ease;
-    background: rgba(197, 160, 89, 0.05);
+    background: rgba(120, 201, 77, 0.05);
 }
 
 .riya-social-icon svg {
@@ -218,9 +218,9 @@
 
 .riya-social-icon:hover {
     border-color: var(--riya-gold-light);
-    box-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
+    box-shadow: 0 0 15px rgba(120, 201, 77, 0.3);
     transform: translateY(-3px);
-    background: rgba(197, 160, 89, 0.1);
+    background: rgba(120, 201, 77, 0.1);
     color: #fff;
 }
 
@@ -230,7 +230,7 @@
     z-index: 2;
     margin-top: 70px;
     text-align: center;
-    border-top: 1px solid rgba(197, 160, 89, 0.1);
+    border-top: 1px solid rgba(120, 201, 77, 0.1);
     padding-top: 30px;
     display: flex;
     flex-direction: column;
@@ -240,7 +240,7 @@
 .riya-footer-emblem {
     margin-bottom: 20px;
     display: block;
-    filter: drop-shadow(0 0 8px rgba(197, 160, 89, 0.3));
+    filter: drop-shadow(0 0 8px rgba(120, 201, 77, 0.3));
 }
 
 .riya-footer-bottom p {
