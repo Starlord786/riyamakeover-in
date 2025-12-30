@@ -6,17 +6,17 @@
  preserveAspectRatio="xMidYMid meet">
 
 <defs>
-    <linearGradient id="goldShine" x1="-100%" y1="0%" x2="0%" y2="0%" gradientUnits="objectBoundingBox">
-        <stop offset="0%" stop-color="#C5B358" />
-        <stop offset="50%" stop-color="#FFD700" /> <!-- Bright Gold Shine -->
-        <stop offset="100%" stop-color="#C5B358" />
+    <linearGradient id="greenShine" x1="-100%" y1="0%" x2="0%" y2="0%" gradientUnits="objectBoundingBox">
+        <stop offset="0%" stop-color="#39ff14" /> <!-- Neon Green -->
+        <stop offset="50%" stop-color="#ccffcc" /> <!-- Bright Green Shine -->
+        <stop offset="100%" stop-color="#39ff14" />
         <animate attributeName="x1" from="-100%" to="100%" dur="3s" repeatCount="indefinite" />
         <animate attributeName="x2" from="0%" to="200%" dur="3s" repeatCount="indefinite" />
     </linearGradient>
 </defs>
 
 <g transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"
-fill="url(#goldShine)" stroke="none">
+fill="url(#greenShine)" stroke="none">
 <path d="M1 6933 c1 -1218 5 -2033 10 -1983 103 1020 542 1964 1254 2699 728
 751 1690 1222 2727 1335 106 12 -155 14 -1934 15 l-2058 1 1 -2067z"/>
 <path d="M4875 8993 c1346 -121 2579 -857 3327 -1984 740 -1115 950 -2483 578

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
-import goldLogo from '../assets/riya_tattoo_gold_logo.png';
+import dragonLogo from '../../assets/dragon-animated.svg';
 
 const Footer = () => {
     return (
@@ -10,7 +10,7 @@ const Footer = () => {
 
                 {/* 1. Brand Section */}
                 <div className="riya-footer-brand">
-                    <img src={goldLogo} alt="Riya Tattoo Logo" className="riya-footer-logo" />
+                    <img src={dragonLogo} alt="Riya Tattoo Logo" className="riya-footer-logo" />
                     <h2 className="riya-brand-title">RIYA TATTOO</h2>
                     <p className="riya-brand-tagline">Bold Spirit. Timeless Ink.</p>
                 </div>
@@ -91,7 +91,7 @@ const Footer = () => {
 
             {/* Bottom Bar */}
             <div className="riya-footer-bottom">
-                <div className="riya-footer-emblem"><img src={goldLogo} alt="Riya Tattoo Emblem" style={{ height: '40px' }} /></div>
+                <div className="riya-footer-emblem"><img src={dragonLogo} alt="Riya Tattoo Emblem" style={{ height: '40px' }} /></div>
                 <p>&copy; 2025 RIYA TATTOO. ALL RIGHTS RESERVED.</p>
             </div>
         </footer>
