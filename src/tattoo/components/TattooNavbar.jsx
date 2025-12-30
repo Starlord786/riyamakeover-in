@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import riyaTattoo from '../../assets/Riya_Tattoo.png';
 import mainLogo from '../../assets/logo.png';
@@ -57,6 +57,9 @@ const TattooNavbar = () => {
                     <span onClick={() => handleNavClick('faq')}>FAQ</span>
                     <span onClick={() => handleNavClick('reviews')}>Reviews</span>
                     <span onClick={() => handleNavClick('contact')}>Contact</span>
+                    <Link to="/tattoo/login" className="nav-login-btn">
+                        Login
+                    </Link>
                 </div>
 
                 <div className="nav-right desktop-only">
@@ -82,6 +85,7 @@ const TattooNavbar = () => {
                 <span onClick={() => handleNavClick('faq')}>FAQ</span>
                 <span onClick={() => handleNavClick('reviews')}>Reviews</span>
                 <span onClick={() => handleNavClick('contact')}>Contact</span>
+                <Link to="/tattoo/login" className="mobile-login-link" onClick={() => setIsMenuOpen(false)}>Login</Link>
                 <a href="/" onClick={handleExit} className="mobile-exit-img">
                     <img src={mainLogo} alt="Exit" className="exit-logo-mobile" />
                 </a>

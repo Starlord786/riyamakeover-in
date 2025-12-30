@@ -59,7 +59,7 @@ const Footer = () => {
                     <h3 className="riya-column-heading riya-neon-glow">Resources</h3>
                     <ul className="riya-footer-links">
                         <li><Link to="/tattoo/login" className="riya-footer-link">Login</Link></li>
-                        <li><Link to="/tattoo/admin" className="riya-footer-link">Admin Login</Link></li>
+
                         <li><Link to="/tattoo/newsletter" className="riya-footer-link">Newsletter</Link></li>
                         <li><Link to="/tattoo/faq" className="riya-footer-link">FAQ</Link></li>
                     </ul>

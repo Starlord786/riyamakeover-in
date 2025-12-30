@@ -1,62 +1,44 @@
 /* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 
 :root {
-    --riya-gold: #C5A059;
-    --riya-gold-hover: #D4B06A;
     --riya-neon-green: #39ff14;
+    --riya-neon-glow: rgba(57, 255, 20, 0.4);
     --riya-bg-dark: #050505;
-    --riya-bg-charcoal: #1a1a1a;
+    --riya-card-bg: rgba(15, 15, 15, 0.95);
+    --riya-border: rgba(57, 255, 20, 0.2);
     --font-heading: 'Cinzel', serif;
     --font-body: 'Montserrat', sans-serif;
 }
 
-/* Page Wrapper */
 .riya-login-wrapper {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%);
+    background: radial-gradient(circle at center, #111 0%, #000 100%);
     position: relative;
-    overflow: hidden;
-    color: #e0e0e0;
+    padding: 20px;
     font-family: var(--font-body);
 }
 
-/* Texture Overlay */
-.riya-login-wrapper::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23C5A059' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
-    opacity: 0.5;
-    pointer-events: none;
-}
-
-/* Login Card */
 .riya-login-card {
-    background: rgba(20, 20, 20, 0.7);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    padding: 3rem 2.5rem;
-    border-radius: 20px;
+    background: var(--riya-card-bg);
+    border: 1px solid var(--riya-border);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
     width: 100%;
-    max-width: 420px;
-    border: 1px solid rgba(197, 160, 89, 0.2);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(197, 160, 89, 0.05);
-    position: relative;
-    z-index: 2;
-    animation: fadeIn 0.8s ease-out;
+    max-width: 440px;
+    padding: 40px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(57, 255, 20, 0.05);
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes fadeIn {
+@keyframes slideUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
 
     to {
@@ -65,10 +47,9 @@
     }
 }
 
-/* Logo Section */
 .riya-login-header {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 32px;
 }
 
 .riya-login-logo {
@@ -78,170 +59,215 @@
     border-radius: 50%;
     border: 2px solid var(--riya-neon-green);
     background: #000;
-    margin-bottom: 1rem;
-    filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.3));
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px var(--riya-neon-glow));
 }
 
 .riya-login-title {
     font-family: var(--font-heading);
-    color: var(--riya-gold);
-    font-size: 1.8rem;
+    color: #fff;
+    font-size: 2rem;
     margin: 0;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     letter-spacing: 2px;
+    background: linear-gradient(to bottom, #fff, #888);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .riya-login-subtitle {
     font-size: 0.9rem;
     color: #888;
-    margin-top: 0.5rem;
-    letter-spacing: 1px;
+    margin-top: 8px;
+    line-height: 1.5;
 }
 
-/* Form Styles */
+/* Social Login */
+.social-login-section {
+    margin-bottom: 24px;
+}
+
+.google-login-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.google-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.riya-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    color: #444;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.riya-divider::before,
+.riya-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Error Message */
+.auth-error-message {
+    background: rgba(234, 67, 53, 0.1);
+    color: #ea4335;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    border: 1px solid rgba(234, 67, 53, 0.2);
+    text-align: center;
+}
+
+/* Form */
 .riya-login-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 16px;
 }
 
 .riya-input-group {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .riya-input-icon {
     position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #666;
+    left: 16px;
+    color: #555;
     transition: color 0.3s ease;
 }
 
 .riya-login-input {
     width: 100%;
-    padding: 12px 15px 12px 45px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(197, 160, 89, 0.15);
-    border-radius: 8px;
+    padding: 14px 16px 14px 48px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     color: #fff;
     font-size: 0.95rem;
-    font-family: var(--font-body);
     transition: all 0.3s ease;
 }
 
 .riya-login-input:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.08);
     border-color: var(--riya-neon-green);
-    box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+    outline: none;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
 }
 
-.riya-login-input:focus+.riya-input-icon {
+.riya-login-input:focus~.riya-input-icon {
     color: var(--riya-neon-green);
 }
 
 .riya-password-toggle {
     position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 16px;
     background: none;
     border: none;
-    color: #666;
+    color: #555;
     cursor: pointer;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
-}
-
-.riya-password-toggle:hover {
-    color: var(--riya-gold);
-}
-
-/* Checkbox & Forgot Password */
-.riya-form-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.85rem;
-    color: #aaa;
-}
-
-.riya-remember-label {
     display: flex;
     align-items: center;
-    gap: 8px;
-    cursor: pointer;
 }
 
-.riya-remember-checkbox {
-    accent-color: var(--riya-gold);
-}
-
-.riya-forgot-link {
-    color: #aaa;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.riya-forgot-link:hover {
-    color: var(--riya-gold);
-}
-
-/* Login Button */
 .riya-login-btn {
-    background: linear-gradient(135deg, var(--riya-gold), #b89146);
+    background: var(--riya-neon-green);
     color: #000;
     border: none;
     padding: 14px;
-    border-radius: 8px;
+    border-radius: 12px;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     font-family: var(--font-heading);
     cursor: pointer;
-    letter-spacing: 1px;
-    transition: all 0.4s ease;
+    transition: all 0.3s ease;
     text-transform: uppercase;
-    margin-top: 1rem;
-    position: relative;
-    overflow: hidden;
+    letter-spacing: 1px;
+    margin-top: 10px;
 }
 
 .riya-login-btn:hover {
-    background: var(--riya-neon-green);
-    color: #000;
-    box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+    box-shadow: 0 0 25px var(--riya-neon-glow);
     transform: translateY(-2px);
+    background: #fff;
 }
 
-/* Admin Link */
-.riya-admin-link-wrapper {
+.riya-login-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Auth Toggle */
+.riya-auth-toggle {
+    margin-top: 24px;
     text-align: center;
-    margin-top: 2rem;
+    color: #888;
+    font-size: 0.9rem;
 }
 
-.riya-admin-link {
-    color: rgba(197, 160, 89, 0.6);
+.toggle-btn {
+    background: none;
+    border: none;
+    color: var(--riya-neon-green);
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 8px;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+.toggle-btn:hover {
+    text-decoration: underline;
+}
+
+/* Back Link */
+.back-to-site {
+    margin-top: 30px;
+    color: #666;
     text-decoration: none;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid transparent;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
 }
 
-.riya-admin-link:hover {
-    color: var(--riya-gold);
-    border-bottom-color: var(--riya-gold);
+.back-to-site:hover {
+    color: #fff;
 }
 
 /* Responsive */
 @media (max-width: 480px) {
     .riya-login-card {
-        padding: 2rem 1.5rem;
-        max-width: 90%;
+        padding: 30px 20px;
     }
 
     .riya-login-title {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
     }
 }
