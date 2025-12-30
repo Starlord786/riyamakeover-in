@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, User, Tag, ArrowUpRight } from 'lucide-react';
 import { tattooWorks } from '../data';
 import Footer from './Footer';
+import TattooNavbar from './TattooNavbar';
 import './TattooDetail.css';
 
 const TattooDetail = () => {
@@ -32,19 +33,18 @@ const TattooDetail = () => {
             <div className="td-bg-noise"></div>
 
             {/* Navigation Header */}
-            <nav className="td-nav-bar">
-                <Link to="/tattoo" className="td-back-studio-btn">
-                    <ArrowLeft size={20} />
-                    <span>Back to Studio</span>
-                </Link>
-
-                <div className="td-nav-brand">RIYA TATTOO</div>
-
-                <div className="td-nav-placeholder"></div> {/* For spacing balance */}
-            </nav>
+            {/* Navigation Header */}
+            <TattooNavbar />
 
             <main className="td-main-container">
                 <div className="td-content-grid">
+                    {/* Back to Studio Button */}
+                    <div style={{ gridColumn: '1 / -1', marginBottom: '1rem' }}>
+                        <Link to="/tattoo" className="td-back-studio-btn" style={{ display: 'inline-flex', width: 'auto' }}>
+                            <ArrowLeft size={20} />
+                            <span>Back to Studio</span>
+                        </Link>
+                    </div>
 
                     {/* Image Section - Now more prominent */}
                     <div className="td-visual-col">

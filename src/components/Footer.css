@@ -95,7 +95,6 @@
 .designer-inline-container {
     display: flex;
     align-items: center;
-    gap: 15px;
     margin-top: 40px;
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -106,10 +105,11 @@
     color: #666;
     letter-spacing: 2px;
     text-transform: uppercase;
+    margin-left: 30%;
 }
 
 .hybix-logo-inline {
-    width: 100px;
+    width: 200px;
     opacity: 0.6;
     transition: opacity 0.3s ease;
 }
@@ -135,5 +135,19 @@
 @media (max-width: 600px) {
     .footer-links-group {
         grid-template-columns: 1fr;
+    }
+
+    .hybix-logo-inline {
+        width: 150px;
+    }
+
+    .designed-by-text-inline {
+        margin-left: 5%;
+    }
+
+    .designer-inline-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 }
