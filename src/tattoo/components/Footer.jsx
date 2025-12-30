@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
-import dragonLogo from '../../assets/dragon-animated.svg';
+import dragonLogo from '../../assets/dragon-green.svg';
 
 const Footer = () => {
     return (

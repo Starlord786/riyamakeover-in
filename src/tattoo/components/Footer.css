@@ -2,12 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
 
 :root {
-    --riya-gold: #78c94d;
-    /* Reverted to Green as requested for highlights */
-    --riya-gold-light: #9be075;
-    --riya-olive: #556B2F;
-    /* Muted Olive Green */
-    --riya-olive-light: #8F9779;
+    --riya-green: #39ff14;
+    /* Neon Green */
+    --riya-green-light: #b5ffad;
+    --riya-olive: #2a3d0a;
+    --riya-olive-light: #4e632b;
     --riya-black: #080808;
     --riya-black-rich: #111111;
     --riya-text: #e0e0e0;
@@ -25,7 +24,7 @@
     font-family: var(--font-body);
     position: relative;
     overflow: hidden;
-    border-top: 1px solid rgba(120, 201, 77, 0.2);
+    border-top: 1px solid rgba(57, 255, 20, 0.2);
 }
 
 /* Texture Overlay */
@@ -59,7 +58,8 @@
     width: 1px;
     height: 100%;
     min-height: 250px;
-    background: linear-gradient(180deg, transparent, rgba(120, 201, 77, 0.4), transparent);
+    background: linear-gradient(180deg, transparent, var(--riya-green), transparent);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
 }
 
 /* 1. Brand Section */
@@ -82,18 +82,18 @@
 
 .riya-footer-logo:hover {
     transform: scale(1.05) rotate(2deg);
-    filter: drop-shadow(0 0 20px rgba(120, 201, 77, 0.4));
+    filter: drop-shadow(0 0 20px rgba(57, 255, 20, 0.4));
 }
 
 .riya-brand-title {
     font-family: var(--font-heading);
-    color: var(--riya-gold);
+    color: var(--riya-green);
     font-size: 2rem;
     font-weight: 500;
     letter-spacing: 3px;
     margin: 0 0 10px 0;
     text-transform: uppercase;
-    background: linear-gradient(45deg, var(--riya-gold), #e0f8d1, var(--riya-gold));
+    background: linear-gradient(45deg, var(--riya-green), #e0f8d1, var(--riya-green));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -111,7 +111,7 @@
 /* Headings */
 .riya-column-heading {
     font-family: var(--font-heading);
-    color: var(--riya-gold-light);
+    color: var(--riya-green-light);
     font-size: 1rem;
     margin-bottom: 30px;
     text-transform: uppercase;
@@ -153,12 +153,13 @@
     height: 1px;
     bottom: -2px;
     left: 0;
-    background-color: var(--riya-gold);
+    background-color: var(--riya-green);
     transition: width 0.3s ease;
 }
 
 .riya-footer-link:hover {
-    color: var(--riya-gold);
+    color: var(--riya-green);
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
 }
 
 .riya-footer-link:hover::after {
@@ -235,7 +236,7 @@
     z-index: 2;
     margin-top: 70px;
     text-align: center;
-    border-top: 1px solid rgba(120, 201, 77, 0.1);
+    border-top: 1px solid rgba(57, 255, 20, 0.1);
     padding-top: 30px;
     display: flex;
     flex-direction: column;
@@ -245,7 +246,7 @@
 .riya-footer-emblem {
     margin-bottom: 20px;
     display: block;
-    filter: drop-shadow(0 0 8px rgba(120, 201, 77, 0.3));
+    filter: drop-shadow(0 0 8px rgba(57, 255, 20, 0.3));
 }
 
 .riya-footer-bottom p {
