@@ -53,7 +53,7 @@
 
 .social-icons {
     display: flex;
-    gap: 20px;
+    gap: 40px;
     margin-top: 20px;
 }
 
@@ -88,10 +88,10 @@
 
 .column-heading {
     font-family: 'Cinzel', serif;
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 20px;
-    color: var(--text-gold);
+    color: var(--text-white);
     text-transform: uppercase;
     letter-spacing: 2px;
     border-bottom: 1px solid rgba(212, 175, 55, 0.3);
@@ -103,8 +103,10 @@
     color: #b0b0b0;
     text-decoration: none;
     margin-bottom: 10px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     transition: all 0.3s ease;
+    text-align: center;
+    margin-left: -150px;
 }
 
 .footer-link:hover {
