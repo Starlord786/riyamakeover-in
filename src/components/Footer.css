@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Agency+FB:wght@700&family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cinzel:wght@400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-
 :root {
     --dark-background: black;
     --text-white: #ffffff;
@@ -12,33 +11,18 @@
 
 .premium-footer {
     background: linear-gradient(0deg, #0a0a0a, #000000);
-    /* Restored subtle gradient depth */
     color: var(--text-white);
-    padding: 80px 5%;
+    padding: 60px 5% 40px;
     font-family: 'Poppins', sans-serif;
-    /* Changed from Bodoni */
     border-top: 1px solid rgba(212, 175, 55, 0.2);
     position: relative;
     overflow: hidden;
 }
 
-/* Optional: Slight light leak background effect */
-.premium-footer::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 400px;
-    background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.15), transparent 70%);
-    pointer-events: none;
-}
-
 .footer-content {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 80px;
+    gap: 60px;
     max-width: 1400px;
     margin: 0 auto;
     position: relative;
@@ -46,107 +30,55 @@
 }
 
 /* --- Left Side: Logo & Social --- */
-
 .footer-left {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    height: 100%;
 }
 
 .footer-logo-container {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
     width: fit-content;
-}
-
-/* Circular Glow behind the Dragon */
-.footer-logo-container::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100px;
-    /* Base glow size */
-    height: 100px;
-    background: rgba(212, 175, 55, 0.2);
-    box-shadow: 0 0 50px 30px rgba(212, 175, 55, 0.3);
-    /* The diffusion */
-    border-radius: 50%;
-    /* Force circle */
-    z-index: 0;
-    pointer-events: none;
-    transition: all 0.4s ease;
-}
-
-.footer-logo-container:hover::before {
-    background: rgba(212, 175, 55, 0.4);
-    box-shadow: 0 0 70px 40px rgba(212, 175, 55, 0.5);
-    /* Stronger diffusion */
-    width: 120px;
-    height: 120px;
 }
 
 .footer-logo {
     width: 160px;
     height: auto;
-    position: relative;
-    z-index: 1;
-    /* Sit on top of glow */
-    filter: brightness(1.1) drop-shadow(0 0 2px rgba(0, 0, 0, 0.8));
-    /* Sharpness only */
+    filter: brightness(1.1);
     transition: transform 0.3s ease;
-}
-
-.footer-logo:hover {
-    transform: scale(1.05);
-}
-
-.footer-social {
-    margin-top: auto;
-}
-
-.footer-social p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    color: var(--text-gold);
-    margin-bottom: 15px;
-    font-weight: 500;
 }
 
 .social-icons {
     display: flex;
     gap: 20px;
+    margin-top: 20px;
 }
 
 .social-icons a {
     color: var(--text-white);
+    font-size: 1.5rem;
     transition: all 0.3s ease;
 }
 
 .social-icons a:hover {
     color: var(--text-gold);
     transform: translateY(-3px);
-    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
 }
 
 /* --- Right Side: Links & Designer --- */
-
 .footer-right {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 40px; /* Space between links and designer */
 }
 
 .footer-links-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    gap: 30px;
 }
 
 .footer-column {
@@ -156,90 +88,93 @@
 
 .column-heading {
     font-family: 'Cinzel', serif;
-    /* Keep headings fancy */
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
-    margin-bottom: 25px;
-    color: var(--text-white);
+    margin-bottom: 20px;
+    color: var(--text-gold);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 2px solid rgba(212, 175, 55, 0.5);
-    /* Thicker accent */
-    padding-bottom: 10px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    padding-bottom: 8px;
     width: fit-content;
 }
 
 .footer-link {
-    font-family: 'Poppins', sans-serif;
-    /* Clean readable font */
     color: #b0b0b0;
     text-decoration: none;
-    margin-bottom: 12px;
-    font-size: 0.95rem;
-    font-weight: 300;
-    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
 }
 
 .footer-link:hover {
-    color: #d4af37;
+    color: var(--text-gold);
     padding-left: 5px;
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
-/* --- Designer Text --- */
-.footer-designer {
-    margin-top: 80px;
-    text-align: right;
-    width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+/* --- Designer Section: FIXED TO BE ONE BY ONE --- */
+.designer-inline-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
     padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+    margin-left: 100%;
 }
 
-.designer-text {
-    font-family: 'Bodoni Moda', serif;
-    /* Elegant serif for signature */
-    font-size: clamp(2rem, 4vw, 5rem);
-    font-weight: 700;
+.designed-by-text-inline {
+    font-size: 1rem;
+    color: #666;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    color: rgba(255, 255, 255, 0.15);
-    /* Slightly brighter */
-    margin: 0;
-    line-height: 1;
-    transition: color 0.5s ease;
-    cursor: default;
 }
 
-.designer-text:hover {
-    color: rgba(212, 175, 55, 0.4);
+.hybix-logo-inline {
+    width: 120px;
+    height: auto;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
 }
 
-/* --- Media Query --- */
+.hybix-logo-inline:hover {
+    opacity: 1;
+}
 
+/* --- Media Queries --- */
 @media (max-width: 900px) {
     .footer-content {
         grid-template-columns: 1fr;
-        gap: 60px;
+        text-align: center;
+        gap: 40px;
     }
 
     .footer-left {
         align-items: center;
-        text-align: center;
     }
 
-    .footer-designer {
-        text-align: center;
+    .footer-logo-container {
+        margin: 0 auto;
+    }
+
+    .column-heading {
+        margin: 0 auto 15px auto;
+    }
+
+    .designer-inline-container {
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .designer-inline-container {
+        margin-left: 0;
     }
 }
 
 @media (max-width: 600px) {
     .footer-links-group {
         grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .column-heading {
-        margin: 0 auto 25px auto;
+        gap: 40px;
     }
 }

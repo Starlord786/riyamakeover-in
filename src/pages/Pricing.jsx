@@ -1,12 +1,27 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import './Pages.css';
 
 const Pricing = () => {
     return (
-        <div className="page-container">
-            <div className="page-hero">
-                <h1 className="page-title">Pricing & Plans</h1>
-                <p className="page-subtitle">Transparent pricing for exceptional value. Choose the package that suits your special occasion.</p>
+        <motion.div
+            className="page-container"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+        >
+            <div className="page-hero" data-text="INVEST">
+                <motion.h1
+                    className="page-title"
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                >
+                    The Investment
+                </motion.h1>
+                <div className="page-subtitle">Curated Packages for You</div>
             </div>
 
             <section className="page-section">
@@ -22,7 +37,7 @@ const Pricing = () => {
                             <li>Draping</li>
                             <li>Studio Session</li>
                         </ul>
-                        <a href="/contact" className="plan-btn">Book Now</a>
+                        <Link to="/contact" className="plan-btn">Book Now</Link>
                     </div>
 
                     {/* Premium Plan */}
@@ -37,12 +52,12 @@ const Pricing = () => {
                             <li>Pre-Bridal Consultation</li>
                             <li>Venue Service Available</li>
                         </ul>
-                        <a href="/contact" className="plan-btn">Book Now</a>
+                        <Link to="/contact" className="plan-btn">Book Now</Link>
                     </div>
 
                     {/* Luxury Plan */}
                     <div className="pricing-card">
-                        <h3 className="plan-name">Engagement / Reception</h3>
+                        <h3 className="plan-name">Engagement</h3>
                         <div className="plan-price">₹8,000</div>
                         <ul className="plan-features">
                             <li>HD Makeup</li>
@@ -52,11 +67,11 @@ const Pricing = () => {
                             <li>Nail Polish Change</li>
                             <li>Studio or Venue Service</li>
                         </ul>
-                        <a href="/contact" className="plan-btn">Book Now</a>
+                        <Link to="/contact" className="plan-btn">Book Now</Link>
                     </div>
                 </div>
             </section>
-        </div>
+        </motion.div>
     );
 };
 

@@ -131,6 +131,42 @@ body {
     color: var(--accent-color);
 }
 
+/* Updated Exit Logo Styles */
+.exit-link-img {
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.exit-link-img:hover {
+    transform: scale(1.1);
+}
+
+.exit-logo {
+    height: 70px;
+    width: auto;
+    filter: brightness(1.1) saturate(1.3);
+    opacity: 1;
+    transition: transform 0.3s ease;
+}
+
+.exit-logo:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2) saturate(1.4);
+}
+
+.mobile-exit-img {
+    margin-top: 2rem;
+    display: block;
+}
+
+.exit-logo-mobile {
+    height: 90px;
+    width: auto;
+    filter: brightness(1.1) saturate(1.3);
+    opacity: 1;
+}
+
+/* Remove old text styles if not used (optional to keep for revert safety) */
 .exit-link {
     font-size: 0.8rem;
     color: var(--gray-color);
@@ -294,7 +330,6 @@ body {
     align-items: flex-start;
     /* Alternated: Push to far left */
     text-align: left;
-    /* Alternated: Left align text */
 }
 
 .t-hs-content-inner {
@@ -524,6 +559,42 @@ body {
     .process-step .step-number {
         margin-bottom: 0.5rem;
     }
+
+    /* Reduce Logo Size on Mobile */
+    .brand-logo {
+        height: 50px;
+        /* Reduced from 60px */
+    }
+}
+
+/* Mobile Close Button (Inside Overlay) */
+.mobile-close-btn {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    z-index: 101;
+    padding: 10px;
+}
+
+.mobile-close-btn:hover {
+    color: var(--accent-color);
+}
+
+.mobile-exit-img {
+    margin-top: 2rem;
+    display: block;
+}
+
+.exit-logo-mobile {
+    height: 60px;
+    /* Reduced from 90px */
+    width: auto;
+    filter: brightness(1.1) saturate(1.3);
+    opacity: 1;
 }
 
 /* Hover Overlay for Work Cards */
@@ -563,4 +634,48 @@ body {
 
 .work-card:hover .work-overlay-text {
     transform: scale(1.05);
+}
+
+/* --- LOADING OVERLAY --- */
+.tattoo-loader {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.loader-logo {
+    width: 150px;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+}
+
+.loader-bar {
+    width: 200px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    /* Important for inner bar to be contained */
+    position: relative;
+}
+
+.loader-progress {
+    height: 100%;
+    background: #d4af37;
+    /* Gold for Riya Makeover destination */
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+    /* width is controlled by framer motion inline */
 }

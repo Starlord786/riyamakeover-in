@@ -9,26 +9,17 @@
     align-items: center;
     font-size: 1rem;
     position: fixed;
-    /* Fixed position for overlay */
     top: 0;
     z-index: 999;
     transition: all 0.4s ease-in-out;
     width: 100%;
 }
 
-.home-icon {
-    margin-right: 5px;
-    margin-bottom: -1px;
-}
-
 .navbar.scrolled {
     background: rgba(5, 5, 5, 0.6);
-    /* Darker, more transparent */
     backdrop-filter: blur(15px);
-    /* Heavier blur */
     -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    /* Subtle border */
     height: 80px;
 }
 
@@ -39,7 +30,6 @@
     height: 100%;
     width: 100%;
     max-width: 1400px;
-    /* Match other sections */
     padding: 0 40px;
     position: relative;
 }
@@ -86,11 +76,10 @@
     position: relative;
     transition: color 0.3s ease;
     padding: 5px 0;
-    font-family: 'cinzel', sans-serif;
+    font-family: 'Cinzel', sans-serif;
 }
 
-/* Gold Underline Effect on Hover */
-.navbar-item::after {
+.navbar-item:not(.tattoo-img-link)::after {
     content: '';
     position: absolute;
     width: 0;
@@ -101,15 +90,15 @@
     transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.navbar-item:hover {
+.navbar-item:not(.tattoo-img-link):hover {
     color: #d4af37;
 }
 
-.navbar-item:hover::after {
+.navbar-item:not(.tattoo-img-link):hover::after {
     width: 100%;
 }
 
-/* Tattoo Image Link */
+/* Tattoo Image Link (Desktop) */
 .tattoo-img-link {
     margin-left: 2rem;
     display: flex;
@@ -119,7 +108,6 @@
 
 .tattoo-img {
     height: 60px;
-    /* Adjust as needed */
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5));
@@ -128,28 +116,31 @@
 
 .tattoo-img-link:hover .tattoo-img {
     transform: scale(1.1);
-    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.8));
+    filter: drop-shadow(0 0 10px rgba(103, 255, 98, 0.8));
 }
 
 .tattoo-img-link::after {
-    display: none;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -5px;
+    left: 0;
+    background-color: #00e676;
+    /* Bright Green */
+    transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-
-
-
-/* Mobile Responsive */
-.mobile-tattoo-img-link {
-    display: none;
+.tattoo-img-link:hover::after {
+    width: 100%;
 }
 
+/* Hamburger Menu Toggle */
 .navbar-toggle {
     display: none;
     cursor: pointer;
     z-index: 1001;
-    /* Above everything */
     padding: 10px;
-    /* larger touch area */
 }
 
 .bar {
@@ -157,44 +148,31 @@
     width: 25px;
     height: 2px;
     background: #ffffff;
-    /* Gold */
     margin: 4px 0;
     transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-    /* Bouncy effect */
     border-radius: 2px;
-    box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
-    /* Gold glow */
 }
 
-/* Staggered widths for "Epic" look */
 .bar:nth-child(2) {
     width: 18px;
-    /* Shorter middle bar */
     margin-left: auto;
-    /* Align right effect if in flex column */
-}
-
-.navbar-toggle:hover .bar {
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
 }
 
 /* Open State Animation */
 .bar.open:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
-    width: 25px;
 }
 
 .bar.open:nth-child(2) {
     opacity: 0;
     transform: translateX(-20px);
-    width: 25px;
 }
 
 .bar.open:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
-    width: 25px;
 }
 
+/* --- Mobile Responsive Layout --- */
 @media screen and (max-width: 960px) {
     .navbar-container {
         padding: 0 20px;
@@ -204,7 +182,10 @@
     .navbar-logo {
         position: static;
         transform: none;
-        left: auto;
+    }
+
+    .logo-img {
+        height: 70px;
     }
 
     .navbar-menu {
@@ -213,13 +194,10 @@
         left: 0;
         width: 100%;
         height: 100vh;
-        overflow-y: hidden;
-        /* Avoid scrolling, fit content */
         background: #000;
         flex-direction: column;
         justify-content: center;
-        gap: 1.5rem;
-        /* Reduced gap for compact layout */
+        gap: 2rem;
         transform: translateX(100%);
         transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         z-index: 998;
@@ -235,32 +213,23 @@
 
     .navbar-item {
         font-size: 1.5rem;
-        /* Smaller font */
-        margin: 0;
-        /* Remove margin, use gap */
     }
 
+    /* Fixed Riya Tattoo Mobile Size */
     .tattoo-img-link {
         margin-left: 0;
-        margin-top: 1rem;
+        margin-top: 1.5rem;
         display: flex !important;
-        align-items: center;
         justify-content: center;
         width: 100%;
-        opacity: 1 !important;
-        visibility: visible !important;
     }
 
     .tattoo-img-link .tattoo-img {
-        height: 140px;
-        /* Reduced from 80px to fit better */
+        height: 50px;
+        /* Reduced from 140px to fit mobile screen */
         width: auto;
-        filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.8));
-        /* Enhance visibility */
-    }
-
-    .navbar-search {
-        display: none;
+        filter: drop-shadow(0 0 10px rgba(57, 255, 20, 0.6));
+        /* Adjusted glow to match green theme */
     }
 
     .mobile-tattoo-img-link {

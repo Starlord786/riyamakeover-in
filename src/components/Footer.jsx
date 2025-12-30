@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Footer.css'; // Link to the CSS file
 
 import dragonLogo from '../assets/dragon-animated.svg';
+import hybixLogo from '../assets/Darkmode.png';
 
 const Footer = () => {
     return (
@@ -72,13 +73,21 @@ const Footer = () => {
                             <Link to="/privacy" className="footer-link">Privacy Policy</Link>
                             <Link to="/licensing" className="footer-link">Licensing</Link>
                         </div>
+
+                        {/* Designer Credit (Placed here for ordering control) */}
+                        <div className="designer-inline-container">
+                            <span className="designed-by-text-inline">Designed by</span>
+                            <a href="https://hybixgroups.com/" target="_blank" rel="noopener noreferrer">
+                                <img src={hybixLogo} alt="Hybix" className="hybix-logo-inline" />
+                            </a>
+                        </div>
                     </div>
 
                     {/* Designer Credit */}
-                    <div className="footer-designer">
-                        <h2 className="designer-text">Designed By Hybix</h2>
-                    </div>
+
                 </div>
+
+
             </div>
         </footer >
     );

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Lock, Mail, ArrowLeft, Scissors, Palette, Sparkles, Feather, Gem, Brush, Heart, Star, Fingerprint, AlertTriangle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import './AdminLogin.css';
 
+
 const AdminLogin = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -22,7 +24,17 @@ const AdminLogin = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Admin Login attempt:', formData);
-        // Add administration login logic here
+        setViewState('loading');
+
+        // Simulate API call
+        setTimeout(() => {
+            navigate('/admin-dashboard', {
+                state: {
+                    email: formData.email,
+                    password: formData.password
+                }
+            });
+        }, 1500);
     };
 
     const handleForgotPassword = (e) => {

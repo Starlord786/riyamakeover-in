@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './TattooHome.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import TattooHero from './TattooHero';
 import riyaTattoo from '../../assets/Riya_Tattoo.png';
+import mainLogo from '../../assets/logo.png';
+import Preloader from '../../components/Preloader';
 
 import TattooWork from './TattooWork';
 import TattooProcess from './TattooProcess';
@@ -15,6 +17,8 @@ import { Menu, X } from 'lucide-react';
 const TattooHome = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     // Smooth scroll progress bar (minimal style)
     const { scrollYProgress } = useScroll();
@@ -39,8 +43,19 @@ const TattooHome = () => {
         }
     };
 
+    const handleExit = (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setTimeout(() => {
+            navigate('/');
+        }, 2000); // Match Preloader duration roughly
+    };
+
     return (
         <div className="tattoo-body-minimal">
+            {/* Loading Overlay */}
+            {isLoading && <Preloader isLoading={true} />}
+
             {/* Scroll Progress */}
             <motion.div className="minimal-progress" style={{ scaleX }} />
 
@@ -62,7 +77,9 @@ const TattooHome = () => {
                     </div>
 
                     <div className="nav-right desktop-only">
-                        <Link to="/" className="exit-link">Exit</Link>
+                        <a href="/" onClick={handleExit} className="exit-link-img">
+                            <img src={mainLogo} alt="Exit" className="exit-logo" />
+                        </a>
                     </div>
 
                     {/* Mobile Toggle */}
@@ -73,12 +90,17 @@ const TattooHome = () => {
 
                 {/* Mobile Menu Overlay */}
                 <div className={`mobile-menu-minimal ${isMenuOpen ? 'active' : ''}`}>
+                    <button className="mobile-close-btn" onClick={() => setIsMenuOpen(false)}>
+                        <X size={32} />
+                    </button>
                     <span onClick={() => scrollToSection('home')}>Studio</span>
                     <span onClick={() => scrollToSection('work')}>Work</span>
                     <span onClick={() => scrollToSection('process')}>Process</span>
                     <span onClick={() => scrollToSection('faq')}>FAQ</span>
                     <span onClick={() => scrollToSection('contact')}>Contact</span>
-                    <Link to="/" className="mobile-exit">Exit Site</Link>
+                    <a href="/" onClick={handleExit} className="mobile-exit-img">
+                        <img src={mainLogo} alt="Exit" className="exit-logo-mobile" />
+                    </a>
                 </div>
             </nav>
 

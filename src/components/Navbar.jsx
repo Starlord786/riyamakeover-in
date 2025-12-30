@@ -53,9 +53,6 @@ const Navbar = () => {
                         <img src={riyaTattoo} alt="Riya Tattoo" className="tattoo-img" />
                     </Link>
                 </div>
-                <Link to="/tattoo" className="tattoo-img-link mobile-tattoo-img-link">
-                    <img src={riyaTattoo} alt="Riya Tattoo" className="tattoo-img" />
-                </Link>
                 <div className="navbar-toggle" onClick={() => setIsOpen(!isOpen)}>
                     <span className={`bar ${isOpen ? 'open' : ''}`}></span>
                     <span className={`bar ${isOpen ? 'open' : ''}`}></span>

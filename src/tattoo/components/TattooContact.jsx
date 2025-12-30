@@ -44,8 +44,8 @@ const TattooContact = () => {
                         <motion.button
                             type="submit"
                             className="tattoo-btn"
-                            style={{ width: '100%', fontSize: '1.2rem', padding: '1.5rem', cursor: 'pointer', background: 'var(--accent-color)', color: '#000', border: 'none', fontWeight: 'bold', fontFamily: 'var(--font-heading)', letterSpacing: '0.1em' }}
-                            whileHover={{ scale: 1.02, backgroundColor: '#fff' }}
+                            style={{ width: '100%', fontSize: '1.2rem', padding: '1.5rem', cursor: 'pointer', background: 'var(--accent-color)', color: '#000', border: 'none', fontWeight: 'bold', fontFamily: 'var(--font-heading)', letterSpacing: '1px' }}
+                            whileHover={{ scale: 1.02, backgroundColor: '#fff', letterSpacing: '3px' }}
                             whileTap={{ scale: 0.98 }}
                         >
                             SUBMIT REQUEST
