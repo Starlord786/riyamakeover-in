@@ -8,7 +8,6 @@ const ScrollToTop = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
 
-    // Handle scroll restoration on route change
     useEffect(() => {
         if (hash) {
             setTimeout(() => {
@@ -23,10 +22,8 @@ const ScrollToTop = () => {
         }
     }, [pathname, hash]);
 
-    // Handle button visibility and progress
     useEffect(() => {
         const handleScroll = () => {
-            // Calculate visibility
             const isTattoo = pathname.toLowerCase().startsWith('/tattoo');
             if (window.pageYOffset > 300 && !isTattoo) {
                 setIsVisible(true);
@@ -34,12 +31,10 @@ const ScrollToTop = () => {
                 setIsVisible(false);
             }
 
-            // Calculate progress
             const totalScroll = document.documentElement.scrollTop;
             const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scroll = `${totalScroll / windowHeight}`;
-
-            setScrollProgress(Number(scroll));
+            const scroll = windowHeight > 0 ? totalScroll / windowHeight : 0;
+            setScrollProgress(scroll);
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -47,13 +42,9 @@ const ScrollToTop = () => {
     }, [pathname]);
 
     const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // SVG Circle setup
     const radius = 23;
     const circumference = 2 * Math.PI * radius;
     const strokeDashoffset = circumference - scrollProgress * circumference;
@@ -61,40 +52,14 @@ const ScrollToTop = () => {
     return (
         <>
             {isVisible && (
-                <div
-                    className="scroll-to-top-container"
-                    onClick={scrollToTop}
-                    aria-label="Scroll to top"
-                >
-                    <svg
-                        className="progress-ring"
-                        width="50"
-                        height="50"
-                    >
-                        <circle
-                            className="progress-ring__circle-bg"
-                            strokeWidth="2"
-                            fill="transparent"
-                            r={radius}
-                            cx="25"
-                            cy="25"
-                        />
-                        <circle
-                            className="progress-ring__circle"
-                            strokeWidth="2"
-                            fill="transparent"
-                            r={radius}
-                            cx="25"
-                            cy="25"
-                            style={{
-                                strokeDasharray: `${circumference} ${circumference}`,
-                                strokeDashoffset: strokeDashoffset
-                            }}
+                <div className="scroll-to-top-container" onClick={scrollToTop} aria-label="Scroll to top">
+                    <svg className="progress-ring" width="50" height="50">
+                        <circle className="progress-ring__circle-bg" strokeWidth="2" fill="transparent" r={radius} cx="25" cy="25" />
+                        <circle className="progress-ring__circle" strokeWidth="2" fill="transparent" r={radius} cx="25" cy="25"
+                            style={{ strokeDasharray: `${circumference} ${circumference}`, strokeDashoffset: strokeDashoffset }}
                         />
                     </svg>
-                    <div className="scroll-to-top-icon">
-                        <ArrowUp size={24} strokeWidth={2.5} />
-                    </div>
+                    <div className="scroll-to-top-icon"><ArrowUp size={24} strokeWidth={2.5} /></div>
                 </div>
             )}
         </>

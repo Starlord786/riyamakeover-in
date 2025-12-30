@@ -19,7 +19,9 @@ const Preloader = ({ isLoading, onImageLoaded }) => {
     }, [onImageLoaded]);
 
     useEffect(() => {
-        if (!isLoading) {
+        if (isLoading) {
+            setShow(true);
+        } else {
             const timer = setTimeout(() => {
                 setShow(false);
             }, 500); // Wait for fade out transition
