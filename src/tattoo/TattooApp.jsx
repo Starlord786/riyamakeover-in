@@ -11,6 +11,7 @@ import TattooFAQ from './components/TattooFAQ';
 import TattooReviews from './components/TattooReviews';
 import TattooNavbar from './components/TattooNavbar';
 import Footer from './components/Footer';
+import TattooNewsletter from './components/TattooNewsletter';
 import './components/TattooHome.css'; // Ensure styles are loaded for this sub-app
 import TattooLoader from './loader/TattooLoader';
 
@@ -78,6 +79,7 @@ const TattooApp = () => {
             <Route index element={<TattooHome />} />
             <Route path="work/:id" element={<TattooDetail />} />
             <Route path="login" element={<TattooLogin />} />
+            <Route path="newsletter" element={<TattooNewsletter />} />
             <Route path="*" element={<Navigate to="/tattoo" replace />} />
         </Routes>
     );

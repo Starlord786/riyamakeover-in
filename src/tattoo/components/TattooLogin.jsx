@@ -198,7 +198,7 @@ const TattooLogin = () => {
                 </div>
             </div>
 
-            <Link to="/studio" className="back-to-site">
+            <Link to="/tattoo" className="back-to-site">
                 ← Back to Studio
             </Link>
         </div>
