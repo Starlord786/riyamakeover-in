@@ -98,6 +98,7 @@
 
 /* --- UPDATED DESIGNER CONTAINER --- */
 .designer-inline-container {
+    grid-column: 1 / -1;
     display: flex;
     align-items: center;
     /* Vertically centers text and logo together */

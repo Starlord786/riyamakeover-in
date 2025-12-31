@@ -62,12 +62,12 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    <div className="designer-inline-container">
-                        <span className="designed-by-text-inline">Designed by</span>
-                        <a href="https://hybixgroups.com/" target="_blank" rel="noopener noreferrer">
-                            <img src={hybixLogo} alt="Hybix" className="hybix-logo-inline" />
-                        </a>
-                    </div>
+                </div>
+                <div className="designer-inline-container">
+                    <span className="designed-by-text-inline">Designed by</span>
+                    <a href="https://hybixgroups.com/" target="_blank" rel="noopener noreferrer">
+                        <img src={hybixLogo} alt="Hybix" className="hybix-logo-inline" />
+                    </a>
                 </div>
             </div>
         </footer>

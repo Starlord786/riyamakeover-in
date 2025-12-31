@@ -1,5 +1,7 @@
 .reviews-section {
     padding: 100px 0;
+    scroll-margin-top: 100px;
+    /* Fix for sticky header overlap */
     background-color: #000;
     position: relative;
     overflow: hidden;
@@ -8,6 +10,7 @@
 .reviews-header {
     text-align: center;
     margin-bottom: 60px;
+    padding: 0 20px;
 }
 
 .reviews-subtitle {
@@ -117,11 +120,69 @@
 }
 
 @media (max-width: 768px) {
+    .reviews-section {
+        padding: 60px 0;
+    }
+
     .reviews-title {
         font-size: 2rem;
     }
 
     .reviews-grid {
         grid-template-columns: 1fr;
+        padding: 0 20px;
     }
+
+    .review-card {
+        padding: 2rem 1.5rem;
+    }
+
+    /* Disable hover effects on mobile */
+    .review-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+.review-date {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 4px;
+    display: block;
+}
+
+.reviews-google-link {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.google-reviews-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.google-reviews-btn:hover {
+    background: var(--accent);
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+}
+
+.google-logo-svg {
+    flex-shrink: 0;
 }

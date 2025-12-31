@@ -7,6 +7,7 @@ import TattooLogin from './components/TattooLogin';
 import TattooContact from './components/TattooContact';
 import './components/TattooHome.css'; // Ensure styles are loaded for this sub-app
 import TattooLoader from './loader/TattooLoader';
+import TattooScrollProgress from './components/TattooScrollProgress';
 
 const TattooApp = () => {
     const [isLoading, setIsLoading] = React.useState(true);
@@ -47,15 +48,18 @@ const TattooApp = () => {
     }
 
     return (
-        <Routes>
-            <Route index element={<TattooHome />} />
-            <Route path="works" element={<TattooWorksPage />} />
-            <Route path="work/:id" element={<TattooDetail />} />
-            <Route path="contact" element={<TattooContact />} />
-            <Route path="login" element={<TattooLogin />} />
-            {/* Catch-all redirect to home within the tattoo section */}
-            <Route path="*" element={<Navigate to="/tattoo" replace />} />
-        </Routes>
+        <>
+            <TattooScrollProgress />
+            <Routes>
+                <Route index element={<TattooHome />} />
+                <Route path="works" element={<TattooWorksPage />} />
+                <Route path="work/:id" element={<TattooDetail />} />
+                <Route path="contact" element={<TattooContact />} />
+                <Route path="login" element={<TattooLogin />} />
+                {/* Catch-all redirect to home within the tattoo section */}
+                <Route path="*" element={<Navigate to="/tattoo" replace />} />
+            </Routes>
+        </>
     );
 };
 
