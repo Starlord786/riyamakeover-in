@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 import dragonLogo from '../../assets/dragon-green.svg';
+import hybixLogo from '../../assets/hybix.svg';
 
 const Footer = () => {
     return (
@@ -91,8 +92,12 @@ const Footer = () => {
 
             {/* Bottom Bar */}
             <div className="riya-footer-bottom">
-                <div className="riya-footer-emblem"><img src={dragonLogo} alt="Riya Tattoo Emblem" /></div>
-                <p>&copy; 2025 RIYA TATTOO. ALL RIGHTS RESERVED.</p>
+                <div className="designer-inline-container">
+                    <span className="designed-by-text-inline">Designed by</span>
+                    <a href="https://hybixgroups.com/" target="_blank" rel="noopener noreferrer">
+                        <img src={hybixLogo} alt="Hybix" className="hybix-logo-inline" />
+                    </a>
+                </div>
             </div>
         </footer>
     );
