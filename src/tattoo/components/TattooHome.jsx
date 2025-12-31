@@ -9,6 +9,7 @@ import TattooProcess from './TattooProcess';
 import TattooReviews from './TattooReviews';
 import TattooFAQ from './TattooFAQ';
 import TattooContact from './TattooContact';
+import TattooScrollProgress from './TattooScrollProgress';
 import Footer from './Footer';
 
 const TattooHome = () => {
@@ -50,6 +51,7 @@ const TattooHome = () => {
         <div className="tattoo-body-minimal">
             {/* Scroll Progress */}
             <motion.div className="minimal-progress" style={{ scaleX }} />
+            <TattooScrollProgress />
 
             <TattooNavbar scrollToSection={scrollToSection} />
 

@@ -60,6 +60,7 @@ const TattooApp = () => {
             <Route path="work/:id" element={<TattooDetail />} />
             <Route path="contact" element={<TattooContact />} />
             <Route path="login" element={<TattooLogin />} />
+            <Route path="newsletter" element={<TattooNewsletter />} />
             {/* Catch-all redirect to home within the tattoo section */}
             <Route path="*" element={<Navigate to="/tattoo" replace />} />
         </Routes>
