@@ -22,10 +22,10 @@ const Footer = () => {
                 <div className="riya-footer-column">
                     <h3 className="riya-column-heading riya-neon-glow">Menu</h3>
                     <ul className="riya-footer-links">
-                        <li><Link to="/tattoo" className="riya-footer-link">Studio</Link></li>
-                        <li><Link to="/tattoo/work" className="riya-footer-link">Work</Link></li>
-                        <li><Link to="/tattoo/artists" className="riya-footer-link">Artists</Link></li>
-                        <li><Link to="/tattoo/contact" className="riya-footer-link">Contact</Link></li>
+                        <li><Link to="/tattoo#studio" className="riya-footer-link">Studio</Link></li>
+                        <li><Link to="/tattoo#gallery" className="riya-footer-link">Work</Link></li>
+                        <li><Link to="/tattoo#process" className="riya-footer-link">Process</Link></li>
+                        <li><Link to="/tattoo#contact" className="riya-footer-link">Contact</Link></li>
                     </ul>
                 </div>
 
@@ -61,7 +61,7 @@ const Footer = () => {
                         <li><Link to="/tattoo/login" className="riya-footer-link">Login</Link></li>
 
                         <li><Link to="/tattoo/newsletter" className="riya-footer-link">Newsletter</Link></li>
-                        <li><Link to="/tattoo/faq" className="riya-footer-link">FAQ</Link></li>
+                        <li><Link to="/tattoo#faq" className="riya-footer-link">FAQ</Link></li>
                     </ul>
                 </div>
 
@@ -69,7 +69,7 @@ const Footer = () => {
                 <div className="riya-footer-column riya-follow-section">
                     <h3 className="riya-column-heading riya-neon-glow">Follow</h3>
                     <div className="riya-social-icons">
-                        <a href="#" className="riya-social-icon" aria-label="Instagram">
+                        <a href="https://www.instagram.com/riya_tattoo_vnr?igsh=MXM5emp2NzZmZmNiZg==" target="_blank" rel="noopener noreferrer" className="riya-social-icon" aria-label="Instagram">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.251-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.645-.07-4.85s.012-3.584.07-4.85c.149-3.227 1.664-4.771 4.919-4.919 1.266-.058 1.644-.07 4.85-.07zm0-2.163c-3.259 0-3.668.014-4.944.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.276-.073 1.685-.073 4.943s.014 3.668.072 4.944c.2 4.358 2.618 6.78 6.98 6.98 1.276.059 1.685.073 4.944.073s3.668-.014 4.944-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.276.073-1.685.073-4.943s-.014-3.668-.072-4.944c-.2-4.358-2.618-6.78-6.98-6.98-1.276-.059-1.685-.073-4.944-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                             </svg>

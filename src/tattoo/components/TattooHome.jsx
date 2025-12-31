@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import './TattooHome.css';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import TattooHero from './TattooHero';
-import Preloader from '../../components/Preloader';
-
+import TattooNavbar from './TattooNavbar';
 import TattooWork from './TattooWork';
 import TattooProcess from './TattooProcess';
-import TattooFAQ from './TattooFAQ';
 import TattooReviews from './TattooReviews';
+import TattooFAQ from './TattooFAQ';
 import TattooContact from './TattooContact';
 import Footer from './Footer';
-import TattooNavbar from './TattooNavbar';
 
 const TattooHome = () => {
-    const [scrolled, setScrolled] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
     const location = useLocation();
 
     // Smooth scroll progress bar (minimal style)
@@ -25,56 +21,56 @@ const TattooHome = () => {
         stiffness: 100, damping: 30, restDelta: 0.001
     });
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-
-        // Handle incoming navigation from other pages
-        if (location.state && location.state.targetId) {
-            setTimeout(() => {
-                const element = document.getElementById(location.state.targetId);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }
-                // Clear state to avoid scrolling on reload? 
-                // modifying state history is complex, ignore for now
-            }, 100);
-        }
-
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [location]);
-
-    const scrollToSection = (id) => {
-        const element = document.getElementById(id);
+    const scrollToSection = (sectionId) => {
+        const element = document.getElementById(sectionId);
         if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+            const offset = 80; // height of sticking navbar
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
         }
     };
 
+    useEffect(() => {
+        if (location.hash) {
+            const id = location.hash.replace('#', '');
+            setTimeout(() => scrollToSection(id), 100);
+        } else {
+            window.scrollTo(0, 0);
+        }
+    }, [location]);
+
     return (
         <div className="tattoo-body-minimal">
-            {/* Loading Overlay */}
-            {isLoading && <Preloader isLoading={true} />}
-
             {/* Scroll Progress */}
             <motion.div className="minimal-progress" style={{ scaleX }} />
 
-            {/* Reusable Navbar */}
-            <TattooNavbar />
+            <TattooNavbar scrollToSection={scrollToSection} />
 
-            <TattooHero scrollToSection={scrollToSection} />
+            <section id="home">
+                <TattooHero scrollToSection={scrollToSection} />
+            </section>
 
-            <div className="minimal-content-wrapper">
+            <section id="studio" className="minimal-content-wrapper" style={{ padding: '100px 20px', textAlign: 'center' }}>
+                <h2 className="t-heading-lg">THE <span className="t-gothic-accent">STUDIO</span></h2>
+                <p style={{ color: '#aaa', maxWidth: '800px', margin: '2rem auto', fontSize: '1.2rem', lineHeight: '1.8' }}>
+                    Welcome to Riya Tattoo Chennai. We specialize in custom ink that tells your story.
+                    Our studio is designed for comfort, creativity, and sterile precision.
+                    Explore our work, understand our process, and book your session to begin your journey.
+                </p>
+            </section>
 
-                <div id="work" className="section-minimal"><TattooWork /></div>
-                <div id="process" className="section-minimal"><TattooProcess /></div>
-                <div id="faq" className="section-minimal"><TattooFAQ /></div>
-                <div id="reviews" className="section-minimal"><TattooReviews /></div>
-                <div id="contact" className="section-minimal"><TattooContact /></div>
-            </div>
+            <TattooWork />
+            <TattooProcess />
+            <TattooReviews />
+            <TattooFAQ />
+            <TattooContact />
 
             <Footer />
         </div>

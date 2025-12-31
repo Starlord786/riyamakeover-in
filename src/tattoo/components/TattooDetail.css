@@ -9,7 +9,7 @@
     --td-frame-border: rgba(255, 255, 255, 0.1);
 }
 
-.td-page-wrapper {
+.td-page-content {
     background-color: var(--td-bg);
     min-height: 100vh;
     color: var(--td-text);

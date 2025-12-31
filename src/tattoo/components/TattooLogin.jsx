@@ -27,7 +27,7 @@ const TattooLogin = () => {
                 const sessionType = sessionStorage.getItem('activeSession');
 
                 if (isTattoo && sessionType === 'tattoo') {
-                    navigate('/tattoo');
+                    navigate('/studio');
                 }
             }
         });
@@ -198,7 +198,7 @@ const TattooLogin = () => {
                 </div>
             </div>
 
-            <Link to="/tattoo" className="back-to-site">
+            <Link to="/studio" className="back-to-site">
                 ← Back to Studio
             </Link>
         </div>

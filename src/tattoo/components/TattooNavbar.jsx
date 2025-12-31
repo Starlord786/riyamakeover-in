@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link, NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { auth } from '../../firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
@@ -8,7 +8,7 @@ import riyaTattoo from '../../assets/Riya_Tattoo.png';
 import mainLogo from '../../assets/logo.png';
 import './TattooHome.css';
 
-const TattooNavbar = () => {
+const TattooNavbar = ({ scrollToSection }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [user, setUser] = useState(null);
@@ -43,15 +43,10 @@ const TattooNavbar = () => {
         };
     }, []);
 
-    const handleNavClick = (id) => {
+    const handleNavClick = (sectionId) => {
         setIsMenuOpen(false);
-        if (location.pathname === '/tattoo' || location.pathname === '/tattoo/') {
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-        } else {
-            navigate('/tattoo', { state: { targetId: id } });
+        if (scrollToSection) {
+            scrollToSection(sectionId);
         }
     };
 
@@ -75,8 +70,8 @@ const TattooNavbar = () => {
 
                 {/* Desktop Menu */}
                 <div className="nav-links-minimal desktop-only">
-                    <span onClick={() => handleNavClick('home')}>Studio</span>
-                    <span onClick={() => handleNavClick('work')}>Work</span>
+                    <span onClick={() => handleNavClick('studio')}>Studio</span>
+                    <span onClick={() => handleNavClick('gallery')}>Work</span>
                     <span onClick={() => handleNavClick('process')}>Process</span>
                     <span onClick={() => handleNavClick('faq')}>FAQ</span>
                     <span onClick={() => handleNavClick('reviews')}>Reviews</span>
@@ -161,8 +156,8 @@ const TattooNavbar = () => {
                 <button className="mobile-close-btn" onClick={() => setIsMenuOpen(false)}>
                     <X size={32} />
                 </button>
-                <span onClick={() => handleNavClick('home')}>Studio</span>
-                <span onClick={() => handleNavClick('work')}>Work</span>
+                <span onClick={() => handleNavClick('studio')}>Studio</span>
+                <span onClick={() => handleNavClick('gallery')}>Work</span>
                 <span onClick={() => handleNavClick('process')}>Process</span>
                 <span onClick={() => handleNavClick('faq')}>FAQ</span>
                 <span onClick={() => handleNavClick('reviews')}>Reviews</span>

@@ -67,7 +67,7 @@ const ReviewCard = ({ review }) => {
 
 const TattooReviews = () => {
     return (
-        <section className="tattoo-reviews-section">
+        <section id="reviews" className="tattoo-reviews-section">
             <div className="repo-container">
                 <div className="tr-header">
                     <h2 className="tr-title">Google Reviews</h2>

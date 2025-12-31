@@ -1,12 +1,39 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import TattooHome from './components/TattooHome';
 import TattooWorksPage from './components/TattooWork';
 import TattooDetail from './components/TattooDetail';
 import TattooLogin from './components/TattooLogin';
 import TattooContact from './components/TattooContact';
+import TattooProcess from './components/TattooProcess';
+import TattooFAQ from './components/TattooFAQ';
+import TattooReviews from './components/TattooReviews';
+import TattooNavbar from './components/TattooNavbar';
+import Footer from './components/Footer';
 import './components/TattooHome.css'; // Ensure styles are loaded for this sub-app
 import TattooLoader from './loader/TattooLoader';
+
+const TattooLayout = ({ children }) => {
+    const location = useLocation();
+    return (
+        <div className="tattoo-layout">
+            <TattooNavbar />
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={location.pathname}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                >
+                    {children}
+                </motion.div>
+            </AnimatePresence>
+            <Footer />
+        </div>
+    );
+};
 
 const TattooApp = () => {
     const [isLoading, setIsLoading] = React.useState(true);
@@ -49,11 +76,8 @@ const TattooApp = () => {
     return (
         <Routes>
             <Route index element={<TattooHome />} />
-            <Route path="works" element={<TattooWorksPage />} />
             <Route path="work/:id" element={<TattooDetail />} />
-            <Route path="contact" element={<TattooContact />} />
             <Route path="login" element={<TattooLogin />} />
-            {/* Catch-all redirect to home within the tattoo section */}
             <Route path="*" element={<Navigate to="/tattoo" replace />} />
         </Routes>
     );

@@ -54,33 +54,33 @@ const TattooWork = () => {
     }
 
     return (
-        <section 
-            id="gallery" 
-            ref={targetRef} 
-            className="gallery-section section-wrapper" 
-            style={{ 
+        <section
+            id="gallery"
+            ref={targetRef}
+            className="gallery-section section-wrapper"
+            style={{
                 height: '400vh', // Increased scroll length for smoother feel
                 position: 'relative',
-                backgroundColor: '#000' 
+                backgroundColor: '#000'
             }}
         >
-            <div className="sticky-wrapper" style={{ 
-                position: 'sticky', 
-                top: 0, 
-                height: '100vh', 
-                overflow: 'hidden', 
-                display: 'flex', 
+            <div className="sticky-wrapper" style={{
+                position: 'sticky',
+                top: 0,
+                height: '100vh',
+                overflow: 'hidden',
+                display: 'flex',
                 alignItems: 'center', // Centers the track vertically in the screen
-                boxSizing: 'border-box' 
+                boxSizing: 'border-box'
             }}>
-                <motion.div 
-                    style={{ 
-                        x, 
-                        display: 'flex', 
-                        gap: '6rem', 
-                        paddingLeft: '10vw', 
-                        alignItems: 'center' 
-                    }} 
+                <motion.div
+                    style={{
+                        x,
+                        display: 'flex',
+                        gap: '6rem',
+                        paddingLeft: '10vw',
+                        alignItems: 'center'
+                    }}
                     className="gallery-track"
                 >
                     {/* Intro Section */}
@@ -96,17 +96,17 @@ const TattooWork = () => {
                     {/* Image Cards */}
                     {tattooWorks.map((work) => (
                         <Link to={`/tattoo/work/${work.id}`} key={work.id} style={{ display: 'block', textDecoration: 'none' }}>
-                            <div className="work-card" style={{ 
-                                minWidth: '500px', 
+                            <div className="work-card" style={{
+                                minWidth: '500px',
                                 height: '60vh', // Reduced from 65vh to ensure it doesn't hit Nav/Footer
-                                position: 'relative', 
+                                position: 'relative',
                                 cursor: 'pointer',
                                 transition: 'transform 0.3s ease'
                             }}>
-                                <img 
-                                    src={work.img} 
-                                    alt={work.title} 
-                                    style={{ width: '100%', height: '100%', objectFit: 'cover', border: '1px solid #333' }} 
+                                <img
+                                    src={work.img}
+                                    alt={work.title}
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover', border: '1px solid #333' }}
                                 />
                                 {/* View Details Overlay */}
                                 <div className="work-overlay" style={{
@@ -121,15 +121,15 @@ const TattooWork = () => {
                                 }}>
                                     <span className="work-overlay-text" style={{ color: '#fff', border: '1px solid #fff', padding: '10px 20px' }}>VIEW DETAILS</span>
                                 </div>
-                                
+
                                 {/* Title Tag */}
-                                <div style={{ 
-                                    position: 'absolute', 
-                                    bottom: '30px', 
-                                    left: '-30px', 
-                                    background: '#000', 
-                                    padding: '12px 25px', 
-                                    borderLeft: '4px solid var(--accent-color)', 
+                                <div style={{
+                                    position: 'absolute',
+                                    bottom: '30px',
+                                    left: '-30px',
+                                    background: '#000',
+                                    padding: '12px 25px',
+                                    borderLeft: '4px solid var(--accent-color)',
                                     zIndex: 11,
                                     boxShadow: '10px 10px 30px rgba(0,0,0,0.5)'
                                 }}>
