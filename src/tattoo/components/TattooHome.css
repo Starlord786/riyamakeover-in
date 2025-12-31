@@ -528,3 +528,9 @@ body {
     font-weight: bold;
     letter-spacing: 2px;
 }
+
+/* Selection Highlight for Tattoo Mode (Green) */
+body.tattoo-mode ::selection {
+    background-color: var(--accent-color);
+    color: #000000;
+}

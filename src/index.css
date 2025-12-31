@@ -26,7 +26,7 @@ body {
 }
 
 h1,
-h2, 
+h2,
 h3,
 h4,
 h5,
@@ -79,4 +79,10 @@ button {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
+}
+
+/* Global Selection Highlight (Gold for Makeover) */
+::selection {
+  background-color: var(--accent);
+  color: #000000;
 }
