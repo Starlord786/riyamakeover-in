@@ -206,22 +206,8 @@
     transition: 0.3s;
 }
 
-.dot-number {
-    color: white;
-    font-family: 'Montserrat';
-    font-size: 0.8rem;
-}
 
-.dot-bar {
-    width: 40px;
-    height: 1px;
-    background: white;
-    transition: 0.3s;
-}
 
-.epic-dot.active {
-    opacity: 1;
-}
 
 .epic-dot.active .dot-bar {
     background: var(--gold);

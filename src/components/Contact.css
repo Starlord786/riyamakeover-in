@@ -93,7 +93,7 @@
 }
 
 .highlight-gold-left {
-    color: #d4af37;
+    color: #d4af37; 
     font-family: 'Damion', serif;
     text-transform: capitalize;
     letter-spacing: 5px;
@@ -177,7 +177,34 @@
     /* premium minimal round */
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     position: relative;
-    /* Corner Accents */
+    overflow: hidden;
+    /* Ensure rounded corners clip internal elements if needed */
+}
+
+/* Background Logo Container */
+.form-bg-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    aspect-ratio: 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+    mix-blend-mode: luminosity;
+    filter: sepia(100%) hue-rotate(0deg) saturate(500%);
+    /* Make it golden/tinted if needed, or just keep it simple */
+}
+
+/* Ensure content sits above the background logo */
+.epic-form-card>*:not(.form-bg-logo) {
+    position: relative;
+    z-index: 1;
 }
 
 /* Top Right Corner Accent */

@@ -5,6 +5,7 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { db, auth } from '../firebase';
 import './Contact.css';
+import dragonBg from '../assets/dragon-animated.svg';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -124,6 +125,7 @@ const Contact = () => {
                     viewport={{ once: true }}
                 >
                     <div className="epic-form-card">
+                        <div className="form-bg-logo" style={{ backgroundImage: `url(${dragonBg})` }}></div>
                         {isSuccess ? (
                             <motion.div
                                 className="success-message"
