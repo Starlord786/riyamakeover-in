@@ -20,7 +20,6 @@
 .footer-content {
     display: grid;
     grid-template-columns: 1fr 2.5fr;
-    /* Adjusted for better spacing */
     gap: 40px;
     max-width: 1400px;
     margin: 0 auto;
@@ -90,7 +89,6 @@
     font-size: 0.95rem;
     transition: all 0.3s ease;
     display: block;
-    /* Ensures links stack correctly */
 }
 
 .footer-link:hover {
@@ -98,12 +96,21 @@
     padding-left: 5px;
 }
 
+/* --- UPDATED DESIGNER CONTAINER --- */
 .designer-inline-container {
     display: flex;
     align-items: center;
+    /* Vertically centers text and logo together */
+    justify-content: center;
+    /* Horizontally centers the whole block in footer */
+    gap: 12px;
+    /* Controlled gap between text and logo */
     margin-top: 40px;
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    /* Ensures it takes full width to center correctly */
+    text-align: center;
 }
 
 .designed-by-text-inline {
@@ -111,12 +118,20 @@
     color: #666;
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-left: 30%;
+    margin: 0;
+    /* Removed negative margins that caused misalignment */
+    line-height: 1;
+    /* Ensures text doesn't have extra top/bottom space */
 }
 
 .hybix-logo-inline {
-    width: 200px;
+    width: 100px;
+    /* Slightly smaller for better vertical alignment */
+    height: auto;
     opacity: 0.6;
+    display: block;
+    margin-top: -10px;
+    /* Removes ghost padding at bottom of images */
     transition: opacity 0.3s ease;
 }
 
@@ -131,13 +146,13 @@
         text-align: center;
     }
 
-    .footer-left,
-    .column-heading,
-    .designer-inline-container {
+    .footer-left {
         align-items: center;
-        justify-content: center;
-        margin-left: auto;
-        margin-right: auto;
+        margin-bottom: 30px;
+    }
+
+    .column-heading {
+        margin: 0 auto 15px;
     }
 }
 
@@ -146,17 +161,9 @@
         grid-template-columns: 1fr;
     }
 
-    .hybix-logo-inline {
-        width: 150px;
-    }
-
-    .designed-by-text-inline {
-        margin-left: 5%;
-    }
-
     .designer-inline-container {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        flex-direction: row;
+        /* Keep them side-by-side even on small screens */
+        gap: 10px;
     }
 }

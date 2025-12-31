@@ -116,7 +116,7 @@
 
 .detail-desc-inline {
     font-family: 'Google Sans Flex', serif;
-    color: #aeaeae;
+    color: #ffffff;
     font-size: 1.1rem;
     line-height: 1.5;
     margin: 0;
@@ -144,7 +144,7 @@
     font-family: 'Oswald', sans-serif;
     font-size: clamp(2rem, 3vw, 3.5rem);
     color: transparent;
-    -webkit-text-stroke: 1px #888;
+    -webkit-text-stroke: 1px #989494;
     margin: 0;
     text-transform: uppercase;
     transition: all 0.4s ease;

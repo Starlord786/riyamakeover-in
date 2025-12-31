@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 import dragonLogo from '../assets/dragon-animated.svg';
-import hybixLogo from '../assets/Darkmode.png';
+import hybixLogo from '../assets/hybix.svg';
 
 const Footer = () => {
     return (
