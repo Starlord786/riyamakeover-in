@@ -4,6 +4,7 @@ import TattooHome from './components/TattooHome';
 import TattooWorksPage from './components/TattooWork';
 import TattooDetail from './components/TattooDetail';
 import TattooLogin from './components/TattooLogin';
+import TattooContact from './components/TattooContact';
 import './components/TattooHome.css'; // Ensure styles are loaded for this sub-app
 import TattooLoader from './loader/TattooLoader';
 
@@ -50,6 +51,7 @@ const TattooApp = () => {
             <Route index element={<TattooHome />} />
             <Route path="works" element={<TattooWorksPage />} />
             <Route path="work/:id" element={<TattooDetail />} />
+            <Route path="contact" element={<TattooContact />} />
             <Route path="login" element={<TattooLogin />} />
             {/* Catch-all redirect to home within the tattoo section */}
             <Route path="*" element={<Navigate to="/tattoo" replace />} />

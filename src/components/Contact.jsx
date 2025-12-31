@@ -99,9 +99,9 @@ const Contact = () => {
                         <p className="epic-subtitle-left">Exquisite makeup artistry for the moments that matter.</p>
 
                         <div className="epic-contact-list">
-                            <a href="mailto:booking@riyamakeover.in" className="contact-row">
+                            <a href="mailto:chandrabhagavan6@gmail.com" className="contact-row">
                                 <div className="icon-box"><Mail size={20} /></div>
-                                <span>booking@riyamakeover.in</span>
+                                <span>chandrabhagavan6@gmail.com</span>
                             </a>
                             <a href="tel:+918667459193" className="contact-row">
                                 <div className="icon-box"><Phone size={20} /></div>

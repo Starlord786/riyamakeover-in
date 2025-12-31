@@ -24,21 +24,21 @@ const heroData = [
         image: img2,
         title: "ART & SOUL",
         subtitle: "Expression beyond words.",
-        cta: "View Portfolio"
+        cta: "Book Session"
     },
     {
         id: 3,
         image: img3,
         title: "BOLD SPIRIT",
         subtitle: "Unleash your inner rebel.",
-        cta: "Meet Artists"
+        cta: "Book Session"
     },
     {
         id: 4,
         image: img4,
         title: "PURE VISION",
         subtitle: "The ultimate canvas is you.",
-        cta: "Get Consult"
+        cta: "Book Session"
     }
 ];
 

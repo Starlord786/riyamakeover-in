@@ -106,7 +106,7 @@ const Hero = () => {
                         {/* Content Side */}
                         <div className="hs-content-wrapper">
                             <motion.div className="hs-content-inner">
-                                <span className="hs-label">Est. MMXXIV</span>
+                                <span className="hs-label">Premium</span>
                                 <h1 className="hs-title">
                                     {heroData[current].title}
                                     <span className="hs-highlight">{heroData[current].highlight}</span>

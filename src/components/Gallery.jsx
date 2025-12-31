@@ -2,45 +2,52 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import './Gallery.css';
 
+import imgBridal from '../assets/service_bridal.png';
+import imgGlam from '../assets/hero1.png';
+import imgEditorial from '../assets/hero2.png';
+import imgHair from '../assets/service_hair.png';
+import imgEngagement from '../assets/service_skincare.png';
+import imgReception from '../assets/hero3.png';
+
 const galleryImages = [
     {
         id: 1,
-        url: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=800&auto=format&fit=crop', // Woman portrait
+        url: imgBridal,
         title: 'BRIDAL RADIANCE',
         category: 'WEDDING',
         span: 'col-2'
     },
     {
         id: 2,
-        url: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=800&auto=format&fit=crop', // Makeup close up
+        url: imgGlam,
         title: 'EVENING GLAM',
         category: 'PARTY',
         span: 'row-2'
     },
     {
         id: 3,
-        url: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800&auto=format&fit=crop', // Eye makeup
+        url: imgEditorial,
         title: 'EDITORIAL ARTS',
         category: 'FASHION',
         span: ''
     },
     {
         id: 4,
-        url: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=800&auto=format&fit=crop', // Makeup products (Safe)
+        url: imgHair,
         title: 'ELEGANT STYLES',
         category: 'HAIR',
         span: ''
     },
     {
         id: 5,
-        url: 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=800&auto=format&fit=crop', // Indian Bride
+        url: imgEngagement,
         title: 'ENGAGEMENT GLOW',
         category: 'EVENTS',
         span: ''
     },
     {
         id: 6,
-        url: 'https://images.unsplash.com/photo-1457972729786-0411a3b2b626?q=80&w=800&auto=format&fit=crop', // Roses/Soft
+        url: imgReception,
         title: 'RECEPTION QUEEN',
         category: 'BRIDAL',
         span: 'col-2'
