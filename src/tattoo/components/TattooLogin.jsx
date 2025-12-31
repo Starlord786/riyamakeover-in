@@ -27,7 +27,7 @@ const TattooLogin = () => {
                 const sessionType = sessionStorage.getItem('activeSession');
 
                 if (isTattoo && sessionType === 'tattoo') {
-                    navigate('/tattoo');
+                    navigate('/studio');
                 }
             }
         });

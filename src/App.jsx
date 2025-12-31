@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './components/Home'
@@ -24,6 +24,17 @@ import Newsletter from './pages/Newsletter'
 import TattooApp from './tattoo/TattooApp'
 import ServiceDetail from './pages/ServiceDetail'
 import { useNetworkStatus } from './hooks/useNetworkStatus'
+
+// Tattoo Components
+import TattooHome from './tattoo/components/TattooHome'
+import TattooWorksPage from './tattoo/components/TattooWork'
+import TattooDetail from './tattoo/components/TattooDetail'
+import TattooLogin from './tattoo/components/TattooLogin'
+import TattooContact from './tattoo/components/TattooContact'
+import TattooProcess from './tattoo/components/TattooProcess'
+import TattooFAQ from './tattoo/components/TattooFAQ'
+import TattooReviews from './tattoo/components/TattooReviews'
+
 import './App.css'
 
 function App() {
@@ -80,6 +91,8 @@ function App() {
         <Route path="/AdminLogin" element={<AdminLogin />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/newsletter" element={<Newsletter />} />
+
+        {/* Tattoo Section Route */}
         <Route path="/tattoo/*" element={<TattooApp />} />
       </Routes>
 

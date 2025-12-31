@@ -16,7 +16,7 @@ const TattooFAQ = () => {
     ];
 
     return (
-        <section className="faq-section section-wrapper" style={{ maxWidth: '800px', margin: '0 auto', padding: '0 20px' }}>
+        <section id="faq" className="faq-section section-wrapper" style={{ maxWidth: '800px', margin: '0 auto', padding: '0 20px' }}>
             <h2 className="t-heading-lg" style={{ textAlign: 'center', marginBottom: '4rem' }}>
                 COMMON <span className="t-gothic-accent">QUERIES</span>
             </h2>
