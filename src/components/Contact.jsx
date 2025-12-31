@@ -1,9 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle, Phone, Mail, Sparkles } from 'lucide-react';
+import { MessageCircle, Phone, Mail, Sparkles, Loader2, CheckCircle } from 'lucide-react';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import { db, auth } from '../firebase';
 import './Contact.css';
 
 const Contact = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        phone: '',
+        message: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Prefill name if available
+                const displayName = user.displayName || (user.email ? user.email.split('@')[0] : '');
+                setFormData(prev => ({
+                    ...prev,
+                    name: prev.name || displayName
+                }));
+            }
+        });
+        return () => unsubscribe();
+    }, []);
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        try {
+            await addDoc(collection(db, "messages"), {
+                ...formData,
+                source: 'makeover', // Tagging as makeover
+                createdAt: serverTimestamp()
+            });
+            setIsSuccess(true);
+            setFormData({ name: '', phone: '', message: '' });
+            setTimeout(() => setIsSuccess(false), 5000); // Reset after 5 seconds
+        } catch (error) {
+            console.error("Error adding document: ", error);
+            alert("Error sending message. Please try again.");
+        }
+        setIsSubmitting(false);
+    };
     return (
         <section className="epic-contact-section" id="contact">
             {/* Background Watermark Elements - Kept for vibe */}
@@ -77,29 +124,67 @@ const Contact = () => {
                     viewport={{ once: true }}
                 >
                     <div className="epic-form-card">
-                        <form className="epic-form-compact" onSubmit={(e) => e.preventDefault()}>
-                            <div className="input-split">
+                        {isSuccess ? (
+                            <motion.div
+                                className="success-message"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                            >
+                                <CheckCircle size={50} color="#d4af37" />
+                                <h3>Message Sent!</h3>
+                                <p>Thank you, {formData.name}. We will get back to you shortly.</p>
+                            </motion.div>
+                        ) : (
+                            <form className="epic-form-compact" onSubmit={handleSubmit}>
+                                {/* Vertical Stack Layout: Name -> Phone -> Message */}
                                 <div className="compact-group">
                                     <label>FULL NAME</label>
-                                    <input type="text" placeholder="Jane Doe" required />
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Jane Doe"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        required
+                                    />
                                 </div>
+
                                 <div className="compact-group">
                                     <label>PHONE</label>
-                                    <input type="tel" placeholder="+91..." required />
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        placeholder="+91..."
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        required
+                                    />
                                 </div>
-                            </div>
 
+                                <div className="compact-group">
+                                    <label>MESSAGE</label>
+                                    <textarea
+                                        name="message"
+                                        placeholder="Your vision..."
+                                        rows="3"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        required
+                                    ></textarea>
+                                </div>
 
-
-                            <div className="compact-group">
-                                <label>MESSAGE</label>
-                                <textarea placeholder="Your vision..." rows="3"></textarea>
-                            </div>
-
-                            <button type="submit" className="epic-submit-btn-full">
-                                Send Message
-                            </button>
-                        </form>
+                                <button type="submit" className="epic-submit-btn-full" disabled={isSubmitting}>
+                                    {isSubmitting ? (
+                                        <div className="btn-loader">
+                                            <Loader2 className="animate-spin" size={20} />
+                                            <span>Sending...</span>
+                                        </div>
+                                    ) : (
+                                        'Send Message'
+                                    )}
+                                </button>
+                            </form>
+                        )}
                     </div>
                 </motion.div>
             </div>

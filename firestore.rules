@@ -25,5 +25,19 @@ service cloud.firestore {
       allow read: if request.auth != null && 
                   (request.auth.uid == adminId || request.auth.token.email == adminId);
     }
+
+    // ---------- MESSAGES COLLECTION ----------
+    match /messages/{messageId} {
+      // Allow anyone to send a message (Contact Forms)
+      allow create: if true;
+      // Only admins can read/delete messages
+      allow read, delete: if isAdmin();
+    }
+
+    // ---------- ANALYTICS COLLECTION ----------
+    match /analytics/{docId} {
+       allow read: if isAdmin();
+       allow write: if true; // Allow tracking updates from public clients
+    }
   }
 }

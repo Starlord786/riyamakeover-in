@@ -33,10 +33,15 @@ const AdminDashboard = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [activeTab, setActiveTab] = useState('dashboard');
 
-    // Data State
+    // Users Data State
     const [usersData, setUsersData] = useState({ all: [], tattoo: [], makeover: [] });
     const [showClientsModal, setShowClientsModal] = useState(false);
     const [clientFilter, setClientFilter] = useState('tattoo'); // 'tattoo' | 'makeover'
+
+    // Messages Data State
+    const [messagesData, setMessagesData] = useState({ all: [], tattoo: [], makeover: [] });
+    const [showMessagesModal, setShowMessagesModal] = useState(false);
+    const [messageFilter, setMessageFilter] = useState('tattoo');
 
     // Analytics State
     const [chartData, setChartData] = useState([]);
@@ -79,6 +84,42 @@ const AdminDashboard = () => {
         };
 
         fetchUsers();
+    }, []);
+
+    // Fetch Messages Data
+    useEffect(() => {
+        const fetchMessages = async () => {
+            try {
+                // Fetch all messages by default order descending if possible
+                // If index missing, just fetch all and sort client-side for now
+                const msgsRef = collection(db, "messages");
+                const querySnapshot = await getDocs(msgsRef);
+                const allMsgs = [];
+                const tattooMsgs = [];
+                const makeoverMsgs = [];
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const msgObj = { id: doc.id, ...data };
+
+                    // Simple client-side sort helper if we want by date later, assuming createdAt exists
+
+                    allMsgs.push(msgObj);
+                    if (data.source === 'tattoo') tattooMsgs.push(msgObj);
+                    else if (data.source === 'makeover') makeoverMsgs.push(msgObj);
+                });
+
+                // Set state
+                setMessagesData({
+                    all: allMsgs,
+                    tattoo: tattooMsgs,
+                    makeover: makeoverMsgs
+                });
+            } catch (error) {
+                console.error("Error fetching messages:", error);
+            }
+        };
+        fetchMessages();
     }, []);
 
     // Fetch Analytics Data
@@ -263,15 +304,16 @@ const AdminDashboard = () => {
                             variants={itemVariants}
                             whileHover={{ scale: 1.03, backgroundColor: 'rgba(255,255,255,0.95)' }}
                             whileTap={{ scale: 0.97 }}
+                            onClick={() => setShowMessagesModal(true)}
                         >
                             <div className="stat-header">
                                 <div className="stat-icon" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>
                                     <MessageSquare />
                                 </div>
-                                <span className="stat-trend" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>Action</span>
+                                <span className="stat-trend" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>{messagesData.all.length} New</span>
                             </div>
                             <div className="stat-value">Messages</div>
-                            <div className="stat-label">View Today's Inbox</div>
+                            <div className="stat-label">View Inbox</div>
                         </motion.button>
 
                         <motion.button
@@ -611,6 +653,88 @@ const AdminDashboard = () => {
                                     </div>
                                 </div>
 
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {/* Messages Modal */}
+                <AnimatePresence>
+                    {showMessagesModal && (
+                        <motion.div
+                            className="modal-backdrop"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setShowMessagesModal(false)}
+                        >
+                            <motion.div
+                                className="modal-content-large"
+                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                                onClick={e => e.stopPropagation()}
+                            >
+                                <div className="modal-header-custom">
+                                    <div className="modal-title-wrapper">
+                                        <MessageSquare className="modal-icon" />
+                                        <h3>Inbox</h3>
+                                    </div>
+                                    <button className="modal-close-btn" onClick={() => setShowMessagesModal(false)}>
+                                        <X size={24} />
+                                    </button>
+                                </div>
+
+                                <div className="modal-tabs">
+                                    <button
+                                        className={`modal-tab ${messageFilter === 'tattoo' ? 'active' : ''}`}
+                                        onClick={() => setMessageFilter('tattoo')}
+                                    >
+                                        Tattoo Messages
+                                        <span className="count-badge">{messagesData.tattoo.length}</span>
+                                    </button>
+                                    <button
+                                        className={`modal-tab ${messageFilter === 'makeover' ? 'active' : ''}`}
+                                        onClick={() => setMessageFilter('makeover')}
+                                    >
+                                        Makeover Messages
+                                        <span className="count-badge">{messagesData.makeover.length}</span>
+                                    </button>
+                                </div>
+
+                                <div className="modal-list-container">
+                                    <div className="list-header-row">
+                                        <span style={{ flex: 1 }}>Sender Info</span>
+                                        <span style={{ flex: 2 }}>Message</span>
+                                        <span style={{ width: '120px', textAlign: 'right' }}>Sent At</span>
+                                    </div>
+
+                                    <div className="list-scroll-area">
+                                        {(messageFilter === 'tattoo' ? messagesData.tattoo : messagesData.makeover).length > 0 ? (
+                                            (messageFilter === 'tattoo' ? messagesData.tattoo : messagesData.makeover).map((msg, index) => (
+                                                <div key={msg.id} className="list-item-row" style={{ alignItems: 'flex-start' }}>
+                                                    <div className="list-col" style={{ flex: 1, flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
+                                                        <span style={{ fontWeight: '600', color: '#333' }}>{msg.name || 'Unknown'}</span>
+                                                        <span style={{ fontSize: '0.8rem', color: '#666' }}>{msg.email || msg.phone}</span>
+                                                    </div>
+                                                    <div className="list-col" style={{ flex: 2 }}>
+                                                        <p style={{ margin: 0, fontSize: '0.9rem', color: '#444', lineHeight: '1.4' }}>{msg.message}</p>
+                                                    </div>
+                                                    <div className="list-col" style={{ width: '120px', justifyContent: 'flex-end', fontSize: '0.8rem', color: '#888' }}>
+                                                        {msg.createdAt?.seconds ? new Date(msg.createdAt.seconds * 1000).toLocaleDateString() : 'Just now'}
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="empty-state-list">
+                                                <div className="empty-icon-circle">
+                                                    <MessageSquare size={30} color="#ccc" />
+                                                </div>
+                                                <p>No messages received yet.</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
                             </motion.div>
                         </motion.div>
                     )}
