@@ -4,6 +4,7 @@ import { Home, ArrowRight, LogOut } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { auth, googleProvider } from '../firebase';
 import { signInWithPopup, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
+import { updateUserRole, checkUserRole } from '../utils/authUtils';
 import './Login.css';
 import userPhoto from '../assets/user_photo.png';
 
@@ -18,8 +19,17 @@ const Login = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            if (currentUser) {
+                const isMakeover = await checkUserRole(currentUser.uid, 'makeover');
+                if (isMakeover) {
+                    setUser(currentUser);
+                } else {
+                    setUser(null);
+                }
+            } else {
+                setUser(null);
+            }
             setLoading(false);
         });
         return () => unsubscribe();
@@ -37,8 +47,9 @@ const Login = () => {
         e.preventDefault();
         setError('');
         try {
-            await signInWithEmailAndPassword(auth, formData.email, formData.password);
-            // Auth state listener will handle the rest
+            const result = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+            await updateUserRole(result.user, 'makeover');
+            setUser(result.user);
         } catch (err) {
             console.error("Login error:", err);
             setError('Invalid email or password.');
@@ -48,7 +59,9 @@ const Login = () => {
     const handleGoogleLogin = async () => {
         setError('');
         try {
-            await signInWithPopup(auth, googleProvider);
+            const result = await signInWithPopup(auth, googleProvider);
+            await updateUserRole(result.user, 'makeover');
+            setUser(result.user);
         } catch (err) {
             console.error("Google login error:", err);
             setError('Failed to sign in with Google.');

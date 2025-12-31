@@ -17,7 +17,9 @@ import {
     Key,
     Activity,
     MessageSquare,
-    CheckCircle
+    CheckCircle,
+    X,
+    Filter
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
@@ -31,6 +33,11 @@ const AdminDashboard = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [activeTab, setActiveTab] = useState('dashboard');
 
+    // Data State
+    const [usersData, setUsersData] = useState({ all: [], tattoo: [], makeover: [] });
+    const [showClientsModal, setShowClientsModal] = useState(false);
+    const [clientFilter, setClientFilter] = useState('tattoo'); // 'tattoo' | 'makeover'
+
     // Analytics State
     const [chartData, setChartData] = useState([]);
     const [chartPeriod, setChartPeriod] = useState('weekly');
@@ -42,6 +49,36 @@ const AdminDashboard = () => {
     useEffect(() => {
         const timer = setInterval(() => setCurrentTime(new Date()), 1000);
         return () => clearInterval(timer);
+    }, []);
+
+    // Fetch Users Data
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, "users"));
+                const allUsers = [];
+                const tattooUsers = [];
+                const makeoverUsers = [];
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const userObj = { id: doc.id, ...data };
+                    allUsers.push(userObj);
+                    if (data.isTattooUser) tattooUsers.push(userObj);
+                    if (data.isMakeoverUser) makeoverUsers.push(userObj);
+                });
+
+                setUsersData({
+                    all: allUsers,
+                    tattoo: tattooUsers,
+                    makeover: makeoverUsers
+                });
+            } catch (error) {
+                console.error("Error fetching users:", error);
+            }
+        };
+
+        fetchUsers();
     }, []);
 
     // Fetch Analytics Data
@@ -197,13 +234,19 @@ const AdminDashboard = () => {
 
                     {/* Stats Grid */}
                     <div className="stats-grid">
-                        <motion.div className="stat-card" variants={itemVariants}>
+                        <motion.div
+                            className="stat-card clickable-card"
+                            variants={itemVariants}
+                            onClick={() => setShowClientsModal(true)}
+                            whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(197, 160, 89, 0.2)' }}
+                        >
                             <div className="stat-header">
                                 <div className="stat-icon"><Users /></div>
-                                <span className="stat-trend">+12.5%</span>
+                                <span className="stat-trend">+100%</span>
                             </div>
-                            <div className="stat-value">1,234</div>
+                            <div className="stat-value">{usersData.all.length}</div>
                             <div className="stat-label">Total Clients</div>
+                            <div style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>Click to view details</div>
                         </motion.div>
 
                         <motion.div className="stat-card" variants={itemVariants}>
@@ -477,6 +520,101 @@ const AdminDashboard = () => {
                         </motion.div>
                     </div>
                 </motion.div>
+
+                {/* Clients Modal */}
+                <AnimatePresence>
+                    {showClientsModal && (
+                        <motion.div
+                            className="modal-backdrop"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setShowClientsModal(false)}
+                        >
+                            <motion.div
+                                className="modal-content-large"
+                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                                onClick={e => e.stopPropagation()}
+                            >
+                                <div className="modal-header-custom">
+                                    <div className="modal-title-wrapper">
+                                        <Users className="modal-icon" />
+                                        <h3>Client Registry</h3>
+                                    </div>
+                                    <button className="modal-close-btn" onClick={() => setShowClientsModal(false)}>
+                                        <X size={24} />
+                                    </button>
+                                </div>
+
+                                <div className="modal-tabs">
+                                    <button
+                                        className={`modal-tab ${clientFilter === 'tattoo' ? 'active' : ''}`}
+                                        onClick={() => setClientFilter('tattoo')}
+                                    >
+                                        Tattoo Clients
+                                        <span className="count-badge">{usersData.tattoo.length}</span>
+                                    </button>
+                                    <button
+                                        className={`modal-tab ${clientFilter === 'makeover' ? 'active' : ''}`}
+                                        onClick={() => setClientFilter('makeover')}
+                                    >
+                                        Makeover Clients
+                                        <span className="count-badge">{usersData.makeover.length}</span>
+                                    </button>
+                                </div>
+
+                                <div className="modal-list-container">
+                                    <div className="list-header-row">
+                                        <span style={{ flex: 1 }}>Client ID / Email</span>
+                                        <span style={{ flex: 1 }}>Full Name</span>
+                                        <span style={{ flex: 1 }}>Joined Date</span>
+                                        <span style={{ width: '80px', textAlign: 'center' }}>Status</span>
+                                    </div>
+
+                                    <div className="list-scroll-area">
+                                        {(clientFilter === 'tattoo' ? usersData.tattoo : usersData.makeover).length > 0 ? (
+                                            (clientFilter === 'tattoo' ? usersData.tattoo : usersData.makeover).map((user, index) => (
+                                                <div key={user.id} className="list-item-row">
+                                                    <div className="list-col" style={{ flex: 1 }}>
+                                                        <div className="user-avatar-small" style={{
+                                                            background: clientFilter === 'tattoo' ? '#00c853' : '#c5a059'
+                                                        }}>
+                                                            {user.displayName ? user.displayName.charAt(0).toUpperCase() : (user.email ? user.email.charAt(0).toUpperCase() : 'U')}
+                                                        </div>
+                                                        <div className="user-id-group">
+                                                            <span className="user-email-text">{user.email}</span>
+                                                            <span className="user-id-mini">ID: {user.id.substring(0, 8)}...</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="list-col" style={{ flex: 1 }}>
+                                                        {user.displayName || 'N/A'}
+                                                    </div>
+                                                    <div className="list-col" style={{ flex: 1 }}>
+                                                        {/* Handle Firebase Timestamp or fallback */}
+                                                        {new Date().toLocaleDateString()}
+                                                    </div>
+                                                    <div className="list-col" style={{ width: '80px', display: 'flex', justifyContent: 'center' }}>
+                                                        <span className="status-badge-active">Active</span>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="empty-state-list">
+                                                <div className="empty-icon-circle">
+                                                    <Users size={30} color="#ccc" />
+                                                </div>
+                                                <p>No clients found in this category.</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </main>
         </div>
     );

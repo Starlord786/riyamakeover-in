@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth, googleProvider } from '../../firebase';
-import { signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from 'firebase/auth';
+import { updateUserRole, checkUserRole } from '../../utils/authUtils';
 import './TattooLogin.css';
 import greenLogo from '../assets/riya_tattoo_green_logo.png';
-import { User, Mail, Lock, Eye, EyeOff, LogIn, Github } from 'lucide-react'; // Note: used Github icon as a placeholder if needed, but will focus on Google
+import { User, Mail, Lock, Eye, EyeOff, LogIn, Github } from 'lucide-react';
 
 const TattooLogin = () => {
     const navigate = useNavigate();
@@ -19,6 +20,18 @@ const TattooLogin = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            if (currentUser) {
+                const isTattoo = await checkUserRole(currentUser.uid, 'tattoo');
+                if (isTattoo) {
+                    navigate('/tattoo');
+                }
+            }
+        });
+        return () => unsubscribe();
+    }, [navigate]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -28,7 +41,8 @@ const TattooLogin = () => {
     const handleGoogleLogin = async () => {
         setLoading(true);
         try {
-            await signInWithPopup(auth, googleProvider);
+            const result = await signInWithPopup(auth, googleProvider);
+            await updateUserRole(result.user, 'tattoo');
             navigate('/tattoo');
         } catch (err) {
             if (err.code === 'auth/api-key-not-valid') {
@@ -54,12 +68,16 @@ const TattooLogin = () => {
         }
 
         try {
+            let user;
             if (isLogin) {
-                await signInWithEmailAndPassword(auth, formData.email, formData.password);
+                const result = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+                user = result.user;
             } else {
                 const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-                await updateProfile(userCredential.user, { displayName: formData.name });
+                user = userCredential.user;
+                await updateProfile(user, { displayName: formData.name });
             }
+            await updateUserRole(user, 'tattoo');
             navigate('/tattoo');
         } catch (err) {
             setError(err.message.replace('Firebase: ', ''));

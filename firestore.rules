@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: Check if the current user exists in the 'admins' collection
+    // We check BOTH the UID and the EMAIL because you might have stored them differently.
+    function isAdmin() {
+      return exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+             exists(/databases/$(database)/documents/admins/$(request.auth.token.email));
+    }
+
+    // ---------- USERS COLLECTION ----------
+    match /users/{userId} {
+      // 1. Owners can read/write their own profile
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // 2. Admins can read/list ALL users (needed for Dashboard)
+      allow read: if isAdmin();
+    }
+
+    // ---------- ADMINS COLLECTION ----------
+    // Security check for Admin Login
+    match /admins/{adminId} {
+      // Allow reading if the doc ID matches the User's UID OR the User's Email
+      allow read: if request.auth != null && 
+                  (request.auth.uid == adminId || request.auth.token.email == adminId);
+    }
+  }
+}
