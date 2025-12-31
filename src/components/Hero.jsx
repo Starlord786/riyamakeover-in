@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { loadSlim } from "tsparticles-slim";
 import Particles from "react-particles";
@@ -11,13 +12,14 @@ import hero3 from '../assets/hero3.png';
 import hero4 from '../assets/hero4.png';
 
 const heroData = [
-    { id: 1, image: hero1, title: "Bridal", highlight: "Radiance", subtitle: "The pinnacle of timeless elegance.", cta: "Reserve Experience" },
-    { id: 2, image: hero2, title: "Elite", highlight: "Styling", subtitle: "Couture hair and aesthetic mastery.", cta: "Explore Artistry" },
-    { id: 3, image: hero3, title: "Pure", highlight: "Glow", subtitle: "Sanctuary for the modern soul.", cta: "View Retreats" },
-    { id: 4, image: hero4, title: "The", highlight: "Atelier", subtitle: "Where luxury meets clinical precision.", cta: "Visit Studio" }
+    { id: 1, image: hero1, title: "Bridal", highlight: "Radiance", subtitle: "The pinnacle of timeless elegance.", cta: "Book Now" },
+    { id: 2, image: hero2, title: "Elite", highlight: "Styling", subtitle: "Couture hair and aesthetic mastery.", cta: "Book Now" },
+    { id: 3, image: hero3, title: "Pure", highlight: "Glow", subtitle: "Sanctuary for the modern soul.", cta: "Book Now" },
+    { id: 4, image: hero4, title: "The", highlight: "Atelier", subtitle: "Where luxury meets clinical precision.", cta: "Book Now" }
 ];
 
 const Hero = () => {
+    const navigate = useNavigate();
     const [current, setCurrent] = useState(0);
 
     const nextSlide = useCallback(() => {
@@ -112,7 +114,7 @@ const Hero = () => {
                                     <span className="hs-highlight">{heroData[current].highlight}</span>
                                 </h1>
                                 <p className="hs-subtitle">{heroData[current].subtitle}</p>
-                                <button className="hs-cta">
+                                <button className="hs-cta" onClick={() => navigate('/contact')}>
                                     {heroData[current].cta}
                                 </button>
                             </motion.div>
