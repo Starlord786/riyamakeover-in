@@ -516,3 +516,15 @@ body {
         padding: 60px 20px;
     }
 }
+/* Work Card Hover Effects */
+.work-card:hover .work-overlay {
+    opacity: 1 !important;
+}
+
+.work-card:hover .work-overlay-text {
+    background-color: var(--accent-color) !important;
+    color: #000 !important;
+    border-color: var(--accent-color) !important;
+    font-weight: bold;
+    letter-spacing: 2px;
+}

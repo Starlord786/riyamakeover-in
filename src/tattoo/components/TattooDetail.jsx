@@ -20,7 +20,7 @@ const TattooDetail = () => {
         return (
             <div className="td-error-container">
                 <h2>Work not found</h2>
-                <Link to="/tattoo/works" className="td-error-link">Return to Collection</Link>
+                <Link to="/tattoo/work" className="td-error-link">Return to Collection</Link>
             </div>
         );
     }
@@ -29,101 +29,104 @@ const TattooDetail = () => {
 
     return (
         <div className="td-page-wrapper">
-            {/* Background Texture/Noise could go here */}
-            <div className="td-bg-noise"></div>
-
-            {/* Navigation Header */}
-            {/* Navigation Header */}
             <TattooNavbar />
 
-            <main className="td-main-container">
-                <div className="td-content-grid">
-                    {/* Back to Studio Button */}
-                    <div style={{ gridColumn: '1 / -1', marginBottom: '1rem' }}>
-                        <Link to="/tattoo" className="td-back-studio-btn" style={{ display: 'inline-flex', width: 'auto' }}>
-                            <ArrowLeft size={20} />
-                            <span>Back to Studio</span>
-                        </Link>
+            <div className="td-scroll-container">
+                {/* Hero Showcase Section */}
+                <section className="td-showcase-section">
+                    {/* Blurred Background Layer for Consistency */}
+                    <div className="td-bg-blur-container">
+                        <img src={work.img} alt="" className="td-bg-blur-img" />
+                        <div className="td-bg-overlay"></div>
                     </div>
 
-                    {/* Image Section - Now more prominent */}
-                    <div className="td-visual-col">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                            className="td-image-frame"
-                        >
-                            <img
-                                src={work.img}
-                                alt={work.title}
-                                className="td-hero-image"
-                            />
-                            <div className="td-image-overlay"></div>
-                        </motion.div>
-                    </div>
-
-                    {/* Info Section */}
-                    <div className="td-info-col">
-                        <motion.div
-                            initial={{ opacity: 0, y: 50 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="td-info-wrapper"
-                        >
-                            <h5 className="td-kicker">Selected Work // 0{work.id}</h5>
-                            <h1 className="td-title-glitch" data-text={work.title}>
-                                {work.title}
-                            </h1>
-
-                            <div className="td-meta-grid">
-                                <div className="td-meta-item">
-                                    <span className="td-meta-label">Style</span>
-                                    <span className="td-meta-value">{work.style}</span>
-                                </div>
-                                <div className="td-meta-item">
-                                    <span className="td-meta-label">Time Session</span>
-                                    <span className="td-meta-value">{work.time}</span>
-                                </div>
-                                <div className="td-meta-item">
-                                    <span className="td-meta-label">Artist</span>
-                                    <span className="td-meta-value">{work.artist}</span>
-                                </div>
+                    <div className="td-showcase-inner">
+                        <div className="td-content-flex">
+                            {/* Left: Sticky Image Container */}
+                            <div className="td-image-side">
+                                <motion.div
+                                    className="td-main-frame"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.8 }}
+                                >
+                                    <img src={work.img} alt={work.title} className="td-main-img" />
+                                    {/* Corner Accents */}
+                                    <div className="td-corner tl"></div>
+                                    <div className="td-corner tr"></div>
+                                    <div className="td-corner bl"></div>
+                                    <div className="td-corner br"></div>
+                                </motion.div>
                             </div>
 
-                            <p className="td-description-text">
-                                {work.description}
-                            </p>
-
-                            <Link to="/tattoo#contact" className="td-book-btn">
-                                <span>Book This Design</span>
-                                <ArrowUpRight size={20} />
-                            </Link>
-                        </motion.div>
-                    </div>
-                </div>
-
-                {/* Related Works - Redesigned */}
-                <div className="td-related-section">
-                    <div className="td-related-header">
-                        <h3>More From The Collection</h3>
-                        <div className="td-line-separator"></div>
-                    </div>
-
-                    <div className="td-related-grid">
-                        {relatedWorks.map((item) => (
-                            <Link to={`/tattoo/work/${item.id}`} key={item.id} className="td-related-card">
-                                <div className="td-card-inner">
-                                    <img src={item.img} alt={item.title} className="td-related-img" />
-                                    <div className="td-related-overlay">
-                                        <span className="td-related-title">{item.title}</span>
+                            {/* Right: Details */}
+                            <div className="td-details-side">
+                                <motion.div
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.8, delay: 0.2 }}
+                                >
+                                    <div className="td-header-group">
+                                        <span className="td-id-badge">NO. 0{work.id}</span>
+                                        <h1 className="td-hero-title">{work.title}</h1>
+                                        <div className="td-divider"></div>
                                     </div>
-                                </div>
-                            </Link>
-                        ))}
+
+                                    <div className="td-specs-grid">
+                                        <div className="td-spec-item">
+                                            <span className="spec-label">Style</span>
+                                            <span className="spec-value">{work.style}</span>
+                                        </div>
+                                        <div className="td-spec-item">
+                                            <span className="spec-label">Time</span>
+                                            <span className="spec-value">{work.time}</span>
+                                        </div>
+                                        <div className="td-spec-item">
+                                            <span className="spec-label">Artist</span>
+                                            <span className="spec-value">{work.artist}</span>
+                                        </div>
+                                    </div>
+
+                                    <p className="td-description">
+                                        {work.description}
+                                    </p>
+
+                                    <div className="td-action-group">
+                                        <Link to="/tattoo/contact" className="td-book-now-btn">
+                                            Book Appointment
+                                            <ArrowUpRight className="btn-icon" size={18} />
+                                        </Link>
+                                        <Link to="/tattoo/work" className="td-back-btn">
+                                            <ArrowLeft size={18} />
+                                            Back to Studio
+                                        </Link>
+                                    </div>
+                                </motion.div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </main>
+                </section>
+
+                {/* Related Works */}
+                <section className="td-related-section">
+                    <div className="td-container">
+                        <h3 className="td-related-heading">More from the Archive</h3>
+                        <div className="td-related-grid">
+                            {relatedWorks.map((item) => (
+                                <Link to={`/tattoo/work/${item.id}`} key={item.id} className="td-related-card">
+                                    <div className="td-rc-image-box">
+                                        <img src={item.img} alt={item.title} />
+                                        <div className="td-rc-overlay">
+                                            <span>View</span>
+                                        </div>
+                                    </div>
+                                    <h4>{item.title}</h4>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            </div>
 
             <Footer />
         </div>
