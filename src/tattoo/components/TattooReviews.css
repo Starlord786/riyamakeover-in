@@ -72,8 +72,35 @@
     line-height: 1.6;
     color: #d0d0d0;
     font-style: italic;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
+    /* Reduced margin to fit button */
     font-family: var(--font-body);
+}
+
+.tr-text.clamped {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tr-read-more {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0;
+    margin-bottom: 20px;
+    font-family: var(--font-body);
+    text-decoration: underline;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.tr-read-more:hover {
+    opacity: 1;
 }
 
 .tr-divider {

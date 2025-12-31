@@ -22,7 +22,9 @@ const Login = () => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
                 const isMakeover = await checkUserRole(currentUser.uid, 'makeover');
-                if (isMakeover) {
+                const sessionType = sessionStorage.getItem('activeSession');
+
+                if (isMakeover && sessionType === 'makeover') {
                     setUser(currentUser);
                 } else {
                     setUser(null);
@@ -49,6 +51,7 @@ const Login = () => {
         try {
             const result = await signInWithEmailAndPassword(auth, formData.email, formData.password);
             await updateUserRole(result.user, 'makeover');
+            sessionStorage.setItem('activeSession', 'makeover');
             setUser(result.user);
         } catch (err) {
             console.error("Login error:", err);
@@ -61,6 +64,7 @@ const Login = () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             await updateUserRole(result.user, 'makeover');
+            sessionStorage.setItem('activeSession', 'makeover');
             setUser(result.user);
         } catch (err) {
             console.error("Google login error:", err);

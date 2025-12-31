@@ -19,11 +19,18 @@ import {
     MessageSquare,
     CheckCircle,
     X,
-    Filter
+    Filter,
+    Moon,
+    Sun,
+    Smartphone,
+    Monitor,
+    Palette,
+    Type
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
-import { db } from '../firebase';
+import { collection, query, where, orderBy, getDocs, doc, getDoc } from 'firebase/firestore';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { db, auth } from '../firebase';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -32,6 +39,39 @@ const AdminDashboard = () => {
     const [currentTime, setCurrentTime] = useState(new Date());
     const [showPassword, setShowPassword] = useState(false);
     const [activeTab, setActiveTab] = useState('dashboard');
+    const [user, setUser] = useState(null);
+    const [authLoading, setAuthLoading] = useState(true);
+
+    // Settings State
+    const [darkMode, setDarkMode] = useState(false);
+    const [fontSize, setFontSize] = useState('medium'); // small, medium, large
+    const [themeColor, setThemeColor] = useState('gold'); // gold, blue, green, purple
+    const [compactMode, setCompactMode] = useState(false);
+
+    // Apply Settings Effect
+    useEffect(() => {
+        // Reset classes
+        document.body.className = '';
+
+        // Apply new classes
+        if (darkMode) document.body.classList.add('dark-mode');
+        document.body.classList.add(`font-${fontSize}`);
+        document.body.classList.add(`theme-${themeColor}`);
+
+        // Save to local storage (optional enhancement)
+        localStorage.setItem('adminSettings', JSON.stringify({ darkMode, fontSize, themeColor, compactMode }));
+    }, [darkMode, fontSize, themeColor, compactMode]);
+
+    // Load settings on mount
+    useEffect(() => {
+        const savedSettings = JSON.parse(localStorage.getItem('adminSettings'));
+        if (savedSettings) {
+            setDarkMode(savedSettings.darkMode);
+            setFontSize(savedSettings.fontSize || 'medium');
+            setThemeColor(savedSettings.themeColor || 'gold');
+            setCompactMode(savedSettings.compactMode || false);
+        }
+    }, []);
 
     // Users Data State
     const [usersData, setUsersData] = useState({ all: [], tattoo: [], makeover: [] });
@@ -48,8 +88,33 @@ const AdminDashboard = () => {
     const [chartPeriod, setChartPeriod] = useState('weekly');
     const [isLoadingChart, setIsLoadingChart] = useState(false);
 
-    // Get the pushed state from AdminLogin (email/password)
-    const { email, password } = location.state || { email: 'Admin', password: '***' };
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            if (currentUser) {
+                try {
+                    const adminDocRef = doc(db, 'admins', currentUser.email);
+                    const adminDoc = await getDoc(adminDocRef);
+
+                    if (adminDoc.exists()) {
+                        setUser(currentUser);
+                        setAuthLoading(false);
+                    } else {
+                        await signOut(auth);
+                        navigate('/AdminLogin');
+                    }
+                } catch (err) {
+                    console.error("Auth check failed", err);
+                    navigate('/AdminLogin');
+                }
+            } else {
+                navigate('/AdminLogin');
+            }
+        });
+        return () => unsubscribe();
+    }, [navigate]);
+
+    const email = user?.email || '';
+    const password = '••••••••'; // Protected
 
     useEffect(() => {
         const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -163,8 +228,15 @@ const AdminDashboard = () => {
         fetchAnalytics();
     }, [chartPeriod]);
 
-    const handleLogout = () => {
-        navigate('/AdminLogin');
+    const handleLogout = async () => {
+        try {
+            await signOut(auth);
+            navigate('/AdminLogin');
+        } catch (error) {
+            console.error("Logout Error:", error);
+            // Even if firebase fails, force redirect
+            navigate('/AdminLogin');
+        }
     };
 
     const containerVariants = {
@@ -198,6 +270,27 @@ const AdminDashboard = () => {
         { id: 'analytics', icon: TrendingUp, label: 'Analytics' },
         { id: 'settings', icon: Settings, label: 'Settings' },
     ];
+
+    if (authLoading) {
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#fff' }}>
+                <div style={{
+                    width: '40px',
+                    height: '40px',
+                    border: '3px solid #f3f3f3',
+                    borderTop: '3px solid #c5a059',
+                    borderRadius: '50%',
+                    animation: 'spin 1s linear infinite'
+                }} />
+                <style>{`
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                `}</style>
+            </div>
+        );
+    }
 
     return (
         <div className="admin-dashboard-container">
@@ -250,6 +343,7 @@ const AdminDashboard = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
+                    key={activeTab} // Animate when tab changes
                 >
                     {/* Header */}
                     <header className="dashboard-header">
@@ -259,7 +353,8 @@ const AdminDashboard = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5 }}
                             >
-                                Welcome back, <span className="header-accent">{email.split('@')[0]}</span>
+                                {activeTab === 'settings' ? 'System Settings' :
+                                    <>Welcome back, <span className="header-accent">{email.split('@')[0]}</span></>}
                             </motion.h2>
                             <p>{currentTime.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} • {currentTime.toLocaleTimeString()}</p>
                         </div>
@@ -270,304 +365,231 @@ const AdminDashboard = () => {
                             <button className="action-btn">
                                 <Bell size={20} />
                             </button>
+                            <button className="action-btn" onClick={handleLogout} title="Logout">
+                                <LogOut size={20} />
+                            </button>
                         </div>
                     </header>
 
-                    {/* Stats Grid */}
-                    <div className="stats-grid">
-                        <motion.div
-                            className="stat-card clickable-card"
-                            variants={itemVariants}
-                            onClick={() => setShowClientsModal(true)}
-                            whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(197, 160, 89, 0.2)' }}
-                        >
-                            <div className="stat-header">
-                                <div className="stat-icon"><Users /></div>
-                                <span className="stat-trend">+100%</span>
-                            </div>
-                            <div className="stat-value">{usersData.all.length}</div>
-                            <div className="stat-label">Total Clients</div>
-                            <div style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>Click to view details</div>
-                        </motion.div>
-
-                        <motion.div className="stat-card" variants={itemVariants}>
-                            <div className="stat-header">
-                                <div className="stat-icon"><Calendar /></div>
-                                <span className="stat-trend">+5.2%</span>
-                            </div>
-                            <div className="stat-value">42</div>
-                            <div className="stat-label">Pending Bookings</div>
-                        </motion.div>
-
-                        <motion.button
-                            className="stat-card action-btn-large"
-                            variants={itemVariants}
-                            whileHover={{ scale: 1.03, backgroundColor: 'rgba(255,255,255,0.95)' }}
-                            whileTap={{ scale: 0.97 }}
-                            onClick={() => setShowMessagesModal(true)}
-                        >
-                            <div className="stat-header">
-                                <div className="stat-icon" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>
-                                    <MessageSquare />
-                                </div>
-                                <span className="stat-trend" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>{messagesData.all.length} New</span>
-                            </div>
-                            <div className="stat-value">Messages</div>
-                            <div className="stat-label">View Inbox</div>
-                        </motion.button>
-
-                        <motion.button
-                            className="stat-card action-btn-large"
-                            variants={itemVariants}
-                            whileHover={{ scale: 1.03, backgroundColor: 'rgba(255,255,255,0.95)' }}
-                            whileTap={{ scale: 0.97 }}
-                        >
-                            <div className="stat-header">
-                                <div className="stat-icon" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
-                                    <CheckCircle />
-                                </div>
-                                <span className="stat-trend" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>Verified</span>
-                            </div>
-                            <div className="stat-value">Bookings</div>
-                            <div className="stat-label">View Accepted List</div>
-                        </motion.button>
-                    </div>
-
-                    {/* Analytics Chart Section */}
-                    <motion.div
-                        className="chart-section"
-                        variants={itemVariants}
-                    >
-                        <div className="card-header">
-                            <span className="card-title"><TrendingUp size={18} color="#c5a059" /> Analytics Overview</span>
-                            <div className="chart-actions">
-                                {['weekly', 'monthly', 'yearly'].map(period => (
-                                    <button
-                                        key={period}
-                                        className={`chart-period ${chartPeriod === period ? 'active' : ''}`}
-                                        onClick={() => setChartPeriod(period)}
-                                    >
-                                        {period.charAt(0).toUpperCase() + period.slice(1)}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="chart-container">
-                            {isLoadingChart ? (
-                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', color: '#ccc' }}>
-                                    Loading Data...
-                                </div>
-                            ) : (
-                                <div className="chart-wrapper">
-                                    {/* Tooltip or Legend could go here */}
-                                    <div style={{ position: 'absolute', top: 10, right: 10, fontSize: '0.8rem', color: '#888' }}>
-                                        Views: {chartData.reduce((acc, curr) => acc + curr.views, 0)} Total
+                    {/* DASHBOARD CONTENT */}
+                    {activeTab === 'dashboard' && (
+                        <>
+                            <div className="stats-grid">
+                                <motion.div
+                                    className="stat-card clickable-card"
+                                    variants={itemVariants}
+                                    onClick={() => setShowClientsModal(true)}
+                                    whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(197, 160, 89, 0.2)' }}
+                                >
+                                    <div className="stat-header">
+                                        <div className="stat-icon"><Users /></div>
+                                        <span className="stat-trend">+100%</span>
                                     </div>
+                                    <div className="stat-value">{usersData.all.length}</div>
+                                    <div className="stat-label">Total Clients</div>
+                                    <div style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>Click to view details</div>
+                                </motion.div>
 
-                                    {/* Custom SVG Line Chart */}
-                                    <svg width="100%" height="100%" viewBox="0 0 800 300" preserveAspectRatio="none">
-                                        <defs>
-                                            <linearGradient id="gradientArea" x1="0" y1="0" x2="0" y2="1">
-                                                <stop offset="0%" stopColor="#c5a059" stopOpacity="0.4" />
-                                                <stop offset="100%" stopColor="#c5a059" stopOpacity="0" />
-                                            </linearGradient>
-                                        </defs>
+                                <motion.button
+                                    className="stat-card action-btn-large"
+                                    variants={itemVariants}
+                                    whileHover={{ scale: 1.03, backgroundColor: 'rgba(255,255,255,0.95)' }}
+                                    whileTap={{ scale: 0.97 }}
+                                    onClick={() => setShowMessagesModal(true)}
+                                >
+                                    <div className="stat-header">
+                                        <div className="stat-icon" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>
+                                            <MessageSquare />
+                                        </div>
+                                        <span className="stat-trend" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>{messagesData.all.length} New</span>
+                                    </div>
+                                    <div className="stat-value">Messages</div>
+                                    <div className="stat-label">View Inbox</div>
+                                </motion.button>
+                            </div>
 
-                                        {/* Grid Lines */}
-                                        {[0, 1, 2, 3, 4].map(i => (
-                                            <line
-                                                key={i}
-                                                x1="0"
-                                                y1={300 - (i * 75)}
-                                                x2="800"
-                                                y2={300 - (i * 75)}
-                                                stroke="rgba(0,0,0,0.05)"
-                                                strokeWidth="1"
+                            <motion.div
+                                className="chart-section"
+                                variants={itemVariants}
+                            >
+                                <div className="card-header">
+                                    <span className="card-title"><TrendingUp size={18} color="#c5a059" /> Analytics Overview</span>
+                                    <div className="chart-actions">
+                                        {['weekly', 'monthly', 'yearly'].map(period => (
+                                            <button
+                                                key={period}
+                                                className={`chart-period ${chartPeriod === period ? 'active' : ''}`}
+                                                onClick={() => setChartPeriod(period)}
+                                            >
+                                                {period.charAt(0).toUpperCase() + period.slice(1)}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="chart-container">
+                                    {isLoadingChart ? (
+                                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', color: '#ccc' }}>
+                                            Loading Data...
+                                        </div>
+                                    ) : (
+                                        <div className="chart-wrapper">
+                                            <div style={{ position: 'absolute', top: 10, right: 10, fontSize: '0.8rem', color: '#888' }}>
+                                                Views: {chartData.reduce((acc, curr) => acc + curr.views, 0)} Total
+                                            </div>
+                                            <svg width="100%" height="100%" viewBox="0 0 800 300" preserveAspectRatio="none">
+                                                <defs>
+                                                    <linearGradient id="gradientArea" x1="0" y1="0" x2="0" y2="1">
+                                                        <stop offset="0%" stopColor="#c5a059" stopOpacity="0.4" />
+                                                        <stop offset="100%" stopColor="#c5a059" stopOpacity="0" />
+                                                    </linearGradient>
+                                                </defs>
+                                                {[0, 1, 2, 3, 4].map(i => (
+                                                    <line
+                                                        key={i}
+                                                        x1="0"
+                                                        y1={300 - (i * 75)}
+                                                        x2="800"
+                                                        y2={300 - (i * 75)}
+                                                        stroke="rgba(0,0,0,0.05)"
+                                                        strokeWidth="1"
+                                                    />
+                                                ))}
+                                                {(() => {
+                                                    if (chartData.length === 0) return null;
+                                                    const maxViews = Math.max(...chartData.map(d => d.views), 10);
+                                                    const width = 800;
+                                                    const height = 300;
+                                                    const points = chartData.map((d, i) => {
+                                                        const x = (i / (chartData.length - 1 || 1)) * width;
+                                                        const y = height - ((d.views / maxViews) * (height - 50));
+                                                        return `${x},${y}`;
+                                                    });
+                                                    const pathD = points.length === 1 ? `M0,${height} L800,${height}` : `M${points.join(' L')}`;
+                                                    const areaD = points.length === 1
+                                                        ? `M0,${height} L800,${height} L800,300 L0,300 Z`
+                                                        : `M${points[0].split(',')[0]},300 L${points.join(' L')} L${points[points.length - 1].split(',')[0]},300 Z`;
+
+                                                    return (
+                                                        <>
+                                                            <motion.path d={areaD} fill="url(#gradientArea)" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} />
+                                                            <motion.path d={pathD} fill="none" stroke="#c5a059" strokeWidth="3" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut" }} />
+                                                            {chartData.map((d, i) => {
+                                                                const x = (i / (chartData.length - 1 || 1)) * width;
+                                                                const y = height - ((d.views / maxViews) * (height - 50));
+                                                                return (
+                                                                    <motion.circle key={i} cx={x} cy={y} r="4" fill="#fff" stroke="#c5a059" strokeWidth="2" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1 + (i * 0.1) }}><title>{d.date}: {d.views} views</title></motion.circle>
+                                                                );
+                                                            })}
+                                                        </>
+                                                    );
+                                                })()}
+                                            </svg>
+                                        </div>
+                                    )}
+                                </div>
+                            </motion.div>
+                        </>
+                    )}
+
+                    {/* SETTINGS CONTENT */}
+                    {activeTab === 'settings' && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0 }}
+                            className="settings-container"
+                        >
+                            {/* Appearance Section */}
+                            <div className="settings-section">
+                                <h3><Palette size={20} /> Appearance</h3>
+
+                                <div className="setting-item">
+                                    <div className="setting-label">
+                                        <span className="setting-title">Dark Mode</span>
+                                        <span className="setting-desc">Switch between light and dark themes</span>
+                                    </div>
+                                    <label className="switch">
+                                        <input
+                                            type="checkbox"
+                                            checked={darkMode}
+                                            onChange={() => setDarkMode(!darkMode)}
+                                        />
+                                        <span className="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div className="setting-item">
+                                    <div className="setting-label">
+                                        <span className="setting-title">Theme Color</span>
+                                        <span className="setting-desc">Select your preferred accent color</span>
+                                    </div>
+                                    <div style={{ display: 'flex', gap: '10px' }}>
+                                        {[
+                                            { id: 'gold', color: '#c5a059' },
+                                            { id: 'blue', color: '#3b82f6' },
+                                            { id: 'green', color: '#10b981' },
+                                            { id: 'purple', color: '#8b5cf6' }
+                                        ].map(theme => (
+                                            <div
+                                                key={theme.id}
+                                                className={`color-option ${themeColor === theme.id ? 'active' : ''}`}
+                                                style={{ background: theme.color }}
+                                                onClick={() => setThemeColor(theme.id)}
+                                                title={theme.id.charAt(0).toUpperCase() + theme.id.slice(1)}
                                             />
                                         ))}
-
-                                        {/* Dynamic Data Paths */
-                                            (() => {
-                                                if (chartData.length === 0) return null;
-
-                                                const maxViews = Math.max(...chartData.map(d => d.views), 10);
-                                                const width = 800;
-                                                const height = 300;
-                                                const padding = 20; // internal padding
-
-                                                // Calculate points
-                                                const points = chartData.map((d, i) => {
-                                                    const x = (i / (chartData.length - 1 || 1)) * width;
-                                                    const y = height - ((d.views / maxViews) * (height - 50)); // Leave 50px buffer at top
-                                                    return `${x},${y}`;
-                                                });
-
-                                                // If single point, synthesize a line
-                                                const pathD = points.length === 1
-                                                    ? `M0,${height} L800,${height}` // Flat line if 1 point
-                                                    : `M${points.join(' L')}`;
-
-                                                // Area needs to close at bottom
-                                                const areaD = points.length === 1
-                                                    ? `M0,${height} L800,${height} L800,300 L0,300 Z`
-                                                    : `M${points[0].split(',')[0]},300 L${points.join(' L')} L${points[points.length - 1].split(',')[0]},300 Z`;
-
-                                                return (
-                                                    <>
-                                                        <motion.path
-                                                            d={areaD}
-                                                            fill="url(#gradientArea)"
-                                                            initial={{ opacity: 0 }}
-                                                            animate={{ opacity: 1 }}
-                                                            transition={{ duration: 1 }}
-                                                        />
-                                                        <motion.path
-                                                            d={pathD}
-                                                            fill="none"
-                                                            stroke="#c5a059"
-                                                            strokeWidth="3"
-                                                            initial={{ pathLength: 0 }}
-                                                            animate={{ pathLength: 1 }}
-                                                            transition={{ duration: 1.5, ease: "easeInOut" }}
-                                                        />
-                                                        {/* Render Points */}
-                                                        {chartData.map((d, i) => {
-                                                            const x = (i / (chartData.length - 1 || 1)) * width;
-                                                            const y = height - ((d.views / maxViews) * (height - 50));
-                                                            return (
-                                                                <motion.circle
-                                                                    key={i}
-                                                                    cx={x}
-                                                                    cy={y}
-                                                                    r="4"
-                                                                    fill="#fff"
-                                                                    stroke="#c5a059"
-                                                                    strokeWidth="2"
-                                                                    initial={{ scale: 0 }}
-                                                                    animate={{ scale: 1 }}
-                                                                    transition={{ delay: 1 + (i * 0.1) }}
-                                                                >
-                                                                    <title>{d.date}: {d.views} views</title>
-                                                                </motion.circle>
-                                                            );
-                                                        })}
-                                                    </>
-                                                );
-                                            })()}
-                                    </svg>
-                                </div>
-                            )}
-                        </div>
-                    </motion.div>
-
-                    <div className="dashboard-content-grid">
-                        {/* Recent Activity */}
-                        <motion.div className="content-card" variants={itemVariants}>
-                            <div className="card-header">
-                                <span className="card-title"><Shield size={18} color="#c5a059" /> Recent Security Logs</span>
-                            </div>
-                            <div className="recent-logins-list">
-                                <div className="recent-login-item">
-                                    <div className="login-info">
-                                        <div className="login-avatar">
-                                            <UserCheck size={20} />
-                                        </div>
-                                        <div className="login-details">
-                                            <h4>{email}</h4>
-                                            <p>Admin Portal Access</p>
-                                        </div>
                                     </div>
-                                    <span className="login-time" style={{ color: '#00c853' }}>Active Now</span>
-                                </div>
-
-                                <div className="recent-login-item">
-                                    <div className="login-info">
-                                        <div className="login-avatar" style={{ backgroundColor: 'rgba(0,0,0,0.05)', color: '#888' }}>
-                                            <Users size={20} />
-                                        </div>
-                                        <div className="login-details">
-                                            <h4>manager@riyamakeover.in</h4>
-                                            <p>Dashboard Check</p>
-                                        </div>
-                                    </div>
-                                    <span className="login-time">2h ago</span>
-                                </div>
-
-                                <div className="recent-login-item">
-                                    <div className="login-info">
-                                        <div className="login-avatar" style={{ backgroundColor: 'rgba(0,0,0,0.05)', color: '#888' }}>
-                                            <Settings size={20} />
-                                        </div>
-                                        <div className="login-details">
-                                            <h4>System Auto-Backup</h4>
-                                            <p>Automated Task</p>
-                                        </div>
-                                    </div>
-                                    <span className="login-time">5h ago</span>
                                 </div>
                             </div>
-                        </motion.div>
 
-                        {/* Session Vault */}
-                        <motion.div className="content-card" variants={itemVariants}>
-                            <div className="card-header">
-                                <span className="card-title"><Lock size={18} color="#c5a059" /> Secure Session Vault</span>
-                            </div>
+                            {/* Display Section */}
+                            <div className="settings-section">
+                                <h3><Monitor size={20} /> Display</h3>
 
-                            <div className="session-info">
-                                <p style={{ color: '#888', fontSize: '0.85rem', marginBottom: '1.5rem', lineHeight: '1.6' }}>
-                                    You are currently operating with Level-5 Administrative Privileges. All actions are logged.
-                                </p>
-
-                                <div className="vault-container">
-                                    <div className="vault-header">
-                                        <Shield size={16} />
-                                        <span>ENCRYPTED_CREDENTIALS_DISPLAY</span>
+                                <div className="setting-item">
+                                    <div className="setting-label">
+                                        <span className="setting-title">Font Size</span>
+                                        <span className="setting-desc">Adjust the text size for better readability</span>
                                     </div>
-
-                                    <div className="credential-row">
-                                        <span className="credential-label">Admin Identity</span>
-                                        <div className="credential-value-box">
-                                            <span>{email}</span>
-                                            <UserCheck size={14} color="#00c853" />
-                                        </div>
-                                    </div>
-
-                                    <div className="credential-row">
-                                        <span className="credential-label">Access Key (Password)</span>
-                                        <div className="credential-value-box">
-                                            <span style={{
-                                                filter: showPassword ? 'none' : 'blur(5px)',
-                                                transition: 'all 0.3s',
-                                                userSelect: 'none'
-                                            }}>
-                                                {password}
-                                            </span>
+                                    <div className="option-group">
+                                        {['small', 'medium', 'large'].map(size => (
                                             <button
-                                                className="toggle-pass-btn"
-                                                onClick={() => setShowPassword(!showPassword)}
-                                                title={showPassword ? "Hide Password" : "Show Password"}
+                                                key={size}
+                                                className={`option-btn ${fontSize === size ? 'active' : ''}`}
+                                                onClick={() => setFontSize(size)}
                                             >
-                                                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                                                {size.charAt(0).toUpperCase() + size.slice(1)}
                                             </button>
-                                        </div>
+                                        ))}
                                     </div>
+                                </div>
 
-                                    <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem', alignItems: 'center', fontSize: '0.7rem', color: '#666' }}>
-                                        <Key size={12} />
-                                        <span>End-to-end encryption active</span>
+                                <div className="setting-item">
+                                    <div className="setting-label">
+                                        <span className="setting-title">Compact Mode</span>
+                                        <span className="setting-desc">Reduce padding and margin for denser content</span>
                                     </div>
+                                    <label className="switch">
+                                        <input
+                                            type="checkbox"
+                                            checked={compactMode}
+                                            onChange={() => setCompactMode(!compactMode)}
+                                        />
+                                        <span className="slider"></span>
+                                    </label>
                                 </div>
                             </div>
                         </motion.div>
-                    </div>
+                    )}
+
                 </motion.div>
 
-                {/* Clients Modal */}
+                {/* Modals outside main flow (kept as is) */}
                 <AnimatePresence>
                     {showClientsModal && (
                         <motion.div
                             className="modal-backdrop"
+
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}

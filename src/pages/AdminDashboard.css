@@ -19,6 +19,212 @@
     --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
+/* Dark Mode Variables */
+body.dark-mode {
+    --admin-bg: #121212;
+    --admin-sidebar-bg: rgba(25, 25, 25, 0.95);
+    --admin-card-bg: rgba(30, 30, 30, 0.6);
+    --admin-card-hover: #252525;
+    --admin-border: rgba(255, 255, 255, 0.08);
+    --admin-text-main: #e0e0e0;
+    --admin-text-secondary: #a0a0a0;
+    --admin-text-muted: #666;
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Font Sizes */
+body.font-small {
+    font-size: 14px;
+}
+
+body.font-medium {
+    font-size: 16px;
+}
+
+body.font-large {
+    font-size: 18px;
+}
+
+/* Theme Colors */
+body.theme-blue {
+    --admin-accent-gold: #3b82f6;
+    --gradient-gold: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+    --admin-accent-glow: rgba(59, 130, 246, 0.15);
+}
+
+body.theme-green {
+    --admin-accent-gold: #10b981;
+    --gradient-gold: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    --admin-accent-glow: rgba(16, 185, 129, 0.15);
+}
+
+body.theme-purple {
+    --admin-accent-gold: #8b5cf6;
+    --gradient-gold: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+    --admin-accent-glow: rgba(139, 92, 246, 0.15);
+}
+
+/* Settings View Styles */
+.settings-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.settings-section {
+    background: var(--admin-card-bg);
+    border: 1px solid #fff;
+    /* fallback */
+    border: 1px solid var(--admin-border);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    backdrop-filter: var(--glass-effect);
+    box-shadow: var(--shadow-card);
+}
+
+.settings-section h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--admin-text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.2rem;
+    border-bottom: 1px solid var(--admin-border);
+    padding-bottom: 1rem;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+body.dark-mode .setting-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.setting-title {
+    font-weight: 500;
+    color: var(--admin-text-main);
+}
+
+.setting-desc {
+    font-size: 0.85rem;
+    color: var(--admin-text-muted);
+}
+
+/* Toggle Switch */
+.switch {
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    position: relative;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: .4s;
+    border-radius: 34px;
+}
+
+body.dark-mode .slider {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: var(--admin-accent-gold);
+}
+
+input:checked+.slider:before {
+    transform: translateX(24px);
+}
+
+/* Radio/Button Group for Theme/Size */
+.option-group {
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.03);
+    padding: 4px;
+    border-radius: 10px;
+}
+
+body.dark-mode .option-group {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.option-btn {
+    padding: 6px 16px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--admin-text-secondary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.option-btn.active {
+    background: #fff;
+    color: var(--admin-accent-gold);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    font-weight: 600;
+}
+
+body.dark-mode .option-btn.active {
+    background: #333;
+}
+
+.color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.color-option.active {
+    border-color: var(--admin-text-main);
+    transform: scale(1.1);
+}
+
 body {
     background-color: var(--admin-bg);
 }
@@ -668,6 +874,10 @@ body {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
+    }
+
+    .welcome-msg h2 {
+        font-size: 1.8rem;
     }
 }
 

@@ -4,6 +4,7 @@ import { Home, UserPlus, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../firebase';
+import { updateUserRole } from '../utils/authUtils';
 import './Login.css'; // Reusing the shared Epic styles
 
 const Signup = () => {
@@ -41,6 +42,10 @@ const Signup = () => {
             await updateProfile(user, {
                 displayName: formData.fullname
             });
+
+            // Set role and session
+            await updateUserRole(user, 'makeover');
+            sessionStorage.setItem('activeSession', 'makeover');
 
             console.log('User registered:', user);
             navigate('/'); // Redirect to home on success

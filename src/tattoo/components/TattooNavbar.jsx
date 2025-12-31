@@ -25,7 +25,9 @@ const TattooNavbar = () => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
                 const isTattoo = await checkUserRole(currentUser.uid, 'tattoo');
-                if (isTattoo) {
+                const sessionType = sessionStorage.getItem('activeSession');
+
+                if (isTattoo && sessionType === 'tattoo') {
                     setUser(currentUser);
                 } else {
                     setUser(null);

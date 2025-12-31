@@ -26,36 +26,66 @@ const tattooReviewsData = [
     }
 ];
 
+const ReviewCard = ({ review }) => {
+    const [isExpanded, setIsExpanded] = React.useState(false);
+    const CHAR_LIMIT = 100;
+    const shouldTruncate = review.content.length > CHAR_LIMIT;
+
+    return (
+        <div className="tr-card">
+            <div className="tr-quote-overlay">
+                <MessageSquareQuote size={80} strokeWidth={1} />
+            </div>
+            <div className="tr-card-content">
+                <p className={`tr-text ${!isExpanded && shouldTruncate ? 'clamped' : ''}`}>
+                    "{review.content}"
+                </p>
+                {shouldTruncate && (
+                    <button
+                        className="tr-read-more"
+                        onClick={() => setIsExpanded(!isExpanded)}
+                    >
+                        {isExpanded ? 'View less' : 'View more'}
+                    </button>
+                )}
+                {!shouldTruncate && <div style={{ marginBottom: '25px' }}></div>}
+
+                <div className="tr-divider"></div>
+                <div className="tr-meta">
+                    <h4 className="tr-author">{review.name}</h4>
+                    <span className="tr-service">{review.service}</span>
+                </div>
+                <div className="tr-stars">
+                    {[...Array(review.rating)].map((_, i) => (
+                        <Star key={i} size={14} fill="var(--accent-color)" stroke="none" />
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const TattooReviews = () => {
     return (
         <section className="tattoo-reviews-section">
             <div className="repo-container">
                 <div className="tr-header">
-                    <h2 className="tr-title">Client Stories</h2>
+                    <h2 className="tr-title">Google Reviews</h2>
                     <div className="tr-bar"></div>
-                    <p className="tr-subtitle">What people say about their ink experience.</p>
+                    <a
+                        href="https://share.google/PG8DugJToqCFQPEl9"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="tr-subtitle"
+                        style={{ textDecoration: 'none', display: 'inline-block', marginTop: '10px' }}
+                    >
+                        See what people say about their ink experience on Google.
+                    </a>
                 </div>
 
                 <div className="tr-grid">
                     {tattooReviewsData.map((review) => (
-                        <div key={review.id} className="tr-card">
-                            <div className="tr-quote-overlay">
-                                <MessageSquareQuote size={80} strokeWidth={1} />
-                            </div>
-                            <div className="tr-card-content">
-                                <p className="tr-text">"{review.content}"</p>
-                                <div className="tr-divider"></div>
-                                <div className="tr-meta">
-                                    <h4 className="tr-author">{review.name}</h4>
-                                    <span className="tr-service">{review.service}</span>
-                                </div>
-                                <div className="tr-stars">
-                                    {[...Array(review.rating)].map((_, i) => (
-                                        <Star key={i} size={14} fill="var(--accent-color)" stroke="none" />
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                        <ReviewCard key={review.id} review={review} />
                     ))}
                 </div>
             </div>

@@ -24,7 +24,9 @@ const TattooLogin = () => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
                 const isTattoo = await checkUserRole(currentUser.uid, 'tattoo');
-                if (isTattoo) {
+                const sessionType = sessionStorage.getItem('activeSession');
+
+                if (isTattoo && sessionType === 'tattoo') {
                     navigate('/tattoo');
                 }
             }
@@ -43,6 +45,7 @@ const TattooLogin = () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             await updateUserRole(result.user, 'tattoo');
+            sessionStorage.setItem('activeSession', 'tattoo');
             navigate('/tattoo');
         } catch (err) {
             if (err.code === 'auth/api-key-not-valid') {
@@ -78,6 +81,7 @@ const TattooLogin = () => {
                 await updateProfile(user, { displayName: formData.name });
             }
             await updateUserRole(user, 'tattoo');
+            sessionStorage.setItem('activeSession', 'tattoo');
             navigate('/tattoo');
         } catch (err) {
             setError(err.message.replace('Firebase: ', ''));

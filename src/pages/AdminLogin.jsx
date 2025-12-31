@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Lock, Mail, ArrowLeft, Scissors, Palette, Sparkles, Feather, Gem, Brush, Heart, Star, AlertTriangle } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import './AdminLogin.css';
@@ -15,6 +15,27 @@ const AdminLogin = () => {
     });
     const [viewState, setViewState] = useState('login'); // 'login', 'loading', 'error'
     const [loginError, setLoginError] = useState('');
+
+    // Check for existing session on mount
+    React.useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                try {
+                    const paramsEmail = user.email.toLowerCase().trim();
+                    const adminDocRef = doc(db, 'admins', paramsEmail);
+                    const adminDoc = await getDoc(adminDocRef);
+
+                    if (adminDoc.exists()) {
+                        navigate('/admin-dashboard');
+                    }
+                } catch (error) {
+                    console.error("Session check error:", error);
+                    // Optional: signOut(auth) if check fails to be safe
+                }
+            }
+        });
+        return () => unsubscribe();
+    }, [navigate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

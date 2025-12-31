@@ -4,6 +4,7 @@ import { Home } from 'lucide-react';
 import { ToastContainer } from 'react-toastify';
 import { auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
+import { checkUserRole } from '../utils/authUtils';
 import 'react-toastify/dist/ReactToastify.css';
 import './Navbar.css';
 import logo from '../assets/logo.png';
@@ -38,8 +39,19 @@ const Navbar = () => {
         window.addEventListener('scroll', handleScroll);
         document.addEventListener('mousedown', handleClickOutside);
 
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            if (currentUser) {
+                const isMakeover = await checkUserRole(currentUser.uid, 'makeover');
+                const sessionType = sessionStorage.getItem('activeSession');
+
+                if (isMakeover && sessionType === 'makeover') {
+                    setUser(currentUser);
+                } else {
+                    setUser(null);
+                }
+            } else {
+                setUser(null);
+            }
         });
 
         return () => {
