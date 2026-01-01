@@ -180,6 +180,7 @@
 .hs-cta:hover {
     background: var(--gold);
     color: var(--dark);
+    font-weight: 700;
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
 }
 
