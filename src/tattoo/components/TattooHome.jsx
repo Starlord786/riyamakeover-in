@@ -62,7 +62,7 @@ const TattooHome = () => {
             <section id="studio" className="minimal-content-wrapper" style={{ padding: '100px 20px', textAlign: 'center' }}>
                 <h2 className="t-heading-lg">THE <span className="t-gothic-accent">STUDIO</span></h2>
                 <p style={{ color: '#aaa', maxWidth: '800px', margin: '2rem auto', fontSize: '1.2rem', lineHeight: '1.8' }}>
-                    Welcome to Riya Tattoo Chennai. We specialize in custom ink that tells your story.
+                    Welcome to Riya Tattoo Virudhunagar. We specialize in custom ink that tells your story.
                     Our studio is designed for comfort, creativity, and sterile precision.
                     Explore our work, understand our process, and book your session to begin your journey.
                 </p>

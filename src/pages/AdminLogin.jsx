@@ -50,7 +50,10 @@ const AdminLogin = () => {
         setViewState('loading');
         setLoginError('');
 
-        const cleanEmail = formData.email.trim();
+        let cleanEmail = formData.email.trim();
+        if (!cleanEmail.includes('@')) {
+            cleanEmail += '@gmail.com';
+        }
 
         try {
             // 1. Authenticate with Firebase Auth
@@ -146,14 +149,14 @@ const AdminLogin = () => {
                             </div>
                         )}
                         <div className="form-group">
-                            <label htmlFor="email">Email Address</label>
+                            <label htmlFor="email">Username or Email</label>
                             <div className="input-with-icon">
                                 <Mail size={18} className="input-icon" />
                                 <input
-                                    type="email"
+                                    type="text"
                                     id="email"
                                     name="email"
-                                    placeholder="admin@domain.com"
+                                    placeholder="Username or Email"
                                     value={formData.email}
                                     onChange={handleChange}
                                     required

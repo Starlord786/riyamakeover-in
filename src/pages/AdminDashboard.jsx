@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { createPortal } from 'react-dom';
 import {
     LayoutDashboard,
     Users,
@@ -76,17 +77,17 @@ const AdminDashboard = () => {
 
     // Users Data State
     const [usersData, setUsersData] = useState({ all: [], tattoo: [], makeover: [] });
-    const [showClientsModal, setShowClientsModal] = useState(false);
-    const [clientFilter, setClientFilter] = useState('tattoo'); // 'tattoo' | 'makeover'
+    // showClientsModal removed, using activeTab 'clients' instead
+    const [clientFilter, setClientFilter] = useState('all'); // 'all' | 'tattoo' | 'makeover'
 
     // Messages Data State
     const [messagesData, setMessagesData] = useState({ all: [], tattoo: [], makeover: [] });
-    const [showMessagesModal, setShowMessagesModal] = useState(false);
+    // showMessagesModal removed
     const [messageFilter, setMessageFilter] = useState('tattoo');
 
     // Newsletter Data State
     const [newsletterData, setNewsletterData] = useState({ tattoo: [], makeover: [] });
-    const [showNewsletterModal, setShowNewsletterModal] = useState(false);
+    // showNewsletterModal removed
     const [newsletterFilter, setNewsletterFilter] = useState('tattoo');
 
     // Fetch Messages Data
@@ -154,8 +155,7 @@ const AdminDashboard = () => {
         };
         fetchNewsletter();
     }, []);
-    const [chartPeriod, setChartPeriod] = useState('weekly');
-    const [isLoadingChart, setIsLoadingChart] = useState(false);
+
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -256,46 +256,7 @@ const AdminDashboard = () => {
         fetchMessages();
     }, []);
 
-    // Fetch Analytics Data
-    useEffect(() => {
-        const fetchAnalytics = async () => {
-            setIsLoadingChart(true);
-            try {
-                const today = new Date();
-                let startDate = new Date();
 
-                if (chartPeriod === 'weekly') {
-                    startDate.setDate(today.getDate() - 7);
-                } else if (chartPeriod === 'monthly') {
-                    startDate.setDate(today.getDate() - 30);
-                } else if (chartPeriod === 'yearly') {
-                    startDate.setDate(today.getDate() - 365);
-                }
-
-                const dateString = startDate.toISOString().split('T')[0];
-                const analyticsRef = collection(db, 'analytics');
-                const q = query(
-                    analyticsRef,
-                    where('date', '>=', dateString),
-                    orderBy('date', 'asc')
-                );
-
-                const querySnapshot = await getDocs(q);
-                const data = querySnapshot.docs.map(doc => ({
-                    date: doc.id,
-                    views: doc.data().views || 0
-                }));
-
-                setChartData(data);
-            } catch (error) {
-                console.error("Error fetching analytics:", error);
-            } finally {
-                setIsLoadingChart(false);
-            }
-        };
-
-        fetchAnalytics();
-    }, [chartPeriod]);
 
     const handleLogout = async () => {
         try {
@@ -335,8 +296,8 @@ const AdminDashboard = () => {
     const navItems = [
         { id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
         { id: 'clients', icon: Users, label: 'Clients' },
-        { id: 'bookings', icon: Calendar, label: 'Bookings' },
-        { id: 'analytics', icon: TrendingUp, label: 'Analytics' },
+        { id: 'messages', icon: MessageSquare, label: 'Messages' },
+        { id: 'newsletter', icon: Mail, label: 'Newsletter' },
         { id: 'settings', icon: Settings, label: 'Settings' },
     ];
 
@@ -388,20 +349,8 @@ const AdminDashboard = () => {
                     ))}
                 </nav>
 
-                <div className="sidebar-footer">
-                    <div className="user-mini-profile">
-                        <div className="user-avatar-mini">
-                            {email ? email.charAt(0).toUpperCase() : 'A'}
-                        </div>
-                        <div className="user-info-mini">
-                            <span className="user-email-mini">{email}</span>
-                            <span style={{ fontSize: '0.7em', color: '#c5a059', letterSpacing: '0.5px' }}>Super Admin</span>
-                        </div>
-                    </div>
-                    <div className="logout-btn" onClick={handleLogout}>
-                        <LogOut size={18} />
-                        <span>Logout System</span>
-                    </div>
+                <div className="sidebar-footer" style={{ display: 'none' }}>
+                    {/* Removed per user request */}
                 </div>
             </motion.aside>
 
@@ -428,14 +377,9 @@ const AdminDashboard = () => {
                             <p>{currentTime.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} • {currentTime.toLocaleTimeString()}</p>
                         </div>
                         <div className="dashboard-actions">
-                            <button className="action-btn">
-                                <Search size={20} />
-                            </button>
-                            <button className="action-btn">
-                                <Bell size={20} />
-                            </button>
-                            <button className="action-btn" onClick={handleLogout} title="Logout">
+                            <button className="action-btn" onClick={handleLogout} title="Logout" style={{ width: 'auto', padding: '0 15px', borderRadius: '20px', gap: '8px' }}>
                                 <LogOut size={20} />
+                                <span style={{ fontSize: '0.9rem', fontWeight: '500' }}>Logout</span>
                             </button>
                         </div>
                     </header>
@@ -447,7 +391,7 @@ const AdminDashboard = () => {
                                 <motion.div
                                     className="stat-card clickable-card"
                                     variants={itemVariants}
-                                    onClick={() => setShowClientsModal(true)}
+                                    onClick={() => setActiveTab('clients')}
                                     whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(197, 160, 89, 0.2)' }}
                                 >
                                     <div className="stat-header">
@@ -464,7 +408,7 @@ const AdminDashboard = () => {
                                     variants={itemVariants}
                                     whileHover={{ scale: 1.03, backgroundColor: 'rgba(255,255,255,0.95)' }}
                                     whileTap={{ scale: 0.97 }}
-                                    onClick={() => setShowMessagesModal(true)}
+                                    onClick={() => setActiveTab('messages')}
                                 >
                                     <div className="stat-header">
                                         <div className="stat-icon" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>
@@ -481,7 +425,7 @@ const AdminDashboard = () => {
                                     variants={itemVariants}
                                     whileHover={{ scale: 1.03, backgroundColor: 'rgba(255,255,255,0.95)' }}
                                     whileTap={{ scale: 0.97 }}
-                                    onClick={() => setShowNewsletterModal(true)}
+                                    onClick={() => setActiveTab('newsletter')}
                                 >
                                     <div className="stat-header">
                                         <div className="stat-icon" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
@@ -495,90 +439,232 @@ const AdminDashboard = () => {
                                     <div className="stat-label">Manage Emails</div>
                                 </motion.button>
                             </div>
-
-                            <motion.div
-                                className="chart-section"
-                                variants={itemVariants}
-                            >
-                                <div className="card-header">
-                                    <span className="card-title"><TrendingUp size={18} color="#c5a059" /> Analytics Overview</span>
-                                    <div className="chart-actions">
-                                        {['weekly', 'monthly', 'yearly'].map(period => (
-                                            <button
-                                                key={period}
-                                                className={`chart-period ${chartPeriod === period ? 'active' : ''}`}
-                                                onClick={() => setChartPeriod(period)}
-                                            >
-                                                {period.charAt(0).toUpperCase() + period.slice(1)}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div className="chart-container">
-                                    {isLoadingChart ? (
-                                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', color: '#ccc' }}>
-                                            Loading Data...
-                                        </div>
-                                    ) : (
-                                        <div className="chart-wrapper">
-                                            <div style={{ position: 'absolute', top: 10, right: 10, fontSize: '0.8rem', color: '#888' }}>
-                                                Views: {chartData.reduce((acc, curr) => acc + curr.views, 0)} Total
-                                            </div>
-                                            <svg width="100%" height="100%" viewBox="0 0 800 300" preserveAspectRatio="none">
-                                                <defs>
-                                                    <linearGradient id="gradientArea" x1="0" y1="0" x2="0" y2="1">
-                                                        <stop offset="0%" stopColor="#c5a059" stopOpacity="0.4" />
-                                                        <stop offset="100%" stopColor="#c5a059" stopOpacity="0" />
-                                                    </linearGradient>
-                                                </defs>
-                                                {[0, 1, 2, 3, 4].map(i => (
-                                                    <line
-                                                        key={i}
-                                                        x1="0"
-                                                        y1={300 - (i * 75)}
-                                                        x2="800"
-                                                        y2={300 - (i * 75)}
-                                                        stroke="rgba(0,0,0,0.05)"
-                                                        strokeWidth="1"
-                                                    />
-                                                ))}
-                                                {(() => {
-                                                    if (chartData.length === 0) return null;
-                                                    const maxViews = Math.max(...chartData.map(d => d.views), 10);
-                                                    const width = 800;
-                                                    const height = 300;
-                                                    const points = chartData.map((d, i) => {
-                                                        const x = (i / (chartData.length - 1 || 1)) * width;
-                                                        const y = height - ((d.views / maxViews) * (height - 50));
-                                                        return `${x},${y}`;
-                                                    });
-                                                    const pathD = points.length === 1 ? `M0,${height} L800,${height}` : `M${points.join(' L')}`;
-                                                    const areaD = points.length === 1
-                                                        ? `M0,${height} L800,${height} L800,300 L0,300 Z`
-                                                        : `M${points[0].split(',')[0]},300 L${points.join(' L')} L${points[points.length - 1].split(',')[0]},300 Z`;
-
-                                                    return (
-                                                        <>
-                                                            <motion.path d={areaD} fill="url(#gradientArea)" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} />
-                                                            <motion.path d={pathD} fill="none" stroke="#c5a059" strokeWidth="3" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.5, ease: "easeInOut" }} />
-                                                            {chartData.map((d, i) => {
-                                                                const x = (i / (chartData.length - 1 || 1)) * width;
-                                                                const y = height - ((d.views / maxViews) * (height - 50));
-                                                                return (
-                                                                    <motion.circle key={i} cx={x} cy={y} r="4" fill="#fff" stroke="#c5a059" strokeWidth="2" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 1 + (i * 0.1) }}><title>{d.date}: {d.views} views</title></motion.circle>
-                                                                );
-                                                            })}
-                                                        </>
-                                                    );
-                                                })()}
-                                            </svg>
-                                        </div>
-                                    )}
-                                </div>
-                            </motion.div>
                         </>
                     )}
 
+                    {/* CLIENTS CONTENT */}
+                    {activeTab === 'clients' && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="clients-container"
+                        >
+                            <div className="section-header">
+                                <h3><Users size={24} /> Client Registry</h3>
+                                <div className="tabs-wrapper">
+                                    <button className={`tab-btn ${clientFilter === 'all' ? 'active' : ''}`} onClick={() => setClientFilter('all')}>
+                                        All Clients
+                                    </button>
+                                    <button className={`tab-btn ${clientFilter === 'tattoo' ? 'active' : ''}`} onClick={() => setClientFilter('tattoo')}>
+                                        Tattoo
+                                    </button>
+                                    <button className={`tab-btn ${clientFilter === 'makeover' ? 'active' : ''}`} onClick={() => setClientFilter('makeover')}>
+                                        Makeover
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="clients-list-card">
+                                <div className="list-header-row main-view-header">
+                                    <span style={{ flex: 1 }}>Client</span>
+                                    <span style={{ flex: 1.5 }}>Email / Contact</span>
+                                    <span style={{ flex: 1 }}>Role / Type</span>
+                                    <span style={{ flex: 1 }}>Joined / Last Login</span>
+                                    <span style={{ width: '100px', textAlign: 'center' }}>Status</span>
+                                </div>
+
+                                <div className="list-content-scroll">
+                                    {(() => {
+                                        let filtered = usersData.all;
+                                        if (clientFilter === 'tattoo') filtered = usersData.tattoo;
+                                        if (clientFilter === 'makeover') filtered = usersData.makeover;
+
+                                        if (filtered.length === 0) {
+                                            return (
+                                                <div className="empty-state">
+                                                    <Users size={40} color="#ddd" />
+                                                    <p>No clients found.</p>
+                                                </div>
+                                            );
+                                        }
+
+                                        return filtered.map((client) => (
+                                            <motion.div
+                                                key={client.id}
+                                                className="list-item-row"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                            >
+                                                <div className="list-col" style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                                    <div className="user-avatar-medium">
+                                                        {client.photoURL ? (
+                                                            <img src={client.photoURL} alt="dp" />
+                                                        ) : (
+                                                            <span>{client.displayName ? client.displayName.charAt(0).toUpperCase() : (client.email ? client.email.charAt(0).toUpperCase() : 'U')}</span>
+                                                        )}
+                                                    </div>
+                                                    <div>
+                                                        <span className="user-name">{client.displayName || 'Guest User'}</span>
+                                                        {client.uid && <span className="user-id-tiny">{client.uid.substring(0, 6)}...</span>}
+                                                    </div>
+                                                </div>
+
+                                                <div className="list-col" style={{ flex: 1.5 }}>
+                                                    <div className="contact-info">
+                                                        <span>{client.email}</span>
+                                                        {client.phoneNumber && <span className="sub-text">{client.phoneNumber}</span>}
+                                                    </div>
+                                                </div>
+
+                                                <div className="list-col" style={{ flex: 1 }}>
+                                                    <span className={`role-badge ${client.isTattooUser ? 'tattoo' : 'makeover'}`}>
+                                                        {client.isTattooUser ? 'Tattoo' : (client.isMakeoverUser ? 'Makeover' : 'User')}
+                                                    </span>
+                                                </div>
+
+                                                <div className="list-col" style={{ flex: 1 }}>
+                                                    <div className="date-info">
+                                                        <span>Joined: {client.createdAt ? new Date(client.createdAt.seconds * 1000 || client.createdAt).toLocaleDateString() : 'N/A'}</span>
+                                                        <span className="sub-text">Last: {client.lastLoginAt ? new Date(Number(client.lastLoginAt)).toLocaleDateString() : 'N/A'}</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="list-col" style={{ width: '100px', display: 'flex', justifyContent: 'center' }}>
+                                                    <span className="status-badge-active">Active</span>
+                                                </div>
+                                            </motion.div>
+                                        ));
+                                    })()}
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+
+
+                    {/* MESSAGES CONTENT */}
+                    {activeTab === 'messages' && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="clients-container"
+                        >
+                            <div className="section-header">
+                                <h3><MessageSquare size={24} /> Messages Inbox</h3>
+                                <div className="tabs-wrapper">
+                                    <button className={`tab-btn ${messageFilter === 'tattoo' ? 'active' : ''}`} onClick={() => setMessageFilter('tattoo')}>
+                                        Tattoo Messages
+                                    </button>
+                                    <button className={`tab-btn ${messageFilter === 'makeover' ? 'active' : ''}`} onClick={() => setMessageFilter('makeover')}>
+                                        Makeover Messages
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="clients-list-card">
+                                <div className="list-header-row main-view-header">
+                                    <span style={{ flex: 1 }}>Sender Info</span>
+                                    <span style={{ flex: 2 }}>Message</span>
+                                    <span style={{ width: '150px', textAlign: 'right' }}>Sent At</span>
+                                </div>
+
+                                <div className="list-content-scroll">
+                                    {(() => {
+                                        const filtered = messageFilter === 'tattoo' ? messagesData.tattoo : messagesData.makeover;
+                                        if (filtered.length === 0) {
+                                            return (
+                                                <div className="empty-state">
+                                                    <MessageSquare size={40} color="#ddd" />
+                                                    <p>No messages received yet.</p>
+                                                </div>
+                                            );
+                                        }
+
+                                        return filtered.map((msg) => (
+                                            <motion.div
+                                                key={msg.id}
+                                                className="list-item-row"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                            >
+                                                <div className="list-col" style={{ flex: 1, flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
+                                                    <span style={{ fontWeight: '600', color: '#333' }}>{msg.name || 'Unknown'}</span>
+                                                    <span style={{ fontSize: '0.85rem', color: '#666' }}>{msg.email || msg.phone}</span>
+                                                </div>
+                                                <div className="list-col" style={{ flex: 2 }}>
+                                                    <p style={{ margin: 0, fontSize: '0.9rem', color: '#444', lineHeight: '1.5' }}>{msg.message}</p>
+                                                </div>
+                                                <div className="list-col" style={{ width: '150px', textAlign: 'right', fontSize: '0.8rem', color: '#888' }}>
+                                                    {msg.createdAt?.seconds ? new Date(msg.createdAt.seconds * 1000).toLocaleDateString() + ' ' + new Date(msg.createdAt.seconds * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Just now'}
+                                                </div>
+                                            </motion.div>
+                                        ));
+                                    })()}
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {/* NEWSLETTER CONTENT */}
+                    {activeTab === 'newsletter' && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="clients-container"
+                        >
+                            <div className="section-header">
+                                <h3><Mail size={24} /> Newsletter Subscribers</h3>
+                                <div className="tabs-wrapper">
+                                    <button className={`tab-btn ${newsletterFilter === 'tattoo' ? 'active' : ''}`} onClick={() => setNewsletterFilter('tattoo')}>
+                                        Tattoo Subscribers
+                                    </button>
+                                    <button className={`tab-btn ${newsletterFilter === 'makeover' ? 'active' : ''}`} onClick={() => setNewsletterFilter('makeover')}>
+                                        Makeover Subscribers
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="clients-list-card">
+                                <div className="list-header-row main-view-header">
+                                    <span style={{ flex: 1.5 }}>Email Address</span>
+                                    <span style={{ flex: 1 }}>Name</span>
+                                    <span style={{ width: '150px', textAlign: 'right' }}>Joined Date</span>
+                                </div>
+
+                                <div className="list-content-scroll">
+                                    {(() => {
+                                        const filtered = newsletterFilter === 'tattoo' ? newsletterData.tattoo : newsletterData.makeover;
+                                        if (filtered.length === 0) {
+                                            return (
+                                                <div className="empty-state">
+                                                    <Mail size={40} color="#ddd" />
+                                                    <p>No subscribers in this list.</p>
+                                                </div>
+                                            );
+                                        }
+
+                                        return filtered.map((sub) => (
+                                            <motion.div
+                                                key={sub.id}
+                                                className="list-item-row"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                            >
+                                                <div className="list-col" style={{ flex: 1.5, fontWeight: '500', color: '#333' }}>
+                                                    {sub.email}
+                                                </div>
+                                                <div className="list-col" style={{ flex: 1, color: '#666' }}>
+                                                    {sub.name || 'N/A'}
+                                                </div>
+                                                <div className="list-col" style={{ width: '150px', textAlign: 'right', fontSize: '0.8rem', color: '#888' }}>
+                                                    {sub.createdAt?.seconds ? new Date(sub.createdAt.seconds * 1000).toLocaleDateString() : 'Unknown'}
+                                                </div>
+                                            </motion.div>
+                                        ));
+                                    })()}
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
                     {/* SETTINGS CONTENT */}
                     {activeTab === 'settings' && (
                         <motion.div
@@ -671,264 +757,6 @@ const AdminDashboard = () => {
                     )}
 
                 </motion.div>
-
-                {/* Modals outside main flow (kept as is) */}
-                <AnimatePresence>
-                    {showClientsModal && (
-                        <motion.div
-                            className="modal-backdrop"
-
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            onClick={() => setShowClientsModal(false)}
-                        >
-                            <motion.div
-                                className="modal-content-large"
-                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                                animate={{ opacity: 1, scale: 1, y: 0 }}
-                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                                onClick={e => e.stopPropagation()}
-                            >
-                                <div className="modal-header-custom">
-                                    <div className="modal-title-wrapper">
-                                        <Users className="modal-icon" />
-                                        <h3>Client Registry</h3>
-                                    </div>
-                                    <button className="modal-close-btn" onClick={() => setShowClientsModal(false)}>
-                                        <X size={24} />
-                                    </button>
-                                </div>
-
-                                <div className="modal-tabs">
-                                    <button
-                                        className={`modal-tab ${clientFilter === 'tattoo' ? 'active' : ''}`}
-                                        onClick={() => setClientFilter('tattoo')}
-                                    >
-                                        Tattoo Clients
-                                        <span className="count-badge">{usersData.tattoo.length}</span>
-                                    </button>
-                                    <button
-                                        className={`modal-tab ${clientFilter === 'makeover' ? 'active' : ''}`}
-                                        onClick={() => setClientFilter('makeover')}
-                                    >
-                                        Makeover Clients
-                                        <span className="count-badge">{usersData.makeover.length}</span>
-                                    </button>
-                                </div>
-
-                                <div className="modal-list-container">
-                                    <div className="list-header-row">
-                                        <span style={{ flex: 1 }}>Client ID / Email</span>
-                                        <span style={{ flex: 1 }}>Full Name</span>
-                                        <span style={{ flex: 1 }}>Joined Date</span>
-                                        <span style={{ width: '80px', textAlign: 'center' }}>Status</span>
-                                    </div>
-
-                                    <div className="list-scroll-area">
-                                        {(clientFilter === 'tattoo' ? usersData.tattoo : usersData.makeover).length > 0 ? (
-                                            (clientFilter === 'tattoo' ? usersData.tattoo : usersData.makeover).map((user, index) => (
-                                                <div key={user.id} className="list-item-row">
-                                                    <div className="list-col" style={{ flex: 1 }}>
-                                                        <div className="user-avatar-small" style={{
-                                                            background: clientFilter === 'tattoo' ? '#00c853' : '#c5a059'
-                                                        }}>
-                                                            {user.displayName ? user.displayName.charAt(0).toUpperCase() : (user.email ? user.email.charAt(0).toUpperCase() : 'U')}
-                                                        </div>
-                                                        <div className="user-id-group">
-                                                            <span className="user-email-text">{user.email}</span>
-                                                            <span className="user-id-mini">ID: {user.id.substring(0, 8)}...</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="list-col" style={{ flex: 1 }}>
-                                                        {user.displayName || 'N/A'}
-                                                    </div>
-                                                    <div className="list-col" style={{ flex: 1 }}>
-                                                        {/* Handle Firebase Timestamp or fallback */}
-                                                        {new Date().toLocaleDateString()}
-                                                    </div>
-                                                    <div className="list-col" style={{ width: '80px', display: 'flex', justifyContent: 'center' }}>
-                                                        <span className="status-badge-active">Active</span>
-                                                    </div>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <div className="empty-state-list">
-                                                <div className="empty-icon-circle">
-                                                    <Users size={30} color="#ccc" />
-                                                </div>
-                                                <p>No clients found in this category.</p>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-
-                            </motion.div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-
-                {/* Messages Modal */}
-                <AnimatePresence>
-                    {showMessagesModal && (
-                        <motion.div
-                            className="modal-backdrop"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            onClick={() => setShowMessagesModal(false)}
-                        >
-                            <motion.div
-                                className="modal-content-large"
-                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                                animate={{ opacity: 1, scale: 1, y: 0 }}
-                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                                onClick={e => e.stopPropagation()}
-                            >
-                                <div className="modal-header-custom">
-                                    <div className="modal-title-wrapper">
-                                        <MessageSquare className="modal-icon" />
-                                        <h3>Inbox</h3>
-                                    </div>
-                                    <button className="modal-close-btn" onClick={() => setShowMessagesModal(false)}>
-                                        <X size={24} />
-                                    </button>
-                                </div>
-
-                                <div className="modal-tabs">
-                                    <button
-                                        className={`modal-tab ${messageFilter === 'tattoo' ? 'active' : ''}`}
-                                        onClick={() => setMessageFilter('tattoo')}
-                                    >
-                                        Tattoo Messages
-                                        <span className="count-badge">{messagesData.tattoo.length}</span>
-                                    </button>
-                                    <button
-                                        className={`modal-tab ${messageFilter === 'makeover' ? 'active' : ''}`}
-                                        onClick={() => setMessageFilter('makeover')}
-                                    >
-                                        Makeover Messages
-                                        <span className="count-badge">{messagesData.makeover.length}</span>
-                                    </button>
-                                </div>
-
-                                <div className="modal-list-container">
-                                    <div className="list-header-row">
-                                        <span style={{ flex: 1 }}>Sender Info</span>
-                                        <span style={{ flex: 2 }}>Message</span>
-                                        <span style={{ width: '120px', textAlign: 'right' }}>Sent At</span>
-                                    </div>
-
-                                    <div className="list-scroll-area">
-                                        {(messageFilter === 'tattoo' ? messagesData.tattoo : messagesData.makeover).length > 0 ? (
-                                            (messageFilter === 'tattoo' ? messagesData.tattoo : messagesData.makeover).map((msg, index) => (
-                                                <div key={msg.id} className="list-item-row" style={{ alignItems: 'flex-start' }}>
-                                                    <div className="list-col" style={{ flex: 1, flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
-                                                        <span style={{ fontWeight: '600', color: '#333' }}>{msg.name || 'Unknown'}</span>
-                                                        <span style={{ fontSize: '0.8rem', color: '#666' }}>{msg.email || msg.phone}</span>
-                                                    </div>
-                                                    <div className="list-col" style={{ flex: 2 }}>
-                                                        <p style={{ margin: 0, fontSize: '0.9rem', color: '#444', lineHeight: '1.4' }}>{msg.message}</p>
-                                                    </div>
-                                                    <div className="list-col" style={{ width: '120px', justifyContent: 'flex-end', fontSize: '0.8rem', color: '#888' }}>
-                                                        {msg.createdAt?.seconds ? new Date(msg.createdAt.seconds * 1000).toLocaleDateString() : 'Just now'}
-                                                    </div>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <div className="empty-state-list">
-                                                <div className="empty-icon-circle">
-                                                    <MessageSquare size={30} color="#ccc" />
-                                                </div>
-                                                <p>No messages received yet.</p>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </motion.div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-
-                <AnimatePresence>
-                    {showNewsletterModal && (
-                        <motion.div
-                            className="modal-backdrop"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            onClick={() => setShowNewsletterModal(false)}
-                        >
-                            <motion.div
-                                className="modal-content-large"
-                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                                animate={{ opacity: 1, scale: 1, y: 0 }}
-                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                                onClick={e => e.stopPropagation()}
-                            >
-                                <div className="modal-header-custom">
-                                    <div className="modal-title-wrapper">
-                                        <Mail className="modal-icon" />
-                                        <h3>Newsletter Subscribers</h3>
-                                    </div>
-                                    <button className="modal-close-btn" onClick={() => setShowNewsletterModal(false)}>
-                                        <X size={24} />
-                                    </button>
-                                </div>
-
-                                <div className="modal-tabs">
-                                    <button
-                                        className={`modal-tab ${newsletterFilter === 'tattoo' ? 'active' : ''}`}
-                                        onClick={() => setNewsletterFilter('tattoo')}
-                                    >
-                                        Tattoo Subscribers
-                                        <span className="count-badge">{newsletterData.tattoo.length}</span>
-                                    </button>
-                                    <button
-                                        className={`modal-tab ${newsletterFilter === 'makeover' ? 'active' : ''}`}
-                                        onClick={() => setNewsletterFilter('makeover')}
-                                    >
-                                        Makeover Subscribers
-                                        <span className="count-badge">{newsletterData.makeover.length}</span>
-                                    </button>
-                                </div>
-
-                                <div className="modal-list-container">
-                                    <div className="list-header-row">
-                                        <span style={{ flex: 1.5 }}>Email Address</span>
-                                        <span style={{ flex: 1 }}>Name</span>
-                                        <span style={{ width: '120px', textAlign: 'right' }}>Joined Date</span>
-                                    </div>
-
-                                    <div className="list-scroll-area">
-                                        {(newsletterFilter === 'tattoo' ? newsletterData.tattoo : newsletterData.makeover).length > 0 ? (
-                                            (newsletterFilter === 'tattoo' ? newsletterData.tattoo : newsletterData.makeover).map((sub, index) => (
-                                                <div key={sub.id} className="list-item-row" style={{ alignItems: 'center' }}>
-                                                    <div className="list-col" style={{ flex: 1.5, fontWeight: '500', color: '#333' }}>
-                                                        {sub.email}
-                                                    </div>
-                                                    <div className="list-col" style={{ flex: 1, color: '#666' }}>
-                                                        {sub.name || 'N/A'}
-                                                    </div>
-                                                    <div className="list-col" style={{ width: '120px', justifyContent: 'flex-end', fontSize: '0.8rem', color: '#888' }}>
-                                                        {sub.createdAt?.seconds ? new Date(sub.createdAt.seconds * 1000).toLocaleDateString() : 'Unknown'}
-                                                    </div>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <div className="empty-state-list">
-                                                <div className="empty-icon-circle">
-                                                    <Mail size={30} color="#ccc" />
-                                                </div>
-                                                <p>No subscribers in this list.</p>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </motion.div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
             </main>
         </div>
     );
