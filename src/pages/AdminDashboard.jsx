@@ -25,7 +25,8 @@ import {
     Smartphone,
     Monitor,
     Palette,
-    Type
+    Type,
+    Mail
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { collection, query, where, orderBy, getDocs, doc, getDoc } from 'firebase/firestore';
@@ -83,8 +84,76 @@ const AdminDashboard = () => {
     const [showMessagesModal, setShowMessagesModal] = useState(false);
     const [messageFilter, setMessageFilter] = useState('tattoo');
 
-    // Analytics State
-    const [chartData, setChartData] = useState([]);
+    // Newsletter Data State
+    const [newsletterData, setNewsletterData] = useState({ tattoo: [], makeover: [] });
+    const [showNewsletterModal, setShowNewsletterModal] = useState(false);
+    const [newsletterFilter, setNewsletterFilter] = useState('tattoo');
+
+    // Fetch Messages Data
+    useEffect(() => {
+        const fetchMessages = async () => {
+            try {
+                // Fetch all messages by default order descending if possible
+                // If index missing, just fetch all and sort client-side for now
+                const msgsRef = collection(db, "messages");
+                const querySnapshot = await getDocs(msgsRef);
+                const allMsgs = [];
+                const tattooMsgs = [];
+                const makeoverMsgs = [];
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const msgObj = { id: doc.id, ...data };
+
+                    // Simple client-side sort helper if we want by date later, assuming createdAt exists
+
+                    allMsgs.push(msgObj);
+                    if (data.source === 'tattoo') tattooMsgs.push(msgObj);
+                    else if (data.source === 'makeover') makeoverMsgs.push(msgObj);
+                });
+
+                // Set state
+                setMessagesData({
+                    all: allMsgs,
+                    tattoo: tattooMsgs,
+                    makeover: makeoverMsgs
+                });
+            } catch (error) {
+                console.error("Error fetching messages:", error);
+            }
+        };
+        fetchMessages();
+    }, []);
+
+    // Fetch Newsletter Data
+    useEffect(() => {
+        const fetchNewsletter = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, "newsletter_subscriptions"));
+                const tattooSubs = [];
+                const makeoverSubs = [];
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const subObj = { id: doc.id, ...data };
+
+                    if (data.source === 'tattoo') {
+                        tattooSubs.push(subObj);
+                    } else {
+                        makeoverSubs.push(subObj);
+                    }
+                });
+
+                setNewsletterData({
+                    tattoo: tattooSubs,
+                    makeover: makeoverSubs
+                });
+            } catch (error) {
+                console.error("Error fetching newsletter subs:", error);
+            }
+        };
+        fetchNewsletter();
+    }, []);
     const [chartPeriod, setChartPeriod] = useState('weekly');
     const [isLoadingChart, setIsLoadingChart] = useState(false);
 
@@ -405,6 +474,25 @@ const AdminDashboard = () => {
                                     </div>
                                     <div className="stat-value">Messages</div>
                                     <div className="stat-label">View Inbox</div>
+                                </motion.button>
+
+                                <motion.button
+                                    className="stat-card action-btn-large"
+                                    variants={itemVariants}
+                                    whileHover={{ scale: 1.03, backgroundColor: 'rgba(255,255,255,0.95)' }}
+                                    whileTap={{ scale: 0.97 }}
+                                    onClick={() => setShowNewsletterModal(true)}
+                                >
+                                    <div className="stat-header">
+                                        <div className="stat-icon" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
+                                            <Mail />
+                                        </div>
+                                        <span className="stat-trend" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
+                                            {newsletterData.tattoo.length + newsletterData.makeover.length} Subs
+                                        </span>
+                                    </div>
+                                    <div className="stat-value">Newsletter</div>
+                                    <div className="stat-label">Manage Emails</div>
                                 </motion.button>
                             </div>
 
@@ -753,6 +841,86 @@ const AdminDashboard = () => {
                                                     <MessageSquare size={30} color="#ccc" />
                                                 </div>
                                                 <p>No messages received yet.</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                <AnimatePresence>
+                    {showNewsletterModal && (
+                        <motion.div
+                            className="modal-backdrop"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setShowNewsletterModal(false)}
+                        >
+                            <motion.div
+                                className="modal-content-large"
+                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                                onClick={e => e.stopPropagation()}
+                            >
+                                <div className="modal-header-custom">
+                                    <div className="modal-title-wrapper">
+                                        <Mail className="modal-icon" />
+                                        <h3>Newsletter Subscribers</h3>
+                                    </div>
+                                    <button className="modal-close-btn" onClick={() => setShowNewsletterModal(false)}>
+                                        <X size={24} />
+                                    </button>
+                                </div>
+
+                                <div className="modal-tabs">
+                                    <button
+                                        className={`modal-tab ${newsletterFilter === 'tattoo' ? 'active' : ''}`}
+                                        onClick={() => setNewsletterFilter('tattoo')}
+                                    >
+                                        Tattoo Subscribers
+                                        <span className="count-badge">{newsletterData.tattoo.length}</span>
+                                    </button>
+                                    <button
+                                        className={`modal-tab ${newsletterFilter === 'makeover' ? 'active' : ''}`}
+                                        onClick={() => setNewsletterFilter('makeover')}
+                                    >
+                                        Makeover Subscribers
+                                        <span className="count-badge">{newsletterData.makeover.length}</span>
+                                    </button>
+                                </div>
+
+                                <div className="modal-list-container">
+                                    <div className="list-header-row">
+                                        <span style={{ flex: 1.5 }}>Email Address</span>
+                                        <span style={{ flex: 1 }}>Name</span>
+                                        <span style={{ width: '120px', textAlign: 'right' }}>Joined Date</span>
+                                    </div>
+
+                                    <div className="list-scroll-area">
+                                        {(newsletterFilter === 'tattoo' ? newsletterData.tattoo : newsletterData.makeover).length > 0 ? (
+                                            (newsletterFilter === 'tattoo' ? newsletterData.tattoo : newsletterData.makeover).map((sub, index) => (
+                                                <div key={sub.id} className="list-item-row" style={{ alignItems: 'center' }}>
+                                                    <div className="list-col" style={{ flex: 1.5, fontWeight: '500', color: '#333' }}>
+                                                        {sub.email}
+                                                    </div>
+                                                    <div className="list-col" style={{ flex: 1, color: '#666' }}>
+                                                        {sub.name || 'N/A'}
+                                                    </div>
+                                                    <div className="list-col" style={{ width: '120px', justifyContent: 'flex-end', fontSize: '0.8rem', color: '#888' }}>
+                                                        {sub.createdAt?.seconds ? new Date(sub.createdAt.seconds * 1000).toLocaleDateString() : 'Unknown'}
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="empty-state-list">
+                                                <div className="empty-icon-circle">
+                                                    <Mail size={30} color="#ccc" />
+                                                </div>
+                                                <p>No subscribers in this list.</p>
                                             </div>
                                         )}
                                     </div>

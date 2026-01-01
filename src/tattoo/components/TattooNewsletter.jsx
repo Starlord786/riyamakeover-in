@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Mail, ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
+import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase';
 import greenLogo from '../assets/riya_tattoo_green_logo.png';
 import './TattooNewsletter.css';
 
@@ -9,14 +11,40 @@ const TattooNewsletter = () => {
     const [email, setEmail] = useState('');
     const [status, setStatus] = useState('idle'); // idle, loading, success
 
-    const handleSubmit = (e) => {
+    const [errorMsg, setErrorMsg] = useState('');
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('loading');
-        // Simulate API call
-        setTimeout(() => {
+        setErrorMsg('');
+
+        try {
+            const q = query(
+                collection(db, "newsletter_subscriptions"),
+                where("email", "==", email),
+                where("source", "==", "tattoo")
+            );
+            const querySnapshot = await getDocs(q);
+
+            if (!querySnapshot.empty) {
+                setStatus('idle'); // Or keep it loading briefly then show error? better to just reset to idle or error state
+                setErrorMsg('This email is already in the tribe.');
+                return;
+            }
+
+            await addDoc(collection(db, "newsletter_subscriptions"), {
+                email,
+                source: 'tattoo',
+                createdAt: new Date()
+            });
+
             setStatus('success');
             setEmail('');
-        }, 1500);
+        } catch (error) {
+            console.error("Error adding document: ", error);
+            setStatus('idle');
+            setErrorMsg('Connection failed. Try again.');
+        }
     };
 
     return (
@@ -81,6 +109,12 @@ const TattooNewsletter = () => {
                                 disabled={status === 'loading'}
                             />
                         </div>
+                        {errorMsg && (
+                            <div className="t-newsletter-error" style={{ color: '#ff6b6b', marginTop: '10px', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.9rem' }}>
+                                <AlertCircle size={16} />
+                                <span>{errorMsg}</span>
+                            </div>
+                        )}
                         <button
                             type="submit"
                             className={`t-newsletter-submit ${status === 'loading' ? 'loading' : ''}`}

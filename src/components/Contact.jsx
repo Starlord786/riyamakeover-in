@@ -18,7 +18,8 @@ const Contact = () => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
+            const sessionType = sessionStorage.getItem('activeSession');
+            if (user && sessionType === 'makeover') {
                 // Prefill name if available
                 const displayName = user.displayName || (user.email ? user.email.split('@')[0] : '');
                 setFormData(prev => ({

@@ -17,14 +17,13 @@ const TattooContact = () => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
+            const sessionType = sessionStorage.getItem('activeSession');
+            if (user && sessionType === 'tattoo') {
                 // Prefill name if available, otherwise fallback to email part or keep empty
                 const displayName = user.displayName || (user.email ? user.email.split('@')[0] : '');
                 setFormData(prev => ({
                     ...prev,
-                    name: prev.name || displayName // Only prefill if currently empty or just overwrite? User said "prefill", usually means initial value. 
-                    // But if I use prev.name || displayName, it respects user edits if they type before auth loads? 
-                    // Actually, safer to just set it if we have a user and name is empty.
+                    name: prev.name || displayName
                 }));
             }
         });
