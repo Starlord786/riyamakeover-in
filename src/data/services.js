@@ -19,7 +19,7 @@ export const servicesData = [
         fullDescription: "Our threading service offers precise hair removal to shape your eyebrows and remove unwanted facial hair. Using 100% cotton thread, we ensure a clean finish with minimal irritation. Perfect for sensitive skin.",
         price: "Starts from ₹50",
         image: serviceEyebrow,
-        features: ["Eyebrow Shaping", "Upper Lip", "Chin", "Forehead", "Full Face"],
+        features: ["Eyebrow Shaping", "Full Face"],
         duration: "15-30 min"
     },
     {
@@ -30,7 +30,7 @@ export const servicesData = [
         fullDescription: "Our bleaching treatments are designed to lighten facial hair and brighten your skin tone. We use safe, high-quality products that are gentle on the skin while effectively reducing the appearance of dark spots and pigmentation.",
         price: "Starts from ₹350",
         image: serviceBleach,
-        features: ["Face Bleach", "Neck Bleach", "Full Body Bleach", "Herbal Options"],
+        features: ["Face Bleach", "De-Tan Bleach", "Oxy Bleach", "Full Body Bleach"],
         duration: "30-45 min"
     },
     {
@@ -41,7 +41,7 @@ export const servicesData = [
         fullDescription: "Experience our luxurious facial treatments tailored to your skin type. Whether you need hydration, anti-aging, or deep cleansing, our experts use premium products to restore your skin's natural radiance.",
         price: "Starts from ₹800",
         image: serviceSkincare,
-        features: ["Deep Cleansing", "Fruit Facial", "Gold Facial", "Diamond Facial", "Anti-Tan"],
+        features: ["Deep Cleansing", "Fruit Facial", "Gold Facial", "Diamond Facial", "Wine Facial", "03 Facial", "Bridal Facial", "Anti-Tan"],
         duration: "60-90 min"
     },
     {
@@ -74,7 +74,7 @@ export const servicesData = [
         fullDescription: "Achieve silky smooth skin with our professional waxing services. We use high-quality wax to minimize pain and prevent irritation, leaving your skin soft and hair-free for weeks.",
         price: "Starts from ₹200",
         image: serviceWaxing,
-        features: ["Full Arms & Legs", "Underarms", "Bikini Wax", "Full Body", "Chocolate Wax"],
+        features: ["Full Arms & Legs", "Underarms", "Full Body", "Chocolate Wax"],
         duration: "30-60 min"
     },
     {
@@ -85,7 +85,7 @@ export const servicesData = [
         fullDescription: "Revitalize your hair with our nourishing hair spa treatments. Ideally suited for dry, damaged, or chemically treated hair, our spa therapies restore moisture, shine, and manageability.",
         price: "Starts from ₹1,000",
         image: serviceHairSpa,
-        features: ["Dandruff Control", "Hair Fall Treatment", "Deep Conditioning", "Scalp Massage"],
+        features: ["Dandruff Control", "Hair Fall Treatment", "Deep Conditioning", "Scalp Massage", "Hair Spa", "Beer Hair Spa"],
         duration: "60 min"
     },
     {
@@ -96,7 +96,7 @@ export const servicesData = [
         fullDescription: "Express yourself with our professional hair coloring services. Our experts use ammonia-free, hair-friendly colors to give you vibrant, long-lasting results without compromising hair health.",
         price: "Starts from ₹2,500",
         image: serviceHairColor,
-        features: ["Global Color", "Root Touch-up", "Highlights", "Balayage", "Ombre"],
+        features: ["Root Touch-up", "Highlights", "Full Black Color"],
         duration: "2-4 hours"
     },
     {
@@ -107,7 +107,7 @@ export const servicesData = [
         fullDescription: "Address specific hair concerns with our targeted hair treatments. Whether you suffer from hair fall, dandruff, or breakage, we have effective solutions to restore your hair's vitality.",
         price: "Starts from ₹1,500",
         image: serviceHairSpa,
-        features: ["Keratin Treatment", "Botox Treatment", "Scalp Therapy", "Damage Repair"],
+        features: ["Hair Keratin Treatment", "Hair Botox Treatment", "Damage Repair", "Dandruff Treatment", "Lice Removal Treatment", "Hair Smoothening Treatment"],
         duration: "2-3 hours"
     },
     {
@@ -118,7 +118,7 @@ export const servicesData = [
         fullDescription: "Pamper your hands and feet with our relaxing manicure and pedicure services. We focus on hygiene, nail health, and aesthetics to give you neat, beautiful nails.",
         price: "Starts from ₹600",
         image: serviceNails,
-        features: ["Nail Shaping", "Cuticle Care", "Massage", "Gel Polish", "Nail Art"],
+        features: ["Classic Pedicure", "Classic Manicure", "Spa Pedicure", "Spa Manicure", "Crystal Pedicure", "Crystal Manicure", "Heel Repairing Treatment"],
         duration: "60-90 min"
     },
     {
@@ -129,7 +129,7 @@ export const servicesData = [
         fullDescription: "Our advanced face treatments target specific skin issues like acne, pigmentation, and signs of aging. We use clinically proven methods to deliver visible improvements.",
         price: "Starts from ₹1,200",
         image: serviceSkincare,
-        features: ["Acne Treatment", "Pigmentation Correction", "Anti-Aging", "Skin Tightening"],
+        features: ["Acne Treatment", "Pigmentation Correction", "Anti-Aging", "Skin Tightening", "Pimple Treatment", "What's Removal"],
         duration: "60-90 min"
     },
     {
@@ -140,7 +140,7 @@ export const servicesData = [
         fullDescription: "Enhance your natural beauty with our non-invasive aesthetic procedures. From micro-needling to skin contouring, our expert treatments provide safe and effective results.",
         price: "Consultation based",
         image: serviceAesthetics,
-        features: ["Micro-needling", "Chemical Peels", "Laser Treatments", "Skin Rejuvenation"],
+        features: ["Micro-needling"],
         duration: "Consultation"
     },
     {
@@ -151,7 +151,29 @@ export const servicesData = [
         fullDescription: "Relax and unwind with our therapeutic massage services. Our skilled therapists use various techniques to relieve muscle tension, reduce stress, and improve overall well-being.",
         price: "Starts from ₹1,500",
         image: serviceMassage,
-        features: ["Swedish Massage", "Deep Tissue", "Head & Shoulder", "Full Body Massage"],
+        features: ["Head & Shoulder", "Full Body Massage"],
         duration: "60-90 min"
+    },
+    {
+        id: 14,
+        slug: 'Hair Cut',
+        title: 'Hair Cut',
+        description: 'Hair cut for men and women',
+        fullDescription: 'Hair cut for men and women',
+        price: 'Starts from ₹200',
+        image: serviceHairCut,
+        features: ["Straight Cut", "U Cut", "V Cut", "Butterfly Cut", "Layer Cut", "Feather Cut", "Hair Splitance", "Front Layer"],
+        duration: '30-60 min'
+    },
+    {
+        id: 15,
+        slug: 'Makeup',
+        title: 'Makeup',
+        description: 'Makeup for men and women',
+        fullDescription: 'Makeup for men and women',
+        price: 'Starts from ₹200',
+        image: serviceMakeup,
+        features: ["Face Makeup", "Party Makeup", "Basic Bridal Makeup", "Kryolan Makeup", "HD Makeup", "Whats proof Makeup",],
+        duration: '30-60 min'
     }
 ];

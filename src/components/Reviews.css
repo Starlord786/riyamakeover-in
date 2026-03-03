@@ -158,6 +158,18 @@
     padding: 0 20px;
 }
 
+.reviews-google-link a{
+    color: var(--accent);
+    font-family: "Google Sans Flex", serif;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+    text-align: center;
+}
+
 .google-reviews-btn {
     display: flex;
     align-items: center;
