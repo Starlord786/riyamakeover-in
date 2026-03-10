@@ -96,7 +96,7 @@ export const servicesData = [
         fullDescription: "Express yourself with our professional hair coloring services. Our experts use ammonia-free, hair-friendly colors to give you vibrant, long-lasting results without compromising hair health.",
         price: "Starts from ₹2,500",
         image: serviceHairColor,
-        features: ["Root Touch-up", "Highlights", "Full Black Color"],
+        features: ["Root Touch-up", "Highlights"],
         duration: "2-4 hours"
     },
     {
@@ -156,24 +156,32 @@ export const servicesData = [
     },
     {
         id: 14,
-        slug: 'Hair Cut',
+        slug: 'hair-cut',
         title: 'Hair Cut',
         description: 'Hair cut for men and women',
         fullDescription: 'Hair cut for men and women',
         price: 'Starts from ₹200',
-        image: serviceHairCut,
-        features: ["Straight Cut", "U Cut", "V Cut", "Butterfly Cut", "Layer Cut", "Feather Cut", "Hair Splitance", "Front Layer"],
+        subServices: [
+            {
+                heading: "Ladies & Men Hair Cut",
+                features: ["Straight Cut", "U Cut", "V Cut", "Butterfly Cut", "Layer Cut", "Feather Cut", "Hair Splitance", "Front Layer"]
+            },
+            {
+                heading: "Baby Hair Cut",
+                features: ["Dora Cut", "Mushroom Cut"]
+            }
+        ],
+        features: ["Straight Cut", "U Cut", "V Cut", "Butterfly Cut", "Layer Cut", "Feather Cut", "Hair Splitance", "Front Layer", "Baby Boy Cut", "Baby Girl Cut"],
         duration: '30-60 min'
     },
     {
         id: 15,
-        slug: 'Makeup',
+        slug: 'makeup',
         title: 'Makeup',
         description: 'Makeup for men and women',
         fullDescription: 'Makeup for men and women',
         price: 'Starts from ₹200',
-        image: serviceMakeup,
-        features: ["Face Makeup", "Party Makeup", "Basic Bridal Makeup", "Kryolan Makeup", "HD Makeup", "Whats proof Makeup",],
+        features: ["Face Makeup", "Party Makeup", "Basic Bridal Makeup", "Kryolan Makeup", "HD Makeup", "Waterproof Makeup"],
         duration: '30-60 min'
     }
-];
+];  

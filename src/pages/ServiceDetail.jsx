@@ -95,29 +95,65 @@ const ServiceDetail = () => {
                     </span></h2>
 
                     <div className="variants-list">
-                        {service.features && service.features.map((feature, index) => (
-                            <motion.div
-                                key={index}
-                                className="variant-item"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                viewport={{ once: true }}
-                            >
-                                <div className="variant-info">
-                                    <span className="variant-number">0{index + 1}</span>
-                                    <h3 className="variant-name">{feature}</h3>
+                        {service.subServices ? (
+                            // Grouped rendering — shows a sub-heading for each group
+                            service.subServices.map((group, groupIndex) => (
+                                <div key={groupIndex} className="variant-group">
+                                    <h3 className="variant-group-heading">{group.heading}</h3>
+                                    {group.features.map((feature, index) => {
+                                        const globalIndex = service.subServices
+                                            .slice(0, groupIndex)
+                                            .reduce((acc, g) => acc + g.features.length, 0) + index;
+                                        return (
+                                            <motion.div
+                                                key={index}
+                                                className="variant-item"
+                                                initial={{ opacity: 0, y: 20 }}
+                                                whileInView={{ opacity: 1, y: 0 }}
+                                                transition={{ delay: globalIndex * 0.07 }}
+                                                viewport={{ once: true }}
+                                            >
+                                                <div className="variant-info">
+                                                    <span className="variant-number">0{index + 1}</span>
+                                                    <h3 className="variant-name">{feature}</h3>
+                                                </div>
+                                                <div className="variant-action">
+                                                    <span className="variant-price">{service.price}</span>
+                                                    <button onClick={handleBookNow} className="variant-book-btn">
+                                                        BOOK NOW <ArrowRight size={16} />
+                                                    </button>
+                                                </div>
+                                            </motion.div>
+                                        );
+                                    })}
                                 </div>
-                                <div className="variant-action">
-                                    <span className="variant-price">{service.price}</span>
-                                    <button onClick={handleBookNow} className="variant-book-btn">
-                                        BOOK NOW <ArrowRight size={16} />
-                                    </button>
-                                </div>
-                            </motion.div>
-                        ))}
-                        {/* Fallback if no features, generate some generic ones as per previous logic (or just show "Standard") */}
-                        {(!service.features || service.features.length === 0) && (
+                            ))
+                        ) : (
+                            // Flat rendering — original behaviour for all other services
+                            service.features && service.features.map((feature, index) => (
+                                <motion.div
+                                    key={index}
+                                    className="variant-item"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: index * 0.1 }}
+                                    viewport={{ once: true }}
+                                >
+                                    <div className="variant-info">
+                                        <span className="variant-number">0{index + 1}</span>
+                                        <h3 className="variant-name">{feature}</h3>
+                                    </div>
+                                    <div className="variant-action">
+                                        <span className="variant-price">{service.price}</span>
+                                        <button onClick={handleBookNow} className="variant-book-btn">
+                                            BOOK NOW <ArrowRight size={16} />
+                                        </button>
+                                    </div>
+                                </motion.div>
+                            ))
+                        )}
+                        {/* Fallback if no features */}
+                        {(!service.subServices && (!service.features || service.features.length === 0)) && (
                             <motion.div
                                 className="variant-item"
                                 initial={{ opacity: 0, y: 20 }}
