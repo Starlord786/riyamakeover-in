@@ -9,6 +9,8 @@ import serviceBleach from '../assets/service_bleach.png';
 import serviceHairColor from '../assets/service_hair_color.png';
 import serviceHairSpa from '../assets/service_hair_spa.png';
 import serviceAesthetics from '../assets/service_aesthetics.png';
+import serviceHairCut from '../assets/service_hair_cut.png';
+import serviceMakeup from '../assets/service_makeup.png';
 
 export const servicesData = [
     {
@@ -19,7 +21,10 @@ export const servicesData = [
         fullDescription: "Our threading service offers precise hair removal to shape your eyebrows and remove unwanted facial hair. Using 100% cotton thread, we ensure a clean finish with minimal irritation. Perfect for sensitive skin.",
         price: "Starts from ₹50",
         image: serviceEyebrow,
-        features: ["Eyebrow Shaping", "Full Face"],
+        features: [
+            { name: "Eyebrow Shaping", price: "₹50" },
+            { name: "Full Face", price: "₹200" }
+        ],
         duration: "15-30 min"
     },
     {
@@ -28,9 +33,14 @@ export const servicesData = [
         title: "Bleaching",
         description: "Gentle skin lightening treatment to reduce dark spots and even out skin tone.",
         fullDescription: "Our bleaching treatments are designed to lighten facial hair and brighten your skin tone. We use safe, high-quality products that are gentle on the skin while effectively reducing the appearance of dark spots and pigmentation.",
-        price: "Starts from ₹350",
+        price: "Starts from ₹400",
         image: serviceBleach,
-        features: ["Face Bleach", "De-Tan Bleach", "Oxy Bleach", "Full Body Bleach"],
+        features: [
+            { name: "Face Bleach", price: "₹400" },
+            { name: "De-Tan Bleach", price: "₹400" },
+            { name: "Oxy Bleach", price: "₹600" },
+            { name: "Full Body Bleach", price: "₹1800" }
+        ],
         duration: "30-45 min"
     },
     {
@@ -39,9 +49,18 @@ export const servicesData = [
         title: "Facial",
         description: "Rejuvenating facials to cleanse, exfoliate, and hydrate for a radiant glow.",
         fullDescription: "Experience our luxurious facial treatments tailored to your skin type. Whether you need hydration, anti-aging, or deep cleansing, our experts use premium products to restore your skin's natural radiance.",
-        price: "Starts from ₹800",
+        price: "Starts from ₹300",
         image: serviceSkincare,
-        features: ["Deep Cleansing", "Fruit Facial", "Gold Facial", "Diamond Facial", "Wine Facial", "03 Facial", "Bridal Facial", "Anti-Tan"],
+        features: [
+            { name: "Deep Cleansing", price: "₹300" },
+            { name: "Fruit Facial", price: "₹500" },
+            { name: "Gold Facial", price: "₹1000" },
+            { name: "Diamond Facial", price: "₹1200" },
+            { name: "Wine Facial", price: "₹1500" },
+            { name: "03 Facial", price: "₹3000" },
+            { name: "Bridal Facial", price: "₹3000" },
+            { name: "Anti-Tan", price: "₹1500" }
+        ],
         duration: "60-90 min"
     },
     {
@@ -50,9 +69,15 @@ export const servicesData = [
         title: "Hair Styling",
         description: "Expert styling for any occasion, from elegant updos to bouncy blowouts.",
         fullDescription: "Transform your look with our professional hair styling services. From casual blow-drys to intricate bridal updos, our stylists create the perfect look to complement your personality and occasion.",
-        price: "Starts from ₹500",
+        price: "Starts from ₹300",
         image: serviceHair,
-        features: ["Blow Dry", "Curls & Waves", "Updos", "Braiding", "Straightening"],
+        features: [
+            { name: "Blow Dry", price: "₹300" },
+            { name: "Curls & Waves", price: "₹500" },
+            { name: "Updos", price: "₹500" },
+            { name: "Braiding", price: "₹1000" },
+            { name: "Straightening", price: "₹1000" }
+        ],
         duration: "45-60 min"
     },
     {
@@ -61,9 +86,15 @@ export const servicesData = [
         title: "Pre-Bridal Packages",
         description: "Comprehensive beauty regimens to prep your skin and hair for the big day.",
         fullDescription: "Get ready for your big day with our comprehensive pre-bridal packages. We offer a series of treatments including body polishing, waxing, facials, and hair spas to ensure you look absolutely stunning.",
-        price: "Customizable",
+        price: "Starts from ₹1000",
         image: serviceBridal,
-        features: ["Body Polishing", "Full Body Waxing", "Premium Facials", "Manicure & Pedicure", "Hair Spa"],
+        features: [
+            { name: "Body Polishing", price: "₹1800" },
+            { name: "Full Body Waxing", price: "₹2000" },
+            { name: "Premium Facials", price: "₹3000" },
+            { name: "Manicure & Pedicure", price: "₹1400" },
+            { name: "Hair Spa", price: "₹1000" }
+        ],
         duration: "Multiple Sessions"
     },
     {
@@ -74,7 +105,12 @@ export const servicesData = [
         fullDescription: "Achieve silky smooth skin with our professional waxing services. We use high-quality wax to minimize pain and prevent irritation, leaving your skin soft and hair-free for weeks.",
         price: "Starts from ₹200",
         image: serviceWaxing,
-        features: ["Full Arms & Legs", "Underarms", "Full Body", "Chocolate Wax"],
+        features: [
+            { name: "Full Arms & Legs", price: "₹1000" },
+            { name: "Underarms", price: "₹200" },
+            { name: "Full Body", price: "₹2000" },
+            { name: "Chocolate Wax", price: "₹1000" }
+        ],
         duration: "30-60 min"
     },
     {
@@ -83,9 +119,16 @@ export const servicesData = [
         title: "Hair Spa",
         description: "Deep conditioning therapy to restore health, shine, and softness to your hair.",
         fullDescription: "Revitalize your hair with our nourishing hair spa treatments. Ideally suited for dry, damaged, or chemically treated hair, our spa therapies restore moisture, shine, and manageability.",
-        price: "Starts from ₹1,000",
+        price: "Starts from ₹800",
         image: serviceHairSpa,
-        features: ["Dandruff Control", "Hair Fall Treatment", "Deep Conditioning", "Scalp Massage", "Hair Spa", "Beer Hair Spa"],
+        features: [
+            { name: "Dandruff Control", price: "₹1200" },
+            { name: "Hair Fall Treatment", price: "₹1000" },
+            { name: "Deep Conditioning", price: "₹800" },
+            { name: "Scalp Massage", price: "₹800" },
+            { name: "Hair Spa", price: "₹1000" },
+            { name: "Beer Hair Spa", price: "₹1300" }
+        ],
         duration: "60 min"
     },
     {
@@ -94,9 +137,12 @@ export const servicesData = [
         title: "Hair Colouring",
         description: "Vibrant global color, highlights, and balayage using premium ammonia-free products.",
         fullDescription: "Express yourself with our professional hair coloring services. Our experts use ammonia-free, hair-friendly colors to give you vibrant, long-lasting results without compromising hair health.",
-        price: "Starts from ₹2,500",
+        price: "Starts from ₹800",
         image: serviceHairColor,
-        features: ["Root Touch-up", "Highlights"],
+        features: [
+            { name: "Root Touch-up", price: "₹800" },
+            { name: "Highlights", price: "₹1500" }
+        ],
         duration: "2-4 hours"
     },
     {
@@ -105,9 +151,16 @@ export const servicesData = [
         title: "Hair Treatment",
         description: "Specialized solutions for dandruff, hair fall, and damaged hair repair.",
         fullDescription: "Address specific hair concerns with our targeted hair treatments. Whether you suffer from hair fall, dandruff, or breakage, we have effective solutions to restore your hair's vitality.",
-        price: "Starts from ₹1,500",
+        price: "Starts from ₹500",
         image: serviceHairSpa,
-        features: ["Hair Keratin Treatment", "Hair Botox Treatment", "Damage Repair", "Dandruff Treatment", "Lice Removal Treatment", "Hair Smoothening Treatment"],
+        features: [
+            { name: "Hair Keratin Treatment", price: "₹6000" },
+            { name: "Hair Botox Treatment", price: "₹6000" },
+            { name: "Damage Repair", price: "₹500" },
+            { name: "Dandruff Treatment", price: "₹1200" },
+            { name: "Lice Removal Treatment", price: "₹2000" },
+            { name: "Hair Smoothening Treatment", price: "₹3000" }
+        ],
         duration: "2-3 hours"
     },
     {
@@ -161,6 +214,7 @@ export const servicesData = [
         description: 'Hair cut for men and women',
         fullDescription: 'Hair cut for men and women',
         price: 'Starts from ₹200',
+        image: serviceHairCut,
         subServices: [
             {
                 heading: "Ladies & Men Hair Cut",
@@ -181,6 +235,7 @@ export const servicesData = [
         description: 'Makeup for men and women',
         fullDescription: 'Makeup for men and women',
         price: 'Starts from ₹200',
+        image: serviceMakeup,
         features: ["Face Makeup", "Party Makeup", "Basic Bridal Makeup", "Kryolan Makeup", "HD Makeup", "Waterproof Makeup"],
         duration: '30-60 min'
     }
