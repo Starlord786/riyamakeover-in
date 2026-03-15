@@ -6,10 +6,10 @@ import Particles from "react-particles";
 import './Hero.css';
 
 // Keep your heroData imports here...
-import hero1 from '../assets/hero1.png';
-import hero2 from '../assets/hero2.png';
-import hero3 from '../assets/hero3.png';
-import hero4 from '../assets/hero4.png';
+import hero1 from '../assets/hero1.webp';
+import hero2 from '../assets/hero2.webp';
+import hero3 from '../assets/hero3.webp';
+import hero4 from '../assets/hero4.webp';
 
 const heroData = [
     { id: 1, image: hero1, title: "Bridal", highlight: "Radiance", subtitle: "The pinnacle of timeless elegance.", cta: "Book Now" },

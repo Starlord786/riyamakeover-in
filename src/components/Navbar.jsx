@@ -7,11 +7,11 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { checkUserRole } from '../utils/authUtils';
 import 'react-toastify/dist/ReactToastify.css';
 import './Navbar.css';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 import riyaTattoo from '../assets/Riya_Tattoo.png';
 
 import { signOut } from 'firebase/auth'; // Add to imports
-import userPhoto from '../assets/user_photo.png';
+import userPhoto from '../assets/user_photo.webp';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);

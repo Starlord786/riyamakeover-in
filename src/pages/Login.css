@@ -12,7 +12,7 @@
 .login-visual-side {
     flex: 1.2;
     position: relative;
-    background-image: url('../assets/hero1.png');
+    background-image: url('../assets/hero1.webp');
     /* Use one of your high-end hero images */
     background-size: cover;
     background-position: center;
@@ -218,7 +218,7 @@
 }
 
 .signup-bg {
-    background-image: url('../assets/hero2.png');
+    background-image: url('../assets/hero2.webp');
     /* Use a different high-end image */
     background-position: left center;
 }
@@ -257,7 +257,7 @@
     }
 
     .login-epic-wrapper {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/hero1.png');
+        background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/hero1.webp');
         background-size: cover;
     }
 }

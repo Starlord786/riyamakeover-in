@@ -6,10 +6,10 @@ import { ArrowRight } from 'lucide-react';
 import './TattooHome.css';
 
 // Importing assets
-import img1 from '../assets/pexels-cottonbro-5320162.jpg';
-import img2 from '../assets/pexels-brett-sayles-2177019.jpg';
-import img3 from '../assets/pexels-daniel-lazarov-1357330-2623692.jpg';
-import img4 from '../assets/pexels-kevinbidwell-2183131.jpg';
+import img1 from '../assets/pexels-cottonbro-5320162.webp';
+import img2 from '../assets/pexels-brett-sayles-2177019.webp';
+import img3 from '../assets/pexels-daniel-lazarov-1357330-2623692.webp';
+import img4 from '../assets/pexels-kevinbidwell-2183131.webp';
 
 const heroData = [
     {

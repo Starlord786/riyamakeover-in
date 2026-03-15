@@ -5,7 +5,7 @@ import { auth } from '../../firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { checkUserRole } from '../../utils/authUtils';
 import riyaTattoo from '../../assets/Riya_Tattoo.png';
-import mainLogo from '../../assets/logo.png';
+import mainLogo from '../../assets/logo.webp';
 import './TattooHome.css';
 
 const TattooNavbar = ({ scrollToSection }) => {

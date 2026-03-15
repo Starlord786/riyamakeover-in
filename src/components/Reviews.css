@@ -23,10 +23,16 @@
 }
 
 .reviews-title {
-    font-family: var(--font-heading);
-    font-size: 3rem;
+    font-family: "cinzel", serif;
+    font-size: 5rem;
     color: var(--text-primary);
     margin-bottom: 1.5rem;
+}
+
+.reviews-title .text-accent {
+    font-family: "Damion", serif;
+    font-size: 5rem;
+    font-weight: 400;
 }
 
 .reviews-divider {

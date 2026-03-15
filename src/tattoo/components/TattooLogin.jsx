@@ -4,7 +4,7 @@ import { auth, googleProvider } from '../../firebase';
 import { signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from 'firebase/auth';
 import { updateUserRole, checkUserRole } from '../../utils/authUtils';
 import './TattooLogin.css';
-import greenLogo from '../assets/riya_tattoo_green_logo.png';
+import greenLogo from '../assets/riya_tattoo_green_logo.webp';
 import { User, Mail, Lock, Eye, EyeOff, LogIn, Github } from 'lucide-react';
 
 const TattooLogin = () => {

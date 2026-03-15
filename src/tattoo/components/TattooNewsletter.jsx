@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Mail, ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
 import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase';
-import greenLogo from '../assets/riya_tattoo_green_logo.png';
+import greenLogo from '../assets/riya_tattoo_green_logo.webp';
 import './TattooNewsletter.css';
 
 const TattooNewsletter = () => {

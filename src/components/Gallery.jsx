@@ -2,12 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import './Gallery.css';
 
-import imgBridal from '../assets/service_bridal.png';
-import imgGlam from '../assets/hero1.png';
-import imgEditorial from '../assets/hero2.png';
-import imgHair from '../assets/service_hair.png';
-import imgEngagement from '../assets/service_skincare.png';
-import imgReception from '../assets/hero3.png';
+import imgBridal from '../assets/service_bridal.webp';
+import imgGlam from '../assets/hero1.webp';
+import imgEditorial from '../assets/hero2.webp';
+import imgHair from '../assets/service_hair.webp';
+import imgEngagement from '../assets/service_skincare.webp';
+import imgReception from '../assets/hero3.webp';
 
 const galleryImages = [
     {

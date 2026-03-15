@@ -1,41 +1,49 @@
-import React from 'react'
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
+import React, { lazy, Suspense } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './components/Home'
-import Services from './components/Services'
-import Gallery from './components/Gallery'
 import Preloader from './components/Preloader'
 import NoInternet from './components/NoInternet'
-import Contact from './components/Contact'
-import About from './pages/About'
-import Features from './pages/Features'
-import Pricing from './pages/Pricing'
-import Guides from './pages/Guides'
-import Terms from './pages/Terms'
-import Privacy from './pages/Privacy'
-import Licensing from './pages/Licensing'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
 import ScrollToTop from './components/ScrollToTop'
-import AdminLogin from './pages/AdminLogin'
-import AdminDashboard from './pages/AdminDashboard'
-import Newsletter from './pages/Newsletter'
-import TattooApp from './tattoo/TattooApp'
-import ServiceDetail from './pages/ServiceDetail'
 import { useNetworkStatus } from './hooks/useNetworkStatus'
 
-// Tattoo Components
-import TattooHome from './tattoo/components/TattooHome'
-import TattooWorksPage from './tattoo/components/TattooWork'
-import TattooDetail from './tattoo/components/TattooDetail'
-import TattooLogin from './tattoo/components/TattooLogin'
-import TattooContact from './tattoo/components/TattooContact'
-import TattooProcess from './tattoo/components/TattooProcess'
-import TattooFAQ from './tattoo/components/TattooFAQ'
-import TattooReviews from './tattoo/components/TattooReviews'
+// Eagerly loaded (needed immediately on first render)
+import Services from './components/Services'
+
+// Lazy-loaded pages (only fetched when user navigates there)
+const Gallery = lazy(() => import('./components/Gallery'))
+const Contact = lazy(() => import('./components/Contact'))
+const About = lazy(() => import('./pages/About'))
+const Features = lazy(() => import('./pages/Features'))
+const Pricing = lazy(() => import('./pages/Pricing'))
+const Guides = lazy(() => import('./pages/Guides'))
+const Terms = lazy(() => import('./pages/Terms'))
+const Privacy = lazy(() => import('./pages/Privacy'))
+const Licensing = lazy(() => import('./pages/Licensing'))
+const Login = lazy(() => import('./pages/Login'))
+const Signup = lazy(() => import('./pages/Signup'))
+const AdminLogin = lazy(() => import('./pages/AdminLogin'))
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'))
+const Newsletter = lazy(() => import('./pages/Newsletter'))
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'))
+
+// Tattoo section — large sub-app, load lazily
+const TattooApp = lazy(() => import('./tattoo/TattooApp'))
 
 import './App.css'
+
+// Simple full-screen spinner shown while a lazy chunk loads
+function PageSpinner() {
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      minHeight: '60vh', fontSize: '1.2rem', color: '#888'
+    }}>
+      Loading…
+    </div>
+  )
+}
 
 function App() {
   const location = useLocation();
@@ -52,7 +60,6 @@ function App() {
     }
   }, [isImageLoaded]);
 
-  // If offline page should be shown, render it exclusively (or on top)
   if (showOfflinePage) {
     return <NoInternet onRetry={() => window.location.reload()} />;
   }
@@ -73,28 +80,30 @@ function App() {
 
       {shouldShowLayout && <Navbar />}
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/service/:slug" element={<ServiceDetail />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/features" element={<Features />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/guides" element={<Guides />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/licensing" element={<Licensing />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/AdminLogin" element={<AdminLogin />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/newsletter" element={<Newsletter />} />
+      <Suspense fallback={<PageSpinner />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/service/:slug" element={<ServiceDetail />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/guides" element={<Guides />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/licensing" element={<Licensing />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/AdminLogin" element={<AdminLogin />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/newsletter" element={<Newsletter />} />
 
-        {/* Tattoo Section Route */}
-        <Route path="/tattoo/*" element={<TattooApp />} />
-      </Routes>
+          {/* Tattoo Section Route */}
+          <Route path="/tattoo/*" element={<TattooApp />} />
+        </Routes>
+      </Suspense>
 
       {shouldShowLayout && <Footer />}
     </>

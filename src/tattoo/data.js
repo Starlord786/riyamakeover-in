@@ -1,8 +1,8 @@
-import work1 from './assets/pexels-brett-sayles-2177019.jpg';
-import work2 from './assets/pexels-cottonbro-5088485.jpg';
-import work3 from './assets/pexels-cottonbro-5320162.jpg';
-import work4 from './assets/pexels-dan-prado-141463-428105.jpg';
-import work5 from './assets/pexels-daniel-lazarov-1357330-2623692.jpg';
+import work1 from './assets/pexels-brett-sayles-2177019.webp';
+import work2 from './assets/pexels-cottonbro-5088485.webp';
+import work3 from './assets/pexels-cottonbro-5320162.webp';
+import work4 from './assets/pexels-dan-prado-141463-428105.webp';
+import work5 from './assets/pexels-daniel-lazarov-1357330-2623692.webp';
 
 export const tattooWorks = [
     {

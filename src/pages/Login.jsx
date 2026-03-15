@@ -6,7 +6,7 @@ import { auth, googleProvider } from '../firebase';
 import { signInWithPopup, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { updateUserRole, checkUserRole } from '../utils/authUtils';
 import './Login.css';
-import userPhoto from '../assets/user_photo.png';
+import userPhoto from '../assets/user_photo.webp';
 
 const Login = () => {
     const [formData, setFormData] = useState({

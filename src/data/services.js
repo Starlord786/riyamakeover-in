@@ -1,16 +1,16 @@
-import serviceEyebrow from '../assets/service_eyebrow.png';
-import serviceSkincare from '../assets/service_skincare.png';
-import serviceHair from '../assets/service_hair.png';
-import serviceBridal from '../assets/service_bridal.png';
-import serviceNails from '../assets/service_nails.png';
-import serviceMassage from '../assets/service_massage.png';
-import serviceWaxing from '../assets/service_waxing.png';
-import serviceBleach from '../assets/service_bleach.png';
-import serviceHairColor from '../assets/service_hair_color.png';
-import serviceHairSpa from '../assets/service_hair_spa.png';
-import serviceAesthetics from '../assets/service_aesthetics.png';
-import serviceHairCut from '../assets/service_hair_cut.png';
-import serviceMakeup from '../assets/service_makeup.png';
+import serviceEyebrow from '../assets/service_eyebrow.webp';
+import serviceSkincare from '../assets/service_skincare.webp';
+import serviceHair from '../assets/service_hair.webp';
+import serviceBridal from '../assets/service_bridal.webp';
+import serviceNails from '../assets/service_nails.webp';
+import serviceMassage from '../assets/service_massage.webp';
+import serviceWaxing from '../assets/service_waxing.webp';
+import serviceBleach from '../assets/service_bleach.webp';
+import serviceHairColor from '../assets/service_hair_color.webp';
+import serviceHairSpa from '../assets/service_hair_spa.webp';
+import serviceAesthetics from '../assets/service_aesthetics.webp';
+import serviceHairCut from '../assets/service_hair_cut.webp';
+import serviceMakeup from '../assets/service_makeup.webp';
 
 export const servicesData = [
     {
