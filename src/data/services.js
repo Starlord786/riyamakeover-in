@@ -141,7 +141,9 @@ export const servicesData = [
         image: serviceHairColor,
         features: [
             { name: "Root Touch-up", price: "₹800" },
-            { name: "Highlights", price: "₹1500" }
+            { name: "Highlights", price: "₹1500" },
+            { name: "Full Black Color", price: "₹2000" },
+            { name: "Customize Color", price: "Customizable" }
         ],
         duration: "2-4 hours"
     },
@@ -169,9 +171,15 @@ export const servicesData = [
         title: "Pedicure & Manicure",
         description: "Relaxing hand and foot care with nail shaping, cuticle work, and polish.",
         fullDescription: "Pamper your hands and feet with our relaxing manicure and pedicure services. We focus on hygiene, nail health, and aesthetics to give you neat, beautiful nails.",
-        price: "Starts from ₹600",
+        price: "Starts from ₹300",
         image: serviceNails,
-        features: ["Classic Pedicure", "Classic Manicure", "Spa Pedicure", "Spa Manicure", "Crystal Pedicure", "Crystal Manicure", "Heel Repairing Treatment"],
+        features: [{ name: "Classic Pedicure", price: "₹400" },
+        { name: "Classic Manicure", price: "₹300" },
+        { name: "Spa Pedicure", price: "₹800" },
+        { name: "Spa Manicure", price: "₹600" },
+        { name: "Crystal Pedicure", price: "₹1200" },
+        { name: "Crystal Manicure", price: "₹800" },
+        { name: "Heel Repairing Treatment", price: "₹1200" }],
         duration: "60-90 min"
     },
     {
@@ -182,7 +190,12 @@ export const servicesData = [
         fullDescription: "Our advanced face treatments target specific skin issues like acne, pigmentation, and signs of aging. We use clinically proven methods to deliver visible improvements.",
         price: "Starts from ₹1,200",
         image: serviceSkincare,
-        features: ["Acne Treatment", "Pigmentation Correction", "Anti-Aging", "Skin Tightening", "Pimple Treatment", "What's Removal"],
+        features: [{ name: "Acne Treatment", price: "₹1500" },
+        { name: "Pigmentation Correction", price: "₹1500" },
+        { name: "Anti-Aging", price: "₹2000" },
+        { name: "Skin Tightening", price: "₹1800" },
+        { name: "Pimple Treatment", price: "₹1500" },
+        { name: "What's Removal", price: "₹500" }],
         duration: "60-90 min"
     },
     {
@@ -193,7 +206,19 @@ export const servicesData = [
         fullDescription: "Enhance your natural beauty with our non-invasive aesthetic procedures. From micro-needling to skin contouring, our expert treatments provide safe and effective results.",
         price: "Consultation based",
         image: serviceAesthetics,
-        features: ["Micro-needling"],
+        features: [
+            { name: "Micro-needling", price: "₹1500" },
+            { name: "Permanent Hair Removal", price: "₹999" },
+            { name: "Skin Whitening Treatment", price: "₹1999" },
+            { name: "Anti Wrinkle Treatment", price: "₹1999" },
+            { name: "Skin Rejuvenation Treatment", price: "₹1999" },
+            { name: "Acne Treatment", price: "₹999" },
+            { name: "BirthMark Removal", price: "₹1499" },
+            { name: "Pigmentation Theraphy", price: "₹1499" },
+            { name: "Carbon Laser Facial", price: "₹1999" },
+            { name: "Eyebrow Tattoo Removal", price: "₹1499" },
+            { name: "Tattoo Removal", price: "₹999" },
+        ],
         duration: "Consultation"
     },
     {
@@ -204,7 +229,8 @@ export const servicesData = [
         fullDescription: "Relax and unwind with our therapeutic massage services. Our skilled therapists use various techniques to relieve muscle tension, reduce stress, and improve overall well-being.",
         price: "Starts from ₹1,500",
         image: serviceMassage,
-        features: ["Head & Shoulder", "Full Body Massage"],
+        features: [{ name: "Head & Shoulder", price: "₹700" },
+        { name: "Full Body Massage", price: "₹2000" }],
         duration: "60-90 min"
     },
     {
@@ -213,19 +239,26 @@ export const servicesData = [
         title: 'Hair Cut',
         description: 'Hair cut for men and women',
         fullDescription: 'Hair cut for men and women',
-        price: 'Starts from ₹200',
+        price: 'Starts from ₹100',
         image: serviceHairCut,
         subServices: [
             {
                 heading: "Ladies & Men Hair Cut",
-                features: ["Straight Cut", "U Cut", "V Cut", "Butterfly Cut", "Layer Cut", "Feather Cut", "Hair Splitance", "Front Layer"]
+                features: [{ name: "Straight Cut", price: "₹100" },
+                { name: "U Cut", price: "₹200" },
+                { name: "V Cut", price: "₹200" },
+                { name: "Butterfly Cut", price: "₹500" },
+                { name: "Layer Cut", price: "₹500" },
+                { name: "Feather Cut", price: "₹500" },
+                { name: "Hair Splitance", price: "₹500" },
+                { name: "Front Layer", price: "₹200" }]
             },
             {
                 heading: "Baby Hair Cut",
-                features: ["Dora Cut", "Mushroom Cut"]
+                features: [{ name: "Dora Cut", price: "₹200" },
+                { name: "Mushroom Cut", price: "₹200" }]
             }
         ],
-        features: ["Straight Cut", "U Cut", "V Cut", "Butterfly Cut", "Layer Cut", "Feather Cut", "Hair Splitance", "Front Layer", "Baby Boy Cut", "Baby Girl Cut"],
         duration: '30-60 min'
     },
     {
@@ -236,7 +269,12 @@ export const servicesData = [
         fullDescription: 'Makeup for men and women',
         price: 'Starts from ₹200',
         image: serviceMakeup,
-        features: ["Face Makeup", "Party Makeup", "Basic Bridal Makeup", "Kryolan Makeup", "HD Makeup", "Waterproof Makeup"],
+        features: [{ name: "Face Makeup", price: "₹1000" },
+        { name: "Party Makeup", price: "₹3000" },
+        { name: "Basic Bridal Makeup", price: "₹7000" },
+        { name: "Kryolan Makeup", price: "₹9000" },
+        { name: "HD Makeup", price: "₹12000" },
+        { name: "Waterproof Makeup", price: "₹16000" }],
         duration: '30-60 min'
     }
 ];  

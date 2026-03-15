@@ -104,6 +104,8 @@ const ServiceDetail = () => {
                                         const globalIndex = service.subServices
                                             .slice(0, groupIndex)
                                             .reduce((acc, g) => acc + g.features.length, 0) + index;
+                                        const featureName = typeof feature === 'object' ? feature.name : feature;
+                                        const featurePrice = typeof feature === 'object' ? (feature.price.includes('₹') ? `Starts from ${feature.price}` : feature.price) : service.price;
                                         return (
                                             <motion.div
                                                 key={index}
@@ -115,10 +117,10 @@ const ServiceDetail = () => {
                                             >
                                                 <div className="variant-info">
                                                     <span className="variant-number">0{index + 1}</span>
-                                                    <h3 className="variant-name">{feature}</h3>
+                                                    <h3 className="variant-name">{featureName}</h3>
                                                 </div>
                                                 <div className="variant-action">
-                                                    <span className="variant-price">{service.price}</span>
+                                                    <span className="variant-price">{featurePrice}</span>
                                                     <button onClick={handleBookNow} className="variant-book-btn">
                                                         BOOK NOW <ArrowRight size={16} />
                                                     </button>
@@ -132,7 +134,7 @@ const ServiceDetail = () => {
                             // Flat rendering — original behaviour for all other services
                             service.features && service.features.map((feature, index) => {
                                 const featureName = typeof feature === 'object' ? feature.name : feature;
-                                const featurePrice = typeof feature === 'object' ? feature.price : service.price;
+                                const featurePrice = typeof feature === 'object' ? (feature.price.includes('₹') ? `Starts from ${feature.price}` : feature.price) : service.price;
                                 return (
                                     <motion.div
                                         key={index}
