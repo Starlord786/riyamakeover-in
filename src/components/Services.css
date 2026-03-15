@@ -143,17 +143,16 @@
 .service-name {
     font-family: 'Oswald', sans-serif;
     font-size: clamp(2rem, 3vw, 3.5rem);
-    color: transparent;
-    -webkit-text-stroke: 1px #989494;
+    color: #fff;
+    -webkit-text-stroke: 0;
     margin: 0;
     text-transform: uppercase;
     transition: all 0.4s ease;
+    font-weight: 600;
 }
 
 .spotlight-item:hover .service-name,
 .spotlight-item.active .service-name {
-    color: #fff;
-    -webkit-text-stroke: 0;
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
