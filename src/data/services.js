@@ -57,9 +57,9 @@ export const servicesData = [
             { name: "Gold Facial", price: "₹1000" },
             { name: "Diamond Facial", price: "₹1200" },
             { name: "Wine Facial", price: "₹1500" },
+            { name: "Anti-Tan", price: "₹1500" },
             { name: "03 Facial", price: "₹3000" },
-            { name: "Bridal Facial", price: "₹3000" },
-            { name: "Anti-Tan", price: "₹1500" }
+            { name: "Bridal Facial", price: "₹3000" }
         ],
         duration: "60-90 min"
     },
@@ -89,11 +89,11 @@ export const servicesData = [
         price: "Starts from ₹1000",
         image: serviceBridal,
         features: [
+            { name: "Hair Spa", price: "₹1000" },
+            { name: "Manicure & Pedicure", price: "₹1400" },
             { name: "Body Polishing", price: "₹1800" },
             { name: "Full Body Waxing", price: "₹2000" },
-            { name: "Premium Facials", price: "₹3000" },
-            { name: "Manicure & Pedicure", price: "₹1400" },
-            { name: "Hair Spa", price: "₹1000" }
+            { name: "Premium Facials", price: "₹3000" }
         ],
         duration: "Multiple Sessions"
     },
@@ -106,10 +106,10 @@ export const servicesData = [
         price: "Starts from ₹200",
         image: serviceWaxing,
         features: [
-            { name: "Full Arms & Legs", price: "₹1000" },
             { name: "Underarms", price: "₹200" },
-            { name: "Full Body", price: "₹2000" },
-            { name: "Chocolate Wax", price: "₹1000" }
+            { name: "Chocolate Wax", price: "₹1000" },
+            { name: "Full Arms & Legs", price: "₹1000" },
+            { name: "Full Body", price: "₹2000" }
         ],
         duration: "30-60 min"
     },
@@ -122,11 +122,11 @@ export const servicesData = [
         price: "Starts from ₹800",
         image: serviceHairSpa,
         features: [
-            { name: "Dandruff Control", price: "₹1200" },
-            { name: "Hair Fall Treatment", price: "₹1000" },
             { name: "Deep Conditioning", price: "₹800" },
             { name: "Scalp Massage", price: "₹800" },
             { name: "Hair Spa", price: "₹1000" },
+            { name: "Hair Fall Treatment", price: "₹1000" },
+            { name: "Dandruff Control", price: "₹1200" },
             { name: "Beer Hair Spa", price: "₹1300" }
         ],
         duration: "60 min"
@@ -156,12 +156,12 @@ export const servicesData = [
         price: "Starts from ₹500",
         image: serviceHairSpa,
         features: [
-            { name: "Hair Keratin Treatment", price: "₹6000" },
-            { name: "Hair Botox Treatment", price: "₹6000" },
             { name: "Damage Repair", price: "₹500" },
             { name: "Dandruff Treatment", price: "₹1200" },
             { name: "Lice Removal Treatment", price: "₹2000" },
-            { name: "Hair Smoothening Treatment", price: "₹3000" }
+            { name: "Hair Smoothening Treatment", price: "₹3000" },
+            { name: "Hair Keratin Treatment", price: "₹6000" },
+            { name: "Hair Botox Treatment", price: "₹6000" }
         ],
         duration: "2-3 hours"
     },
@@ -173,13 +173,15 @@ export const servicesData = [
         fullDescription: "Pamper your hands and feet with our relaxing manicure and pedicure services. We focus on hygiene, nail health, and aesthetics to give you neat, beautiful nails.",
         price: "Starts from ₹300",
         image: serviceNails,
-        features: [{ name: "Classic Pedicure", price: "₹400" },
-        { name: "Classic Manicure", price: "₹300" },
-        { name: "Spa Pedicure", price: "₹800" },
-        { name: "Spa Manicure", price: "₹600" },
-        { name: "Crystal Pedicure", price: "₹1200" },
-        { name: "Crystal Manicure", price: "₹800" },
-        { name: "Heel Repairing Treatment", price: "₹1200" }],
+        features: [
+            { name: "Classic Manicure", price: "₹300" },
+            { name: "Classic Pedicure", price: "₹400" },
+            { name: "Spa Manicure", price: "₹600" },
+            { name: "Spa Pedicure", price: "₹800" },
+            { name: "Crystal Manicure", price: "₹800" },
+            { name: "Crystal Pedicure", price: "₹1200" },
+            { name: "Heel Repairing Treatment", price: "₹1200" }
+        ],
         duration: "60-90 min"
     },
     {
@@ -188,14 +190,16 @@ export const servicesData = [
         title: "Face Treatment",
         description: "Targeted treatments for acne, pigmentation, and anti-aging concerns.",
         fullDescription: "Our advanced face treatments target specific skin issues like acne, pigmentation, and signs of aging. We use clinically proven methods to deliver visible improvements.",
-        price: "Starts from ₹1,200",
+        price: "Starts from ₹500",
         image: serviceSkincare,
-        features: [{ name: "Acne Treatment", price: "₹1500" },
-        { name: "Pigmentation Correction", price: "₹1500" },
-        { name: "Anti-Aging", price: "₹2000" },
-        { name: "Skin Tightening", price: "₹1800" },
-        { name: "Pimple Treatment", price: "₹1500" },
-        { name: "What's Removal", price: "₹500" }],
+        features: [
+            { name: "What's Removal", price: "₹500" },
+            { name: "Pimple Treatment", price: "₹1500" },
+            { name: "Acne Treatment", price: "₹1500" },
+            { name: "Pigmentation Correction", price: "₹1500" },
+            { name: "Skin Tightening", price: "₹1800" },
+            { name: "Anti-Aging", price: "₹2000" }
+        ],
         duration: "60-90 min"
     },
     {
@@ -204,20 +208,20 @@ export const servicesData = [
         title: "Aesthetics",
         description: "Advanced non-invasive procedures for skin rejuvenation and contouring.",
         fullDescription: "Enhance your natural beauty with our non-invasive aesthetic procedures. From micro-needling to skin contouring, our expert treatments provide safe and effective results.",
-        price: "Consultation based",
+        price: "Starts from ₹999",
         image: serviceAesthetics,
         features: [
-            { name: "Micro-needling", price: "₹1500" },
+            { name: "Tattoo Removal", price: "₹999" },
             { name: "Permanent Hair Removal", price: "₹999" },
-            { name: "Skin Whitening Treatment", price: "₹1999" },
-            { name: "Anti Wrinkle Treatment", price: "₹1999" },
-            { name: "Skin Rejuvenation Treatment", price: "₹1999" },
             { name: "Acne Treatment", price: "₹999" },
             { name: "BirthMark Removal", price: "₹1499" },
             { name: "Pigmentation Theraphy", price: "₹1499" },
-            { name: "Carbon Laser Facial", price: "₹1999" },
             { name: "Eyebrow Tattoo Removal", price: "₹1499" },
-            { name: "Tattoo Removal", price: "₹999" },
+            { name: "Micro-needling", price: "₹1500" },
+            { name: "Skin Whitening Treatment", price: "₹1999" },
+            { name: "Anti Wrinkle Treatment", price: "₹1999" },
+            { name: "Skin Rejuvenation Treatment", price: "₹1999" },
+            { name: "Carbon Laser Facial", price: "₹1999" }
         ],
         duration: "Consultation"
     },
@@ -227,10 +231,12 @@ export const servicesData = [
         title: "Massage",
         description: "Therapeutic massages to relieve stress, tension, and improve circulation.",
         fullDescription: "Relax and unwind with our therapeutic massage services. Our skilled therapists use various techniques to relieve muscle tension, reduce stress, and improve overall well-being.",
-        price: "Starts from ₹1,500",
+        price: "Starts from ₹700",
         image: serviceMassage,
-        features: [{ name: "Head & Shoulder", price: "₹700" },
-        { name: "Full Body Massage", price: "₹2000" }],
+        features: [
+            { name: "Head & Shoulder", price: "₹700" },
+            { name: "Full Body Massage", price: "₹2000" }
+        ],
         duration: "60-90 min"
     },
     {
@@ -244,19 +250,23 @@ export const servicesData = [
         subServices: [
             {
                 heading: "Ladies & Men Hair Cut",
-                features: [{ name: "Straight Cut", price: "₹100" },
-                { name: "U Cut", price: "₹200" },
-                { name: "V Cut", price: "₹200" },
-                { name: "Butterfly Cut", price: "₹500" },
-                { name: "Layer Cut", price: "₹500" },
-                { name: "Feather Cut", price: "₹500" },
-                { name: "Hair Splitance", price: "₹500" },
-                { name: "Front Layer", price: "₹200" }]
+                features: [
+                    { name: "Straight Cut", price: "₹100" },
+                    { name: "U Cut", price: "₹200" },
+                    { name: "V Cut", price: "₹200" },
+                    { name: "Front Layer", price: "₹200" }
+                    { name: "Butterfly Cut", price: "₹500" },
+                    { name: "Layer Cut", price: "₹500" },
+                    { name: "Feather Cut", price: "₹500" },
+                    { name: "Hair Splitance", price: "₹500" }
+                ]
             },
             {
                 heading: "Baby Hair Cut",
-                features: [{ name: "Dora Cut", price: "₹200" },
-                { name: "Mushroom Cut", price: "₹200" }]
+                features: [
+                    { name: "Dora Cut", price: "₹200" },
+                    { name: "Mushroom Cut", price: "₹200" }
+                ]
             }
         ],
         duration: '30-60 min'
@@ -267,14 +277,16 @@ export const servicesData = [
         title: 'Makeup',
         description: 'Makeup for men and women',
         fullDescription: 'Makeup for men and women',
-        price: 'Starts from ₹200',
+        price: 'Starts from ₹1000',
         image: serviceMakeup,
-        features: [{ name: "Face Makeup", price: "₹1000" },
-        { name: "Party Makeup", price: "₹3000" },
-        { name: "Basic Bridal Makeup", price: "₹7000" },
-        { name: "Kryolan Makeup", price: "₹9000" },
-        { name: "HD Makeup", price: "₹12000" },
-        { name: "Waterproof Makeup", price: "₹16000" }],
+        features: [
+            { name: "Face Makeup", price: "₹1000" },
+            { name: "Party Makeup", price: "₹3000" },
+            { name: "Basic Bridal Makeup", price: "₹7000" },
+            { name: "Kryolan Makeup", price: "₹9000" },
+            { name: "HD Makeup", price: "₹12000" },
+            { name: "Waterproof Makeup", price: "₹16000" }
+        ],
         duration: '30-60 min'
     }
 ];  
