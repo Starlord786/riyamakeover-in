@@ -254,7 +254,7 @@ export const servicesData = [
                     { name: "Straight Cut", price: "₹100" },
                     { name: "U Cut", price: "₹200" },
                     { name: "V Cut", price: "₹200" },
-                    { name: "Front Layer", price: "₹200" }
+                    { name: "Front Layer", price: "₹200" },
                     { name: "Butterfly Cut", price: "₹500" },
                     { name: "Layer Cut", price: "₹500" },
                     { name: "Feather Cut", price: "₹500" },
